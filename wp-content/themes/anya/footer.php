@@ -43,29 +43,31 @@
         <span>© 2018 Prophoto</span>
     </div>
 </footer>
+
+
 <?php wp_footer(); ?>
 
-
-
+<!--<script src="--><?//= get_template_directory_uri(); ?><!--/js/jquery.min.js" type="text/javascript"></script>-->
 <!-- Bootstrap carousel -->
-<script defer src="<?= get_template_directory_uri(); ?>/plugins/bootstrap-carousel/carousel.min.js" type="text/javascript"></script>
+<script src="<?= get_template_directory_uri(); ?>/plugins/bootstrap-carousel/carousel.min.js" type="text/javascript"></script>
 
 <!-- Countdown timer -->
-<script defer src="<?= get_template_directory_uri(); ?>/plugins/countdown-timer/countdown-timer.js" type="text/javascript"></script>
+<script src="<?= get_template_directory_uri(); ?>/plugins/countdown-timer/countdown-timer.js" type="text/javascript"></script>
 
 <!-- Slick slider -->
-<script defer src="<?= get_template_directory_uri(); ?>/plugins/slick-slider/slick.min.js" type="text/javascript"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/min/tiny-slider.js"></script>
+<script src="<?= get_template_directory_uri(); ?>/plugins/slick-slider/slick.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/min/tiny-slider.js"></script>
 
 <!-- Global -->
-<script defer src="<?= get_template_directory_uri(); ?>/js/global/banners-slider.js" type="text/javascript"></script>
-<script defer src="<?= get_template_directory_uri(); ?>/js/global/products.js" type="text/javascript"></script>
-<script defer src="<?= get_template_directory_uri(); ?>/js/global/menu.js" type="text/javascript"></script>
+<script src="<?= get_template_directory_uri(); ?>/js/global/banners-slider.js" type="text/javascript"></script>
+<script src="<?= get_template_directory_uri(); ?>/js/global/products.js" type="text/javascript"></script>
+<script src="<?= get_template_directory_uri(); ?>/js/global/menu.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 
 </script>
 <script type="text/javascript">
-    document.addEventListener('load', function () {
+    document.addEventListener('DOMContentLoaded', function () {
         setTimer('timer', 'July 25, 2020 15:37:25');
 
 

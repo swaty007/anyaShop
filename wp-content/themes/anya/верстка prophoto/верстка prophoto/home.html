@@ -35,7 +35,7 @@
 	<link href="plugins/slick-slider/slick.css" rel="stylesheet">
 	<link href="plugins/slick-slider/slick-theme.css" rel="stylesheet">	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/tiny-slider.css">
-	<!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/min/tiny-slider.helper.ie8.js"></script><![endif]-->	
+	<!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/min/tiny-slider.helper.ie8.js"></script><![endif]-->
 </head>
 <body>    
 <header>
@@ -1103,11 +1103,13 @@
 	setTimer('timer', 'July 25, 2020 15:37:25');
 </script>
 <script type="text/javascript">
-	if ( $("body").width() > 575 ){
-		setProductsSimilarHeight(".products-table-catalog .product");
-	}
-	iniBannersSlider(".news");
-	iniBannersSlider(".banners");
+	document.addEventListener('DOMContentLoaded', function () {
+		if ( $("body").width() > 575 ){
+			setProductsSimilarHeight(".products-table-catalog .product");
+		}
+		iniBannersSlider(".news");
+		iniBannersSlider(".banners");
+	})
 </script>
 </body>
 </html>
