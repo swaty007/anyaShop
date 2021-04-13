@@ -1,0 +1,24 @@
+// custom
+//@mixin textDots($width: auto) {
+//  @if ($width != auto) {
+//    max-width: $width + px;
+//  }
+//  display: inline-block;
+//  white-space: nowrap;
+//  text-overflow: ellipsis;
+//  overflow: hidden;
+//}
+@mixin heigth100vh() {
+  min-height: unquote("calc(100vh - 413px - 70px)");
+}
+@mixin scroll() {
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: #f0f0ff;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #bab8dc;
+  }
+}
