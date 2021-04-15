@@ -154,42 +154,7 @@ function itea_post_types() {
 
 //    add_permastruct( $post_type, $permastruct, $args );
 }
-add_action('init', 'itea_post_types');
-
-function wpa_show_permalinks( $post_link, $post ){
-    if ( is_object( $post ) && ($post->post_type == 'courses' || $post->post_type == 'professions') ){
-        $terms = wp_get_object_terms( $post->ID, 'courses_category' );
-        if( $terms ){
-            return str_replace( '%courses_category%' , $terms[0]->slug , $post_link );
-        }
-    }
-    return $post_link;
-}
-//add_filter( 'post_type_link', 'wpa_show_permalinks', 20, 2 );
-
-function ex_rewrite( $wp_rewrite ) {
-
-    $feed_rules = array(
-        '(.+)'    =>  'index.php?courses='. $wp_rewrite->preg_index(1)
-    );
-
-    $wp_rewrite->rules = $wp_rewrite->rules + $feed_rules;
-}
-//add_filter( 'generate_rewrite_rules', 'ex_rewrite' );
-
-
-function na_parse_request( $query ) {
-
-    if ( ! $query->is_main_query() || 2 != count( $query->query ) || ! isset( $query->query['page'] ) ) {
-        return;
-    }
-
-    if ( ! empty( $query->query['name'] ) ) {
-        $query->set( 'post_type', array('post', 'page', 'courses','courses_category') );
-    }
-}
-//add_filter( 'pre_get_posts', 'na_parse_request' );
-
+//add_action('init', 'itea_post_types');
 
 function my_cptui_add_post_type_to_search($query)
 {
@@ -205,12 +170,4 @@ function my_cptui_add_post_type_to_search($query)
     }
 }
 
-add_filter('pre_get_posts', 'my_cptui_add_post_type_to_search');
-
-
-function mg_news_pagination_rewrite()
-{
-    add_rewrite_rule(get_option('course') . '/page/?([0-9]{1,})/?$', 'index.php?pagename=' . get_option('course') . '&paged=$matches[1]', 'top');
-}
-
-//add_action('init', 'mg_news_pagination_rewrite');
+//add_filter('pre_get_posts', 'my_cptui_add_post_type_to_search');

@@ -1,13 +1,5 @@
 <?php
-  $tildaOn = get_post_meta($post->ID, '_tilda', true);
-
-
-if (!empty($tildaOn) && $tildaOn['status'] !== 'off'): ?>
-    <?php require_once('tilda.php'); 
-
-else :?>
-    <?php get_header();
-    var_dump($tildaOn['status'] );
+ get_header();
 the_post(); ?>
 <section class="article">
     <div class="container">
@@ -52,5 +44,4 @@ the_post(); ?>
         </div>
     </div>
 </section>
-<?php endif;?>
   <?php get_footer('tilda'); ?>

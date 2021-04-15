@@ -8,473 +8,6 @@ $post_id = $post->ID;
 ?>
 
 
-
-    <section class="menu transition-5s">
-        <div class="container no-pad">
-            <div class="row no-marg content-wrapper">
-                <div class="col-md-3 column">
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Объективы</a>
-                            <span class="open-list-btn">
-							<i class="fas fa-plus show transition-5s"></i>
-							<i class="fas fa-minus hide transition-5s"></i>
-						</span>
-                        </div>
-                        <ul class="under-list transition-5s">
-                            <li><a class="transition-2s" href="#">Серия Di (полноразмерная матрица)</a></li>
-                            <li><a class="transition-2s" href="#">Серия Di II (APS-C)</a></li>
-                            <li><a class="transition-2s" href="#">Серия Di III (для цифровых системных камер</a></li>
-                        </ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Студийный свет</a>
-                            <span class="open-list-btn">
-							<i class="fas fa-plus show transition-5s"></i>
-							<i class="fas fa-minus hide transition-5s"></i>
-						</span>
-                        </div>
-                        <ul class="under-list transition-5s">
-                            <li><a class="transition-2s" href="#">Rime Lite i.TTL</a></li>
-                            <li><a class="transition-2s" href="#">Rime Lite Ni</a></li>
-                            <li><a class="transition-2s" href="#">Rime Lite i</a></li>
-                            <li><a class="transition-2s" href="#">Rime Lite Fame Plus</a></li>
-                            <li><a class="transition-2s" href="#">Rime Lite XB-Prime</a></li>
-                            <li><a class="transition-2s" href="#">Rime Lite F Plus</a></li>
-                            <li><a class="transition-2s" href="#">Комплекты студийного света</a></li>
-                            <li><a class="transition-2s" href="#">Сумки для вспышек</a></li>
-                            <li><a class="transition-2s" href="#">Аксессуары</a></li>
-                        </ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Штативные головки</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Радиосинхронизаторы и ДУ</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Аксессуары для вспышек</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                </div>
-                <div class="col-md-3 column">
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Светофильтры</a>
-                            <span class="open-list-btn">
-							<i class="fas fa-plus show transition-5s"></i>
-							<i class="fas fa-minus hide transition-5s"></i>
-						</span>
-                        </div>
-                        <ul class="under-list transition-5s">
-                            <li><a class="transition-2s" href="#">Защитные</a></li>
-                            <li><a class="transition-2s" href="#">Поляризационные</a></li>
-                            <li><a class="transition-2s" href="#">Нейтральные</a></li>
-                            <li><a class="transition-2s" href="#">Макролинзы</a></li>
-                            <li><a class="transition-2s" href="#">Смягчающие</a></li>
-                            <li><a class="transition-2s" href="#">Лучевые, Эффектные</a></li>
-                            <li><a class="transition-2s" href="#">Градиентные</a></li>
-                            <li><a class="transition-2s" href="#">Конвертеры</a></li>
-                            <li><a class="transition-2s" href="#">Аксессуары</a></li>
-                        </ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Фоны</a>
-                            <span class="open-list-btn">
-							<i class="fas fa-plus show transition-5s"></i>
-							<i class="fas fa-minus hide transition-5s"></i>
-						</span>
-                        </div>
-                        <ul class="under-list transition-5s">
-                            <li><a class="transition-2s" href="#">Фоны тканевые </a></li>
-                            <li><a class="transition-2s" href="#">Фоны бумажные, виниловые </a></li>
-                            <li><a class="transition-2s" href="#">Фоны двухсторонние складные </a></li>
-                            <li><a class="transition-2s" href="#">Фоны Chromakey </a></li>
-                        </ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Боксы для макросъемки</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Стойки</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Зонты</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                </div>
-                <div class="col-md-3 column">
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Штативы</a>
-                            <span class="open-list-btn">
-							<i class="fas fa-plus show transition-5s"></i>
-							<i class="fas fa-minus hide transition-5s"></i>
-						</span>
-                        </div>
-                        <ul class="under-list transition-5s">
-                            <li><a class="transition-2s" href="#">Штативы профессиональные </a></li>
-                            <li><a class="transition-2s" href="#">Штативы без головок </a></li>
-                            <li><a class="transition-2s" href="#">Штативы видео </a></li>
-                            <li><a class="transition-2s" href="#">Штативы любительские </a></li>
-                            <li><a class="transition-2s" href="#">Штативы Sprint </a></li>
-                            <li><a class="transition-2s" href="#">Аксессуары </a></li>
-                        </ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Рефлекторы</a>
-                            <span class="open-list-btn">
-							<i class="fas fa-plus show transition-5s"></i>
-							<i class="fas fa-minus hide transition-5s"></i>
-						</span>
-                        </div>
-                        <ul class="under-list transition-5s">
-                            <li><a class="transition-2s" href="#">Аксессуары </a></li>
-                        </ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Столы для предметной съемки</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Наборы для чистки</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Аксессуары</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                </div>
-                <div class="col-md-3 column relative">
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Софтбоксы</a>
-                            <span class="open-list-btn">
-							<i class="fas fa-plus show transition-5s"></i>
-							<i class="fas fa-minus hide transition-5s"></i>
-						</span>
-                        </div>
-                        <ul class="under-list transition-5s">
-                            <li><a class="transition-2s" href="#">Узкие софтбоксы </a></li>
-                            <li><a class="transition-2s" href="#">Восьмиугольные софтбоксы </a></li>
-                            <li><a class="transition-2s" href="#">Прямоугольные софтбоксы </a></li>
-                            <li><a class="transition-2s" href="#">Квадратные софтбоксы </a></li>
-                            <li><a class="transition-2s" href="#">Grand Box софтбоксы </a></li>
-                            <li><a class="transition-2s" href="#">Portable Box софтбоксы </a></li>
-                            <li><a class="transition-2s" href="#">Аксессуары </a></li>
-                        </ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Моноподы</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Соты</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                    <div class="link-wrapper relative">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Отражатели</a>
-                        </div>
-                        <ul class="under-list transition-5s"></ul>
-                    </div>
-                    <div class="link-wrapper relative pages-navigation">
-                        <div class="title">
-                            <a class="transition-2s" href="#">Навигация</a>
-                            <span class="open-list-btn">
-							<i class="fas fa-plus show transition-5s"></i>
-							<i class="fas fa-minus hide transition-5s"></i>
-						</span>
-                        </div>
-                        <ul class="under-list transition-5s">
-                            <li><a class="transition-2s" href="#">Про компанию </a></li>
-                            <li><a class="transition-2s" href="#">Публикации </a></li>
-                            <li><a class="transition-2s" href="#">Контакты </a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-12 brands">
-                    <div class="brands-colums d-table">
-                        <div class="brand d-table-cell">
-                            <a href="#" class="image-link d-block">
-                                <img width="100%" src="<?= get_template_directory_uri(); ?>/images/logo1.png">
-                            </a>
-                        </div>
-                        <div class="brand d-table-cell">
-                            <a href="#" class="image-link d-block">
-                                <img width="100%" src="<?= get_template_directory_uri(); ?>/images/logo2.png">
-                            </a>
-                        </div>
-                        <div class="brand d-table-cell">
-                            <a href="#" class="image-link d-block">
-                                <img width="100%" src="<?= get_template_directory_uri(); ?>/images/logo3.jpg">
-                            </a>
-                        </div>
-                        <div class="brand d-table-cell">
-                            <a href="#" class="image-link d-block">
-                                <img width="100%" src="<?= get_template_directory_uri(); ?>/images/logo4.png">
-                            </a>
-                        </div>
-                        <div class="brand d-table-cell">
-                            <a href="#" class="image-link d-block">
-                                <img width="100%" src="<?= get_template_directory_uri(); ?>/images/logo5.jpg">
-                            </a>
-                        </div>
-                        <div class="brand d-table-cell">
-                            <a href="#" class="image-link d-block">
-                                <img width="100%" src="<?= get_template_directory_uri(); ?>/images/logo6.jpg">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="mobile-menu transition-5s">
-        <div class="header relative">
-            <div class="logo-wrapper">
-                <div class="logo">Prophoto</div>
-            </div>
-            <div class="close-btn">
-                <i class="fas fa-times"></i>
-            </div>
-            <ul class="menu-list d-block">
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Объективы</a>
-                        <span class="open-list-btn pull-right">
-						<i class="fas fa-plus show transition-5s"></i>
-						<i class="fas fa-minus hide transition-5s"></i>
-					</span>
-                    </div>
-                    <ul class="under-list transition-5s">
-                        <li><a class="transition-2s" href="#">Серия Di (полноразмерная матрица)</a></li>
-                        <li><a class="transition-2s" href="#">Серия Di II (APS-C)</a></li>
-                        <li><a class="transition-2s" href="#">Серия Di III (для цифровых системных камер</a></li>
-                    </ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Студийный свет</a>
-                        <span class="open-list-btn pull-right">
-						<i class="fas fa-plus show transition-5s"></i>
-						<i class="fas fa-minus hide transition-5s"></i>
-					</span>
-                    </div>
-                    <ul class="under-list transition-5s">
-                        <li><a class="transition-2s" href="#">Rime Lite i.TTL</a></li>
-                        <li><a class="transition-2s" href="#">Rime Lite Ni</a></li>
-                        <li><a class="transition-2s" href="#">Rime Lite i</a></li>
-                        <li><a class="transition-2s" href="#">Rime Lite Fame Plus</a></li>
-                        <li><a class="transition-2s" href="#">Rime Lite XB-Prime</a></li>
-                        <li><a class="transition-2s" href="#">Rime Lite F Plus</a></li>
-                        <li><a class="transition-2s" href="#">Комплекты студийного света</a></li>
-                        <li><a class="transition-2s" href="#">Сумки для вспышек</a></li>
-                        <li><a class="transition-2s" href="#">Аксессуары</a></li>
-                    </ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Штативные головки</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Радиосинхронизаторы и ДУ</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Аксессуары для вспышек</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Светофильтры</a>
-                        <span class="open-list-btn pull-right">
-						<i class="fas fa-plus show transition-5s"></i>
-						<i class="fas fa-minus hide transition-5s"></i>
-					</span>
-                    </div>
-                    <ul class="under-list transition-5s">
-                        <li><a class="transition-2s" href="#">Защитные</a></li>
-                        <li><a class="transition-2s" href="#">Поляризационные</a></li>
-                        <li><a class="transition-2s" href="#">Нейтральные</a></li>
-                        <li><a class="transition-2s" href="#">Макролинзы</a></li>
-                        <li><a class="transition-2s" href="#">Смягчающие</a></li>
-                        <li><a class="transition-2s" href="#">Лучевые, Эффектные</a></li>
-                        <li><a class="transition-2s" href="#">Градиентные</a></li>
-                        <li><a class="transition-2s" href="#">Конвертеры</a></li>
-                        <li><a class="transition-2s" href="#">Аксессуары</a></li>
-                    </ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Фоны</a>
-                        <span class="open-list-btn pull-right">
-						<i class="fas fa-plus show transition-5s"></i>
-						<i class="fas fa-minus hide transition-5s"></i>
-					</span>
-                    </div>
-                    <ul class="under-list transition-5s">
-                        <li><a class="transition-2s" href="#">Фоны тканевые </a></li>
-                        <li><a class="transition-2s" href="#">Фоны бумажные, виниловые </a></li>
-                        <li><a class="transition-2s" href="#">Фоны двухсторонние складные </a></li>
-                        <li><a class="transition-2s" href="#">Фоны Chromakey </a></li>
-                    </ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Боксы для макросъемки</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Стойки</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Зонты</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Штативы</a>
-                        <span class="open-list-btn pull-right">
-						<i class="fas fa-plus show transition-5s"></i>
-						<i class="fas fa-minus hide transition-5s"></i>
-					</span>
-                    </div>
-                    <ul class="under-list transition-5s">
-                        <li><a class="transition-2s" href="#">Штативы профессиональные </a></li>
-                        <li><a class="transition-2s" href="#">Штативы без головок </a></li>
-                        <li><a class="transition-2s" href="#">Штативы видео </a></li>
-                        <li><a class="transition-2s" href="#">Штативы любительские </a></li>
-                        <li><a class="transition-2s" href="#">Штативы Sprint </a></li>
-                        <li><a class="transition-2s" href="#">Аксессуары </a></li>
-                    </ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Рефлекторы</a>
-                        <span class="open-list-btn pull-right">
-						<i class="fas fa-plus show transition-5s"></i>
-						<i class="fas fa-minus hide transition-5s"></i>
-					</span>
-                    </div>
-                    <ul class="under-list transition-5s">
-                        <li><a class="transition-2s" href="#">Аксессуары </a></li>
-                    </ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Столы для предметной съемки</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Наборы для чистки</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Аксессуары</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Софтбоксы</a>
-                        <span class="open-list-btn pull-right">
-						<i class="fas fa-plus show transition-5s"></i>
-						<i class="fas fa-minus hide transition-5s"></i>
-					</span>
-                    </div>
-                    <ul class="under-list transition-5s">
-                        <li><a class="transition-2s" href="#">Узкие софтбоксы </a></li>
-                        <li><a class="transition-2s" href="#">Восьмиугольные софтбоксы </a></li>
-                        <li><a class="transition-2s" href="#">Прямоугольные софтбоксы </a></li>
-                        <li><a class="transition-2s" href="#">Квадратные софтбоксы </a></li>
-                        <li><a class="transition-2s" href="#">Grand Box софтбоксы </a></li>
-                        <li><a class="transition-2s" href="#">Portable Box софтбоксы </a></li>
-                        <li><a class="transition-2s" href="#">Аксессуары </a></li>
-                    </ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Моноподы</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Соты</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Отражатели</a>
-                    </div>
-                    <ul class="under-list transition-5s"></ul>
-                </li>
-                <li class="link relative d-block pages-navigation">
-                    <div class="title">
-                        <a class="transition-2s" href="#">Навигация</a>
-                        <span class="open-list-btn pull-right">
-						<i class="fas fa-plus show transition-5s"></i>
-						<i class="fas fa-minus hide transition-5s"></i>
-					</span>
-                    </div>
-                    <ul class="under-list transition-5s">
-                        <li><a class="transition-2s" href="#">Про компанию </a></li>
-                        <li><a class="transition-2s" href="#">Публикации </a></li>
-                        <li><a class="transition-2s" href="#">Контакты </a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </section>
-
     <section class="home-slider">
         <div class="container no-pad">
             <div id="homeSlider" class="carousel slide" data-ride="carousel">
@@ -519,30 +52,47 @@ $post_id = $post->ID;
     <section class="products-table-catalog">
         <div class="container content-container">
             <div class="row">
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a href="#" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img src="<?= get_template_directory_uri(); ?>/images/item1.png">
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">Объектив	Tamron 70-210mm F/4 Di VC USD</div>
-                        <div class="advantages">
-                            <ul>
-                                <li>Ультра высокое качество изображения</li>
-                                <li>Покрытие eBAND</li>
-                                <li>Двойной микропроцессор Dual MPU</li>
-                            </ul>
-                        </div>
-                        <div class="price">$ 799</div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
-                            <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                            <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
+
+
+                <?php
+                $loop = new WP_Query(array(
+                        'post_type' => 'product',
+                        'posts_per_page' => -1,
+                        'orderby' => []
+                    )
+                );
+                while ($loop->have_posts()) : $loop->the_post();?>
+                <?php $product = wc_get_product( get_the_ID() );?>
+
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
+                        <a href="<?php the_permalink();?>" class="link">
+                            <div class="image-wrapper text-center transition-3s">
+                                <img src="<?= get_template_directory_uri(); ?>/images/item1.png">
+                            </div>
+                        </a>
+                        <div class="info">
+                            <div class="title"><?php the_title(); ?></div>
+                            <div class="advantages">
+                                <ul>
+                                    <li>Ультра высокое качество изображения</li>
+                                    <li>Покрытие eBAND</li>
+                                    <li>Двойной микропроцессор Dual MPU</li>
+                                </ul>
+                            </div>
+                            <div class="price"><?=$product->get_price_html();?></div>
+                            <div class="buttons">
+                                <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
+                                <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
+                                <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
+                                <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endwhile;
+                    wp_reset_query(); ?>
+
+
+
                 <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
                     <a href="#" class="link">
                         <div class="image-wrapper text-center transition-3s">
@@ -944,7 +494,19 @@ $post_id = $post->ID;
         <div class="transition-3s action-btn"><i class="fas fa-phone icon"></i></div>
     </div>
 
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimer('timer', 'July 25, 2021 15:37:25');
 
+
+            if ( $("body").width() > 575 ){
+                setProductsSimilarHeight(".products-table-catalog .product");
+            }
+            iniBannersSlider(".news");
+            iniBannersSlider(".banners");
+        })
+
+    </script>
 
 <?php
 get_footer();

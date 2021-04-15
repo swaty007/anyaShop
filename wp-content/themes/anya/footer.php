@@ -63,22 +63,6 @@
 <script src="<?= get_template_directory_uri(); ?>/js/global/products.js" type="text/javascript"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/global/menu.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-
-</script>
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        setTimer('timer', 'July 25, 2020 15:37:25');
-
-
-        if ( $("body").width() > 575 ){
-            setProductsSimilarHeight(".products-table-catalog .product");
-        }
-        iniBannersSlider(".news");
-        iniBannersSlider(".banners");
-    })
-
-</script>
 
 
 <?php get_template_part('template-parts/components', 'modals'); ?>
