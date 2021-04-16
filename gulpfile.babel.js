@@ -117,11 +117,6 @@ export const styles = () =>
         })
       )
     )
-      .pipe(
-          autoprefixer({
-              browsers: ["last 12 versions", "> 1%", "ie 8", "ie 7"],
-          })
-      )
     .pipe(
       // gulpif(
       //   production,
