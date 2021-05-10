@@ -540,50 +540,7 @@ if (!wp_next_scheduled('update_geo_ip')) {
     wp_schedule_event( time(), 'daily', 'update_geo_ip' );
 }
 add_filter( 'use_block_editor_for_post', 'disable_gutenberg_for_post', 10, 2 );
-function disable_gutenberg_for_post( $use, $post ){
-	if( $post->ID == 577 )
-		return false;
 
-	return $use;
-}
-function declOfNum($number, $titles)
-{
-   $cases = array (2, 0, 1, 1, 1, 2);
-    $format = $titles[ ($number%100 > 4 && $number %100 < 20) ? 2 : $cases[min($number%10, 5)] ];
-    return sprintf($format, $titles);
-};
-function sendEmailWithTrialSecond($email,$post__ID){
-    get_post( intval($post__ID) );
-    $send_to = $email;
-    $subject = 'Спасибо за заявку на onlineitea.com!';
-    $headers = array('From: ITEA Online <noreply@onlineitea.com>',"content-type: text/html");
-    $message =  get_field('second_mail', $post__ID);
-    $send_mail = wp_mail($send_to,$subject,$message,$headers);
-}
-add_action( 'wp_mail_failed', 'debug_mail', 10, 1 );
-function debug_mail($wp_error) {
-    $send_to = 'mikhail.khripun@gmail.com';
-    $subject = 'Ошибка отправки';
-    $headers = array('From: ITEA Online <noreply@onlineitea.com>',"content-type: text/html");
-    $message = $wp_error;
-    $send_mail = wp_mail($send_to,$subject,$message,$headers);
-};
-add_filter( 'cron_schedules', 'my_interval');
-function my_interval( $shed ) {
-
-	$shed['every_hour'] = array(
-		'interval' => 3600,
-		'display' => ''
-	);
-	/* пример еженедельного интервала
-	$raspisanie['nedelya'] = array(
-		'interval' => 604800,
-		'display' => 'Раз в неделю'
-	);
-	*/
-	return $shed;
-
-}
 
 // добавляем функцию к указанному хуку
 add_action( 'send_email_two_days', 'my_hour_f' );
@@ -594,28 +551,6 @@ if( ! wp_next_scheduled( 'send_email_two_days' ) ) {
 
 
 
-function my_hour_f() {
-    global $wpdb;
-    $resultForCron = $wpdb->get_results("
-    SELECT * FROM `table_cron`
-    ");
-    selectTwoDaysQuerys($resultForCron);
-
-};
-
-
-function selectTwoDaysQuerys($resultForCron){
-    global $wpdb;
-    $days2_ago = strtotime("-48 hours");
-    foreach ($resultForCron as $singleResult) {
-        if($days2_ago > strtotime($singleResult->DATE)){
-            sendEmailWithTrialSecond($singleResult->userMAIL,$singleResult->courseID);
-            $curID = $singleResult->Id;
-            $table ='table_cron';
-            $wpdb->delete($table, array( 'Id' => $curID),'%d');
-        };
-    }
-};
 /**
  * Disable the emoji's
  */
@@ -643,3 +578,59 @@ function disable_emojis_tinymce( $plugins ) {
 		return array();
 	}
 }
+
+function parse_xml () {
+    $xml = simplexml_load_file(get_template_directory_uri().'/test.xml', 'SimpleXMLElement');
+    $categories = [];
+    $xmlCategories = $xml->shop->categories->category;
+    foreach ($xmlCategories as $category) {
+        $name = $category->__toString();
+        $id = $category['id']->__toString();
+        $parentId = $category['parentld'];
+        if (empty($parentId)) {
+            $categories[$id] = [
+                'name' => $name,
+                'children' => [],
+            ];
+        } else {
+            if (empty($categories[$parentId->__toString()])) {
+
+                foreach($categories as $parentKey => $childCat) {
+                    foreach($childCat['children'] as $key => $child) {
+                        if ($key === $parentId->__toString()) {
+
+                            $categories[$parentKey]['children'][$parentId->__toString()]['children'][$id] = [
+                                'name' => $name,
+                                'children' => [],
+                            ];
+
+                        }
+                    }
+                }
+//                var_dump($xmlCategories[]);$parentId->__toString()
+//                $categories[  ]['children'][] = [
+//                    'name' => $name,
+//                ];
+            } else {
+                $categories[$parentId->__toString()]['children'][$id] = [
+                    'name' => $name,
+                    'children' => [],
+                ];
+            }
+
+        }
+
+    }
+
+    echo '<pre>';
+    var_dump($categories);
+//    var_dump($xml->shop->categories->category[2]);
+
+    echo '</pre>';
+    echo '<pre>';
+    var_dump($xml->shop);
+
+    echo '</pre>';
+}
+
+add_action( 'init', 'parse_xml' );
