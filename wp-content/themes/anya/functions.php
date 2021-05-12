@@ -583,6 +583,7 @@ function parse_xml () {
     $xml = simplexml_load_file(get_template_directory_uri().'/test.xml', 'SimpleXMLElement');
     $categories = [];
     $xmlCategories = $xml->shop->categories->category;
+    $xmlProducts = $xml->shop->offers->offer;
     foreach ($xmlCategories as $category) {
         $name = $category->__toString();
         $id = $category['id']->__toString();
@@ -622,8 +623,13 @@ function parse_xml () {
 
     }
 
+
+    foreach ($xmlProducts as $product) {
+
+    }
+
     echo '<pre>';
-    var_dump($categories);
+//    var_dump($categories);
 //    var_dump($xml->shop->categories->category[2]);
 
     echo '</pre>';
