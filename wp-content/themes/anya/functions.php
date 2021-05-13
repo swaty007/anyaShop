@@ -635,7 +635,7 @@ function parse_xml () {
         'post_type' => 'product'
     ];
 
-//    Term Meta order_ + name   = term_id in wp_terms
+//    wp_termmeta order_ + name   = term_id in wp_terms throu wp_term_relationships
 
 //    $postId = $this->productExists($lang, $product['sku']);
 
