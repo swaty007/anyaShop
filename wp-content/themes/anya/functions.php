@@ -539,7 +539,7 @@ add_action('update_geo_ip', 'update_geo');
 if (!wp_next_scheduled('update_geo_ip')) {
     wp_schedule_event( time(), 'daily', 'update_geo_ip' );
 }
-add_filter( 'use_block_editor_for_post', 'disable_gutenberg_for_post', 10, 2 );
+//add_filter( 'use_block_editor_for_post', 'disable_gutenberg_for_post', 10, 2 );
 
 
 // добавляем функцию к указанному хуку
@@ -628,15 +628,96 @@ function parse_xml () {
 
     }
 
-    echo '<pre>';
+    $post = [
+        'post_title' => 'testTitle',
+        'post_content' => 'testContent',
+        'post_status' => 'publish',
+        'post_type' => 'product'
+    ];
+
+//    Term Meta order_ + name   = term_id in wp_terms
+
+//    $postId = $this->productExists($lang, $product['sku']);
+
+    //    $postId = wp_insert_post($post);
+
+//    update_post_meta($postId, '_regular_price', $product['price']); // write price
+//    update_post_meta($postId, '_price', $product['price']); // write price
+
+//    update_post_meta($postId, '_sku', $product['sku']);
+
+//    $this->generateFeaturedImage($img, $postId , false);
+
+
+//    if(!empty($product['categories'])){ // if not empty categories set categories for inserted product
+//        $cat_ids = [];
+//        foreach ($product['categories'] as $category) {
+//
+//            $slug = $category.'-'. $this->languages[$lang]['code'];
+//            echo '<p>Assigning category '. $slug;
+//            $term = get_term_by('slug', $slug , 'product_cat');
+//            if(!$term ) echo 'term not found';
+//            //$term = $this->get_term_by_name_and_language($category, 'product_cat', $this->languages[$lang]['code'] );
+//            if(!empty($term)){
+//                wp_set_post_terms($postId, [$term->term_id], 'product_cat', true);
+//                $cat_ids[] = $term->term_id;
+//            }
+//        }
+//        $p = wc_get_product($postId);
+//        $p->set_category_ids($cat_ids);
+//        $p->save();
+//    }
+
+
+
+
+
+//    echo '<pre>';
 //    var_dump($categories);
 //    var_dump($xml->shop->categories->category[2]);
 
-    echo '</pre>';
-    echo '<pre>';
-    var_dump($xml->shop);
+//    echo '</pre>';
+//    echo '<pre>';
+//    var_dump($xml->shop);
 
-    echo '</pre>';
+//    echo '</pre>';
 }
 
 add_action( 'init', 'parse_xml' );
+
+
+function generateFeaturedImage($image_url, $post_id, $featured=true){ // Set iamge method
+    $upload_dir = wp_upload_dir();
+    $image_data = file_get_contents($image_url);
+    $filename = 'thumb_'.$post_id.'.png';
+    if(wp_mkdir_p($upload_dir['path']))
+        $file = $upload_dir['path'] . '/' . $filename;
+    else
+        $file = $upload_dir['basedir'] . '/' . $filename;
+    file_put_contents($file, $image_data);
+
+    $wp_filetype = wp_check_filetype($filename, null );
+    $attachment = array(
+        'post_mime_type' => $wp_filetype['type'],
+        'post_title' => 'thumb_'.$post_id,
+        'post_content' => '',
+        'post_status' => 'inherit'
+    );
+    $attach_id = wp_insert_attachment( $attachment, $file, $post_id );
+    require_once(ABSPATH . 'wp-admin/includes/image.php');
+    $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
+    $res1= wp_update_attachment_metadata( $attach_id, $attach_data );
+    if ($featured) {
+        $res2= set_post_thumbnail( $post_id, $attach_id );
+    }else{
+        /// save as gallery image
+        $gallery = get_post_meta($post_id, '_product_image_gallery');
+        if(!empty($gallery)) {
+            $galleryItems = explode(",", $gallery);
+            $galleryItems[] = $attach_id;
+        } else {
+            $galleryItems = [$attach_id];
+        }
+        update_post_meta($post_id, '_product_image_gallery', join(',', $galleryItems));
+    }
+}
