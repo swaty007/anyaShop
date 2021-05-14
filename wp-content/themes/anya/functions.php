@@ -635,6 +635,32 @@ function parse_xml () {
         'post_type' => 'product'
     ];
 
+//    $res = wc_create_attribute( // создать атрибут
+//        [
+//            'name' => 'леха привет',
+//        ]
+//    );
+//    var_dump(wp_set_object_terms( 14,'lexa blat4', 'pa_leha-privet', true)); // create значение
+//    create_global_attribute('$name', 'leha-privet');
+//    register_taxonomy(
+//        6,
+//        apply_filters( 'woocommerce_taxonomy_objects_' . 'леха привет', array( 'product' ) ),
+//        apply_filters( 'woocommerce_taxonomy_args_' . 'леха привет', array(
+//            'labels'       => array(
+//                'name' => 'Lox',
+//            ),
+//            'hierarchical' => true,
+//            'show_ui'      => false,
+//            'query_var'    => true,
+//            'rewrite'      => false,
+//        ) )
+//    );
+//    $res2 = wp_set_object_terms( 6, 'leha-privet', 'leha-privet' , false);
+//var_dump($res);
+var_dump($res2);
+
+
+
 //    wp_termmeta order_ + name   = term_id in wp_terms throu wp_term_relationships
 
 //    $postId = $this->productExists($lang, $product['sku']);
