@@ -100,15 +100,15 @@ function itea_files()
 {
     // $catvar = get_the_category( );
     // if (!in_category('tilda')){
-        wp_enqueue_script('main-itea-bundled-js', get_template_directory_uri() . '/js/scripts-bundled.js', '', '', true);
+    wp_enqueue_script('main-itea-bundled-js', get_template_directory_uri() . '/js/scripts-bundled.js', '', '', true);
 //        wp_enqueue_script('fancybox', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', '', '', true);
 //        wp_enqueue_script('scroll', get_template_directory_uri() . '/js/scroll.js', '', '', true);
 //        wp_enqueue_script('slick', get_template_directory_uri() . '/js/slick.js', '', '', true);
 //        wp_enqueue_script('main-js', get_template_directory_uri() . '/js/main.js', '', '', true);
 //        wp_enqueue_script('modal-js', get_template_directory_uri() . '/js/modalDiscount.js', '', '', true);
-        wp_enqueue_style('material_icons', '//fonts.googleapis.com/icon?family=Material+Icons');
-        wp_enqueue_style('tiny_slider', '//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/tiny-slider.css');
-        wp_enqueue_style('itea_main_styles', get_stylesheet_uri());
+    wp_enqueue_style('material_icons', '//fonts.googleapis.com/icon?family=Material+Icons');
+    wp_enqueue_style('tiny_slider', '//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/tiny-slider.css');
+    wp_enqueue_style('itea_main_styles', get_stylesheet_uri());
     // }
 
 
@@ -307,7 +307,7 @@ function check_promo()
                     $success = true;
                 }
             }
-            foreach($promoData->roadmaps as $roadmap) {
+            foreach ($promoData->roadmaps as $roadmap) {
                 if ($roadmap->uuid == $uuid) {
                     $success = true;
                 }
@@ -327,7 +327,6 @@ function check_promo()
     }
     wp_send_json(false);
 }
-
 
 
 add_action('wp_ajax_nopriv_contact_form', 'contact_form');
@@ -385,13 +384,13 @@ function contact_form()
                     } else {
                         $price += $discount_price;
                     }
-                    if ($data['is_trial'] == 1 and !empty(get_field('first_mail', $post_id))){
+                    if ($data['is_trial'] == 1 and !empty(get_field('first_mail', $post_id))) {
 
                         sendEmailWithTrial($data);
                         global $wpdb;
                         $wpdb->query("
                         INSERT table_cron (`courseID`, `userMAIL`) 
-                        VALUES ( '" . $post_id ."',  '". $data['email'] . "');
+                        VALUES ( '" . $post_id . "',  '" . $data['email'] . "');
 
                         ");
 
@@ -420,7 +419,7 @@ function contact_form()
             $erp = new ErpItea();
             $result = $erp->sendCallbackOrder($data);
             $bitrix = new Bitrix();
-            $bitrix->createLeadBitrix($data['host'].' Callback', $data);
+            $bitrix->createLeadBitrix($data['host'] . ' Callback', $data);
 
             sendEmail($data);
 
@@ -434,9 +433,11 @@ function contact_form()
     wp_send_json(false);
 }
 
-function lb_menu_anchors($items, $args) {
+function lb_menu_anchors($items, $args)
+{
     return $items;
 }
+
 //add_filter('wp_nav_menu_objects', 'lb_menu_anchors', 10, 2);
 
 // require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
@@ -467,7 +468,7 @@ function callback()
         $erp = new ErpItea();
         $result = $erp->sendCallbackOrder($data);
         $bitrix = new Bitrix();
-            $bitrix->createLeadBitrix($data['host'].' Callback', $data);
+        $bitrix->createLeadBitrix($data['host'] . ' Callback', $data);
 //        wp_send_json($result);
         sendEmail($data);
         wp_send_json(true);
@@ -477,7 +478,8 @@ function callback()
 
 
 add_action('wp_ajax_delete_all_dates', 'delete_all_dates');
-function delete_all_dates() {
+function delete_all_dates()
+{
     if (wp_verify_nonce($_POST['security'], 'protection')) {
         $courses = get_posts([
             'post_type' => 'courses',
@@ -486,7 +488,7 @@ function delete_all_dates() {
 
         foreach ($courses as $course) {
             while (have_rows('date', $course->ID)): the_row();
-            delete_row('date', get_row_index(), $course->ID);
+                delete_row('date', get_row_index(), $course->ID);
             endwhile;
         }
         wp_send_json(true);
@@ -500,7 +502,6 @@ function delete_all_dates() {
 if (function_exists('pll_register_string')) {
 
     pll_register_string("Pages", "КРУТИ ВНИЗ", "Globals");
-
 
 
     //pll_e("");
@@ -531,56 +532,61 @@ function send_pre_order(WP_REST_Request $request)
 }
 
 
-function update_geo() {
+function update_geo()
+{
     require_once get_theme_file_path('/inc/api/sxgeo_update.php');
 }
+
 add_action('update_geo_ip', 'update_geo');
 
 if (!wp_next_scheduled('update_geo_ip')) {
-    wp_schedule_event( time(), 'daily', 'update_geo_ip' );
+    wp_schedule_event(time(), 'daily', 'update_geo_ip');
 }
 //add_filter( 'use_block_editor_for_post', 'disable_gutenberg_for_post', 10, 2 );
 
 
 // добавляем функцию к указанному хуку
-add_action( 'send_email_two_days', 'my_hour_f' );
+add_action('send_email_two_days', 'my_hour_f');
 
-if( ! wp_next_scheduled( 'send_email_two_days' ) ) {
-    wp_schedule_event( time(), 'hourly', 'send_email_two_days');
+if (!wp_next_scheduled('send_email_two_days')) {
+    wp_schedule_event(time(), 'hourly', 'send_email_two_days');
 }
-
 
 
 /**
  * Disable the emoji's
  */
-function disable_emojis() {
-	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-	remove_action( 'wp_print_styles', 'print_emoji_styles' );
-	remove_action( 'admin_print_styles', 'print_emoji_styles' );
-	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+function disable_emojis()
+{
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('admin_print_scripts', 'print_emoji_detection_script');
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    remove_action('admin_print_styles', 'print_emoji_styles');
+    remove_filter('the_content_feed', 'wp_staticize_emoji');
+    remove_filter('comment_text_rss', 'wp_staticize_emoji');
+    remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
 
-	// Remove from TinyMCE
-	add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
+    // Remove from TinyMCE
+    add_filter('tiny_mce_plugins', 'disable_emojis_tinymce');
 }
-add_action( 'init', 'disable_emojis' );
+
+add_action('init', 'disable_emojis');
 
 /**
  * Filter out the tinymce emoji plugin.
  */
-function disable_emojis_tinymce( $plugins ) {
-	if ( is_array( $plugins ) ) {
-		return array_diff( $plugins, array( 'wpemoji' ) );
-	} else {
-		return array();
-	}
+function disable_emojis_tinymce($plugins)
+{
+    if (is_array($plugins)) {
+        return array_diff($plugins, array('wpemoji'));
+    } else {
+        return array();
+    }
 }
 
-function parse_xml () {
-    $xml = simplexml_load_file(get_template_directory_uri().'/test.xml', 'SimpleXMLElement');
+function parse_xml()
+{
+    $xml = simplexml_load_file(get_template_directory_uri() . '/test.xml', 'SimpleXMLElement');
     $categories = [];
     $xmlCategories = $xml->shop->categories->category;
     $xmlProducts = $xml->shop->offers->offer;
@@ -596,8 +602,8 @@ function parse_xml () {
         } else {
             if (empty($categories[$parentId->__toString()])) {
 
-                foreach($categories as $parentKey => $childCat) {
-                    foreach($childCat['children'] as $key => $child) {
+                foreach ($categories as $parentKey => $childCat) {
+                    foreach ($childCat['children'] as $key => $child) {
                         if ($key === $parentId->__toString()) {
 
                             $categories[$parentKey]['children'][$parentId->__toString()]['children'][$id] = [
@@ -635,33 +641,50 @@ function parse_xml () {
         'post_type' => 'product'
     ];
 
-//    $res = wc_create_attribute( // создать атрибут
-//        [
-//            'name' => 'леха привет',
-//        ]
-//    );
-//    var_dump(wp_set_object_terms( 14,'lexa blat4', 'pa_leha-privet', true)); // create значение
-//    create_global_attribute('$name', 'leha-privet');
-//    register_taxonomy(
-//        6,
-//        apply_filters( 'woocommerce_taxonomy_objects_' . 'леха привет', array( 'product' ) ),
-//        apply_filters( 'woocommerce_taxonomy_args_' . 'леха привет', array(
-//            'labels'       => array(
-//                'name' => 'Lox',
-//            ),
-//            'hierarchical' => true,
-//            'show_ui'      => false,
-//            'query_var'    => true,
-//            'rewrite'      => false,
-//        ) )
-//    );
-//    $res2 = wp_set_object_terms( 6, 'leha-privet', 'leha-privet' , false);
-//var_dump($res);
-var_dump($res2);
+return;
+    $attribute = 'леха привет911';
+    $taxonomy_name = "pa_" . apply_filters('sanitize_title', $attribute);
+    $taxonomy_name = wc_attribute_taxonomy_name($attribute);
+    if (!taxonomy_exists($taxonomy_name)) {
+        $attribute_id = wc_create_attribute( // создать атрибут
+            [
+                'name' => $attribute,
+            ]
+        );
+    } else {
+        $attribute_id = wc_attribute_taxonomy_id_by_name($taxonomy_name);
+    }
+//    return;
+    $term_name = 'Русский тест5';
+    if (!term_exists($term_name, $taxonomy_name)) {
+        $term_id = (int)wp_insert_term($term_name, $taxonomy_name)['term_id'];
+    } else {
+        $term_id = (int)get_term_by( 'name', $term_name, $taxonomy_name )->term_id;
+    }
 
+    $product = wc_get_product(14);
 
+    function pricode_create_attributes( $name, $options, $attribute_id ){
+        $attribute = new WC_Product_Attribute();
+        $attribute->set_id($attribute_id);
+        $attribute->set_name($name);
+        $attribute->set_options($options);
+        $attribute->set_visible(true);
+        $attribute->set_variation(false);
+        return $attribute;
+    }
 
-//    wp_termmeta order_ + name   = term_id in wp_terms throu wp_term_relationships
+    $attributes = $product->get_attributes();
+    $attributes[] = pricode_create_attributes($taxonomy_name, [$term_id], $attribute_id);
+
+    $product->set_attributes($attributes);
+    $product->save();
+//    var_dump($product);
+    if( ! has_term( $term_id, $taxonomy_name, 14 )) {
+        var_dump('didnt has');
+        wp_set_object_terms(14, $term_id, $taxonomy_name, true );
+    }
+
 
 //    $postId = $this->productExists($lang, $product['sku']);
 
@@ -695,9 +718,6 @@ var_dump($res2);
 //    }
 
 
-
-
-
 //    echo '<pre>';
 //    var_dump($categories);
 //    var_dump($xml->shop->categories->category[2]);
@@ -709,36 +729,37 @@ var_dump($res2);
 //    echo '</pre>';
 }
 
-add_action( 'init', 'parse_xml' );
+add_action('init', 'parse_xml');
 
 
-function generateFeaturedImage($image_url, $post_id, $featured=true){ // Set iamge method
+function generateFeaturedImage($image_url, $post_id, $featured = true)
+{ // Set iamge method
     $upload_dir = wp_upload_dir();
     $image_data = file_get_contents($image_url);
-    $filename = 'thumb_'.$post_id.'.png';
-    if(wp_mkdir_p($upload_dir['path']))
+    $filename = 'thumb_' . $post_id . '.png';
+    if (wp_mkdir_p($upload_dir['path']))
         $file = $upload_dir['path'] . '/' . $filename;
     else
         $file = $upload_dir['basedir'] . '/' . $filename;
     file_put_contents($file, $image_data);
 
-    $wp_filetype = wp_check_filetype($filename, null );
+    $wp_filetype = wp_check_filetype($filename, null);
     $attachment = array(
         'post_mime_type' => $wp_filetype['type'],
-        'post_title' => 'thumb_'.$post_id,
+        'post_title' => 'thumb_' . $post_id,
         'post_content' => '',
         'post_status' => 'inherit'
     );
-    $attach_id = wp_insert_attachment( $attachment, $file, $post_id );
+    $attach_id = wp_insert_attachment($attachment, $file, $post_id);
     require_once(ABSPATH . 'wp-admin/includes/image.php');
-    $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
-    $res1= wp_update_attachment_metadata( $attach_id, $attach_data );
+    $attach_data = wp_generate_attachment_metadata($attach_id, $file);
+    $res1 = wp_update_attachment_metadata($attach_id, $attach_data);
     if ($featured) {
-        $res2= set_post_thumbnail( $post_id, $attach_id );
-    }else{
+        $res2 = set_post_thumbnail($post_id, $attach_id);
+    } else {
         /// save as gallery image
         $gallery = get_post_meta($post_id, '_product_image_gallery');
-        if(!empty($gallery)) {
+        if (!empty($gallery)) {
             $galleryItems = explode(",", $gallery);
             $galleryItems[] = $attach_id;
         } else {
