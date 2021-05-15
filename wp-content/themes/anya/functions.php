@@ -10,6 +10,7 @@ require get_theme_file_path('/inc/itea-settings.php');
 require_once get_theme_file_path('/inc/api/ErpItea.php');
 require_once get_theme_file_path('/inc/api/Bitrix.php');
 require_once get_theme_file_path('/inc/api/ScheduleErp.php');
+require_once get_theme_file_path('/inc/importXml.php');
 
 
 add_action('init', 'create_taxonomy');
@@ -733,6 +734,10 @@ return;
 }
 
 add_action('init', 'parse_xml');
+function parsePlugin() {
+    new ImportXML();
+}
+add_action('init', 'parsePlugin');
 
 
 function generateFeaturedImage($image_url, $post_id, $featured = true)

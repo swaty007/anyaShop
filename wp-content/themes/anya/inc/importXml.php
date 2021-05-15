@@ -40,9 +40,9 @@ class ImportXML
     function __construct()
     {
         $this->loadData();
-//        $this->importCategories();
+        $this->importCategories();
 //        $this->set_term_parents();
-        $this->importProducts();
+//        $this->importProducts();
     }
 
     function loadData()
@@ -70,34 +70,6 @@ class ImportXML
         }
 
         $this->products = $xml->shop->offers->offer;
-    }
-
-    function productExists($sku)
-    {
-        $posts = get_posts(['post_type' => 'product', 'post_status' => array('publish', 'draft'), 'posts_per_page' => -1, 'meta_query' => [['key' => '_sku', 'compare' => '=', 'value' => $sku]]]); // Get products by sku
-        if (empty($posts)) {
-            return false;
-        }
-        return $posts[0]->ID;
-//        $translation = icl_object_id($posts[0]->ID, 'product', false, $this->languages[$lang]['code']); // get post id for language
-    }
-
-    function categoryExists($lang, $akeneo_slug)
-    {
-
-        $lang = $this->languages[$lang]['code']; // Get language from lang data array
-
-        $terms = get_terms(['hide_empty' => false, 'taxonomy' => 'product_cat', 'meta_query' => [
-            'key' => 'akeneo_slug',
-            'value' => $akeneo_slug,
-            'compare' => '='
-        ]]); // Get category by akeneo slug
-        $termsOut = []; // Initialize array for preparing categories
-        foreach ($terms as $term) {
-            $langTerm = apply_filters('wpml_object_id', $term->term_id, 'product_cat', false, $lang); // Get id of translation of product
-            if ($langTerm) $termsOut[] = get_term($langTerm); // if term exists, add to array
-        }
-        return (empty($termsOut)) ? false : $termsOut; // return empty or array of terms
     }
 
 
@@ -143,15 +115,17 @@ class ImportXML
                 $taxonomy_name = "pa_" . apply_filters('sanitize_title', $attribute);
                 $taxonomy_name = wc_attribute_taxonomy_name($attribute);
                 if (!taxonomy_exists($taxonomy_name)) {
-                    $attribute_id = wc_create_attribute( // создать атрибут
+                    $taxonomy_id = wc_create_attribute( // создать атрибут
                         [
                             'name' => $attribute,
                             'type' => "select", // text
                         ]
                     );
                 } else {
-                    $attribute_id = wc_attribute_taxonomy_id_by_name($taxonomy_name);
+                    $taxonomy_id = wc_attribute_taxonomy_id_by_name($taxonomy_name);
                 }
+
+
                 $term_name = $paramValue;
                 if (!term_exists($term_name, $taxonomy_name)) {
                     $term_id = (int)wp_insert_term($term_name, $taxonomy_name)['term_id'];
@@ -161,10 +135,10 @@ class ImportXML
 
                 $product = wc_get_product($post_id);
 
-                function pricode_create_attributes($name, $options, $attribute_id)
+                function pricode_create_attributes($name, $options, $taxonomy_id)
                 {
                     $attribute = new WC_Product_Attribute();
-                    $attribute->set_id($attribute_id);
+                    $attribute->set_id($taxonomy_id);
                     $attribute->set_name($name);
                     $attribute->set_options($options);
                     $attribute->set_visible(true);
@@ -173,7 +147,7 @@ class ImportXML
                 }
 
                 $attributes = $product->get_attributes();
-                $attributes[] = pricode_create_attributes($taxonomy_name, [$term_id], $attribute_id);
+                $attributes[] = pricode_create_attributes($taxonomy_name, [$term_id], $taxonomy_id);
 
                 $product->set_attributes($attributes);
                 $product->save();
@@ -210,6 +184,37 @@ class ImportXML
 
     }
 
+
+    function importCategories()
+    {
+//        return;
+        $n = 0;
+        foreach ($this->categories as &$category) {
+//            echo "<pre>";
+//            return;
+            var_dump("category", $category);
+            $term = get_term_by('name', $category['name'], 'product_cat');
+            var_dump("term", $term);
+            if (!empty($term)) {
+                $term_id = $term->term_id;
+            } else {
+                $result = wp_insert_term($category['name'], 'product_cat');
+                var_dump("result", $result);
+                $term_id = $result['term_id'];
+                $n++;
+            }
+//            $taxonomy_name = "pa_" . apply_filters('sanitize_title', $attribute);
+
+
+            update_term_meta($term_id, 'xml_id', $category['id']);
+            if (!empty($category['parent_id'])) {
+                update_term_meta($term_id, 'term_parent', $category['parent_id']);
+            }
+            return;
+        }
+        unset($category);
+    }
+
     function set_term_parents()
     {
 
@@ -241,12 +246,33 @@ class ImportXML
         echo '<br/> finish set_term_parents';
     }
 
-    function importCategories()
+    function categoryExists($lang, $akeneo_slug)
     {
 
-        foreach ($this->categories as $category) {
+        $lang = $this->languages[$lang]['code']; // Get language from lang data array
 
+        $terms = get_terms(['hide_empty' => false, 'taxonomy' => 'product_cat', 'meta_query' => [
+            'key' => 'akeneo_slug',
+            'value' => $akeneo_slug,
+            'compare' => '='
+        ]]); // Get category by akeneo slug
+        $termsOut = []; // Initialize array for preparing categories
+        foreach ($terms as $term) {
+            $langTerm = apply_filters('wpml_object_id', $term->term_id, 'product_cat', false, $lang); // Get id of translation of product
+            if ($langTerm) $termsOut[] = get_term($langTerm); // if term exists, add to array
         }
+        return (empty($termsOut)) ? false : $termsOut; // return empty or array of terms
+    }
+
+
+    function productExists($sku)
+    {
+        $posts = get_posts(['post_type' => 'product', 'post_status' => array('publish', 'draft'), 'posts_per_page' => -1, 'meta_query' => [['key' => '_sku', 'compare' => '=', 'value' => $sku]]]); // Get products by sku
+        if (empty($posts)) {
+            return false;
+        }
+        return $posts[0]->ID;
+//        $translation = icl_object_id($posts[0]->ID, 'product', false, $this->languages[$lang]['code']); // get post id for language
     }
 
     function generateFeaturedImage($images, $post_id)
