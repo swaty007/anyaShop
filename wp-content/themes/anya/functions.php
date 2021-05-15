@@ -614,10 +614,6 @@ function parse_xml()
                         }
                     }
                 }
-//                var_dump($xmlCategories[]);$parentId->__toString()
-//                $categories[  ]['children'][] = [
-//                    'name' => $name,
-//                ];
             } else {
                 $categories[$parentId->__toString()]['children'][$id] = [
                     'name' => $name,
@@ -626,12 +622,29 @@ function parse_xml()
             }
 
         }
-
     }
-
+return;
 
     foreach ($xmlProducts as $product) {
+        echo '<pre>';
+        var_dump($product);
+        var_dump($product['id']->__toString());
+        var_dump($product['available']->__toString());
+        var_dump($product->name->__toString());
+        var_dump($product->price->__toString());
+        var_dump($product->categoryId->__toString());
+        foreach($product->picture as $image) {
+            var_dump($image->__toString());
+        }
+        var_dump($product->vendor->__toString());
+        var_dump($product->stock_quantity->__toString());
+//        var_dump(trim($product->description->__toString()));
+        foreach($product->param as $parameter) {
+            $paramName = $parameter['name']->__toString();
+            $paramValue = $parameter->__toString();
+        }
 
+        die();
     }
 
     $post = [
@@ -717,16 +730,6 @@ return;
 //        $p->save();
 //    }
 
-
-//    echo '<pre>';
-//    var_dump($categories);
-//    var_dump($xml->shop->categories->category[2]);
-
-//    echo '</pre>';
-//    echo '<pre>';
-//    var_dump($xml->shop);
-
-//    echo '</pre>';
 }
 
 add_action('init', 'parse_xml');
