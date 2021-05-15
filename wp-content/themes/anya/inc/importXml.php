@@ -41,7 +41,7 @@ class ImportXML
     {
         $this->loadData();
         $this->importCategories();
-//        $this->set_term_parents();
+//        $this->set_categories_parents();
 //        $this->importProducts();
     }
 
@@ -187,7 +187,7 @@ class ImportXML
 
     function importCategories()
     {
-//        return;
+        return;
         $n = 0;
         foreach ($this->categories as &$category) {
 //            echo "<pre>";
@@ -215,7 +215,7 @@ class ImportXML
         unset($category);
     }
 
-    function set_term_parents()
+    function set_categories_parents()
     {
 
 
