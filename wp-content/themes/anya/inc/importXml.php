@@ -39,9 +39,10 @@ class ImportXML
 
     function __construct()
     {
+//        return;
         $this->loadData();
         $this->importCategories();
-//        $this->set_categories_parents();
+        $this->set_categories_parents();
 //        $this->importProducts();
     }
 
@@ -169,11 +170,11 @@ class ImportXML
                     if (!$term) echo 'term not found';
                     //$term = $this->get_term_by_name_and_language($category, 'product_cat', $this->languages[$lang]['code'] );
                     if (!empty($term)) {
-                        wp_set_post_terms($postId, [$term->term_id], 'product_cat', true);
+                        wp_set_post_terms($post_id, [$term->term_id], 'product_cat', true);
                         $cat_ids[] = $term->term_id;
                     }
                 }
-                $p = wc_get_product($postId);
+                $p = wc_get_product($post_id);
                 $p->set_category_ids($cat_ids);
                 $p->save();
             }
@@ -187,14 +188,10 @@ class ImportXML
 
     function importCategories()
     {
-        return;
+//        return;
         $n = 0;
         foreach ($this->categories as &$category) {
-//            echo "<pre>";
-//            return;
-            var_dump("category", $category);
             $term = get_term_by('name', $category['name'], 'product_cat');
-            var_dump("term", $term);
             if (!empty($term)) {
                 $term_id = $term->term_id;
             } else {
@@ -203,47 +200,48 @@ class ImportXML
                 $term_id = $result['term_id'];
                 $n++;
             }
-//            $taxonomy_name = "pa_" . apply_filters('sanitize_title', $attribute);
-
 
             update_term_meta($term_id, 'xml_id', $category['id']);
             if (!empty($category['parent_id'])) {
                 update_term_meta($term_id, 'term_parent', $category['parent_id']);
             }
-            return;
         }
         unset($category);
     }
 
     function set_categories_parents()
     {
-
-
-        echo '<h3>Setting Category Parents</h3>';
-        $terms = get_terms([
+        $categories = get_terms([
             'taxonomy' => 'product_cat',
             'hide_empty' => false,
             'suppress_filters' => false,
         ]);
-        foreach ($terms as $term) {
-            //if ( isset( $term->parent ) ) continue;
-//                echo "<h4>Setting parent for {$term->name} , {$term->slug}</h4>";
-            $parent_slug = get_term_meta($term->term_id, 'term_parent', true);
-            if ($parent_slug) {
-                echo "<br/> Parent slug is {$parent_slug} ";
-                $parent_term = get_term_by('slug', $parent_slug, 'product_cat');
-                if (!$parent_term) {
-                    echo '<br/> Parent ' . $parent_slug . ' not found';
+        foreach ($categories as $category) {
+            $parent_id = get_term_meta($category->term_id, 'term_parent', true);
+            if ($parent_id) {
+
+                $parent_terms = get_terms([
+                    'hide_empty' => false,
+                    'taxonomy' => 'product_cat',
+                    'meta_query' => [
+                        'key' => 'xml_id',
+                        'value' => $parent_id,
+                        'compare' => '='
+                    ]]);
+
+
+                if (!empty($parent_terms)) {
+                    foreach($parent_terms as $parent_term) {
+                        if ($parent_term->term_id !== $category->parent) {
+                            $result = wp_update_term($category->term_id, 'product_cat', ['parent' => $parent_term->term_id]);
+                        }
+                    }
                 } else {
-                    echo "<br/> Parent term id {$parent_term->term_id}";
-                    $result = wp_update_term($term->term_id, 'product_cat', array('parent' => $parent_term->term_id));
+                    echo '<br/> Parent ' . $parent_id . ' not found';
                 }
 
-            } else {
-//                    echo '<br/> meta not found';
             }
         }
-        echo '<br/> finish set_term_parents';
     }
 
     function categoryExists($lang, $akeneo_slug)
