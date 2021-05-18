@@ -114,6 +114,99 @@ class ImportXML
                 // TODO: Image parsing to long
 //                $this->generateFeaturedImage($product->picture, $post_id);
 //                continue;
+
+
+                $productWp = wc_get_product($post_id);
+                $attributes = $productWp->get_attributes();
+                foreach ($product->param as $parameter) {
+                    $paramName = $parameter['name']->__toString();
+                    $paramValue = $parameter->__toString();
+
+
+                    $attribute = $paramName;
+                    $taxonomy_name = "pa_" . apply_filters('sanitize_title', $attribute);
+                    $taxonomy_name = mb_substr(wc_attribute_taxonomy_name($attribute), 0, 29, 'utf-8');
+                    $taxonomy_slug = mb_substr(apply_filters('sanitize_title', $attribute), 0, 26, 'utf-8');
+
+
+                    if (!taxonomy_exists($taxonomy_name)) {
+                        $taxonomy_id = wc_create_attribute( // создать атрибут
+                            [
+                                'name' => $attribute,
+                                'type' => "select", // text
+                                'slug' => $taxonomy_slug, // text
+                            ]
+                        );
+                        if (is_wp_error($taxonomy_id)) {
+                            var_dump($taxonomy_id);die();
+                        }
+                        register_taxonomy($taxonomy_name, ['product'], []);
+//                    WC_Post_Types::register_taxonomies();
+                    } else {
+//                    WC_Post_Types::register_taxonomies();
+                        $taxonomy_id = wc_attribute_taxonomy_id_by_name($taxonomy_name);
+                    }
+
+
+                    $termsArr = [];
+                    foreach (explode(", ", $paramValue) as $term_name) {
+                        if (empty($term_name)) continue;
+
+                        $term_id = term_exists($term_name, $taxonomy_name);
+                        if (!$term_id) {
+                            $term_id = wp_insert_term($term_name, $taxonomy_name);
+                            if (is_wp_error($term_id)) {
+                                if ($term_id->error_data['term_exists']) {
+                                    $term_id = $term_id->error_data['term_exists'];
+                                } else {
+                                    var_dump($term_id);
+                                    var_dump($term_name);
+                                    var_dump($taxonomy_name);
+                                    var_dump(term_exists($term_name, $taxonomy_name));
+                                    die();
+                                    continue;
+                                }
+                            } else {
+                                $term_id = (int)$term_id['term_id'];
+                            }
+                        } else {
+                            $term_id = (int)$term_id['term_id'];
+                        }
+                        $termsArr[] = $term_id;
+
+                        if (!has_term($term_id, $taxonomy_name, $post_id)) {
+//                        var_dump('didnt has');
+                            wp_set_object_terms($post_id, $term_id, $taxonomy_name, true);
+                        }
+                    }
+
+                    $attributes[] = $this->pricode_create_attributes($taxonomy_name, $termsArr, $taxonomy_id);
+                    unset($parameter);
+                }
+                $productWp->set_attributes($attributes);
+
+                $category_id = $product->categoryId->__toString();
+                if ($category_id) {
+                    $cat_ids = [];
+                    $product_category_terms = get_terms([
+                        'hide_empty' => false,
+                        'taxonomy' => 'product_cat',
+                        'meta_query' => [
+                            'key' => 'xml_id',
+                            'value' => $category_id,
+                            'compare' => '='
+                        ]]);
+                    if (!empty($product_category_terms)) {
+                        foreach ($product_category_terms as $product_term) {
+                            $cat_ids[] = $product_term->term_id;
+//                            wp_set_post_terms($post_id, [$product_term->term_id], 'product_cat', true);
+                        }
+                        $productWp->set_category_ids($cat_ids);
+                    }
+                }
+
+            } else {
+                $productWp = wc_get_product($post_id);
             }
             // TODO: Image parsing to long
 //            $this->generateFeaturedImage($product->picture, $post_id);
@@ -124,99 +217,11 @@ class ImportXML
 
 //            var_dump($product->vendor->__toString());
 
-            $productWp = wc_get_product($post_id);
+
 
             $productWp->set_manage_stock(true);
             wc_update_product_stock($post_id, $product->stock_quantity->__toString());
-            $attributes = $productWp->get_attributes();
-            foreach ($product->param as $parameter) {
-                $paramName = $parameter['name']->__toString();
-                $paramValue = $parameter->__toString();
 
-
-                $attribute = $paramName;
-                $taxonomy_name = "pa_" . apply_filters('sanitize_title', $attribute);
-                $taxonomy_name = mb_substr(wc_attribute_taxonomy_name($attribute), 0, 29, 'utf-8');
-                $taxonomy_slug = mb_substr(apply_filters('sanitize_title', $attribute), 0, 26, 'utf-8');
-
-
-                if (!taxonomy_exists($taxonomy_name)) {
-                    $taxonomy_id = wc_create_attribute( // создать атрибут
-                        [
-                            'name' => $attribute,
-                            'type' => "select", // text
-                            'slug' => $taxonomy_slug, // text
-                        ]
-                    );
-                    if (is_wp_error($taxonomy_id)) {
-                        var_dump($taxonomy_id);die();
-                    }
-                    register_taxonomy($taxonomy_name, ['product'], []);
-//                    WC_Post_Types::register_taxonomies();
-                } else {
-//                    WC_Post_Types::register_taxonomies();
-                    $taxonomy_id = wc_attribute_taxonomy_id_by_name($taxonomy_name);
-                }
-
-
-                $termsArr = [];
-                foreach (explode(", ", $paramValue) as $term_name) {
-                    if (empty($term_name)) continue;
-
-                    $term_id = term_exists($term_name, $taxonomy_name);
-                    if (!$term_id) {
-                        $term_id = wp_insert_term($term_name, $taxonomy_name);
-                        if (is_wp_error($term_id)) {
-                            if ($term_id->error_data['term_exists']) {
-                                $term_id = $term_id->error_data['term_exists'];
-                            } else {
-                                var_dump($term_id);
-                                var_dump($term_name);
-                                var_dump($taxonomy_name);
-                                var_dump(term_exists($term_name, $taxonomy_name));
-                                die();
-                                continue;
-                            }
-                        } else {
-                            $term_id = (int)$term_id['term_id'];
-                        }
-                    } else {
-                        $term_id = (int)$term_id['term_id'];
-                    }
-                    $termsArr[] = $term_id;
-
-                    if (!has_term($term_id, $taxonomy_name, $post_id)) {
-//                        var_dump('didnt has');
-                        wp_set_object_terms($post_id, $term_id, $taxonomy_name, true);
-                    }
-                }
-
-                $attributes[] = $this->pricode_create_attributes($taxonomy_name, $termsArr, $taxonomy_id);
-                unset($parameter);
-            }
-            $productWp->set_attributes($attributes);
-
-
-            $category_id = $product->categoryId->__toString();
-
-            if ($category_id) {
-                $cat_ids = [];
-                $product_category_terms = get_terms([
-                    'hide_empty' => false,
-                    'taxonomy' => 'product_cat',
-                    'meta_query' => [
-                        'key' => 'xml_id',
-                        'value' => $category_id,
-                        'compare' => '='
-                    ]]);
-                if (!empty($product_category_terms)) {
-                    foreach ($product_category_terms as $product_term) {
-                        $cat_ids[] = $product_term->term_id;
-//                            wp_set_post_terms($post_id, [$product_term->term_id], 'product_cat', true);
-                    }
-                    $productWp->set_category_ids($cat_ids);
-                }
-            }
             $productWp->save();
             unset($product);
         }
