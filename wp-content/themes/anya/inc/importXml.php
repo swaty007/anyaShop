@@ -39,6 +39,7 @@ class ImportXML
 
     function __construct()
     {
+        return;
         $this->loadData();
         $this->importCategories();
         $this->set_categories_parents();
@@ -68,16 +69,15 @@ class ImportXML
                 'term_id' => null,
             ];
         }
-
         $this->products = $xml->shop->offers->offer;
+        unset($xml);
+        unset($xmlCategories);
     }
 
 
     function importProducts()
     {
-
         foreach ($this->products as $product) {
-
             $post = [
                 'post_title' => $product->name->__toString(),
                 'post_content' => trim($product->description->__toString()),
@@ -95,20 +95,24 @@ class ImportXML
             if (!$post_id) {
                 $post_id = wp_insert_post($post);
                 update_post_meta($post_id, '_sku', $sku);
-                $this->generateFeaturedImage($product->picture, $post_id);
+                // TODO: Image parsing to long
+//                $this->generateFeaturedImage($product->picture, $post_id);
+//                continue;
             }
+            // TODO: Image parsing to long
+            $this->generateFeaturedImage($product->picture, $post_id);
+            continue;
 
             update_post_meta($post_id, '_regular_price', $product->price->__toString());
-//            update_post_meta($post_id, '_stock', $product->stock_quantity->__toString());
 
 
-            var_dump($product->vendor->__toString());
+//            var_dump($product->vendor->__toString());
 
             $productWp = wc_get_product($post_id);
 
             $productWp->set_manage_stock(true);
             wc_update_product_stock($post_id, $product->stock_quantity->__toString());
-//return;
+            $attributes = $productWp->get_attributes();
             foreach ($product->param as $parameter) {
                 $paramName = $parameter['name']->__toString();
                 $paramValue = $parameter->__toString();
@@ -116,45 +120,66 @@ class ImportXML
 
                 $attribute = $paramName;
                 $taxonomy_name = "pa_" . apply_filters('sanitize_title', $attribute);
-                $taxonomy_name = wc_attribute_taxonomy_name($attribute);
+                $taxonomy_name = mb_substr(wc_attribute_taxonomy_name($attribute), 0, 29, 'utf-8');
+                $taxonomy_slug = mb_substr(apply_filters('sanitize_title', $attribute), 0, 26, 'utf-8');
+
+
                 if (!taxonomy_exists($taxonomy_name)) {
                     $taxonomy_id = wc_create_attribute( // создать атрибут
                         [
                             'name' => $attribute,
                             'type' => "select", // text
+                            'slug' => $taxonomy_slug, // text
                         ]
                     );
+                    if (is_wp_error($taxonomy_id)) {
+                        var_dump($taxonomy_id);die();
+                    }
                     register_taxonomy($taxonomy_name, ['product'], []);
 //                    WC_Post_Types::register_taxonomies();
                 } else {
+//                    WC_Post_Types::register_taxonomies();
                     $taxonomy_id = wc_attribute_taxonomy_id_by_name($taxonomy_name);
                 }
 
-//                $term_name = $paramValue;
 
                 $termsArr = [];
                 foreach (explode(", ", $paramValue) as $term_name) {
+                    if (empty($term_name)) continue;
 
-                    if (!term_exists($term_name, $taxonomy_name)) {
-                        $term_id = (int)wp_insert_term($term_name, $taxonomy_name)['term_id'];
+                    $term_id = term_exists($term_name, $taxonomy_name);
+                    if (!$term_id) {
+                        $term_id = wp_insert_term($term_name, $taxonomy_name);
+                        if (is_wp_error($term_id)) {
+                            if ($term_id->error_data['term_exists']) {
+                                $term_id = $term_id->error_data['term_exists'];
+                            } else {
+                                var_dump($term_id);
+                                var_dump($term_name);
+                                var_dump($taxonomy_name);
+                                var_dump(term_exists($term_name, $taxonomy_name));
+                                die();
+                                continue;
+                            }
+                        } else {
+                            $term_id = (int)$term_id['term_id'];
+                        }
                     } else {
-                        $term_id = (int)get_term_by('name', $term_name, $taxonomy_name)->term_id;
+                        $term_id = (int)$term_id['term_id'];
                     }
                     $termsArr[] = $term_id;
 
                     if (!has_term($term_id, $taxonomy_name, $post_id)) {
-                        var_dump('didnt has');
+//                        var_dump('didnt has');
                         wp_set_object_terms($post_id, $term_id, $taxonomy_name, true);
                     }
                 }
 
-                $attributes = $productWp->get_attributes();
                 $attributes[] = $this->pricode_create_attributes($taxonomy_name, $termsArr, $taxonomy_id);
-                $productWp->set_attributes($attributes);
-                $productWp->save();
-
-
+                unset($parameter);
             }
+            $productWp->set_attributes($attributes);
+
 //            return;
 
             $category_id = $product->categoryId->__toString();
@@ -175,11 +200,13 @@ class ImportXML
 //                            wp_set_post_terms($post_id, [$product_term->term_id], 'product_cat', true);
                     }
                     $productWp->set_category_ids($cat_ids);
-                    $productWp->save();
+//                    $productWp->save();
                 }
             }
+            $productWp->save();
+            unset($product);
         }
-
+        unset($this->products);
     }
 
     function pricode_create_attributes($name, $options, $taxonomy_id)
@@ -196,7 +223,6 @@ class ImportXML
 
     function importCategories()
     {
-//        return;
         $n = 0;
         foreach ($this->categories as &$category) {
             $term = get_term_by('name', $category['name'], 'product_cat');
@@ -215,6 +241,7 @@ class ImportXML
             }
         }
         unset($category);
+        unset($this->categories);
     }
 
     function set_categories_parents()
@@ -250,17 +277,22 @@ class ImportXML
 
             }
         }
+        unset($categories);
     }
 
 
     function productExists($sku)
     {
         $posts = get_posts([
-                'post_type' => 'product',
+            'post_type' => 'product',
             'post_status' => ['publish', 'draft'],
             'posts_per_page' => -1,
             'meta_query' => [
-                    ['key' => '_sku', 'compare' => '=', 'value' => $sku]
+                [
+                    'key' => '_sku',
+                    'compare' => '=',
+                    'value' => $sku,
+                ]
             ]
         ]); // Get products by sku
         if (empty($posts)) {
@@ -280,18 +312,19 @@ class ImportXML
             if (!empty($src)) {
 
 
-                $imageurl = $src;
+                $imageurl = str_replace("?dl=0", "", $src);
                 $mime = explode('/', getimagesize($imageurl)['mime']);
                 $imagetype = end($mime);
 
                 $filename = "product_$post_id." . $imagetype;
                 $uploaddir = wp_upload_dir();
                 $uploadfile = $uploaddir['path'] . '/' . $filename;
-                $contents = file_get_contents($imageurl);
+
                 if (file_exists($uploadfile)) {
                     $filename = "product_$post_id." . date('dmY') . '.' . $imagetype;
                     $uploadfile = $uploaddir['path'] . '/' . $filename;
                 }
+                $contents = file_get_contents($imageurl);
                 $savefile = fopen($uploadfile, 'w');
                 fwrite($savefile, $contents);
                 fclose($savefile);
@@ -313,7 +346,7 @@ class ImportXML
                 if ($n === 0) {
                     set_post_thumbnail($post_id, $attach_id);
                 } else {
-                    $gallery = get_post_meta($post_id, '_product_image_gallery');
+                    $gallery = get_post_meta($post_id, '_product_image_gallery', true);
                     if (!empty($gallery)) {
                         var_dump("gallery");
                         var_dump($gallery);
@@ -324,7 +357,6 @@ class ImportXML
                     }
                     update_post_meta($post_id, '_product_image_gallery', join(',', $galleryItems));
                 }
-
                 $n++;
             }
         }

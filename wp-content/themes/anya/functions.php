@@ -7,9 +7,9 @@
 require get_theme_file_path('/inc/widgets.php');
 require get_theme_file_path('/inc/polylang-slug.php');
 require get_theme_file_path('/inc/itea-settings.php');
-require_once get_theme_file_path('/inc/api/ErpItea.php');
-require_once get_theme_file_path('/inc/api/Bitrix.php');
-require_once get_theme_file_path('/inc/api/ScheduleErp.php');
+//require_once get_theme_file_path('/inc/api/ErpItea.php');
+//require_once get_theme_file_path('/inc/api/Bitrix.php');
+//require_once get_theme_file_path('/inc/api/ScheduleErp.php');
 require_once get_theme_file_path('/inc/importXml.php');
 
 
@@ -302,30 +302,6 @@ function lb_menu_anchors($items, $args)
 
 
 
-add_action('wp_ajax_nopriv_callback', 'callback');
-add_action('wp_ajax_callback', 'callback');
-function callback()
-{
-    if (wp_verify_nonce($_POST['security'], 'protection')) {
-
-
-        $data = [
-            'name' => $_POST['data']['phone'],
-            'phone' => $_POST['data']['phone'],
-//            'utm_source' => $_POST['data']['utm_source'],
-            'cityUuid' => get_option('true_options')['department_uuid'],
-        ];
-        $erp = new ErpItea();
-        $result = $erp->sendCallbackOrder($data);
-        $bitrix = new Bitrix();
-        $bitrix->createLeadBitrix($data['host'] . ' Callback', $data);
-//        wp_send_json($result);
-        wp_send_json(true);
-    }
-    wp_send_json(false);
-}
-
-
 add_action('wp_ajax_delete_all_dates', 'delete_all_dates');
 function delete_all_dates()
 {
@@ -367,18 +343,6 @@ function add_recaptcha()
 }
 
 //add_action('wp_enqueue_scripts', 'add_recaptcha');
-
-
-add_action('rest_api_init', function () {
-    register_rest_route('pre-order/v1', 'pre-order', array(
-        'methods' => 'POST',
-        'callback' => 'send_pre_order'
-    ));
-});
-function send_pre_order(WP_REST_Request $request)
-{
-
-}
 
 
 function update_geo()
@@ -428,44 +392,7 @@ function disable_emojis_tinymce($plugins)
 }
 
 function parsePlugin() {
+//    return;
     new ImportXML();
 }
 add_action('init', 'parsePlugin', 69);
-
-
-function generateFeaturedImage($image_url, $post_id, $featured = true)
-{ // Set iamge method
-    $upload_dir = wp_upload_dir();
-    $image_data = file_get_contents($image_url);
-    $filename = 'thumb_' . $post_id . '.png';
-    if (wp_mkdir_p($upload_dir['path']))
-        $file = $upload_dir['path'] . '/' . $filename;
-    else
-        $file = $upload_dir['basedir'] . '/' . $filename;
-    file_put_contents($file, $image_data);
-
-    $wp_filetype = wp_check_filetype($filename, null);
-    $attachment = array(
-        'post_mime_type' => $wp_filetype['type'],
-        'post_title' => 'thumb_' . $post_id,
-        'post_content' => '',
-        'post_status' => 'inherit'
-    );
-    $attach_id = wp_insert_attachment($attachment, $file, $post_id);
-    require_once(ABSPATH . 'wp-admin/includes/image.php');
-    $attach_data = wp_generate_attachment_metadata($attach_id, $file);
-    $res1 = wp_update_attachment_metadata($attach_id, $attach_data);
-    if ($featured) {
-        $res2 = set_post_thumbnail($post_id, $attach_id);
-    } else {
-        /// save as gallery image
-        $gallery = get_post_meta($post_id, '_product_image_gallery');
-        if (!empty($gallery)) {
-            $galleryItems = explode(",", $gallery);
-            $galleryItems[] = $attach_id;
-        } else {
-            $galleryItems = [$attach_id];
-        }
-        update_post_meta($post_id, '_product_image_gallery', join(',', $galleryItems));
-    }
-}
