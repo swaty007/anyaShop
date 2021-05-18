@@ -43,6 +43,7 @@ class ImportXML
         $this->loadData();
         $this->importCategories();
         $this->set_categories_parents();
+//        $this->updateProductsPriceStock();
         $this->importProducts();
     }
 
@@ -74,6 +75,21 @@ class ImportXML
         unset($xmlCategories);
     }
 
+    function updateProductsPriceStock() {
+        foreach ($this->products as $product) {
+            $sku = $product['id']->__toString();
+            $post_id = $this->productExists($sku);
+            if($post_id) {
+                update_post_meta($post_id, '_regular_price', $product->price->__toString());
+                $productWp = wc_get_product($post_id);
+                $productWp->set_manage_stock(true);
+                wc_update_product_stock($post_id, $product->stock_quantity->__toString());
+                $productWp->save();
+            }
+            unset($product);
+        }
+        unset($this->products);
+    }
 
     function importProducts()
     {
@@ -100,8 +116,8 @@ class ImportXML
 //                continue;
             }
             // TODO: Image parsing to long
-            $this->generateFeaturedImage($product->picture, $post_id);
-            continue;
+//            $this->generateFeaturedImage($product->picture, $post_id);
+//            continue;
 
             update_post_meta($post_id, '_regular_price', $product->price->__toString());
 
@@ -180,7 +196,6 @@ class ImportXML
             }
             $productWp->set_attributes($attributes);
 
-//            return;
 
             $category_id = $product->categoryId->__toString();
 
@@ -200,7 +215,6 @@ class ImportXML
 //                            wp_set_post_terms($post_id, [$product_term->term_id], 'product_cat', true);
                     }
                     $productWp->set_category_ids($cat_ids);
-//                    $productWp->save();
                 }
             }
             $productWp->save();
@@ -317,6 +331,9 @@ class ImportXML
                 $imagetype = end($mime);
 
                 $filename = "product_$post_id." . $imagetype;
+                if (empty($imagetype)) {
+                    continue;
+                }
                 $uploaddir = wp_upload_dir();
                 $uploadfile = $uploaddir['path'] . '/' . $filename;
 
@@ -329,13 +346,13 @@ class ImportXML
                 fwrite($savefile, $contents);
                 fclose($savefile);
                 $wp_filetype = wp_check_filetype(basename($filename), null);
-                $attachment = array(
+                $attachment = [
 //            'guid' => $uploaddir . '/' . basename( $filename ),
                     'post_mime_type' => $wp_filetype['type'],
                     'post_title' => $filename,
-                    'post_content' => '',
-                    'post_status' => 'inherit'
-                );
+                    'post_content' => $imageurl,
+                    'post_status' => 'inherit',
+                ];
                 $attach_id = wp_insert_attachment($attachment, $uploadfile); //,$post_id
                 $imagenew = get_post($attach_id);
                 $fullsizepath = get_attached_file($imagenew->ID);
