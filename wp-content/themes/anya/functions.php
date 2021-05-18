@@ -291,148 +291,7 @@ function get_page_id_by_template($template)
     return $pages[0];
 }
 
-add_action('wp_ajax_nopriv_check_promo', 'check_promo');
-add_action('wp_ajax_check_promo', 'check_promo');
-function check_promo()
-{
-    if (wp_verify_nonce($_POST['security'], 'protection')) {
-        $erp = new ErpItea();
-        $post_id = $_POST['data']['target_id'];
-        $result = $erp->checkPromoCode($_POST['data']['promo']);
-        if ($result['success']) {
-            $success = false;
-            $promoData = json_decode($result['message']);
-            $uuid = get_post_meta($post_id, 'uuid_for_itea_crm', true);
-            foreach ($promoData->courses as $course) {
-                if ($course->uuid == $uuid) {
-                    $success = true;
-                }
-            }
-            foreach ($promoData->roadmaps as $roadmap) {
-                if ($roadmap->uuid == $uuid) {
-                    $success = true;
-                }
-            }
-            if ($success) {
-                wp_send_json([
-                    'data' => $promoData,
-                    'success' => $success
-                ]);
-            }
-            wp_send_json([
-                'data' => $promoData,
-                'success' => $success
-            ]);
-        }
-        wp_send_json(false);
-    }
-    wp_send_json(false);
-}
 
-
-add_action('wp_ajax_nopriv_contact_form', 'contact_form');
-add_action('wp_ajax_contact_form', 'contact_form');
-function contact_form()
-{
-    if (wp_verify_nonce($_POST['security'], 'protection')) {
-        $post_id = $_POST['data']['target_id'];
-        $data = [
-            'post_id' => $post_id,
-            'name' => $_POST['data']['name'],
-            'email' => $_POST['data']['email'],
-            'phone' => $_POST['data']['phone'],
-            'promo' => $_POST['data']['promo'],
-            'promocode' => $_POST['data']['promocode'],
-            'discount' => $_POST['data']['discount'],
-            'is_trial' => $_POST['data']['is_trial'],
-            'is_consult' => $_POST['data']['is_consult'],
-            'utm_source' => $_POST['data']['utm_source'],
-            'host' => $_POST['data']['host'],
-            'post_name' => '',
-            'roadmap_uuid' => '',
-            'courses_uuid' => '',
-            'price' => '',
-            'discount_price' => '',
-        ];
-        if (!empty($post_id)) {
-            $price = 0;
-            $courses_uuid = [];
-            $post_type = get_post_type($post_id);
-            $data['post_name'] = get_the_title($post_id);
-            switch ($post_type) {
-                case "webinars":
-
-                    break;
-
-                case "professions":
-//                    $price += get_post_meta($post_id, 'cost', true);
-                    $data['roadmap_uuid'] = get_post_meta($post_id, 'uuid_for_itea_crm', true);
-                    $cost = get_post_meta($post_id, 'discount_price', true);
-                    if (!empty($cost)) {
-                        $price += $cost;
-                    }
-                    foreach (get_post_meta($post_id, 'profession_courses', true) as $course) {
-                        if (empty($price)) {
-                            $price += get_post_meta($course, 'cost', true);
-                        }
-                        $courses_uuid[] = get_post_meta($course, 'uuid_for_itea_crm', true);
-                    }
-                    break;
-                case "courses":
-                    $discount_price = get_post_meta($post_id, 'discount_price', true);
-                    if (empty($discount_price)) {
-                        $price += get_post_meta($post_id, 'cost', true);
-                    } else {
-                        $price += $discount_price;
-                    }
-                    if ($data['is_trial'] == 1 and !empty(get_field('first_mail', $post_id))) {
-
-                        sendEmailWithTrial($data);
-                        global $wpdb;
-                        $wpdb->query("
-                        INSERT table_cron (`courseID`, `userMAIL`) 
-                        VALUES ( '" . $post_id . "',  '" . $data['email'] . "');
-
-                        ");
-
-                    } else {
-                        sendEmailToUser($data);
-                    }
-
-                    $courses_uuid[] = get_post_meta($post_id, 'uuid_for_itea_crm', true);
-                    break;
-            }
-            $data['post_type'] = $post_type;
-            $data['currency'] = get_post_meta($post_id, 'currency', true);
-            $data['price'] = $price;
-            if ($data['is_trial'] || $data['is_consult']) {
-                $data['price'] = 0;
-            }
-            $data['courses_uuid'] = $courses_uuid;
-
-            $erp = new ErpItea();
-            $result = $erp->sendOrder($data);
-            $bitrix = new Bitrix();
-            $bitrix->createLeadBitrix($data['host'], $data);
-            sendEmail($data);
-//            wp_send_json($data);
-        } else {
-            $erp = new ErpItea();
-            $result = $erp->sendCallbackOrder($data);
-            $bitrix = new Bitrix();
-            $bitrix->createLeadBitrix($data['host'] . ' Callback', $data);
-
-            sendEmail($data);
-
-
-//            wp_send_json($result);
-        }
-
-
-        wp_send_json(true);
-    }
-    wp_send_json(false);
-}
 
 function lb_menu_anchors($items, $args)
 {
@@ -441,16 +300,6 @@ function lb_menu_anchors($items, $args)
 
 //add_filter('wp_nav_menu_objects', 'lb_menu_anchors', 10, 2);
 
-// require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-// global $wpdb;
-// $tablename = "table_cron";
-// $main_sql_create = "CREATE TABLE " . $tablename . '(
-//     Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-//     courseID INT NOT NULL,
-//     userMAIL VARCHAR(50) NOT NULL,
-//     DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP 
-//     )';
-// maybe_create_table($wpdb->prefix . $tablename, $main_sql_create );
 
 
 add_action('wp_ajax_nopriv_callback', 'callback');
@@ -471,7 +320,6 @@ function callback()
         $bitrix = new Bitrix();
         $bitrix->createLeadBitrix($data['host'] . ' Callback', $data);
 //        wp_send_json($result);
-        sendEmail($data);
         wp_send_json(true);
     }
     wp_send_json(false);
@@ -546,12 +394,6 @@ if (!wp_next_scheduled('update_geo_ip')) {
 //add_filter( 'use_block_editor_for_post', 'disable_gutenberg_for_post', 10, 2 );
 
 
-// добавляем функцию к указанному хуку
-add_action('send_email_two_days', 'my_hour_f');
-
-if (!wp_next_scheduled('send_email_two_days')) {
-    wp_schedule_event(time(), 'hourly', 'send_email_two_days');
-}
 
 
 /**
@@ -585,159 +427,10 @@ function disable_emojis_tinymce($plugins)
     }
 }
 
-function parse_xml()
-{
-    $xml = simplexml_load_file(get_template_directory_uri() . '/test.xml', 'SimpleXMLElement');
-    $categories = [];
-    $xmlCategories = $xml->shop->categories->category;
-    $xmlProducts = $xml->shop->offers->offer;
-    foreach ($xmlCategories as $category) {
-        $name = $category->__toString();
-        $id = $category['id']->__toString();
-        $parentId = $category['parentld'];
-        if (empty($parentId)) {
-            $categories[$id] = [
-                'name' => $name,
-                'children' => [],
-            ];
-        } else {
-            if (empty($categories[$parentId->__toString()])) {
-
-                foreach ($categories as $parentKey => $childCat) {
-                    foreach ($childCat['children'] as $key => $child) {
-                        if ($key === $parentId->__toString()) {
-
-                            $categories[$parentKey]['children'][$parentId->__toString()]['children'][$id] = [
-                                'name' => $name,
-                                'children' => [],
-                            ];
-
-                        }
-                    }
-                }
-            } else {
-                $categories[$parentId->__toString()]['children'][$id] = [
-                    'name' => $name,
-                    'children' => [],
-                ];
-            }
-
-        }
-    }
-return;
-
-    foreach ($xmlProducts as $product) {
-        echo '<pre>';
-        var_dump($product);
-        var_dump($product['id']->__toString());
-        var_dump($product['available']->__toString());
-        var_dump($product->name->__toString());
-        var_dump($product->price->__toString());
-        var_dump($product->categoryId->__toString());
-        foreach($product->picture as $image) {
-            var_dump($image->__toString());
-        }
-        var_dump($product->vendor->__toString());
-        var_dump($product->stock_quantity->__toString());
-//        var_dump(trim($product->description->__toString()));
-        foreach($product->param as $parameter) {
-            $paramName = $parameter['name']->__toString();
-            $paramValue = $parameter->__toString();
-        }
-
-        die();
-    }
-
-    $post = [
-        'post_title' => 'testTitle',
-        'post_content' => 'testContent',
-        'post_status' => 'publish',
-        'post_type' => 'product'
-    ];
-
-return;
-    $attribute = 'леха привет911';
-    $taxonomy_name = "pa_" . apply_filters('sanitize_title', $attribute);
-    $taxonomy_name = wc_attribute_taxonomy_name($attribute);
-    if (!taxonomy_exists($taxonomy_name)) {
-        $attribute_id = wc_create_attribute( // создать атрибут
-            [
-                'name' => $attribute,
-            ]
-        );
-    } else {
-        $attribute_id = wc_attribute_taxonomy_id_by_name($taxonomy_name);
-    }
-//    return;
-    $term_name = 'Русский тест5';
-    if (!term_exists($term_name, $taxonomy_name)) {
-        $term_id = (int)wp_insert_term($term_name, $taxonomy_name)['term_id'];
-    } else {
-        $term_id = (int)get_term_by( 'name', $term_name, $taxonomy_name )->term_id;
-    }
-
-    $product = wc_get_product(14);
-
-    function pricode_create_attributes( $name, $options, $attribute_id ){
-        $attribute = new WC_Product_Attribute();
-        $attribute->set_id($attribute_id);
-        $attribute->set_name($name);
-        $attribute->set_options($options);
-        $attribute->set_visible(true);
-        $attribute->set_variation(false);
-        return $attribute;
-    }
-
-    $attributes = $product->get_attributes();
-    $attributes[] = pricode_create_attributes($taxonomy_name, [$term_id], $attribute_id);
-
-    $product->set_attributes($attributes);
-    $product->save();
-//    var_dump($product);
-    if( ! has_term( $term_id, $taxonomy_name, 14 )) {
-        var_dump('didnt has');
-        wp_set_object_terms(14, $term_id, $taxonomy_name, true );
-    }
-
-
-//    $postId = $this->productExists($lang, $product['sku']);
-
-    //    $postId = wp_insert_post($post);
-
-//    update_post_meta($postId, '_regular_price', $product['price']); // write price
-//    update_post_meta($postId, '_price', $product['price']); // write price
-
-//    update_post_meta($postId, '_sku', $product['sku']);
-
-//    $this->generateFeaturedImage($img, $postId , false);
-
-
-//    if(!empty($product['categories'])){ // if not empty categories set categories for inserted product
-//        $cat_ids = [];
-//        foreach ($product['categories'] as $category) {
-//
-//            $slug = $category.'-'. $this->languages[$lang]['code'];
-//            echo '<p>Assigning category '. $slug;
-//            $term = get_term_by('slug', $slug , 'product_cat');
-//            if(!$term ) echo 'term not found';
-//            //$term = $this->get_term_by_name_and_language($category, 'product_cat', $this->languages[$lang]['code'] );
-//            if(!empty($term)){
-//                wp_set_post_terms($postId, [$term->term_id], 'product_cat', true);
-//                $cat_ids[] = $term->term_id;
-//            }
-//        }
-//        $p = wc_get_product($postId);
-//        $p->set_category_ids($cat_ids);
-//        $p->save();
-//    }
-
-}
-
-add_action('init', 'parse_xml');
 function parsePlugin() {
     new ImportXML();
 }
-add_action('init', 'parsePlugin');
+add_action('init', 'parsePlugin', 69);
 
 
 function generateFeaturedImage($image_url, $post_id, $featured = true)
