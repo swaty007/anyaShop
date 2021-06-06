@@ -26,7 +26,7 @@ global.jQuery = global.$ = $;
 // import Header from "./modules/header";
 // import Portfolio from "./modules/portfolio";
 // import UtmCookie from "./modules/utm-cookie";
-// import PrivacyPolicy from "./modules/privacy-policy";
+import Product from "./modules/product";
 //
 // const global_script = new Global();
 // const allCourses = new AllCourses();
@@ -37,3 +37,4 @@ global.jQuery = global.$ = $;
 // const contactForm = new ContactForm();
 // const portfolio = new Portfolio();
 // const privacyPolicy = new PrivacyPolicy();
+const product = new Product();

@@ -1,0 +1,17 @@
+.dropdown__widget {
+  position: relative;
+}
+.widget_shopping_cart_content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #222330;
+  z-index: 420;
+  min-width: 300px;
+  img {
+    display: none;
+  }
+  a, p, span {
+    font-size: 15px;
+  }
+}

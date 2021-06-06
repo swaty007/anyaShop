@@ -13,22 +13,6 @@ require get_theme_file_path('/inc/itea-settings.php');
 require_once get_theme_file_path('/inc/importXml.php');
 
 
-add_action('init', 'create_taxonomy');
-function create_taxonomy()
-{
-    // create a new taxonomy
-    register_taxonomy(
-        'courses_category',
-        ['courses', 'professions', 'webinars'],
-        array(
-            "hierarchical" => true,
-            "label" => "Courses Category",
-            "singular_label" => "Course",
-//            "rewrite" => array('slug' => 'courses/category', 'with_front' => false, 'hierarchical' => false)
-            "rewrite" => array('slug' => 'courses', 'with_front' => false)//, 'hierarchical' => true
-        )
-    );
-}
 
 if (!function_exists('itea_setup')) :
     /**
@@ -120,9 +104,9 @@ function itea_files()
         'root_url' => get_site_url(),
         'nonce' => wp_create_nonce('protection'),
         'ajaxurl' => admin_url('admin-ajax.php'),
-        'language' => pll_current_language(),
+//        'language' => pll_current_language(),
         'translates' => [
-            'favorite' => pll__('Favorite equipment'),
+//            'favorite' => pll__('Favorite equipment'),
         ],
         'thank_page_urls' => [
             'order' => get_permalink(457),

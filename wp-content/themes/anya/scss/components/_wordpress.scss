@@ -51,7 +51,7 @@
     font-size: 16px;
     line-height: 1.5;
     strong{
-      font-family: "Gotham Pro Medium";
+      //font-family: "Gotham Pro Medium";
       font-weight: normal;
     }
     ul{
@@ -69,14 +69,14 @@
       line-height: 1.5;
       padding-left: 17px;
       &:before{
-        position: absolute;
-        content: '';
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #8E3DFF;
-        top: 9px;
-        left: 0;
+        //position: absolute;
+        //content: '';
+        //width: 6px;
+        //height: 6px;
+        //border-radius: 50%;
+        //background: #8E3DFF;
+        //top: 9px;
+        //left: 0;
       }
     }
     h2 {
@@ -110,10 +110,10 @@
         padding-left: 20px;
         position: relative;
         &:before {
-          position: absolute;
-          left: 0;
-          color: $brand-color;
-          margin-right: 18px;
+          //position: absolute;
+          //left: 0;
+          ////color: $brand-color;
+          //margin-right: 18px;
         }
         font-weight: 600;
         font-size: 16px;
@@ -124,7 +124,7 @@
     ul {
       li {
         &:before {
-          content: '•';
+          //content: '•';
         }
       }
     }
@@ -148,5 +148,31 @@
       width: 100%;
       height: auto;
     }
+
+    .amount {
+      color: #4A41DB;
+      font-weight: 400;
+      font-size: 20px;
+      margin-right: 35px;
+    }
+    .product-name {
+      color: #161616;
+    }
+  }
+}
+
+
+.product-page .price-info .price, .product-fixed-menu .price {
+  del {
+    color: #848789;
+    font-family: Oswald;
+    font-size: 17px;
+    font-weight: 300;
+    text-decoration: line-through;
+    //margin-right: 40px;
+    //margin-left: 10px;
+  }
+  ins {
+
   }
 }

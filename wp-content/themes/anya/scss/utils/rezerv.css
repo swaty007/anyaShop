@@ -1242,7 +1242,7 @@ footer .copyright{
 .product-page .video{
     margin-bottom: 80px;
 }
-.product-page .video h1{
+.product-page .video h1, .product-page .video h2, .product-page .video h3{
     font-family: 'Oswald';
     color: #161616;
     font-weight: 400;
@@ -1252,7 +1252,7 @@ footer .copyright{
 .product-page .btn-text{
     margin-bottom: 120px;
 }
-.product-page .btn-text h1{
+.product-page .btn-text h1, .product-page .btn-text h2, .product-page .btn-text h3{
     font-family: 'Oswald';
     color: #161616;
     font-weight: 400;

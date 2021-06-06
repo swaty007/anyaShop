@@ -19,7 +19,8 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php //body_class(); ?> class="<?= is_user_logged_in() ? 'log_in' : 'log_out' ?>">
+<body <?php body_class(); ?>>
+<!--class="--><?//= is_user_logged_in() ? 'log_in' : 'log_out' ?><!--"-->
 <?php
 if (function_exists('wp_body_open')) {
     wp_body_open();
@@ -41,7 +42,7 @@ if (function_exists('wp_body_open')) {
     justify-content: center;
     display: flex;
 ">
-    <img src="<?= get_template_directory_uri(); ?>/images/logo/logo_white.svg" style="max-width:300px;"/>
+<!--    <img src="--><?//= get_template_directory_uri(); ?><!--/images/logo/logo_white.svg" style="max-width:300px;"/>-->
 </div>
 <!--preloader-->
 <script>
@@ -103,6 +104,9 @@ if (function_exists('wp_body_open')) {
 						<i class="fas fa-balance-scale"></i>
 						<span class="counter">2</span>
 					</span>
+                    <div class="dropdown__widget">
+                        <div class="widget_shopping_cart_content"></div>
+                    </div>
                 </li>
                 <li class="icon-item d-flex align-items-center transition-3s">
 					<span class="icon">

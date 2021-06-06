@@ -15,13 +15,19 @@ get_header();
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <a href="#" class="d-block"><img widht="100%" src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png" alt="First slide"></a>
+                        <a href="#" class="d-block"><img widht="100%"
+                                                         src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
+                                                         alt="First slide"></a>
                     </div>
                     <div class="carousel-item">
-                        <a href="#" class="d-block"><img widht="100%" src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png" alt="First slide"></a>
+                        <a href="#" class="d-block"><img widht="100%"
+                                                         src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
+                                                         alt="First slide"></a>
                     </div>
                     <div class="carousel-item">
-                        <a href="#" class="d-block"><img widht="100%" src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png" alt="First slide"></a>
+                        <a href="#" class="d-block"><img widht="100%"
+                                                         src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
+                                                         alt="First slide"></a>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#homeSlider" role="button" data-slide="prev">
@@ -55,14 +61,24 @@ get_header();
                 $loop = new WP_Query(array(
                         'post_type' => 'product',
                         'posts_per_page' => 20,
-                        'orderby' => []
+                        'orderby' => [],
+                        'meta_query' => [
+                            [
+                                'key' => '_stock_status',
+                                'value' => 'instock',
+                                'compare' => '=',
+                            ]
+                        ]
                     )
                 );
-                while ($loop->have_posts()) : $loop->the_post();?>
-                <?php $product = wc_get_product( $post->ID );?>
+                while ($loop->have_posts()) : $loop->the_post(); ?>
+                    <?php
+                    $product = wc_get_product($post->ID);
+                    $sku = $product->get_sku();
+                    ?>
 
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                        <a href="<?php the_permalink();?>" class="link">
+                        <a href="<?php the_permalink(); ?>" class="link">
                             <div class="image-wrapper text-center transition-3s">
                                 <img src="<?= get_template_directory_uri(); ?>/images/item1.png">
                             </div>
@@ -70,21 +86,25 @@ get_header();
                         <div class="info">
                             <div class="title"><?php the_title(); ?></div>
                             <div class="advantages">
-                                <?php wc_display_product_attributes($product);?>
+                                <?php wc_display_product_attributes($product); ?>
                             </div>
                             <div class="price">
-                                <?= wc_price($product->get_regular_price());?>
+                                <?= $product->get_price_html(); ?>
                             </div>
                             <div class="buttons">
                                 <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
                                 <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
                                 <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                                <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
+                                <button class="transition-3s buy-btn"
+                                        data-sku="<?= $sku; ?>"
+                                        data-id="<?= $post->ID; ?>">
+                                    <i class="fas fa-cart-plus icon"></i> Купить
+                                </button>
                             </div>
                         </div>
                     </div>
                 <?php endwhile;
-                    wp_reset_query(); ?>
+                wp_reset_query(); ?>
 
             </div>
             <div class="row">
@@ -183,7 +203,8 @@ get_header();
                             <div class="text-center">
                                 <h4>Горячее предложение</h4>
                                 <h1>Объектив + Светофильтр</h1>
-                                <p>При покупке объектива Tamron SP 24-70мм F/2.8 Di VC USD G2, светофильтр Marumi CREATION VARI. ND2.5-ND500 в подарок!</p>
+                                <p>При покупке объектива Tamron SP 24-70мм F/2.8 Di VC USD G2, светофильтр Marumi
+                                    CREATION VARI. ND2.5-ND500 в подарок!</p>
                                 <div class="price"></div>
                                 <div id="timer" class="timer"></div>
                                 <button class="btn transition-3s">Узнать подробнее</button>
@@ -300,7 +321,7 @@ get_header();
             setTimer('timer', 'July 25, 2021 15:37:25');
 
 
-            if ( $("body").width() > 575 ){
+            if ($("body").width() > 575) {
                 setProductsSimilarHeight(".products-table-catalog .product");
             }
             iniBannersSlider(".news");

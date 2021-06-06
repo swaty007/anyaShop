@@ -213,6 +213,7 @@ class ImportXML
 //            continue;
 
             update_post_meta($post_id, '_regular_price', $product->price->__toString());
+            update_post_meta($post_id, '_price', $product->price->__toString());
 
 
 //            var_dump($product->vendor->__toString());
@@ -220,9 +221,11 @@ class ImportXML
 
 
             $productWp->set_manage_stock(true);
+            $productWp->save();
+//            $productWp->set_price($product->price->__toString());
             wc_update_product_stock($post_id, $product->stock_quantity->__toString());
 
-            $productWp->save();
+
             unset($product);
         }
         unset($this->products);

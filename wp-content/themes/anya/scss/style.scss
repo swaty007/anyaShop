@@ -8,6 +8,11 @@
 
 /* Utils */
 @import "utils/mixins";
+@import "components/wordpress";
+@import "wordpress/globals";
+@import "wordpress/cart";
+@import "wordpress/widget";
+@import "wordpress/checkout";
 
 /* Base */
 

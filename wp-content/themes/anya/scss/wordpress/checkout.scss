@@ -1,0 +1,20 @@
+.woocommerce .col2-set .col-1, .woocommerce-page .col2-set {
+  .col-1, .col-2 {
+    max-width: unset!important;
+    min-width: unset!important;
+  }
+}
+
+#add_payment_method #payment ul.payment_methods li, .woocommerce-cart #payment ul.payment_methods li, .woocommerce-checkout #payment ul.payment_methods li {
+  padding-left: 55px;
+}
+
+.woocommerce form .form-row input.input-text {
+  padding: 10px 46px 10px 14px;
+  border-radius: 3px;
+  border: 1px solid #D8DFE1;
+  font-size: 12px;
+  width: 100%;
+  color: #4A41DB;
+  font-family: 'OpenSans';
+}
