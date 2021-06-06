@@ -58,6 +58,9 @@
 <script src="<?= get_template_directory_uri(); ?>/plugins/slick-slider/slick.min.js" type="text/javascript"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/min/tiny-slider.js"></script>
 
+<!-- Product frontend -->
+<script src="<?= get_template_directory_uri(); ?>/js/global/product-anim.js" type="text/javascript"></script>
+
 <!-- Global -->
 <script src="<?= get_template_directory_uri(); ?>/js/global/banners-slider.js" type="text/javascript"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/global/products.js" type="text/javascript"></script>

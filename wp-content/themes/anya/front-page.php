@@ -2,9 +2,6 @@
 
 
 get_header();
-//the_post();
-//$post_id = pll_get_post($post->ID, 'ru');
-$post_id = $post->ID;
 ?>
 
 
@@ -57,12 +54,12 @@ $post_id = $post->ID;
                 <?php
                 $loop = new WP_Query(array(
                         'post_type' => 'product',
-                        'posts_per_page' => -1,
+                        'posts_per_page' => 20,
                         'orderby' => []
                     )
                 );
                 while ($loop->have_posts()) : $loop->the_post();?>
-                <?php $product = wc_get_product( get_the_ID() );?>
+                <?php $product = wc_get_product( $post->ID );?>
 
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
                         <a href="<?php the_permalink();?>" class="link">
@@ -73,13 +70,11 @@ $post_id = $post->ID;
                         <div class="info">
                             <div class="title"><?php the_title(); ?></div>
                             <div class="advantages">
-                                <ul>
-                                    <li>Ультра высокое качество изображения</li>
-                                    <li>Покрытие eBAND</li>
-                                    <li>Двойной микропроцессор Dual MPU</li>
-                                </ul>
+                                <?php wc_display_product_attributes($product);?>
                             </div>
-                            <div class="price"><?=$product->get_price_html();?></div>
+                            <div class="price">
+                                <?= wc_price($product->get_regular_price());?>
+                            </div>
                             <div class="buttons">
                                 <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
                                 <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
@@ -91,200 +86,6 @@ $post_id = $post->ID;
                 <?php endwhile;
                     wp_reset_query(); ?>
 
-
-
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a href="#" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img src="<?= get_template_directory_uri(); ?>/images/item2.png">
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">Студийная вспышка Rime Lite i.4 TTL</div>
-                        <div class="advantages">
-                            <ul>
-                                <li>Работа вспышки в автоматическом TTL или в ручном режиме</li>
-                                <li>Совместимость с системами Canon E-TTL II и Nikon i-TTL</li>
-                                <li>Короткий импульс до 1/12800 секунды</li>
-                            </ul>
-                        </div>
-                        <div class="price">$ 687</div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
-                            <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                            <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a href="#" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img src="<?= get_template_directory_uri(); ?>/images/item3.png">
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">Штатив профессиональный Photex VT-1550 PRO</div>
-                        <div class="advantages">
-                            <ul>
-                                <li>Максимальная высота съемки 155см</li>
-                                <li>Минимальная высота съемки 43см</li>
-                                <li>Длина в сложенном состоянии 550мм</li>
-                            </ul>
-                        </div>
-                        <div class="price">$ 73</div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
-                            <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                            <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a href="#" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img src="<?= get_template_directory_uri(); ?>/images/item4.png">
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">Софтбокс для накамерных вспышек Lastolite Hotrod Strip Softbox</div>
-                        <div class="advantages">
-                            <ul>
-                                <li>Размер 30 x 120 см</li>
-                                <li>Оснащен внутренней панелью рассеивания света и установочным адаптерным кольцом</li>
-                                <li>Oбеспечивает узконаправленную полосу света</li>
-                            </ul>
-                        </div>
-                        <div class="price">$ 140</div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
-                            <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                            <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a href="#" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img src="<?= get_template_directory_uri(); ?>/images/item1.png">
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">Объектив	Tamron 70-210mm F/4 Di VC USD</div>
-                        <div class="advantages">
-                            <ul>
-                                <li>Ультра высокое качество изображения</li>
-                                <li>Покрытие eBAND</li>
-                                <li>Двойной микропроцессор Dual MPU</li>
-                            </ul>
-                        </div>
-                        <div class="price">$ 799</div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
-                            <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                            <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a href="#" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img src="<?= get_template_directory_uri(); ?>/images/item2.png">
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">Студийная вспышка Rime Lite i.4 TTL</div>
-                        <div class="advantages">
-                            <ul>
-                                <li>Работа вспышки в автоматическом TTL или в ручном режиме</li>
-                                <li>Совместимость с системами Canon E-TTL II и Nikon i-TTL</li>
-                                <li>Короткий импульс до 1/12800 секунды</li>
-                            </ul>
-                        </div>
-                        <div class="price">$ 687</div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
-                            <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                            <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a href="#" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img src="<?= get_template_directory_uri(); ?>/images/item3.png">
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">Штатив профессиональный Photex VT-1550 PRO</div>
-                        <div class="advantages">
-                            <ul>
-                                <li>Максимальная высота съемки 155см</li>
-                                <li>Минимальная высота съемки 43см</li>
-                                <li>Длина в сложенном состоянии 550мм</li>
-                            </ul>
-                        </div>
-                        <div class="price">$ 73</div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
-                            <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                            <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a href="#" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img src="<?= get_template_directory_uri(); ?>/images/item4.png">
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">Софтбокс для накамерных вспышек Lastolite Hotrod Strip Softbox</div>
-                        <div class="advantages">
-                            <ul>
-                                <li>Размер 30 x 120 см</li>
-                                <li>Оснащен внутренней панелью рассеивания света и установочным адаптерным кольцом</li>
-                                <li>Oбеспечивает узконаправленную полосу света</li>
-                            </ul>
-                        </div>
-                        <div class="price">$ 140</div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
-                            <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                            <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a href="#" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img src="<?= get_template_directory_uri(); ?>/images/item1.png">
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">Объектив	Tamron 70-210mm F/4 Di VC USD</div>
-                        <div class="advantages">
-                            <ul>
-                                <li>Ультра высокое качество изображения</li>
-                                <li>Покрытие eBAND</li>
-                                <li>Двойной микропроцессор Dual MPU</li>
-                            </ul>
-                        </div>
-                        <div class="price">$ 799</div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
-                            <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i></button>
-                            <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> Купить</button>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -495,7 +296,7 @@ $post_id = $post->ID;
     </div>
 
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('load', function () {
             setTimer('timer', 'July 25, 2021 15:37:25');
 
 

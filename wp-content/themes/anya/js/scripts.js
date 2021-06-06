@@ -1,5 +1,5 @@
 // 3rd party packages from NPM
-// import $ from "jquery";
+import $ from "jquery";
 global.jQuery = global.$ = $;
 // import WOW from "wowjs";
 // import tocca from "tocca";

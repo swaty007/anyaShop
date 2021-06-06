@@ -527,6 +527,8 @@ header ul li.logo-item > a{
 .products-table-catalog .product .info .buttons{
     margin: 40px 0px 10px;
     text-align: right;
+    display: flex;
+    align-items: center;
 }
 .products-table-catalog .product .info .buttons button,
 .products-table-catalog .product .info .buttons a,
@@ -551,7 +553,7 @@ header ul li.logo-item > a{
     color: #fff;
 }
 .products-table-catalog .product .info .buttons button.buy-btn{
-    margin-left: 20px;
+    margin-left: 5px;
     padding: 10px 16px;
 }
 .products-table-catalog .product .info .buttons button.compare-btn,

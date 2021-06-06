@@ -44,4 +44,4 @@ the_post(); ?>
         </div>
     </div>
 </section>
-  <?php get_footer('tilda'); ?>
+  <?php get_footer(); ?>

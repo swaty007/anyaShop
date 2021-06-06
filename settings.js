@@ -7,7 +7,7 @@ const paths = {
   styles: {
     src: themeLocation + "scss/style.scss",
     dist: themeLocation,
-    watch: themeLocation + "scss/**/*.scss",
+    watch: [themeLocation + "scss/**/*.scss", themeLocation + "scss/**/*.css"],
   },
   scripts: {
     // src: [themeLocation + "js/modules/*.js", themeLocation + "js/scripts.js"],
