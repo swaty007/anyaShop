@@ -1,7 +1,7 @@
 .dropdown__widget {
   position: relative;
 }
-.widget_shopping_cart_content {
+body .widget_shopping_cart_content {
   position: absolute;
   top: 0;
   right: 0;
@@ -12,6 +12,24 @@
     display: none;
   }
   a, p, span {
-    font-size: 15px;
+    font-size: 15px!important;
+    color: #fff;
+    display: inline-block!important;
+    &.remove {
+      color: red!important;
+      width: 1em;
+      text-align: center;
+      line-height: 1;
+      border-radius: 100%;
+      &:hover {
+        color: #fff!important;
+        background: red;
+      }
+    }
+    &.quantity {
+      span {
+        color: #4a41db;
+      }
+    }
   }
 }
