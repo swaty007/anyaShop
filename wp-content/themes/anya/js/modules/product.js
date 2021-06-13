@@ -4,6 +4,10 @@ class Product {
         this.buy_btn = $('.buy-btn')
         this.widget_shopping = $('div.widget_shopping_cart_content')
         this.events();
+        // $(() => {
+            this.wc_fragment_refresh()
+        // });
+
     }
 
     events() {
@@ -57,6 +61,7 @@ class Product {
                 console.log(this.widget_shopping)
                 // this.widget_shopping.html(data.fragments['div.widget_shopping_cart_content'])
                 $('div.widget_shopping_cart_content').replaceWith(data.fragments['div.widget_shopping_cart_content'])
+                this.wc_fragment_refresh()
             })
                 .fail((jqXHR, textStatus, errorThrown) => {
 
@@ -65,6 +70,29 @@ class Product {
                     _this.attr('disabled', false)
                 });
         })
+
+        $(document.body).on('wc_fragments_refreshed wc_fragment_refresh removed_from_cart adding_to_cart wc_fragments_loaded', (e) => {
+            console.log('wc_fragment_refresh', e)
+            this.wc_fragment_refresh()
+        })
+
+        $(document).on('berocket_compare-after_load', (e) => {
+            console.log('berocket_compare-after_load')
+        })
+        $(document).on('berocket_compare-after_remove', (e) => {
+            console.log('berocket_compare-after_remove')
+        })
+    }
+
+    wc_fragment_refresh() {
+        let itemsL = $('div.widget_shopping_cart_content li.woocommerce-mini-cart-item.mini_cart_item').length
+        console.log(itemsL)
+        if (itemsL) {
+            $('#cart__counter').text(itemsL).show()
+        } else {
+            $('#cart__counter').hide()
+        }
+
     }
 
 }

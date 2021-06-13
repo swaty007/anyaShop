@@ -104,15 +104,15 @@ if (function_exists('wp_body_open')) {
 						<i class="fas fa-balance-scale"></i>
 						<span class="counter">2</span>
 					</span>
+                </li>
+                <li class="icon-item d-flex align-items-center transition-3s dropdown__li">
+					<span class="icon">
+						<i class="fas fa-shopping-basket"></i>
+						<span id="cart__counter" class="counter">1</span>
+					</span>
                     <div class="dropdown__widget">
                         <div class="widget_shopping_cart_content"></div>
                     </div>
-                </li>
-                <li class="icon-item d-flex align-items-center transition-3s">
-					<span class="icon">
-						<i class="fas fa-shopping-basket"></i>
-						<span class="counter">2</span>
-					</span>
                 </li>
             </ul>
         </div>
