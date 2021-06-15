@@ -157,6 +157,7 @@ header ul li.icon-item.left-border{
 }
 header ul li.icon-item .icon{
     position: relative;
+    color: #fff;
 }
 header ul li.icon-item .icon .counter{
     position: absolute;

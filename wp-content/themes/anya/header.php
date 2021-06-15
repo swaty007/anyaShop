@@ -81,7 +81,7 @@ if (function_exists('wp_body_open')) {
             <ul class="d-flex">
                 <li class="logo-item d-flex align-items-center d-none">
                     <!-- <a href="#">Prophoto</a> -->
-                    <a href="#"><img width="170px" src="<?= get_template_directory_uri(); ?>/images/text-logo.png"></a>
+                    <a href="<?= pll_home_url(); ?>"><img width="170px" src="<?= get_template_directory_uri(); ?>/images/text-logo.png"></a>
                 </li>
             </ul>
             <ul class="d-flex">
@@ -100,10 +100,10 @@ if (function_exists('wp_body_open')) {
 					</span>
                 </li>
                 <li class="icon-item d-flex align-items-center transition-3s">
-					<span class="icon">
+					<a href="<?=get_permalink(1890);?>" class="icon">
 						<i class="fas fa-balance-scale"></i>
-						<span class="counter">2</span>
-					</span>
+						<span id="compare__counter" class="counter">1</span>
+					</a>
                 </li>
                 <li class="icon-item d-flex align-items-center transition-3s dropdown__li">
 					<span class="icon">

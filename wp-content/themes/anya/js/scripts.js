@@ -27,6 +27,7 @@ global.jQuery = global.$ = $;
 // import Portfolio from "./modules/portfolio";
 // import UtmCookie from "./modules/utm-cookie";
 import Product from "./modules/product";
+import Compare from "./modules/compare";
 //
 // const global_script = new Global();
 // const allCourses = new AllCourses();
@@ -38,3 +39,4 @@ import Product from "./modules/product";
 // const portfolio = new Portfolio();
 // const privacyPolicy = new PrivacyPolicy();
 const product = new Product();
+const compare = new Compare();
