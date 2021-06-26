@@ -1,0 +1,51 @@
+.br {
+  &_new {
+    &_compare {
+      &_block {
+        &_wrap {
+          h3 {
+            font-weight: 700;
+            padding: 9px 12px;
+            line-height: 1.5em;
+            color: #161616;
+            font-size: 16px;
+            .added_to_cart, .add_to_cart_button {
+              display: block;
+            }
+          }
+        }
+      }
+      .br_left_table tr th,
+      .br_left_table tr td,
+      .br_right_table tr td,
+      .br_right_table tr th {
+        vertical-align: middle;
+      }
+      .br_right_table p:hover {
+        white-space: unset!important;
+        cursor: pointer;
+      }
+    }
+  }
+  &_top {
+    &_table {
+
+    }
+  }
+  &_remove {
+    &_compare {
+      &_product {
+        &_reload {
+          color: #ff0000;
+        }
+      }
+    }
+  }
+  &_right {
+    &_table {
+      p {
+        font-weight: 400!important;
+      }
+    }
+  }
+}
