@@ -71,7 +71,7 @@ body .widget_shopping_cart_content {
     display: inline-block !important;
 
     &.remove {
-      color: red !important;
+      color: #ff0000 !important;
       width: 1em;
       text-align: center;
       line-height: 1;
@@ -79,7 +79,7 @@ body .widget_shopping_cart_content {
 
       &:hover {
         color: #fff !important;
-        background: red;
+        background: #ff0000;
       }
     }
 

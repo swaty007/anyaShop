@@ -4,3 +4,16 @@ button:disabled, button[disabled] {
 body {
   font-family: 'Oswald', 'OpenSans';
 }
+
+.title {
+  &__xl {
+    color: #161616;
+    font-weight: 400;
+    font-size: 27px;
+    margin-bottom: 40px;
+  }
+}
+.wrapper {
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
