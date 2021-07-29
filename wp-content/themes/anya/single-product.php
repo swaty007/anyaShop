@@ -4,9 +4,9 @@ the_post();
 $product = wc_get_product($post->ID);
 $productStock = $product->get_stock_status() === 'instock';
 $sku = $product->get_sku();
-woocommerce_template_loop_add_to_cart();
+//woocommerce_template_loop_add_to_cart();
+//the_content();
 ?>
-<?php the_content(); ?>
 
 
 <section class="product-fixed-menu transition-3s">
@@ -179,90 +179,11 @@ woocommerce_template_loop_add_to_cart();
                         <button data-value="prev"><i class="material-icons">keyboard_arrow_left</i></button>
                         <button data-value="next"><i class="material-icons">keyboard_arrow_right</i></button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="overview-componentets">
-        <div class="container content-container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="video">
-                        <div class="container">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-md-12">
-                                    <h2><?php the_title(); ?></h2>
-                                    <iframe width="100%" height="600px"
-                                            src="https://www.youtube.com/embed/XC7ZUTmvZ1A?rel=0&amp;controls=0&amp;showinfo=0"
-                                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="btn-text">
                         <div class="container">
                             <div class="row d-flex justify-content-center">
-                                <div class="col-md-7 text-center">
-                                    <h3>Профото является эксклюзивным представителем в Украине известного мирового
-                                        производителя компании Tamron.</h3>
-                                    <button class="transition-3s">Узнать подробнее</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="image-text">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="image-wrapper">
-                                        <img width="100%"
-                                             src="<?= get_template_directory_uri(); ?>/images/product/i2.jpg">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 text-wrapper">
-                                    <h2>Excepteur sint occaecat cupidatat non proident</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                        culpa qui officia deserunt mollit anim id est laborum. <br><br> Sed ut
-                                        perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-                                        quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                                        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                                        dolores eos qui ratione voluptatem sequi nesciunt. Nemo enim ipsam voluptatem
-                                        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                                        dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-                                        dolorem ipsum quia dolor sit amet, consectetur. <br><br>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="image-text text-image">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 text-wrapper">
-                                    <h2>Excepteur sint occaecat cupidatat non proident</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Excepteur
-                                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                                        anim id est laborum. <br><br> Sed quia consequuntur magni dolores eos qui
-                                        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-                                        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi
-                                        tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. <br><br>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris.
-                                    </p>
-                                    <button class="transition-3s">Узнать подробнее</button>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="image-wrapper">
-                                        <img width="100%"
-                                             src="<?= get_template_directory_uri(); ?>/images/product/i1.jpg">
-                                    </div>
+                                <div class="col-md-12 text-left" style="white-space: pre-line;">
+                                    <?= get_post($post->ID)->post_content;?>
                                 </div>
                             </div>
                         </div>
@@ -271,6 +192,9 @@ woocommerce_template_loop_add_to_cart();
             </div>
         </div>
     </div>
+
+
+
     <div id="specifications" class="specifications">
         <div class="container content-container">
             <div class="row">
@@ -385,6 +309,92 @@ woocommerce_template_loop_add_to_cart();
                                             отражений и ореола.
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overview-componentets">
+        <div class="container content-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="btn-text">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-7 text-center">
+                                    <h3>Профото является эксклюзивным представителем в Украине известного мирового
+                                        производителя компании Tamron.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-text">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="image-wrapper">
+                                        <img width="100%"
+                                             src="<?= get_template_directory_uri(); ?>/images/product/i2.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-wrapper">
+                                    <h2>Excepteur sint occaecat cupidatat non proident</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                        culpa qui officia deserunt mollit anim id est laborum. <br><br> Sed ut
+                                        perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
+                                        quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+                                        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                                        dolores eos qui ratione voluptatem sequi nesciunt. Nemo enim ipsam voluptatem
+                                        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                                        dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
+                                        dolorem ipsum quia dolor sit amet, consectetur. <br><br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-text text-image">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 text-wrapper">
+                                    <h2>Excepteur sint occaecat cupidatat non proident</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Excepteur
+                                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                                        anim id est laborum. <br><br> Sed quia consequuntur magni dolores eos qui
+                                        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+                                        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi
+                                        tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. <br><br>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris.
+                                    </p>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="image-wrapper">
+                                        <img width="100%"
+                                             src="<?= get_template_directory_uri(); ?>/images/product/i1.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-12">
+                                    <h2><?php the_title(); ?></h2>
+                                    <iframe width="100%" height="600px"
+                                            src="https://www.youtube.com/embed/XC7ZUTmvZ1A?rel=0&amp;controls=0&amp;showinfo=0"
+                                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>

@@ -98,3 +98,5 @@ wp-content/*
 !wp-content/themes/anya/*
 !robots.txt
 !front_html
+!images/index.js
+!images/package.json
