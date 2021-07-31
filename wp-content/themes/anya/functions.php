@@ -11,6 +11,8 @@ require get_theme_file_path('/inc/itea-settings.php');
 //require_once get_theme_file_path('/inc/api/Bitrix.php');
 //require_once get_theme_file_path('/inc/api/ScheduleErp.php');
 require_once get_theme_file_path('/inc/importXml.php');
+require get_theme_file_path('/inc/parse-routes.php');
+
 
 
 

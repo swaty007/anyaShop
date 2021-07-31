@@ -6,7 +6,8 @@ const fs = require('fs'),
     fastFolderSize = require('fast-folder-size'),
     compress_images = require("compress-images"),
     fse = require('fs-extra'),
-    {compress} = require('compress-images/promise')
+    {compress} = require('compress-images/promise'),
+    needle = require('needle')
 
 
 class ParseImages {
@@ -18,8 +19,11 @@ class ParseImages {
                 xlsxPath: "./MARUMI PICTS/Marumi picts list.xlsx"
             },
         ]
+        this.siteUrl = "https://news.infinitum.tech"
+        this.saveUrl = `${this.siteUrl}/wp-json/parse/v1/save`
 
         this.files = []
+        this.xlsx = null
         this.init()
 
 
@@ -34,11 +38,16 @@ class ParseImages {
     async checkFilesList() {
         for (let index = 0; index < this.filesList.length; index++) {
             let el = this.filesList[index]
+            this.files = []
+            this.xlsx = null
 
-            await this.fileSizeUpdate(el.filePath)
-            // await this.checkDir(el.filePath)
+            // await this.fileSizeUpdate(el.filePath)
+            await this.checkDir(el.filePath)
             // console.log(this.files)
-            // this.checkXlsx(el.xlsxPath)
+            // console.log('checkXlsx')
+            this.checkXlsx(el.xlsxPath)
+            // console.log(this.xlsx)
+            this.importToWP()
         }
     }
 
@@ -70,11 +79,41 @@ class ParseImages {
     }
 
     checkXlsx(filePath) {
-        console.log('checkXlsx')
         let parseData = xlsx.parse(filePath),
             data = parseData[0].data
         data = data.filter(i => i && (Number.isInteger(i[0]) && i[1]))
-        console.log(data)
+        this.xlsx = data
+    }
+
+   async importToWP() {
+        for (let index = 0; index < this.xlsx.length; index++) {
+            let el = this.xlsx[index],
+                sku = el[0],
+                img = el[1],
+                imgObj = this.files.find(i => i.name === img)
+            if (imgObj) {
+                await this.savePost(el, imgObj)
+            } else {
+                console.log(`img not finded `, el)
+            }
+            return;
+        }
+    }
+    async savePost (el, imgObj) {
+        return new Promise((resolve, reject) => {
+            needle.post(this.saveUrl, translates, { json : true,  headers: { 'lang': mainLang } }, (err, res) => {
+                if (err) {
+                    console.log(err, 'error Request Save', this.insertUrl)
+                    validationService(err)
+                    resolve(false)
+                    return
+                }
+                console.log(res.body, 'insertUrl res.body')
+                if (res.body) {
+                    resolve(true)
+                }
+            })
+        })
     }
 
     fileSizeUpdate(dirPath) {
