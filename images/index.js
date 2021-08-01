@@ -15,8 +15,36 @@ class ParseImages {
 
         this.filesList = [
             {
+                filePath: "./BOYA PICTS",
+                xlsxPath: "./BOYA PICTS/Boya pics 1.xlsx",
+            },
+            {
                 filePath: "./MARUMI PICTS",
-                xlsxPath: "./MARUMI PICTS/Marumi picts list.xlsx"
+                xlsxPath: "./MARUMI PICTS/Marumi picts list.xlsx",
+            },
+            {
+                filePath: "./PHOTEX PICTS",
+                xlsxPath: "./PHOTEX PICTS/Photex pics list.xlsx",
+            },
+            {
+                filePath: "./Rimelite",
+                xlsxPath: "./Rimelite/Rimelite pics list.xlsx",
+            },
+            {
+                filePath: "./SLIK PICTS",
+                xlsxPath: "./SLIK PICTS/Slik pict.xlsx",
+            },
+            {
+                filePath: "./TAMRON PICTS",
+                xlsxPath: "./TAMRON PICTS/Tamron pics.xlsx",
+            },
+            {
+                filePath: "./TOLIFO PICTS",
+                xlsxPath: "./TOLIFO PICTS/Tolifo pics list.xlsx",
+            },
+            {
+                filePath: "./ZHIYUN PICTS",
+                xlsxPath: "./ZHIYUN PICTS/ZHIYUN PICTS list.xlsx",
             },
         ]
         this.siteUrl = "https://news.infinitum.tech"
@@ -41,13 +69,13 @@ class ParseImages {
             this.files = []
             this.xlsx = null
 
-            // await this.fileSizeUpdate(el.filePath)
-            await this.checkDir(el.filePath)
+            await this.fileSizeUpdate(el.filePath)
+            // await this.checkDir(el.filePath)
             // console.log(this.files)
             // console.log('checkXlsx')
-            this.checkXlsx(el.xlsxPath)
+            // this.checkXlsx(el.xlsxPath)
             // console.log(this.xlsx)
-            this.importToWP()
+            // await this.importToWP()
         }
     }
 
@@ -85,23 +113,27 @@ class ParseImages {
         this.xlsx = data
     }
 
-   async importToWP() {
-        for (let index = 0; index < this.xlsx.length; index++) {
-            let el = this.xlsx[index],
-                sku = el[0],
-                img = el[1],
-                imgObj = this.files.find(i => i.name === img)
-            if (imgObj) {
-                await this.savePost(el, imgObj)
-            } else {
-                console.log(`img not finded `, el)
+    importToWP() {
+        return new Promise(async (resolve, reject) => {
+            for (let index = 0; index < this.xlsx.length; index++) {
+                let el = this.xlsx[index],
+                    sku = el[0],
+                    img = el[1],
+                    imgObj = this.files.find(i => i.name === img)
+                if (imgObj) {
+                    await this.savePost(el, imgObj)
+                } else {
+                    console.log(`img not finded `, el)
+                }
+                return;
             }
-            return;
-        }
+            resolve()
+        })
     }
-    async savePost (el, imgObj) {
+
+    async savePost(el, imgObj) {
         return new Promise((resolve, reject) => {
-            needle.post(this.saveUrl, translates, { json : true,  headers: { 'lang': mainLang } }, (err, res) => {
+            needle.post(this.saveUrl, translates, {json: true, headers: {'lang': mainLang}}, (err, res) => {
                 if (err) {
                     console.log(err, 'error Request Save', this.insertUrl)
                     validationService(err)
