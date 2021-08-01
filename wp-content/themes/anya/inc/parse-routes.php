@@ -10,115 +10,76 @@ function parserRegisterRoute()
     ));
 }
 
-function uniqueTest($request)
-{
-    $json_parsed = $request->get_json_params();
-
-    $imageurl = $json_parsed['image']['guid'];
-
-    $postFinded = get_page_by_title($json_parsed['post_title'], OBJECT, ['post', 'attachment']);
-//    $imgFinded = get_page_by_title(pathinfo(basename($imageurl), PATHINFO_FILENAME), OBJECT, ['post', 'attachment']);
-//    $imgFinded2 = get_page_by_title($json_parsed['image']['post_title'], OBJECT, ['post', 'attachment']);
-//    if (!empty($postFinded) || !empty($imgFinded) || !empty($imgFinded2)) {
-    if (!empty($postFinded)) {
-        wp_send_json(true);
-    } else {
-        wp_send_json(false);
-    }
-}
 
 function insertResult($request)
 {
+
+
     try {
-        $json_parsed = $request->get_json_params();
-        $lang = $request->get_header('lang');
-        if (empty($json_parsed)) {
-            wp_send_json(false);
-            return;
-        }
+        $sku = $_POST['sku'];
+        $listName = $_POST['listName'];
+        $imgFile = $_FILES['img'];
+
+
+        $post_id = null;
         $attach_id = null;
-        $main_post_id = null;
-        $posts = [];
-        $category = [
-            'uk' => [],
-            'en' => [],
-            'ru' => [],
-            'da' => [],
-            'nb' => [],
-            'zh' => [],
-        ];
-        if (!empty($json_parsed['uk']['categories'])) {
-            require_once(ABSPATH . '/wp-admin/includes/taxonomy.php');
-            for ($i = 0; $i < count($json_parsed['uk']['categories']); $i++) {
-                $catUk = wp_insert_category([
-                    'cat_name' => $json_parsed['uk']['categories'][$i],
-                    'category_parent' => pll_get_term(46, 'uk'), //Denmark-46,  nb_NO NO - 3911
-                ]);
-                $category['uk'][] = $catUk;
 
-                $catEn = wp_insert_category([
-                    'cat_name' => $json_parsed['en']['categories'][$i],
-                    'category_parent' => pll_get_term(46, 'en'), //Denmark-46,  nb_NO NO - 3911
-                ]);
-                $category['en'][] = $catEn;
+        $posts = get_posts([
+            'post_type' => 'product',
+            'post_status' => ['publish', 'draft'],
+            'posts_per_page' => -1,
+            'meta_query' => [
+                [
+                    'key' => '_sku',
+                    'compare' => '=',
+                    'value' => $sku,
+                ],
+            ],
+        ]);
 
-                if (!empty($json_parsed['zh-CN'])) {
-                    $catZh = wp_insert_category([
-                        'cat_name' => $json_parsed['zh-CN']['categories'][$i],
-                        'category_parent' => pll_get_term(46, 'zh'), //Denmark-46,  nb_NO NO - 3911
-                    ]);
-                    $category['zh'][] = $catZh;
-                }
-
-                $catRu = wp_insert_category([
-                    'cat_name' => $json_parsed['ru']['categories'][$i],
-                    'category_parent' => pll_get_term(46, 'ru'), //Denmark-46,  nb_NO NO - 3911
-                ]);
-                $category['ru'][] = $catRu;
-
-                if (!empty($json_parsed['da'])) {
-                    $catDa = wp_insert_category([
-                        'cat_name' => $json_parsed['da']['categories'][$i],
-                        'category_parent' => pll_get_term(46, 'da'), //Denmark-46,  nb_NO NO - 3911
-                    ]);
-                    $category['da'][] = $catDa;
-                }
-                if (!empty($json_parsed['nb'])) {
-                    $catNb = wp_insert_category([
-                        'cat_name' => $json_parsed['nb']['categories'][$i],
-                        'category_parent' => pll_get_term(46, 'nb'), //Denmark-46,  nb_NO NO - 3911
-                    ]);
-                    $category['nb'][] = $catNb;
-                }
-
-                $arrSave = [];
-                $arrSave['uk'] = $catUk;
-                $arrSave['en'] = $catEn;
-                $arrSave['ru'] = $catRu;
-                $arrSave['zh'] = $catZh;
-                if ($catDa) {
-                    $arrSave['da'] = $catDa;
-                }
-                if ($catNb) {
-                    $arrSave['nb'] = $catNb;
-                }
-                pll_save_term_translations($arrSave);
-            }
-        };
-        foreach ($json_parsed as $lang => $item) {
-            if (empty($attach_id)) {
-                $attach_id = !empty($item['image']['guid']) ? create_attachment($item['image']) : 315; //default
-            }
-            $post_id = createPost($item, in_array($lang, ['da', 'nb']), $category[$lang]);
-            set_post_thumbnail($post_id, $attach_id);
-            pll_set_post_language($post_id, $lang);
-//            if ($lang !== 'da' || $lang !== 'nb') {
-            $posts[$lang] = $post_id;
-//            } else {
-//                $main_post_id = $post_id;
-//            }
+        if(!empty($posts)) {
+            wp_send_json(false);
         }
-        pll_save_post_translations($posts);
+
+        $attachments = get_posts([
+            'post_type' => 'attachment',
+            'post_status' => 'inherit',
+            'posts_per_page' => -1,
+            'meta_query' => [
+                [
+                    'key' => '_list_name',
+                    'value' => $listName
+                ],
+                [
+                    'key' => '_img_name',
+                    'value' => $imgFile['name']
+                ],
+            ]
+        ]);
+
+        wp_send_json([
+            $posts,
+            $attachments,
+        ]);
+
+        if (empty($attachments)) {
+            if (!function_exists('wp_generate_attachment_metadata')) {
+                require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+                require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+                require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+            }
+            $attach_id = media_handle_upload('img', 0);
+            update_post_meta($attach_id, '_list_name', $listName);
+            update_post_meta($attach_id, '_img_name', $imgFile['name']);
+        } else {
+            $attach_id = $attachments[0]->ID;
+        }
+
+
+        wp_send_json($attach_id);
+//    add_post_meta($pid, 'meta_key_to_attach_image_to', $attach_id, false);
+//    update_post_meta($pid,'_thumbnail_id',$attach_id);
+//    set_post_thumbnail($post_id, $attach_id);
         wp_send_json(true);
     } catch (Exception $e) {
         wp_send_json(false);
@@ -126,69 +87,8 @@ function insertResult($request)
 }
 
 
-function createPost ($post, $private = false, $category = []) {
-    $post_id =  wp_insert_post(array(
-        'post_type' => 'post',
-        'post_title' => $post['post_title'],
-        'post_content' =>  html_entity_decode($post['post_content']),
-        'post_date_gmt' => $post['post_date_gmt'],
-        'post_excerpt' => $post['post_excerpt'],
-//	'post_name'      => <the name>,
-        'post_author'   => 2,
-        'post_status' => $private ? 'draft' : 'publish',
-        'post_category' => $category,
-        'tags_input' => $post['tags'],
-    ));
-//    wp_set_post_categories($post_id, $category);
-    wp_set_post_categories($post_id, $post['categories']);
-    wp_set_object_terms($post_id, $post['categories'], 'category', true);
-//    wp_set_post_terms
-
-    //$attachment_id = media_handle_upload('image', $post_id);
-//set_post_thumbnail( $post_id, $attachment_id );
-    return $post_id;
-}
-function create_attachment ($attach) {
-//    $file_name = basename( $file_path );
-//    $file_type = wp_check_filetype( $file_name, null );
-//    $attachment_title = sanitize_file_name( pathinfo( $file_name, PATHINFO_FILENAME ) );
-    include_once( ABSPATH . 'wp-admin/includes/image.php' );
-    $imageurl = $attach['guid'];
-    $attachTitle = !empty($attach['post_title']) ? $attach['post_title'] : pathinfo(basename($imageurl), PATHINFO_FILENAME);
-    $attackTitle = preg_replace('/[^0-9a-z-]/i', '', sanitize_file_name($attachTitle));
-    $imagetype = end(explode('/', getimagesize($imageurl)['mime']));
-//        $uniq_name = date('dmY').''.(int) microtime(true);
-    $uploaddir = wp_upload_dir();
-    $filename = wp_unique_filename($uploaddir['path'],$attachTitle.'.'.$imagetype);
-    $uploadfile = $uploaddir['path'] . '/' . $filename;
-    $contents = file_get_contents($imageurl);
-    if (file_exists($uploadfile)) {
-        $filename = $attachTitle . date('dmY').'.'.$imagetype;
-        $uploadfile = $uploaddir['path'] . '/' . $filename;
-    }
-    $savefile = fopen($uploadfile, 'w');
-    fwrite($savefile, $contents);
-    fclose($savefile);
-    $wp_filetype = wp_check_filetype(basename($filename), null );
-    $attachment = array(
-//            'guid' => $uploaddir . '/' . basename( $filename ),
-        'post_mime_type' => $wp_filetype['type'],
-        'post_title' => $attachTitle,
-        'post_content' => '',
-        'post_status' => 'inherit'
-    );
-    $attach_id = wp_insert_attachment( $attachment, $uploadfile );
-    $imagenew = get_post( $attach_id );
-    $fullsizepath = get_attached_file( $imagenew->ID );
-    $attach_data = wp_generate_attachment_metadata( $attach_id, $fullsizepath );
-//    unset($attach_data['sizes']);
-    wp_update_attachment_metadata( $attach_id, $attach_data );
-
-    return $attach_id;
-}
-
-
-function shapeSpace_customize_image_sizes($sizes) {
+function shapeSpace_customize_image_sizes($sizes)
+{
     unset($sizes['thumbnail']);    // disable thumbnail size
     unset($sizes['medium']);       // disable medium size
     unset($sizes['large']);        // disable large size
@@ -197,21 +97,26 @@ function shapeSpace_customize_image_sizes($sizes) {
     unset($sizes['2048x2048']);    // disable 2x large size
     return $sizes;
 }
+
 add_filter('intermediate_image_sizes_advanced', 'shapeSpace_customize_image_sizes');
 // disable scaled image size
 add_filter('big_image_size_threshold', '__return_false');
 
 
 // disable other image sizes
-function shapeSpace_disable_other_image_sizes() {
+function shapeSpace_disable_other_image_sizes()
+{
     remove_image_size('post-thumbnail'); // disable images added via set_post_thumbnail_size()
 //    remove_image_size('another-size');   // disable any other added image sizes
 }
+
 add_action('init', 'shapeSpace_disable_other_image_sizes');
 // disable srcset on frontend
-function disable_wp_responsive_images() {
+function disable_wp_responsive_images()
+{
     return 1;
 }
+
 add_filter('max_srcset_image_width', 'disable_wp_responsive_images');
 // thumbnail disable end
 

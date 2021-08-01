@@ -15,39 +15,48 @@ class ParseImages {
 
         this.filesList = [
             {
+                name: "BOYA",
                 filePath: "./BOYA PICTS",
                 xlsxPath: "./BOYA PICTS/Boya pics 1.xlsx",
             },
             {
+                name: "MARUMI PICTS",
                 filePath: "./MARUMI PICTS",
                 xlsxPath: "./MARUMI PICTS/Marumi picts list.xlsx",
             },
             {
+                name: "PHOTEX PICTS",
                 filePath: "./PHOTEX PICTS",
                 xlsxPath: "./PHOTEX PICTS/Photex pics list.xlsx",
             },
             {
+                name: "Rimelite",
                 filePath: "./Rimelite",
                 xlsxPath: "./Rimelite/Rimelite pics list.xlsx",
             },
             {
+                name: "SLIK PICTS",
                 filePath: "./SLIK PICTS",
                 xlsxPath: "./SLIK PICTS/Slik pict.xlsx",
             },
             {
+                name: "TAMRON PICTS",
                 filePath: "./TAMRON PICTS",
                 xlsxPath: "./TAMRON PICTS/Tamron pics.xlsx",
             },
             {
+                name: "TOLIFO PICTS",
                 filePath: "./TOLIFO PICTS",
                 xlsxPath: "./TOLIFO PICTS/Tolifo pics list.xlsx",
             },
             {
+                name: "ZHIYUN PICTS",
                 filePath: "./ZHIYUN PICTS",
                 xlsxPath: "./ZHIYUN PICTS/ZHIYUN PICTS list.xlsx",
             },
         ]
-        this.siteUrl = "https://news.infinitum.tech"
+        this.siteUrl = "http://anya"
+        this.siteUrl = "https://anya.infinitum.tech"
         this.saveUrl = `${this.siteUrl}/wp-json/parse/v1/save`
 
         this.files = []
@@ -69,13 +78,14 @@ class ParseImages {
             this.files = []
             this.xlsx = null
 
-            await this.compressImagesSize(el.filePath)
-            // await this.checkDir(el.filePath)
+            // await this.compressImagesSize(el.filePath)
+            await this.checkDir(el.filePath)
             // console.log(this.files)
             // console.log('checkXlsx')
-            // this.checkXlsx(el.xlsxPath)
+            this.checkXlsx(el.xlsxPath)
             // console.log(this.xlsx)
-            // await this.importToWP()
+            await this.importToWP(this.filesList[index].name)
+            return;
         }
     }
 
@@ -113,7 +123,7 @@ class ParseImages {
         this.xlsx = data
     }
 
-    importToWP() {
+    importToWP(listName) {
         return new Promise(async (resolve, reject) => {
             for (let index = 0; index < this.xlsx.length; index++) {
                 let el = this.xlsx[index],
@@ -121,7 +131,7 @@ class ParseImages {
                     img = el[1],
                     imgObj = this.files.find(i => i.name === img)
                 if (imgObj) {
-                    await this.savePost(el, imgObj)
+                    await this.savePost(el, imgObj, listName)
                 } else {
                     console.log(`img not finded `, el)
                 }
@@ -131,9 +141,18 @@ class ParseImages {
         })
     }
 
-    async savePost(el, imgObj) {
+    async savePost(el, imgObj, listName) {
         return new Promise((resolve, reject) => {
-            needle.post(this.saveUrl, translates, {json: true, headers: {'lang': mainLang}}, (err, res) => {
+            // needle.post(this.saveUrl, {}, {json: true, headers: {'lang': ''}}, (err, res) => {
+            let data = {
+                img: { file: imgObj.filepath, content_type: 'multipart/form-data' },
+                sku: el[0],
+                listName: listName,
+            }
+            console.log(el)
+            console.log(imgObj)
+            // return;
+            needle.post(this.saveUrl, data, {multipart: true}, (err, res) => {
                 if (err) {
                     console.log(err, 'error Request Save', this.insertUrl)
                     resolve(false)
@@ -172,7 +191,7 @@ class ParseImages {
 
                         // console.log(completed);
 
-                        if(error) {
+                        if (error) {
                             console.log(error);
                             console.log(statistic);
                             fse.removeSync(`${statistic.path_out_new}`)
