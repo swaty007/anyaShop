@@ -69,7 +69,7 @@ class ParseImages {
             this.files = []
             this.xlsx = null
 
-            await this.fileSizeUpdate(el.filePath)
+            await this.compressImagesSize(el.filePath)
             // await this.checkDir(el.filePath)
             // console.log(this.files)
             // console.log('checkXlsx')
@@ -136,7 +136,6 @@ class ParseImages {
             needle.post(this.saveUrl, translates, {json: true, headers: {'lang': mainLang}}, (err, res) => {
                 if (err) {
                     console.log(err, 'error Request Save', this.insertUrl)
-                    validationService(err)
                     resolve(false)
                     return
                 }
@@ -148,7 +147,7 @@ class ParseImages {
         })
     }
 
-    fileSizeUpdate(dirPath) {
+    compressImagesSize(dirPath) {
         return new Promise((resolve, reject) => {
             fastFolderSize(dirPath, (err, size) => {
                 if (err) {
@@ -160,16 +159,24 @@ class ParseImages {
 
                 compress_images(`${dirPath}/**/*.{jpg,JPG,jpeg,JPEG,png,svg,gif}`, `${dirPath}/min/`, {
                         compress_force: false,
-                        statistic: true,
+                        statistic: false,
                         autoupdate: true
                     }, false,
                     {jpg: {engine: "mozjpeg", command: ["-quality", "80"]}},
-                    {png: {engine: "pngquant", command: ["--quality=40-70", "-o"]}},
+                    // {jpg: {engine: "jpegtran", command: ['-trim', '-progressive', '-copy', 'none', '-optimize']}},
+                    {png: {engine: "pngquant", command: ["--quality=60-80", "-o"]}},
+                    // {png: {engine: "optipng", command: false}},
                     {svg: {engine: "svgo", command: "--multipass"}},
                     {gif: {engine: "gifsicle", command: ["--colors", "64", "--use-col=web"]}},
                     function (error, completed, statistic) {
-                        // console.log(error);
-                        console.log(completed);
+
+                        // console.log(completed);
+
+                        if(error) {
+                            console.log(error);
+                            console.log(statistic);
+                            fse.removeSync(`${statistic.path_out_new}`)
+                        }
                         if (completed) {
                             fse.copySync(`${dirPath}/min`, `${dirPath}`, {overwrite: true}, function (err) {
                                 if (err) {

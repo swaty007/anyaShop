@@ -287,27 +287,6 @@ function lb_menu_anchors($items, $args)
 //add_filter('wp_nav_menu_objects', 'lb_menu_anchors', 10, 2);
 
 
-
-add_action('wp_ajax_delete_all_dates', 'delete_all_dates');
-function delete_all_dates()
-{
-    if (wp_verify_nonce($_POST['security'], 'protection')) {
-        $courses = get_posts([
-            'post_type' => 'courses',
-            'posts_per_page' => -1,
-        ]);
-
-        foreach ($courses as $course) {
-            while (have_rows('date', $course->ID)): the_row();
-                delete_row('date', get_row_index(), $course->ID);
-            endwhile;
-        }
-        wp_send_json(true);
-    }
-    wp_send_json(false);
-}
-
-
 //translate start
 
 if (function_exists('pll_register_string')) {
