@@ -75,11 +75,12 @@ class ImportXML
         unset($xmlCategories);
     }
 
-    function updateProductsPriceStock() {
+    function updateProductsPriceStock()
+    {
         foreach ($this->products as $product) {
             $sku = $product['id']->__toString();
             $post_id = $this->productExists($sku);
-            if($post_id) {
+            if ($post_id) {
                 update_post_meta($post_id, '_regular_price', $product->price->__toString());
                 $productWp = wc_get_product($post_id);
                 $productWp->set_manage_stock(true);
@@ -138,7 +139,8 @@ class ImportXML
                             ]
                         );
                         if (is_wp_error($taxonomy_id)) {
-                            var_dump($taxonomy_id);die();
+                            var_dump($taxonomy_id);
+                            die();
                         }
                         register_taxonomy($taxonomy_name, ['product'], []);
 //                    WC_Post_Types::register_taxonomies();
@@ -184,6 +186,7 @@ class ImportXML
                     unset($parameter);
                 }
                 $productWp->set_attributes($attributes);
+                unset($attributes);
 
                 $category_id = $product->categoryId->__toString();
                 if ($category_id) {
@@ -217,7 +220,6 @@ class ImportXML
 
 
 //            var_dump($product->vendor->__toString());
-
 
 
             $productWp->set_manage_stock(true);

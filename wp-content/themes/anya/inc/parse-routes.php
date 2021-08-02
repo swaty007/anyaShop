@@ -37,7 +37,7 @@ function insertResult($request)
             ],
         ]);
 
-        if(!empty($posts)) {
+        if (!empty($posts)) {
             wp_send_json(false);
         }
 

@@ -145,7 +145,7 @@ class ParseImages {
         return new Promise((resolve, reject) => {
             // needle.post(this.saveUrl, {}, {json: true, headers: {'lang': ''}}, (err, res) => {
             let data = {
-                img: { file: imgObj.filepath, content_type: 'multipart/form-data' },
+                img: {file: imgObj.filepath, content_type: 'multipart/form-data'},
                 sku: el[0],
                 listName: listName,
             }
