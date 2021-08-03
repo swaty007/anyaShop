@@ -368,7 +368,7 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
 
                             <div class="image-text <?php if ($count % 2) echo 'text-image'; ?>">
                                 <div class="container">
-                                    <div class="row">
+                                    <div class="row align-items-md-center justify-content-md-center">
                                         <div class="col-md-5 <?php if ($count % 2) echo 'order-md-2'; ?>">
                                             <div class="image-wrapper">
                                                 <img width="100%"
@@ -416,7 +416,7 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                         <!--                                </div>-->
                         <!--                            </div>-->
                         <!--                        </div>-->
-                        <?php if (!emoty($youtube)): ?>
+                        <?php if (!empty($youtube)): ?>
 
                             <div class="video">
                                 <div class="container">
