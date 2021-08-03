@@ -59,6 +59,7 @@ class ParseImages {
         this.siteUrl = "https://anya.infinitum.tech"
         this.saveUrl = `${this.siteUrl}/wp-json/parse/v1/save`
 
+        this.errorSku = []
         this.files = []
         this.xlsx = null
         this.init()
@@ -67,8 +68,8 @@ class ParseImages {
     }
 
     async init() {
-        this.checkFilesList();
-
+        await this.checkFilesList();
+        console.log("errorSku", this.errorSku)
     }
 
 
@@ -85,7 +86,6 @@ class ParseImages {
             this.checkXlsx(el.xlsxPath)
             // console.log(this.xlsx)
             await this.importToWP(this.filesList[index].name)
-            return;
         }
     }
 
@@ -131,11 +131,12 @@ class ParseImages {
                     img = el[1],
                     imgObj = this.files.find(i => i.name === img)
                 if (imgObj) {
-                    await this.savePost(el, imgObj, listName)
+                    if (await this.savePost(el, imgObj, listName)) {
+                        // return;
+                    }
                 } else {
                     console.log(`img not finded `, el)
                 }
-                return;
             }
             resolve()
         })
@@ -150,18 +151,23 @@ class ParseImages {
                 listName: listName,
             }
             console.log(el)
-            console.log(imgObj)
+            // console.log(imgObj)
             // return;
             needle.post(this.saveUrl, data, {multipart: true}, (err, res) => {
                 if (err) {
                     console.log(err, 'error Request Save', this.insertUrl)
                     resolve(false)
-                    return
                 }
                 console.log(res.body, 'insertUrl res.body')
+
                 if (res.body) {
-                    resolve(true)
+                    if (res.body.error) {
+                        console.log('error find product sku', res.body.value)
+                        this.errorSku.push(res.body.value)
+                        resolve(false)
+                    }
                 }
+                resolve(true)
             })
         })
     }

@@ -31,14 +31,19 @@ function insertResult($request)
             'meta_query' => [
                 [
                     'key' => '_sku',
-                    'compare' => '=',
+                    'compare' => 'LIKE',
                     'value' => $sku,
                 ],
             ],
         ]);
 
-        if (!empty($posts)) {
-            wp_send_json(false);
+        if (empty($posts)) {
+            wp_send_json([
+                'error' => '404',
+                'value' => $sku,
+            ]);
+        } else {
+            $post_id = $posts[0]->ID;
         }
 
         $attachments = get_posts([
@@ -48,19 +53,19 @@ function insertResult($request)
             'meta_query' => [
                 [
                     'key' => '_list_name',
-                    'value' => $listName
+                    'value' => $listName,
                 ],
                 [
                     'key' => '_img_name',
-                    'value' => $imgFile['name']
+                    'value' => $imgFile['name'],
                 ],
             ]
         ]);
 
-        wp_send_json([
-            $posts,
-            $attachments,
-        ]);
+//        wp_send_json([
+//            $posts,
+//            $attachments,
+//        ]);
 
         if (empty($attachments)) {
             if (!function_exists('wp_generate_attachment_metadata')) {
@@ -73,16 +78,31 @@ function insertResult($request)
             update_post_meta($attach_id, '_img_name', $imgFile['name']);
         } else {
             $attach_id = $attachments[0]->ID;
+//            wp_send_json("Attach finded $attach_id");
+        }
+
+        $post_thumbnail = get_post_meta($post_id, '_thumbnail_id', true);
+        if (empty($post_thumbnail)) {
+//            update_post_meta($post_id, '_thumbnail_id', $attach_id);
+            set_post_thumbnail($post_id, $attach_id);
+        } elseif ((int)$post_thumbnail !== $attach_id) {
+            $gallery = get_post_meta($post_id, '_product_image_gallery', true);
+            if (!empty($gallery)) {
+                $galleryItems = explode(",", $gallery);
+                $galleryItems[] = $attach_id;
+            } else {
+                $galleryItems = [$attach_id];
+            }
+            update_post_meta($post_id, '_product_image_gallery', implode(',', array_unique($galleryItems)));
         }
 
 
         wp_send_json($attach_id);
-//    add_post_meta($pid, 'meta_key_to_attach_image_to', $attach_id, false);
-//    update_post_meta($pid,'_thumbnail_id',$attach_id);
-//    set_post_thumbnail($post_id, $attach_id);
-        wp_send_json(true);
     } catch (Exception $e) {
-        wp_send_json(false);
+        wp_send_json([
+            'error' => '404',
+            'value' => "Catch Error: {$e->getMessage()}",
+        ]);
     }
 }
 
