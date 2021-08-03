@@ -4,6 +4,17 @@ the_post();
 $product = wc_get_product($post->ID);
 $productStock = $product->get_stock_status() === 'instock';
 $sku = $product->get_sku();
+
+$youtube = get_post_meta($post->ID, 'youtube', true);
+$gallery = get_post_meta($post->ID, '_product_image_gallery', true);
+if (!empty($gallery)) {
+    $gallery = explode(",", $gallery);
+}
+$additional_information = get_post_meta($post->ID, 'additional_information', true); //repeater
+$additional_materials = get_post_meta($post->ID, 'additional_materials', true); //repeater
+$vc_icon = get_post_meta($post->ID, 'vc_icon', true);
+$usd_icon = get_post_meta($post->ID, 'usd_icon', true);
+$eband_icon = get_post_meta($post->ID, 'eband_icon', true);
 //woocommerce_template_loop_add_to_cart();
 //the_content();
 ?>
@@ -148,51 +159,54 @@ $sku = $product->get_sku();
             </div>
         </div>
     </div>
-    <div id="review" class="image-slider">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="text-center">
-                        <div class="active-slide">
-                            <img src="<?= get_template_directory_uri(); ?>/images/product/2.png">
-                            <h2><?php the_title(); ?></h2>
-                        </div>
-                    </div>
-                    <div class="slides d-flex justify-content-center">
-                        <div class="slide transition-3s active"><img data-title="Объектив Tamron SP 24-70mm Nicon"
-                                                                     src="<?= get_template_directory_uri(); ?>/images/product/2.png">
-                        </div>
-                        <div class="slide transition-3s"><img data-title="Объектив Tamron SP 24-70mm Nicon 2"
-                                                              src="<?= get_template_directory_uri(); ?>/images/product/avatar.png">
-                        </div>
-                        <div class="slide transition-3s"><img data-title="Объектив Tamron SP 24-70mm Nicon 3"
-                                                              src="<?= get_template_directory_uri(); ?>/images/product/1.png">
-                        </div>
-                        <div class="slide transition-3s"><img data-title="Объектив Tamron SP 24-70mm Nicon 4"
-                                                              src="<?= get_template_directory_uri(); ?>/images/product/3.png">
-                        </div>
-                        <div class="slide transition-3s"><img data-title="Объектив Tamron SP 24-70mm Nicon 5"
-                                                              src="<?= get_template_directory_uri(); ?>/images/product/4.png">
-                        </div>
-                    </div>
-                    <div class="navigation d-flex justify-content-between">
-                        <button data-value="prev"><i class="material-icons">keyboard_arrow_left</i></button>
-                        <button data-value="next"><i class="material-icons">keyboard_arrow_right</i></button>
-                    </div>
-                    <div class="btn-text">
-                        <div class="container">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-md-12 text-left" style="white-space: pre-line;">
-                                    <?= get_post($post->ID)->post_content;?>
-                                </div>
+
+    <?php if (!empty($gallery)): ?>
+        <div id="review" class="image-slider">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <div class="active-slide">
+                                <img src="<?= get_template_directory_uri(); ?>/images/product/2.png">
+                                <h2><?php the_title(); ?></h2>
                             </div>
                         </div>
+                        <div class="slides d-flex justify-content-center">
+                            <?php foreach ($gallery as $i => $image): ?>
+                                <div class="slide transition-3s <?php if ($i === 0) echo "active"; ?>">
+                                    <img data-title="Объектив Tamron SP 24-70mm Nicon <?php if ($i !== 0) echo $i; ?>"
+                                         src="<?= get_url_from_img_id($image) ?>">
+                                </div>
+                            <?php endforeach; ?>
+
+
+                            <!--                        <div class="slide transition-3s"><img data-title="Объектив Tamron SP 24-70mm Nicon 2"-->
+                            <!--                                                              src="-->
+                            <? //= get_template_directory_uri(); ?><!--/images/product/avatar.png">-->
+                            <!--                        </div>-->
+                            <!--                        <div class="slide transition-3s"><img data-title="Объектив Tamron SP 24-70mm Nicon 3"-->
+                            <!--                                                              src="-->
+                            <? //= get_template_directory_uri(); ?><!--/images/product/1.png">-->
+                            <!--                        </div>-->
+                            <!--                        <div class="slide transition-3s"><img data-title="Объектив Tamron SP 24-70mm Nicon 4"-->
+                            <!--                                                              src="-->
+                            <? //= get_template_directory_uri(); ?><!--/images/product/3.png">-->
+                            <!--                        </div>-->
+                            <!--                        <div class="slide transition-3s"><img data-title="Объектив Tamron SP 24-70mm Nicon 5"-->
+                            <!--                                                              src="-->
+                            <? //= get_template_directory_uri(); ?><!--/images/product/4.png">-->
+                            <!--                        </div>-->
+                        </div>
+                        <div class="navigation d-flex justify-content-between">
+                            <button data-value="prev"><i class="material-icons">keyboard_arrow_left</i></button>
+                            <button data-value="next"><i class="material-icons">keyboard_arrow_right</i></button>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    <?php endif; ?>
 
 
     <div id="specifications" class="specifications">
@@ -201,6 +215,17 @@ $sku = $product->get_sku();
                 <div class="col-md-12">
                     <div class="container">
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-text">
+                                    <div class="container">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-md-12 text-left" style="white-space: pre-line;">
+                                                <?= get_post($post->ID)->post_content; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <h3>Характеристики и особенности</h3>
                             </div>
@@ -279,36 +304,38 @@ $sku = $product->get_sku();
                                 </ul>
                             </div>
                             <div class="col-md-4">
-                                <div class="feature">
-                                    <img src="<?= get_template_directory_uri(); ?>/images/product/f1.png">
-                                    <div class="title">VC (компенсация вибраций)</div>
-                                    <div class="text">Стабилизатор изображения VC обеспечивает резкое изображение без
-                                        дрожания, а также обеспечивает резкое изображение в видоискателе.
+                                <?php if (!empty($vc_icon)): ?>
+                                    <div class="feature">
+                                        <img src="<?= get_template_directory_uri(); ?>/images/product/f1.png">
+                                        <div class="title">VC (компенсация вибраций)</div>
+                                        <div class="text">Стабилизатор изображения VC обеспечивает резкое изображение
+                                            без
+                                            дрожания, а также обеспечивает резкое изображение в видоискателе.
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="feature">
-                                    <img src="<?= get_template_directory_uri(); ?>/images/product/f2.png">
-                                    <div class="title">USD (ультразвуковой мотор)</div>
-                                    <div class="text">Мощный ультразвуковой двигатель для съемки быстрых и динамичных
-                                        объектов. Чрезвычайно тихий и точный, позволяет осуществлять ручное управление
-                                        фокусировкой во время съемки.
+                                <?php endif; ?>
+                                <?php if (!empty($usd_icon)): ?>
+                                    <div class="feature">
+                                        <img src="<?= get_template_directory_uri(); ?>/images/product/f2.png">
+                                        <div class="title">USD (ультразвуковой мотор)</div>
+                                        <div class="text">Мощный ультразвуковой двигатель для съемки быстрых и
+                                            динамичных
+                                            объектов. Чрезвычайно тихий и точный, позволяет осуществлять ручное
+                                            управление
+                                            фокусировкой во время съемки.
+                                        </div>
                                     </div>
-                                </div>
+                                <?php endif; ?>
                                 <div class="full-features">
-                                    <div class="feature">
-                                        <img src="<?= get_template_directory_uri(); ?>/images/product/f3.png">
-                                        <div class="title">Покрытие eBAND</div>
-                                        <div class="text">Нано- антибликовое покрытие для защиты от нежелательных
-                                            отражений и ореола.
+                                    <?php if (!empty($eband_icon)): ?>
+                                        <div class="feature">
+                                            <img src="<?= get_template_directory_uri(); ?>/images/product/f3.png">
+                                            <div class="title">Покрытие eBAND</div>
+                                            <div class="text">Нано- антибликовое покрытие для защиты от нежелательных
+                                                отражений и ореола.
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="feature">
-                                        <img src="<?= get_template_directory_uri(); ?>/images/product/f3.png">
-                                        <div class="title">Покрытие eBAND</div>
-                                        <div class="text">Нано- антибликовое покрытие для защиты от нежелательных
-                                            отражений и ореола.
-                                        </div>
-                                    </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -317,84 +344,156 @@ $sku = $product->get_sku();
             </div>
         </div>
     </div>
-    <div class="overview-componentets">
-        <div class="container content-container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="btn-text">
-                        <div class="container">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-md-7 text-center">
-                                    <h3>Профото является эксклюзивным представителем в Украине известного мирового
-                                        производителя компании Tamron.</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="image-text">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="image-wrapper">
-                                        <img width="100%"
-                                             src="<?= get_template_directory_uri(); ?>/images/product/i2.jpg">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 text-wrapper">
-                                    <h2>Excepteur sint occaecat cupidatat non proident</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                        culpa qui officia deserunt mollit anim id est laborum. <br><br> Sed ut
-                                        perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-                                        quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                                        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                                        dolores eos qui ratione voluptatem sequi nesciunt. Nemo enim ipsam voluptatem
-                                        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
-                                        dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-                                        dolorem ipsum quia dolor sit amet, consectetur. <br><br>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="image-text text-image">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 text-wrapper">
-                                    <h2>Excepteur sint occaecat cupidatat non proident</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Excepteur
-                                        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                                        anim id est laborum. <br><br> Sed quia consequuntur magni dolores eos qui
-                                        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-                                        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi
-                                        tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. <br><br>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris.
-                                    </p>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="image-wrapper">
-                                        <img width="100%"
-                                             src="<?= get_template_directory_uri(); ?>/images/product/i1.jpg">
+    <?php if (have_rows('additional_information') || $youtube): ?>
+
+
+        <div class="overview-componentets">
+            <div class="container content-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn-text">
+                            <div class="container">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-7 text-center">
+                                        <h3>Профото является эксклюзивным представителем в Украине известного мирового
+                                            производителя компании Tamron.</h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <?php $count = 0;
+                        while (have_rows('additional_information')): the_row(); ?>
+
+
+                            <div class="image-text <?php if ($count % 2) echo 'text-image'; ?>">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-5 <?php if ($count % 2) echo 'order-md-2'; ?>">
+                                            <div class="image-wrapper">
+                                                <img width="100%"
+                                                     src="<?= get_sub_field('img') ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-wrapper">
+                                            <?= get_sub_field('text') ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php $count++;endwhile; ?>
+
+                        <!--                        <div class="image-text text-image">-->
+                        <!--                            <div class="container">-->
+                        <!--                                <div class="row">-->
+                        <!--                                    <div class="col-md-6 text-wrapper">-->
+                        <!--                                        <h2>Excepteur sint occaecat cupidatat non proident</h2>-->
+                        <!--                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+                        <!--                                            tempor-->
+                        <!--                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.-->
+                        <!--                                            Excepteur-->
+                        <!--                                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt-->
+                        <!--                                            mollit-->
+                        <!--                                            anim id est laborum. <br><br> Sed quia consequuntur magni dolores eos qui-->
+                        <!--                                            ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem-->
+                        <!--                                            ipsum-->
+                        <!--                                            quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius-->
+                        <!--                                            modi-->
+                        <!--                                            tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. <br><br>-->
+                        <!--                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
+                        <!--                                            tempor-->
+                        <!--                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis-->
+                        <!--                                            nostrud exercitation ullamco laboris.-->
+                        <!--                                        </p>-->
+                        <!--                                    </div>-->
+                        <!--                                    <div class="col-md-5">-->
+                        <!--                                        <div class="image-wrapper">-->
+                        <!--                                            <img width="100%"-->
+                        <!--                                                 src="-->
+                        <? //= get_template_directory_uri(); ?><!--/images/product/i1.jpg">-->
+                        <!--                                        </div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <?php if (!emoty($youtube)): ?>
+
+                            <div class="video">
+                                <div class="container">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-12">
+                                            <h2><?php the_title(); ?></h2>
+                                            <iframe width="100%" height="600px"
+                                                    src="https://www.youtube.com/embed/XC7ZUTmvZ1A?rel=0&amp;controls=0&amp;showinfo=0"
+                                                    frameborder="0" allow="autoplay; encrypted-media"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
-                    <div class="video">
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if (have_rows('additional_materials')): ?>
+
+
+        <div id="materials" class="materials">
+            <div class="container content-container">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="container">
-                            <div class="row d-flex justify-content-center">
+                            <div class="row">
                                 <div class="col-md-12">
-                                    <h2><?php the_title(); ?></h2>
-                                    <iframe width="100%" height="600px"
-                                            src="https://www.youtube.com/embed/XC7ZUTmvZ1A?rel=0&amp;controls=0&amp;showinfo=0"
-                                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    <h3>Дополнительные материалы</h3>
+                                </div>
+                                <div class="col-md-12">
+                                    <table width="100%">
+                                        <thead>
+                                        <tr>
+                                            <td>Описание</td>
+                                            <td class="text-center">Язык</td>
+                                            <td class="text-center">Файл</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $count = 0;
+                                        while (have_rows('additional_materials')): the_row(); ?>
+                                            <?= get_sub_field('file') ?>
+                                            <?php $count++;endwhile; ?>
+                                        <tr>
+                                            <td>Lorem ipsum dolor sit amet</td>
+                                            <td class="text-center">Ru</td>
+                                            <td class="text-center"><img
+                                                        src="<?= get_template_directory_uri(); ?>/images/icon_pdf.png">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ut enim ad minim veniam</td>
+                                            <td class="text-center">En</td>
+                                            <td class="text-center"><img
+                                                        src="<?= get_template_directory_uri(); ?>/images/icon_windows.png">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sed quia consequuntur</td>
+                                            <td class="text-center">Ru</td>
+                                            <td class="text-center"><img
+                                                        src="<?= get_template_directory_uri(); ?>/images/icon_apple.png">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Neque porro quisquam est</td>
+                                            <td class="text-center">En</td>
+                                            <td class="text-center"><img
+                                                        src="<?= get_template_directory_uri(); ?>/images/icon_linux.png">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -402,62 +501,7 @@ $sku = $product->get_sku();
                 </div>
             </div>
         </div>
-    </div>
-    <div id="materials" class="materials">
-        <div class="container content-container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>Дополнительные материалы</h3>
-                            </div>
-                            <div class="col-md-12">
-                                <table width="100%">
-                                    <thead>
-                                    <tr>
-                                        <td>Описание</td>
-                                        <td class="text-center">Язык</td>
-                                        <td class="text-center">Файл</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Lorem ipsum dolor sit amet</td>
-                                        <td class="text-center">Ru</td>
-                                        <td class="text-center"><img
-                                                    src="<?= get_template_directory_uri(); ?>/images/icon_pdf.png"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ut enim ad minim veniam</td>
-                                        <td class="text-center">En</td>
-                                        <td class="text-center"><img
-                                                    src="<?= get_template_directory_uri(); ?>/images/icon_windows.png">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sed quia consequuntur</td>
-                                        <td class="text-center">Ru</td>
-                                        <td class="text-center"><img
-                                                    src="<?= get_template_directory_uri(); ?>/images/icon_apple.png">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Neque porro quisquam est</td>
-                                        <td class="text-center">En</td>
-                                        <td class="text-center"><img
-                                                    src="<?= get_template_directory_uri(); ?>/images/icon_linux.png">
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php endif; ?>
     <div id="related-products" class="related-products">
         <div class="container content-container">
             <div class="row">
