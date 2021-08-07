@@ -359,5 +359,6 @@ function disable_emojis_tinymce($plugins)
 function parsePlugin() {
 //    return;
     new ImportXML();
+    die();
 }
-add_action('init', 'parsePlugin', 69);
+//add_action('init', 'parsePlugin', 69);

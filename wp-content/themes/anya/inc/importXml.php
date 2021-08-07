@@ -39,7 +39,7 @@ class ImportXML
 
     function __construct()
     {
-        return;
+//        return;
         $this->loadData();
         $this->importCategories();
         $this->set_categories_parents();
@@ -49,7 +49,7 @@ class ImportXML
 
     function loadData()
     {
-        $xml = simplexml_load_file(get_template_directory_uri() . '/test.xml', 'SimpleXMLElement');
+        $xml = simplexml_load_file(get_template_directory_uri() . '/datafile2.xml', 'SimpleXMLElement');
 
 //        $this->categories = $xml->shop->categories->category;
         $xmlCategories = $xml->shop->categories->category;
