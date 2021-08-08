@@ -150,7 +150,7 @@ class ParseImages {
                 sku: el[0],
                 listName: listName,
             }
-            console.log(el)
+            // console.log(el)
             // console.log(imgObj)
             // return;
             needle.post(this.saveUrl, data, {multipart: true}, (err, res) => {
