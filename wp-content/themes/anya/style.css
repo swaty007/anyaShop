@@ -3056,10 +3056,10 @@ header.diller ul li.icon-item .icon .counter {
     font-size: 14px;
     font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
-    border: none;
     color: #4a41db;
     background: #fff;
     width: auto;
+    border: 1px solid #4a41db;
 }
 
 .products-table-catalog .view-more-btn {
