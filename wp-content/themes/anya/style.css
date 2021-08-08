@@ -2527,7 +2527,7 @@ body.open-modal {
 }
 
 header {
-    background: #111111;
+    background: #fff;
     width: 100%
 }
 
@@ -2563,7 +2563,7 @@ header ul li.icon-item.left-border {
 
 header ul li.icon-item .icon {
     position: relative;
-    color: #fff
+    color: #111111
 }
 
 header ul li.icon-item .icon .counter {
@@ -2606,7 +2606,7 @@ header ul li.menu-item .icon span {
     position: absolute;
     height: 3px;
     width: 100%;
-    background: #fff;
+    background: #111111;
     border-radius: 9px;
     opacity: 1;
     left: 0;
@@ -2658,7 +2658,8 @@ header ul li.menu-item.open .icon span:nth-child(4) {
 header ul li.menu-item .text {
     margin-left: 12px;
     font-size: 14px;
-    font-weight: 700
+    font-weight: 700;
+    color: #111111;
 }
 
 header ul li.text-item {
@@ -2676,7 +2677,7 @@ header ul:last-of-type li.text-item {
 
 header ul li.text-item > a {
     font-size: 14px;
-    color: #fff
+    color: #111111
 }
 
 header ul li.logo-item > a {
@@ -3000,7 +3001,9 @@ header.diller ul li.icon-item .icon .counter {
 }
 
 .products-table-catalog .product .image-wrapper img {
-    max-width: 100%
+    max-width: 100%;
+    height: 300px;
+    object-fit: cover;
 }
 
 .products-table-catalog .product .info {
@@ -3054,8 +3057,9 @@ header.diller ul li.icon-item .icon .counter {
     font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
     border: none;
-    color: #fff;
-    background: #4a41db
+    color: #4a41db;
+    background: #fff;
+    width: auto;
 }
 
 .products-table-catalog .view-more-btn {
@@ -3810,7 +3814,10 @@ footer.diller .copyright {
     font-size: 13px;
     font-weight: 600;
     color: #848789;
-    cursor: pointer
+    cursor: pointer;
+    width: auto;
+    padding: 4px 5px;
+    margin-top: 0;
 }
 
 .product-page .price-info .compare-btn i, .product-page .price-info .like-btn i {
@@ -11981,4 +11988,14 @@ body .widget_shopping_cart_content a.quantity span, body .widget_shopping_cart_c
 
 .br_right_table p {
     font-weight: 400 !important
+}
+
+
+.header_top {
+    background: #111111;
+}
+
+.compare-btn.br_compare_added {
+    background: #4a41db!important;
+    color: #fff!important;
 }

@@ -25,7 +25,8 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
         <div class="row">
             <div class="col-md-12 d-flex align-items-center justify-content-between desktop">
                 <div class="d-flex align-items-center">
-                    <img width="50px" src="<?= get_template_directory_uri(); ?>/images/product/avatar.png">
+                    <img width="50px" src="<?= get_the_post_thumbnail_url(); ?>">
+                    <!--                    --><? //= woocommerce_get_product_thumbnail();?>
                     <span class="product-title"><?php the_title(); ?></span>
                 </div>
                 <div class="d-flex align-items-center">
@@ -37,7 +38,8 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
             </div>
             <div class="col-md-12 tablet-mobile">
                 <div class="image-title d-flex align-items-center">
-                    <img width="50px" src="<?= get_template_directory_uri(); ?>/images/product/avatar.png">
+                    <img width="50px" src="<?= get_the_post_thumbnail_url(); ?>">
+                    <!--                    --><? //= woocommerce_get_product_thumbnail();?>
                     <span class="product-title"><?php the_title(); ?></span>
                 </div>
                 <div class="price-btn">
@@ -52,14 +54,24 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
             <div class="col-md-12">
                 <div class="product-menu">
                     <div class="anchor-link-menu d-flex flex-nowrap">
-                        <div class="transition-3s d-flex link active"><a class="anchor-link" href="#review">Описание</a>
+                        <div class="transition-3s d-flex link active">
+                            <a class="anchor-link" href="#review">Описание</a>
                         </div>
-                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#specifications">Характеристики
-                                и особенности</a></div>
-                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#materials">Дополнительные
-                                материалы</a></div>
-                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#related-products">Похожие
-                                товары</a></div>
+                        <div class="transition-3s d-flex link">
+                            <a class="anchor-link" href="#specifications">Характеристики
+                                и особенности</a>
+                        </div>
+                        <?php if (have_rows('additional_materials')): ?>
+                            <div class="transition-3s d-flex link">
+                                <a class="anchor-link" href="#materials">
+                                    Дополнительные материалы</a>
+                            </div>
+                        <?php endif; ?>
+                        <div class="transition-3s d-flex link">
+                            <a class="anchor-link" href="#related-products">Похожие
+                                товары
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -70,15 +82,22 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-3 col-md-2 col-lg-2 col-xl-2">
-                <img class="product-avatar" width="80%"
-                     src="<?= get_template_directory_uri(); ?>/images/product/avatar.png">
+                <img class="product-avatar"
+                     src="<?= get_the_post_thumbnail_url(); ?>">
+                <!--                <div class="product-avatar">-->
+                <!--                    --><? //= woocommerce_get_product_thumbnail();?>
+                <!--                </div>-->
             </div>
             <div class="col-12 col-sm-9 col-md-10 col-lg-7 col-xl-7">
                 <a class="back-link d-flex align-items-center" href="#"><i
                             class="material-icons">keyboard_arrow_left</i><span>Объективы</span></a>
                 <h1 class="product-title"><?php the_title(); ?></h1>
                 <div class="price-info">
-                    <button class="transition-3s compare-btn"><i class="fas fa-balance-scale"></i> Сравнить</button>
+                    <button data-id="<?=$post->ID;?>"
+                            class="transition-3s compare-btn add_to_cart_button br_compare_button br_product_<?=$post->ID;?> <?= set_class_compare($post->ID);?>">
+                        <i class="fas fa-balance-scale"></i>
+                        Сравнить
+                    </button>
                     <button class="transition-3s like-btn"><i class="far fa-heart"></i> Добавить в избранное</button>
                     <div class="status">
                         <?= wc_get_stock_html($product); ?>
@@ -522,7 +541,14 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                                             <div class="col-md-4 product">
                                                 <a class="link" href="<?= get_the_permalink($related_product); ?>">
                                                     <div class="image-wrapper text-center transition-3s">
-                                                        <img src="<?= get_template_directory_uri(); ?>/images/item3.png">
+                                                        <?php
+                                                        $related_image_url = get_the_post_thumbnail_url($related_product);
+                                                        if (!empty($related_image_url)):?>
+                                                            <img src="<?= $related_image_url; ?>">
+                                                        <?php else: ?>
+                                                            <img src="<?= wc_placeholder_img_src(); ?>">
+                                                        <?php endif; ?>
+
                                                     </div>
                                                 </a>
                                                 <div class="info">
@@ -533,8 +559,10 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                                                         <div class="buttons">
                                                             <button class="transition-3s like-btn"><i
                                                                         class="far fa-heart"></i></button>
-                                                            <button class="transition-3s compare-btn"><i
-                                                                        class="fas fa-balance-scale"></i></button>
+                                                            <button data-id="<?=$related_product;?>"
+                                                                    class="transition-3s compare-btn br_compare_button br_product_<?=$related_product;?> <?=set_class_compare($related_product);?>">
+                                                                <i class="fas fa-balance-scale"></i>
+                                                            </button>
                                                             <button class="transition-3s buy-btn"
                                                                     data-sku="<?= $skuWC; ?>"
                                                                     data-id="<?= $related_product; ?>">

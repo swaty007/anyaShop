@@ -362,3 +362,23 @@ function parsePlugin() {
     die();
 }
 //add_action('init', 'parsePlugin', 69);
+
+
+function is_set_cookie_compare( $id ) {
+    if ( ! empty($_COOKIE['br_products_compare']) ) {
+        $cookie = $_COOKIE['br_products_compare'];
+        if ( preg_match( "/(^".$id.",)|(,".$id."$)|(,".$id.",)|(^".$id."$)/", $cookie ) ) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+function set_class_compare($id) {
+    if (is_set_cookie_compare($id)) {
+        return "br_compare_added";
+    }
+    return "";
+}

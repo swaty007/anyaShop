@@ -80,7 +80,8 @@ get_header();
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
                         <a href="<?php the_permalink(); ?>" class="link">
                             <div class="image-wrapper text-center transition-3s">
-                                <img src="<?= get_template_directory_uri(); ?>/images/item1.png">
+<!--                                <img src="--><?//= get_template_directory_uri(); ?><!--/images/item1.png">-->
+                                <?= woocommerce_get_product_thumbnail();?>
                             </div>
                         </a>
                         <div class="info">
