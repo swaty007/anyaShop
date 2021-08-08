@@ -155,8 +155,11 @@ class ParseImages {
             // return;
             needle.post(this.saveUrl, data, {multipart: true}, (err, res) => {
                 if (err) {
-                    console.log(err, 'error Request Save', this.insertUrl)
-                    resolve(false)
+                    console.log(err, 'error Request Save', this.saveUrl, data)
+                    setTimeout(() => {
+                        resolve(false)
+                    }, 10000)
+                    return;
                 }
                 console.log(res.body, 'insertUrl res.body')
 
@@ -167,11 +170,12 @@ class ParseImages {
                         resolve(false)
                     }
                 }
-                resolve(true)
+                setTimeout(() => {
+                    resolve(true)
+                }, 100)
             })
         })
     }
-
     compressImagesSize(dirPath) {
         return new Promise((resolve, reject) => {
             fastFolderSize(dirPath, (err, size) => {

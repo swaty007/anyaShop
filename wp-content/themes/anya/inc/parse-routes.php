@@ -89,6 +89,9 @@ function insertResult($request)
             $gallery = get_post_meta($post_id, '_product_image_gallery', true);
             if (!empty($gallery)) {
                 $galleryItems = explode(",", $gallery);
+                if (in_array($attach_id, $galleryItems)) {
+                    wp_send_json($attach_id);
+                }
                 $galleryItems[] = $attach_id;
             } else {
                 $galleryItems = [$attach_id];
@@ -139,74 +142,3 @@ function disable_wp_responsive_images()
 
 add_filter('max_srcset_image_width', 'disable_wp_responsive_images');
 // thumbnail disable end
-
-
-function parseResult($request)
-{
-    $parameters = $request->get_query_params();
-    $mydb = new wpdb('mysql191993', '&Jwh3;~rB6ZR', 'mysql191993', 'mysql191993.mysql.sysedata.no');
-    $rowcount = $mydb->get_var("SELECT COUNT(*) FROM wp_posts WHERE post_type='post' AND post_status='publish'");
-//    $result = $mydb->get_results("
-//SELECT * FROM wp_posts LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_thumbnail_id' LEFT JOIN wp_posts AS image ON image.ID = wp_postmeta.meta_value
-//WHERE wp_posts.post_type='post' AND wp_posts.post_status='publish' LIMIT 100");
-    $result = $mydb->get_results("
-SELECT * FROM wp_posts LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID AND wp_postmeta.meta_key = '_thumbnail_id'
-WHERE wp_posts.post_type='post' AND wp_posts.post_status='publish' LIMIT 2");
-    var_dump($rowcount);
-    include_once(ABSPATH . 'wp-admin/includes/image.php');
-    foreach ($result as $item) {
-        $resultImage = $mydb->get_row("SELECT * FROM wp_posts WHERE ID ='" . $item->meta_value . "'");
-
-        $post_id = wp_insert_post(array(
-            'post_type' => 'post',
-            'post_title' => $item->post_title,
-            'post_content' => $item->post_content,
-            'post_date_gmt' => $item->post_date_gmt,
-            'post_excerpt' => $item->post_excerpt,
-//	'post_name'      => <the name>,
-            'post_status' => 'publish',
-            'post_category' => array(1),
-            'tags_input' => array('tag'),
-        ));
-
-
-//        $attachment_id = media_handle_upload('image', $post_id);
-//        set_post_thumbnail( $post_id, $attachment_id );
-
-
-        $imageurl = $resultImage->guid;
-        $mime = explode('/', getimagesize($imageurl)['mime']);
-        $imagetype = end($mime);
-//        $uniq_name = date('dmY').''.(int) microtime(true);
-        $filename = $resultImage->post_title . '.' . $imagetype;
-        $uploaddir = wp_upload_dir();
-        $uploadfile = $uploaddir['path'] . '/' . $filename;
-        $contents = file_get_contents($imageurl);
-        if (file_exists($uploadfile)) {
-            $filename = $resultImage->post_title . date('dmY') . '.' . $imagetype;
-            $uploadfile = $uploaddir['path'] . '/' . $filename;
-        }
-        $savefile = fopen($uploadfile, 'w');
-        fwrite($savefile, $contents);
-        fclose($savefile);
-        $wp_filetype = wp_check_filetype(basename($filename), null);
-        $attachment = array(
-//            'guid' => $uploaddir . '/' . basename( $filename ),
-            'post_mime_type' => $wp_filetype['type'],
-            'post_title' => $filename,
-            'post_content' => '',
-            'post_status' => 'inherit'
-        );
-        $attach_id = wp_insert_attachment($attachment, $uploadfile);
-        $imagenew = get_post($attach_id);
-        $fullsizepath = get_attached_file($imagenew->ID);
-        $attach_data = wp_generate_attachment_metadata($attach_id, $fullsizepath);
-        wp_update_attachment_metadata($attach_id, $attach_data);
-
-
-        set_post_thumbnail($post_id, $attach_id);
-        pll_set_post_language($post_id, 'da');
-
-    }
-
-}
