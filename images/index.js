@@ -69,7 +69,7 @@ class ParseImages {
 
     async init() {
         await this.checkFilesList();
-        console.log("errorSku", this.errorSku)
+        console.dir(this.errorSku, {'maxArrayLength': null})
     }
 
 
