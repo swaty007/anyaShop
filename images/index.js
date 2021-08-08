@@ -59,7 +59,7 @@ class ParseImages {
         this.siteUrl = "https://anya.infinitum.tech"
         this.saveUrl = `${this.siteUrl}/wp-json/parse/v1/save`
 
-        this.errorSku = []
+        this.errorSku = new Set()
         this.files = []
         this.xlsx = null
         this.init()
@@ -166,7 +166,7 @@ class ParseImages {
                 if (res.body) {
                     if (res.body.error) {
                         console.log('error find product sku', res.body.value)
-                        this.errorSku.push(res.body.value)
+                        this.errorSku.add(res.body.value)
                         resolve(false)
                     }
                 }
