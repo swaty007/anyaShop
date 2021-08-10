@@ -65,6 +65,7 @@
     "@fancyapps/fancybox": "^3.5.7",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "fancybox": "^3.0.1",
     "inputmask": "^5.0.5",
     "intl-tel-input": "^17.0.8",
     "jquery": "^3.5.1",

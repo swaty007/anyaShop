@@ -82,8 +82,11 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-3 col-md-2 col-lg-2 col-xl-2">
-                <img class="product-avatar"
-                     src="<?= get_the_post_thumbnail_url(); ?>">
+                <a href="<?= get_the_post_thumbnail_url(); ?>" data-fancybox="gallery">
+                    <img class="product-avatar"
+                         src="<?= get_the_post_thumbnail_url(); ?>">
+                </a>
+
                 <!--                <div class="product-avatar">-->
                 <!--                    --><? //= woocommerce_get_product_thumbnail();?>
                 <!--                </div>-->
@@ -184,9 +187,12 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="text-center">
+                        <div class="text-center relative" style="z-index: 4;">
                             <div class="active-slide">
-                                <img src="<?= get_template_directory_uri(); ?>/images/product/2.png">
+                                <a href="<?= get_url_from_img_id($gallery[0]) ?>" data-fancybox="gallery">
+                                    <img src="<?= get_url_from_img_id($gallery[0]) ?>">
+                                </a>
+
                                 <h2><?php the_title(); ?></h2>
                             </div>
                         </div>
@@ -538,7 +544,7 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                                             $productWC = wc_get_product($related_product);
                                             $skuWC = $product->get_sku();
                                             ?>
-                                            <div class="col-md-4 product">
+                                            <div class="col-sm-12 col-md-6 col-lg-4 product">
                                                 <a class="link" href="<?= get_the_permalink($related_product); ?>">
                                                     <div class="image-wrapper text-center transition-3s">
                                                         <?php
@@ -552,9 +558,11 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                                                     </div>
                                                 </a>
                                                 <div class="info">
-                                                    <div class="title">
-                                                        <?= get_the_title($related_product); ?>
-                                                    </div>
+                                                    <a href="<?= get_the_permalink($related_product); ?>">
+                                                        <div class="title">
+                                                            <?= get_the_title($related_product); ?>
+                                                        </div>
+                                                    </a>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="buttons">
                                                             <button class="transition-3s like-btn"><i

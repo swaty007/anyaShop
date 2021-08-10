@@ -1,5 +1,5 @@
 // Iterate over each select element
-$('select').each(function () {
+$('.filters-menu select').each(function () {
 
     // Cache the number of options
     var $this = $(this),
@@ -50,10 +50,11 @@ $('select').each(function () {
     // Hides the unordered list when a list item is clicked and updates the styled div to show the selected list item
     // Updates the select element to have the value of the equivalent option
     $listItems.click(function (e) {
-        e.stopPropagation();
+        // e.stopPropagation();
         $styledSelect.text($(this).text()).removeClass('active');
         $this.val($(this).attr('rel'));
         $list.hide();
+        $this.closest('form').submit();
         /* alert($this.val()); Uncomment this for demonstration! */
     });
 

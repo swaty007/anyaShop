@@ -24,6 +24,8 @@ $(document).ready(function () {
 function changeSlide(text, src) {
     $(".product-page .image-slider .active-slide").find("img").attr("src", src);
     $(".product-page .image-slider .active-slide").find("h1").text(text);
+    $(".product-page .image-slider .active-slide").find("a").attr('href', src);
+    // $(".product-page .image-slider .active-slide a").fancybox()
 }
 
 // block image click

@@ -81,7 +81,7 @@ get_header();
                         <a href="<?php the_permalink(); ?>" class="link">
                             <div class="image-wrapper text-center transition-3s">
 <!--                                <img src="--><?//= get_template_directory_uri(); ?><!--/images/item1.png">-->
-                                <?= woocommerce_get_product_thumbnail();?>
+                                <?= woocommerce_get_product_thumbnail('full');?>
                             </div>
                         </a>
                         <div class="info">
