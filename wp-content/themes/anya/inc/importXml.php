@@ -6,7 +6,7 @@ Version: 2.00
 */
 
 
-add_action('admin_bar_menu', 'import_xml_admin_bar', 500);
+//add_action('admin_bar_menu', 'import_xml_admin_bar', 500);
 function import_xml_admin_bar(WP_Admin_Bar $admin_bar)
 {
     if (!current_user_can('manage_options')) {

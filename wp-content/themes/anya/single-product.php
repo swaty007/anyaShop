@@ -187,13 +187,17 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="text-center relative" style="z-index: 4;">
-                            <div class="active-slide">
-                                <a href="<?= get_url_from_img_id($gallery[0]) ?>" data-fancybox="gallery">
-                                    <img src="<?= get_url_from_img_id($gallery[0]) ?>">
-                                </a>
+                        <div class="row">
+                            <div class="col-8 offset-2 col-lg-6 offset-lg-3">
+                                <div class="text-center relative" style="z-index: 4;">
+                                    <div class="active-slide">
+                                        <a href="<?= get_url_from_img_id($gallery[0]) ?>" data-fancybox="gallery">
+                                            <img src="<?= get_url_from_img_id($gallery[0]) ?>">
+                                        </a>
 
-                                <h2><?php the_title(); ?></h2>
+                                        <h2><?php the_title(); ?></h2>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="slides d-flex justify-content-center">
