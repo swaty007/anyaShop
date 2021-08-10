@@ -187,6 +187,7 @@ $child_categories = get_terms('product_cat', [
                 <?php while (have_posts()): the_post(); ?>
                     <?php
                     $product = wc_get_product($post->ID);
+                    if (!$product) continue;
                     $sku = $product->get_sku();
                     ?>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">

@@ -5,6 +5,9 @@ $product = wc_get_product($post->ID);
 $productStock = $product->get_stock_status() === 'instock';
 $sku = $product->get_sku();
 
+$term = get_the_terms($post->ID, 'product_cat')[0];
+$term_id = $term->term_id;
+
 $youtube = get_post_meta($post->ID, 'youtube', true);
 $gallery = get_post_meta($post->ID, '_product_image_gallery', true);
 if (!empty($gallery)) {
@@ -92,12 +95,14 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                 <!--                </div>-->
             </div>
             <div class="col-12 col-sm-9 col-md-10 col-lg-7 col-xl-7">
-                <a class="back-link d-flex align-items-center" href="#"><i
-                            class="material-icons">keyboard_arrow_left</i><span>Объективы</span></a>
+                <a class="back-link d-flex align-items-center" href="<?= get_term_link($term_id); ?>">
+                    <i class="material-icons">keyboard_arrow_left</i>
+                    <span><?= $term->name; ?></span>
+                </a>
                 <h1 class="product-title"><?php the_title(); ?></h1>
                 <div class="price-info">
-                    <button data-id="<?=$post->ID;?>"
-                            class="transition-3s compare-btn add_to_cart_button br_compare_button br_product_<?=$post->ID;?> <?= set_class_compare($post->ID);?>">
+                    <button data-id="<?= $post->ID; ?>"
+                            class="transition-3s compare-btn add_to_cart_button br_compare_button br_product_<?= $post->ID; ?> <?= set_class_compare($post->ID); ?>">
                         <i class="fas fa-balance-scale"></i>
                         Сравнить
                     </button>
@@ -571,8 +576,8 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                                                         <div class="buttons">
                                                             <button class="transition-3s like-btn"><i
                                                                         class="far fa-heart"></i></button>
-                                                            <button data-id="<?=$related_product;?>"
-                                                                    class="transition-3s compare-btn br_compare_button br_product_<?=$related_product;?> <?=set_class_compare($related_product);?>">
+                                                            <button data-id="<?= $related_product; ?>"
+                                                                    class="transition-3s compare-btn br_compare_button br_product_<?= $related_product; ?> <?= set_class_compare($related_product); ?>">
                                                                 <i class="fas fa-balance-scale"></i>
                                                             </button>
                                                             <button class="transition-3s buy-btn"
