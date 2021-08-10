@@ -106,7 +106,7 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                         <i class="fas fa-balance-scale"></i>
                         Сравнить
                     </button>
-                    <button class="transition-3s like-btn"><i class="far fa-heart"></i> Добавить в избранное</button>
+<!--                    <button class="transition-3s like-btn"><i class="far fa-heart"></i> Добавить в избранное</button>-->
                     <div class="status">
                         <?= wc_get_stock_html($product); ?>
                     </div>
@@ -574,8 +574,7 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                                                     </a>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="buttons">
-                                                            <button class="transition-3s like-btn"><i
-                                                                        class="far fa-heart"></i></button>
+<!--                                                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>-->
                                                             <button data-id="<?= $related_product; ?>"
                                                                     class="transition-3s compare-btn br_compare_button br_product_<?= $related_product; ?> <?= set_class_compare($related_product); ?>">
                                                                 <i class="fas fa-balance-scale"></i>

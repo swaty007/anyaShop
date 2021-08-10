@@ -94,7 +94,7 @@ get_header();
                             </div>
                             <div class="buttons">
                                 <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                                <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>
+<!--                                <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>-->
 
                                 <button data-id="<?=$post->ID;?>"
                                         class="transition-3s compare-btn br_compare_button br_product_<?=$post->ID;?> <?=set_class_compare($post->ID);?>">

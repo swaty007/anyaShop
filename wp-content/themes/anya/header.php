@@ -97,12 +97,12 @@ if (function_exists('wp_body_open')) {
 						<i class="far fa-user"></i>
 					</span>
                 </li>
-                <li class="icon-item d-flex align-items-center transition-3s">
-					<span class="icon">
-						<i class="far fa-heart"></i>
-						<span class="counter">2</span>
-					</span>
-                </li>
+<!--                <li class="icon-item d-flex align-items-center transition-3s">-->
+<!--					<span class="icon">-->
+<!--						<i class="far fa-heart"></i>-->
+<!--						<span class="counter">2</span>-->
+<!--					</span>-->
+<!--                </li>-->
                 <li class="icon-item d-flex align-items-center transition-3s">
 					<a href="<?=get_permalink(1890);?>" class="icon">
 						<i class="fas fa-balance-scale"></i>
