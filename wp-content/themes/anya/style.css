@@ -12003,6 +12003,10 @@ body .widget_shopping_cart_content a.quantity span, body .widget_shopping_cart_c
     background: #111111;
 }
 
+.header_top__menu {
+
+}
+
 .compare-btn.br_compare_added {
     background: #4a41db!important;
     color: #fff!important;

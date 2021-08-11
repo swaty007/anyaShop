@@ -4,14 +4,10 @@
 //define('MAIN_SITE_URL', 'https://jungo-master.demo.gns-it.com');
 //define('API_URL', 'https://api.jungo-dev.demo.gns-it.com/api/v1');
 
-require get_theme_file_path('/inc/widgets.php');
-require get_theme_file_path('/inc/polylang-slug.php');
-require get_theme_file_path('/inc/itea-settings.php');
-//require_once get_theme_file_path('/inc/api/ErpItea.php');
-//require_once get_theme_file_path('/inc/api/Bitrix.php');
-//require_once get_theme_file_path('/inc/api/ScheduleErp.php');
+//require_once get_theme_file_path('/inc/widgets.php');
+require_once get_theme_file_path('/inc/polylang-slug.php');
 require_once get_theme_file_path('/inc/importXml.php');
-require get_theme_file_path('/inc/parse-routes.php');
+require_once get_theme_file_path('/inc/parse-routes.php');
 
 
 
@@ -53,14 +49,14 @@ if (!function_exists('itea_setup')) :
 
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus(array(
-            'menu-1' => esc_html__('Header', 'itea'),
+            'menu-header' => esc_html__('Header', 'itea'),
         ));
         register_nav_menus(array(
-            'menu-2' => esc_html__('Footer', 'itea'),
+            'menu-footer' => esc_html__('Footer', 'itea'),
         ));
-        register_nav_menus(array(
-            'menu-support' => esc_html__('Client Support', 'itea'),
-        ));
+//        register_nav_menus(array(
+//            'menu-support' => esc_html__('Client Support', 'itea'),
+//        ));
 
 
     }
@@ -85,8 +81,7 @@ function your_theme_customizer_setting($wp_customize)
         'priority' => 8 // show it just below the custom-logo
     )));
 }
-
-add_action('customize_register', 'your_theme_customizer_setting');
+//add_action('customize_register', 'your_theme_customizer_setting');
 
 
 function itea_files()
