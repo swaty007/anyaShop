@@ -251,6 +251,7 @@ header ul li.menu-item .text{
 header ul li.text-item{
     margin-right: 20px;
     margin-top: 8px !important;
+    margin-top: 0 !important;
 }
 header ul li.text-item a:hover{
     border-bottom: 1px solid #989797;
@@ -1548,7 +1549,7 @@ footer.diller .copyright{
     padding: 70px 0px;
     margin: 150px 0;
 }
-.product-page .specifications h1{
+.product-page .specifications .specifications__title{
     font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;

@@ -14,7 +14,7 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<!--    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>-->
+    <!--    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>-->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-<!--class="--><?//= is_user_logged_in() ? 'log_in' : 'log_out' ?><!--"-->
+<!--class="--><? //= is_user_logged_in() ? 'log_in' : 'log_out' ?><!--"-->
 <?php
 if (function_exists('wp_body_open')) {
     wp_body_open();
@@ -46,13 +46,16 @@ if (function_exists('wp_body_open')) {
     justify-content: center;
     display: flex;
 ">
-<!--    <img src="--><?//= get_template_directory_uri(); ?><!--/images/logo/logo_white.svg" style="max-width:300px;"/>-->
+    <!--    <img src="-->
+    <? //= get_template_directory_uri(); ?><!--/images/logo/logo_white.svg" style="max-width:300px;"/>-->
 </div>
 <!--preloader-->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('pre-loader').style.opacity = '0'
-        setTimeout(function () {document.getElementById('pre-loader').style.display = 'none' }, 350)
+        setTimeout(function () {
+            document.getElementById('pre-loader').style.display = 'none'
+        }, 350)
     })
 </script>
 
@@ -65,7 +68,7 @@ if (function_exists('wp_body_open')) {
 						<i class="fas fa-search"></i>
 					</span>
                 </li>
-                <li class="menu-item d-flex align-items-center transition-3s">
+                <li class="menu-item d-flex d-lg-none align-items-center transition-3s">
                     <div class="icon">
                         <!-- <i class="fas fa-bars"></i> -->
                         <span class="transition-3s"></span>
@@ -76,40 +79,51 @@ if (function_exists('wp_body_open')) {
                     <div class="text">Меню</div>
                 </li>
                 <li class="text-item d-flex align-items-center d-none">
-                    <a href="#">О компании</a>
+                    <ul class="pll_language">
+                        <?php pll_the_languages([
+                            'echo' => 1,
+                            'hide_current' => false,
+                            'show_names' => 1,
+                            'display_names_as' => 'slug',
+                            'show_flags' => 1,
+                        ]); ?>
+                    </ul>
                 </li>
-                <li class="text-item d-flex align-items-center no-marg d-none">
-                    <a href="#">Публикации</a>
-                </li>
+                <!--                <li class="text-item d-flex align-items-center d-none">-->
+                <!--                    <a href="#">О компании</a>-->
+                <!--                </li>-->
+                <!--                <li class="text-item d-flex align-items-center no-marg d-none">-->
+                <!--                    <a href="#">Публикации</a>-->
+                <!--                </li>-->
             </ul>
             <ul class="d-flex">
                 <li class="logo-item d-flex align-items-center d-none">
                     <!-- <a href="#">Prophoto</a> -->
                     <a href="<?= pll_home_url(); ?>">
-                        <img width="170px" src="<?= get_template_directory_uri(); ?>/images/text-logo.png" />
+                        <img width="170px" src="<?= get_template_directory_uri(); ?>/images/text-logo.png"/>
                     </a>
                 </li>
             </ul>
             <ul class="d-flex">
-                <li class="text-item d-flex align-items-center d-none">
-                    <a href="#">Контакты</a>
-                </li>
+                <!--                <li class="text-item d-flex align-items-center d-none">-->
+                <!--                    <a href="#">Контакты</a>-->
+                <!--                </li>-->
                 <li class="icon-item d-flex align-items-center left-border transition-3s">
-					<a href="<?= get_permalink( wc_get_page_id( 'myaccount' ) );?>" class="icon">
-						<i class="far fa-user"></i>
-					</a>
+                    <a href="<?= get_permalink(wc_get_page_id('myaccount')); ?>" class="icon">
+                        <i class="far fa-user"></i>
+                    </a>
                 </li>
-<!--                <li class="icon-item d-flex align-items-center transition-3s">-->
-<!--					<span class="icon">-->
-<!--						<i class="far fa-heart"></i>-->
-<!--						<span class="counter">2</span>-->
-<!--					</span>-->
-<!--                </li>-->
+                <!--                <li class="icon-item d-flex align-items-center transition-3s">-->
+                <!--					<span class="icon">-->
+                <!--						<i class="far fa-heart"></i>-->
+                <!--						<span class="counter">2</span>-->
+                <!--					</span>-->
+                <!--                </li>-->
                 <li class="icon-item d-flex align-items-center transition-3s">
-					<a href="<?= get_permalink(pll_get_post(1890)); ?>" class="icon">
-						<i class="fas fa-balance-scale"></i>
-						<span id="compare__counter" class="counter">1</span>
-					</a>
+                    <a href="<?= get_permalink(pll_get_post(1890)); ?>" class="icon">
+                        <i class="fas fa-balance-scale"></i>
+                        <span id="compare__counter" class="counter">1</span>
+                    </a>
                 </li>
                 <li class="icon-item d-flex align-items-center transition-3s dropdown__li">
 					<span class="icon">
@@ -124,17 +138,6 @@ if (function_exists('wp_body_open')) {
         </div>
     </div>
 </header>
-
-<ul>
-    <?php pll_the_languages([
-        'echo' => 1,
-        'hide_current' => false,
-        'show_names' => 1,
-        'display_names_as' => 'slug',
-        'show_flags' => 1,
-    ]); ?>
-</ul>
-
 
 
 <section class="mobile-menu transition-5s">
@@ -361,17 +364,13 @@ if (function_exists('wp_body_open')) {
                     'theme_location' => 'menu-header',
                     'menu_id' => 'header_menu',
                     'container' => 'ul',
-                    'menu_class' => 'header_top__menu',
+                    'menu_class' => 'header_top__menu d-flex',
                 ));
                 ?>
             </div>
         </div>
     </div>
 </section>
-
-
-
-
 
 
 <!--<section class="menu transition-5s">-->
@@ -594,32 +593,38 @@ if (function_exists('wp_body_open')) {
 <!--                <div class="brands-colums d-table">-->
 <!--                    <div class="brand d-table-cell">-->
 <!--                        <a href="#" class="image-link d-block">-->
-<!--                            <img width="100%" src="--><?//= get_template_directory_uri(); ?><!--/images/logo1.png">-->
+<!--                            <img width="100%" src="-->
+<? //= get_template_directory_uri(); ?><!--/images/logo1.png">-->
 <!--                        </a>-->
 <!--                    </div>-->
 <!--                    <div class="brand d-table-cell">-->
 <!--                        <a href="#" class="image-link d-block">-->
-<!--                            <img width="100%" src="--><?//= get_template_directory_uri(); ?><!--/images/logo2.png">-->
+<!--                            <img width="100%" src="-->
+<? //= get_template_directory_uri(); ?><!--/images/logo2.png">-->
 <!--                        </a>-->
 <!--                    </div>-->
 <!--                    <div class="brand d-table-cell">-->
 <!--                        <a href="#" class="image-link d-block">-->
-<!--                            <img width="100%" src="--><?//= get_template_directory_uri(); ?><!--/images/logo3.jpg">-->
+<!--                            <img width="100%" src="-->
+<? //= get_template_directory_uri(); ?><!--/images/logo3.jpg">-->
 <!--                        </a>-->
 <!--                    </div>-->
 <!--                    <div class="brand d-table-cell">-->
 <!--                        <a href="#" class="image-link d-block">-->
-<!--                            <img width="100%" src="--><?//= get_template_directory_uri(); ?><!--/images/logo4.png">-->
+<!--                            <img width="100%" src="-->
+<? //= get_template_directory_uri(); ?><!--/images/logo4.png">-->
 <!--                        </a>-->
 <!--                    </div>-->
 <!--                    <div class="brand d-table-cell">-->
 <!--                        <a href="#" class="image-link d-block">-->
-<!--                            <img width="100%" src="--><?//= get_template_directory_uri(); ?><!--/images/logo5.jpg">-->
+<!--                            <img width="100%" src="-->
+<? //= get_template_directory_uri(); ?><!--/images/logo5.jpg">-->
 <!--                        </a>-->
 <!--                    </div>-->
 <!--                    <div class="brand d-table-cell">-->
 <!--                        <a href="#" class="image-link d-block">-->
-<!--                            <img width="100%" src="--><?//= get_template_directory_uri(); ?><!--/images/logo6.jpg">-->
+<!--                            <img width="100%" src="-->
+<? //= get_template_directory_uri(); ?><!--/images/logo6.jpg">-->
 <!--                        </a>-->
 <!--                    </div>-->
 <!--                </div>-->

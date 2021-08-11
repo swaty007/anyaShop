@@ -44,9 +44,10 @@
           right: -22px;
           display: block;
           z-index: 5;
+          top: -9px;
         }
         &:before {
-          top: -8px;
+          top: 6px;
           //z-index: 200;
           clip-path: polygon(52% 48%,0 100%,100% 100%);
           position: absolute;
@@ -57,7 +58,7 @@
           transform: rotate(-90deg);
           border: 12px solid transparent;
           background: #111;
-          z-index: 11;
+          z-index: 9;
         }
       }
       .sub-menu {

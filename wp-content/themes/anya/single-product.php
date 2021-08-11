@@ -18,7 +18,18 @@ $additional_materials = get_post_meta($post->ID, 'additional_materials', true); 
 $vc_icon = get_post_meta($post->ID, 'vc_icon', true);
 $usd_icon = get_post_meta($post->ID, 'usd_icon', true);
 $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
-//woocommerce_template_loop_add_to_cart();
+
+$attributes = [];
+foreach ($product->get_attributes() as $attribute) {
+    $attr_name = wc_attribute_label($attribute->get_name(), $product);
+    $attributes[$attr_name] = [];
+    foreach ($attribute->get_options() as $option) {
+        $attributes[$attr_name][] = get_term($option, $attribute->get_name())->name;
+    }
+}
+$attributes_column_size = 8;
+$attributes_count = count($attributes);
+$attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2);
 //the_content();
 ?>
 
@@ -106,7 +117,7 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                         <i class="fas fa-balance-scale"></i>
                         Сравнить
                     </button>
-<!--                    <button class="transition-3s like-btn"><i class="far fa-heart"></i> Добавить в избранное</button>-->
+                    <!--                    <button class="transition-3s like-btn"><i class="far fa-heart"></i> Добавить в избранное</button>-->
                     <div class="status">
                         <?= wc_get_stock_html($product); ?>
                     </div>
@@ -261,80 +272,82 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h3>Характеристики и особенности</h3>
+                                <h3 class="specifications__title">Характеристики и особенности</h3>
                             </div>
                             <div class="col-md-4">
                                 <ul class="specifications-list">
-                                    <li>
-                                        <h3 class="specifications-title">Фокусное расстояние:</h3>
-                                        <h3 class="specifications-value">24-70</h3>
-                                    </li>
-                                    <li>
-                                        <h3 class="specifications-title">Максимальная диафрагма:</h3>
-                                        <h3 class="specifications-value">F/2.8</h3>
-                                    </li>
-                                    <li>
-                                        <h3 class="specifications-title">Минимальное расстояние фокусировки:</h3>
-                                        <h3 class="specifications-value">0,38 мм</h3>
-                                    </li>
-                                    <li>
-                                        <h3 class="specifications-title">Максимальное отношение увеличения:</h3>
-                                        <h3 class="specifications-value">1:5</h3>
-                                    </li>
-                                    <li>
-                                        <h3 class="specifications-title">Размер светофильтра:</h3>
-                                        <h3 class="specifications-value">82 мм</h3>
-                                    </li>
-                                    <div class="full-specifications">
+                                    <?php
+                                    $count = 0;
+                                    foreach ($attributes as $label => $attributeArr):
+                                        if ($count >= ceil($attributes_column_size / 2)) continue;
+                                        ?>
                                         <li>
-                                            <h3 class="specifications-title">Максимальное отношение увеличения:</h3>
-                                            <h3 class="specifications-value">1:5</h3>
+                                            <h3 class="specifications-title"><?= $label; ?>:</h3>
+                                            <?php foreach ($attributeArr as $attribute): ?>
+                                                <p class="specifications-value"><?= $attribute; ?></p>
+                                            <?php endforeach; ?>
                                         </li>
-                                        <li>
-                                            <h3 class="specifications-title">Размер светофильтра:</h3>
-                                            <h3 class="specifications-value">82 мм</h3>
-                                        </li>
-                                        <li>
-                                            <h3 class="specifications-title">Минимальное расстояние фокусировки:</h3>
-                                            <h3 class="specifications-value">0,38 мм</h3>
-                                        </li>
-                                    </div>
+                                        <?php unset($attributes[$label]);
+                                        $count++; endforeach; ?>
+                                    <?php if ($attributes_count > $attributes_column_size): ?>
+                                        <div class="full-specifications">
+                                            <ul>
+                                                <?php
+                                                $count = 0;
+                                                foreach ($attributes as $label => $attributeArr):
+                                                    if ($count >= $attributes_count_more) continue;
+                                                    ?>
+                                                    <li>
+                                                        <h3 class="specifications-title"><?= $label; ?>:</h3>
+                                                        <?php foreach ($attributeArr as $attribute): ?>
+                                                            <p class="specifications-value"><?= $attribute; ?></p>
+                                                        <?php endforeach; ?>
+                                                    </li>
+                                                    <?php unset($attributes[$label]);
+                                                    $count++; endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    <?php endif; ?>
                                 </ul>
-                                <button class="view-full-specifications transition-3s">Все характеристики</button>
-                                <button class="transition-3s"><i class="fas fa-balance-scale"></i> Сравнить</button>
+                                <?php if ($attributes_count > $attributes_column_size): ?>
+                                    <button class="view-full-specifications transition-3s">Все характеристики</button>
+                                <?php endif; ?>
+                                <!--                                <button class="transition-3s"><i class="fas fa-balance-scale"></i> Сравнить</button>-->
                             </div>
                             <div class="col-md-4">
                                 <ul class="specifications-list">
-                                    <li>
-                                        <h3 class="specifications-title">Группы / элементы:</h3>
-                                        <h3 class="specifications-value">12 / 17</h3>
-                                    </li>
-                                    <li>
-                                        <h3 class="specifications-title">Лепестки диафрагмы:</h3>
-                                        <h3 class="specifications-value">9</h3>
-                                    </li>
-                                    <li>
-                                        <h3 class="specifications-title">Угол обзора:</h3>
-                                        <h3 class="specifications-value">84°04'-34°21'</h3>
-                                    </li>
-                                    <li>
-                                        <h3 class="specifications-title">Минимальная диафрагма:</h3>
-                                        <h3 class="specifications-value">F/22</h3>
-                                    </li>
-                                    <li>
-                                        <h3 class="specifications-title">Вес:</h3>
-                                        <h3 class="specifications-value">Canon - 905 г <br> Nikon - 900 г</h3>
-                                    </li>
-                                    <div class="full-specifications">
+                                    <?php
+                                    $count = 0;
+                                    foreach ($attributes as $label => $attributeArr):
+                                        if ($count >= ceil($attributes_column_size / 2)) continue;
+                                        ?>
                                         <li>
-                                            <h3 class="specifications-title">Минимальная диафрагма:</h3>
-                                            <h3 class="specifications-value">F/22</h3>
+                                            <h3 class="specifications-title"><?= $label; ?>:</h3>
+                                            <?php foreach ($attributeArr as $attribute): ?>
+                                                <p class="specifications-value"><?= $attribute; ?></p>
+                                            <?php endforeach; ?>
                                         </li>
-                                        <li>
-                                            <h3 class="specifications-title">Вес:</h3>
-                                            <h3 class="specifications-value">Canon - 905 г <br> Nikon - 900 г</h3>
-                                        </li>
-                                    </div>
+                                        <?php unset($attributes[$label]);
+                                        $count++; endforeach; ?>
+                                    <?php if ($attributes_count > $attributes_column_size): ?>
+                                        <div class="full-specifications">
+                                            <ul>
+                                                <?php
+                                                $count = 0;
+                                                foreach ($attributes as $label => $attributeArr):
+                                                    if ($count >= $attributes_count_more) continue;
+                                                    ?>
+                                                    <li>
+                                                        <h3 class="specifications-title"><?= $label; ?>:</h3>
+                                                        <?php foreach ($attributeArr as $attribute): ?>
+                                                            <p class="specifications-value"><?= $attribute; ?></p>
+                                                        <?php endforeach; ?>
+                                                    </li>
+                                                    <?php unset($attributes[$label]);
+                                                    $count++; endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                             <div class="col-md-4">
@@ -574,7 +587,7 @@ $eband_icon = get_post_meta($post->ID, 'eband_icon', true);
                                                     </a>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="buttons">
-<!--                                                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>-->
+                                                            <!--                                                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>-->
                                                             <button data-id="<?= $related_product; ?>"
                                                                     class="transition-3s compare-btn br_compare_button br_product_<?= $related_product; ?> <?= set_class_compare($related_product); ?>">
                                                                 <i class="fas fa-balance-scale"></i>

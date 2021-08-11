@@ -127,7 +127,7 @@
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 992px) {
 	header ul li.text-item,
 	header ul li.logo-item{
 		display: block !important;
@@ -274,7 +274,7 @@
 	}
 }
 /** Custom */
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 991px) {
 	.menu .content-wrapper .column .link-wrapper.pages-navigation{
     	display: block;
 	}	
