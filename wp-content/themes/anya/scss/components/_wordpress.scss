@@ -165,7 +165,7 @@
 .product-page .price-info .price, .product-fixed-menu .price {
   del {
     color: #848789;
-    font-family: Oswald;
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 17px;
     font-weight: 300;
     text-decoration: line-through;
@@ -175,4 +175,14 @@
   ins {
 
   }
+}
+
+
+.compare-btn.br_compare_added {
+  background: #4a41db!important;
+  color: #fff!important;
+}
+
+.woocommerce .woocommerce-ordering {
+  margin: 0!important;
 }

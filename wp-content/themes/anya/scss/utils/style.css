@@ -17,7 +17,7 @@ body.open-modal {
     overflow-y: hidden;
 }
 .btn{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     border: none;
     background: none;
     padding: 10px 22px;
@@ -63,7 +63,7 @@ body.open-modal {
     padding-bottom: 7px;    
     font-weight: 100;
     font-size: 13px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color:#161616;
     border:1px solid #D8DFE1;
 }
@@ -104,7 +104,7 @@ body.open-modal {
     list-style:none;
     border:1px solid #ccc;
     color: #5D6065;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 100;
     font-size: 12px;
     background-color:white;
@@ -123,7 +123,7 @@ body.open-modal {
 
 header{
     /*background: #EEEEEE;*/
-    background: #222330;
+    background: #fff;
     width: 100%;    
 }
 header .wrapper{
@@ -135,7 +135,7 @@ header ul li{
     padding: 12px 0px;
     /*color: #989797;*/
     color: #fff;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
 }
 header ul li.icon-item{
     font-size: 18px;
@@ -157,7 +157,7 @@ header ul li.icon-item.left-border{
 }
 header ul li.icon-item .icon{
     position: relative;
-    color: #fff;
+    color: #111111;
 }
 header ul li.icon-item .icon .counter{
     position: absolute;
@@ -201,7 +201,7 @@ header ul li.menu-item .icon span{
     height: 3px;
     width: 100%;
     /*background: #989797;*/
-    background: #fff;
+    background: #111111;
     border-radius: 9px;
     opacity: 1;
     left: 0;
@@ -246,6 +246,7 @@ header ul li.menu-item .text{
     margin-left: 12px;
     font-size: 14px;
     font-weight: bold;
+    color: #111111;
 }
 header ul li.text-item{
     margin-right: 20px;
@@ -260,7 +261,7 @@ header ul:last-of-type li.text-item{
 header ul li.text-item > a{
     font-size: 14px;
     /*color: #848789;*/
-    color: #fff;
+    color: #111111;
 }
 header ul li.logo-item > a{
     font-size: 20px;
@@ -322,7 +323,7 @@ header.diller ul li.icon-item .icon .counter{
     color: #4A41DB;
     font-size: 16px;
     font-weight: 600;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
 }
 .menu .content-wrapper .column .link-wrapper.pages-navigation{
     display: none;
@@ -363,7 +364,7 @@ header.diller ul li.icon-item .icon .counter{
     overflow: hidden;
 }
 .menu .content-wrapper .column .link-wrapper .under-list li > a{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     color: #848789;
 }
@@ -426,7 +427,7 @@ header.diller ul li.icon-item .icon .counter{
     height: 52px;
     left: 38px;
     top: 50px; 
-    font-family: 'OpenSans';      
+    font-family: 'Montserrat', Oswald, OpenSans;      
 }
 .mobile-menu .header .close-btn{
     font-size: 33px;
@@ -456,7 +457,7 @@ header.diller ul li.icon-item .icon .counter{
     color: #4A41DB;
     font-size: 18px;
     font-weight: 600;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
 }
 .mobile-menu .menu-list .link .title .open-list-btn i{
     color: #4A41DB;
@@ -474,7 +475,7 @@ header.diller ul li.icon-item .icon .counter{
     padding: 5px 38px;
 }
 .mobile-menu .menu-list .under-list li >a{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     color: #848789;
 }
@@ -502,7 +503,7 @@ header.diller ul li.icon-item .icon .counter{
     color: #5D6065;
     text-transform: uppercase;
     text-align: center;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -539,7 +540,7 @@ header.diller ul li.icon-item .icon .counter{
 }
 .products-table-catalog .product{
     padding: 0px 15px;
-    margin-bottom: 40px;
+    margin-bottom: 40px!important;
 }
 .products-table-catalog .product .link{
     display: block;
@@ -552,6 +553,8 @@ header.diller ul li.icon-item .icon .counter{
 }
 .products-table-catalog .product .image-wrapper img{
     max-width: 100%;
+    height: 300px;
+    object-fit: cover;
 }
 .products-table-catalog .product .info{
     background: #fff;
@@ -562,13 +565,13 @@ header.diller ul li.icon-item .icon .counter{
     overflow: hidden;
 }
 .products-table-catalog .product .info .title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 20px;
 }
 .products-table-catalog .product .info .price{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #4A41DB;
     font-weight: 400;
     font-size: 20px;    
@@ -581,7 +584,7 @@ header.diller ul li.icon-item .icon .counter{
     padding-left: 17px;
     list-style-type: square;
     color: #848789;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
 }
 .products-table-catalog .product .info .advantages > ul > li{
@@ -599,12 +602,14 @@ header.diller ul li.icon-item .icon .counter{
     /*color: #4A41DB;*/
     padding: 10px 13px;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
     /*background: #fff;*/
     border:none;
-    color: #fff;
-    background: #4A41DB;
+    color: #4a41db;
+    background: #fff;
+    width: auto;
+    border: 1px solid #4a41db;
 /*    background-image: -webkit-linear-gradient(to right, #fc00ff 0%, #00dbde 100%);
     background-image: -o-linear-gradient(to right, #fc00ff 0%, #00dbde 100%);
     background-image: -moz-linear-gradient(to right, #fc00ff 0%, #00dbde 100%);     
@@ -635,7 +640,7 @@ header.diller ul li.icon-item .icon .counter{
     margin: 110px 0px 70px;
 }
 .banners .banners-title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 21px;
     font-weight: 200;
     margin-bottom: 35px;
@@ -743,12 +748,12 @@ header.diller ul li.icon-item .icon .counter{
     opacity: 0.9;
 }
 .banners .banners-wrapper .banner a .description h1{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 400;
     font-size: 23px;
 }
 .banners .banners-wrapper .banner a .description p{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     margin-top: 10px;
 }
@@ -771,7 +776,7 @@ header.diller ul li.icon-item .icon .counter{
     text-transform: uppercase;
 }
 .timer-offer .offer-wrapper h1{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 32px;    
@@ -780,7 +785,7 @@ header.diller ul li.icon-item .icon .counter{
 .timer-offer .offer-wrapper h4,
 .timer-offer .offer-wrapper p{
     color: #848789;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
 }
 .timer-offer .offer-wrapper .timer{
@@ -797,12 +802,12 @@ header.diller ul li.icon-item .icon .counter{
     border-right: 1px solid #66696D;
 }
 .timer-offer .offer-wrapper .timer .date{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-size: 29px;
 }
 .timer-offer .offer-wrapper .timer .title{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #4A41DB;
     font-size: 14px;
     text-transform: uppercase;
@@ -812,7 +817,7 @@ header.diller ul li.icon-item .icon .counter{
     padding: 10px 16px;
     border-radius: 2px;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
     border: none;
     color: #fff;
@@ -833,12 +838,12 @@ header.diller ul li.icon-item .icon .counter{
     background: #fff;    
 }
 .subscription .title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 20px;
     color: #161616;    
 }
 .subscription .text{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     color: #a0a0a0;
     font-weight: 100;
@@ -851,7 +856,7 @@ header.diller ul li.icon-item .icon .counter{
     font-size: 12px;
     width: 300px;
     color: #4A41DB;
-    font-family: 'OpenSans';    
+    font-family: 'Montserrat', Oswald, OpenSans;    
 }
 .subscription input:hover{
     border-color: #4A41DB;
@@ -867,7 +872,7 @@ header.diller ul li.icon-item .icon .counter{
 
 footer{
     /*background: #EEEEEE;*/
-    background: #222330;
+    background: #111111;
     padding-top: 60px;
 }
 footer .container{
@@ -881,14 +886,14 @@ footer .title{
     text-transform: uppercase;
     font-weight: 600;
     margin-bottom: 12px;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
 }
 footer .address{
     line-height: 20px;
     font-size: 13px;
     /*color: #848789;    */
     color: #fff;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
 }
 footer .links li{
     margin-bottom: 5px;    
@@ -898,7 +903,7 @@ footer .links li a{
     font-size: 13px;
     /*color: #848789;  */
     color: #fff;
-    font-family: 'OpenSans';      
+    font-family: 'Montserrat', Oswald, OpenSans;      
 }
 footer .links li a:hover {
     border-bottom: 1px solid #848789;
@@ -933,7 +938,7 @@ footer .copyright{
     font-size: 13px;
     /*color: #848789;  */
     color: #fff;
-    font-family: 'Oswald';       
+    font-family: 'Montserrat', Oswald, OpenSans;       
     border-top: 1px solid #CED5D7;
     margin-top: 85px;
     padding: 18px 0px;
@@ -964,13 +969,13 @@ footer.diller .copyright{
 .catalog-way .way-name h1{
     font-size: 36px;
     font-weight: 100;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #fff;
 }
 .catalog-way .way-name h3{
     font-size: 17px;
     font-weight: 400;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #fff;
     margin-top: 15px;
 }
@@ -999,7 +1004,7 @@ footer.diller .copyright{
    margin-top: 25px;
 }
 .catalog-filters-menu .filters-menu .products-count{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 15px;
     color: #161616;
 }
@@ -1018,7 +1023,7 @@ footer.diller .copyright{
     padding-right: 35px;
     font-weight: 100;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;  
     margin-right: 25px;  
     position: relative;
@@ -1043,7 +1048,7 @@ footer.diller .copyright{
     padding: 8px 20px;
     font-weight: 100;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
     margin-right: 15px;  
 }
@@ -1070,7 +1075,7 @@ footer.diller .copyright{
     margin-bottom: 30px;
 }
 .catalog-filters-content .filter-wrapper .title{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     font-weight: 600;
     color: #5D6065;
@@ -1090,7 +1095,7 @@ footer.diller .copyright{
 }
 .catalog-filters-content .filters .filter-wrapper .block{
     display: inline-block;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     background: #fff;
     color: #161616;
@@ -1129,7 +1134,7 @@ footer.diller .copyright{
 .catalog-filters-content .filters .filter-wrapper .checker .label{
     float: left;
     color: #161616;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 15px;
     margin-top: 2px;
 }
@@ -1146,12 +1151,12 @@ footer.diller .copyright{
 .product-fixed-menu .product-title{
     font-size: 26px;
     margin-left: 20px;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;    
 }
 .product-fixed-menu .price{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 24px;
@@ -1174,7 +1179,7 @@ footer.diller .copyright{
     padding: 14px 30px;
     font-weight: 100;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
 }
 .product-fixed-menu .buy-btn:hover{
@@ -1188,7 +1193,7 @@ footer.diller .copyright{
 }
 .product-page .back-link{
     color: #848789;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 13px;
     text-transform: uppercase;
 }
@@ -1196,7 +1201,7 @@ footer.diller .copyright{
     font-size: 18px;
 }
 .product-page .product-title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 27px; 
@@ -1216,7 +1221,7 @@ footer.diller .copyright{
     display: none;
 }
 .product-page .additional-options .option-wrapper h3{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 18px;
     letter-spacing: 1px;
     font-weight: 300;
@@ -1225,7 +1230,7 @@ footer.diller .copyright{
 }
 .product-page .additional-options .option-wrapper ul > li{
     display: inline;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 16px;
     color: #848789;    
     font-weight: 100;
@@ -1240,21 +1245,21 @@ footer.diller .copyright{
     margin-right: 0px;
 }
 .product-page .price-info .price{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 25px;
 }
 .product-page .price-info .status{
     color: #7bd198;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 17px;
     margin: 20px 0px 0px 6px;
     font-weight: 400;
 }
 .product-page .price-info .last-price{
     color: #848789;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 17px;
     font-weight: 300;
     text-decoration: line-through;
@@ -1264,7 +1269,7 @@ footer.diller .copyright{
 .product-page .price-info .discount-percent{
     background: #161616;
     color: #fff;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 12px;
     border-radius: 3px;
     padding: 2px 10px;
@@ -1284,7 +1289,7 @@ footer.diller .copyright{
 }
 .product-page .amount-checker .amount-value,
 .basket .wrapper .amount-checker .amount-value{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 16px;  
@@ -1297,7 +1302,7 @@ footer.diller .copyright{
     padding: 14px 50px;
     font-weight: 100;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
 /*    background-image: -webkit-linear-gradient(to right, #00C9FF 0%, #92FE9D 51%, #00C9FF 100%);
     background-image: -o-linear-gradient(to right, #00C9FF 0%, #92FE9D 51%, #00C9FF 100%);
@@ -1320,11 +1325,14 @@ footer.diller .copyright{
 .product-page .price-info .like-btn{
     background: none;
     border: none;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 13px;
     font-weight: 600;
-    color: #848789;    
+    color: #848789;
     cursor: pointer;
+    width: auto;
+    padding: 4px 5px;
+    margin-top: 0;
 }
 .product-page .price-info .compare-btn i,
 .product-page .price-info .like-btn i{
@@ -1359,7 +1367,7 @@ footer.diller .copyright{
 .product-fixed-menu .product-menu .anchor-link-menu .link{
     margin-right: 40px;
     padding: 0px 5px 8px 5px;      
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     font-weight: 200;
     cursor: pointer; 
@@ -1382,7 +1390,7 @@ footer.diller .copyright{
 }
 .product-page .product-menu ul li a,
 .product-fixed-menu .product-menu ul li a{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     font-weight: 200;
     color: #848789;
@@ -1404,10 +1412,10 @@ footer.diller .copyright{
     margin-bottom: 100px;
 }
 .product-page .image-slider .active-slide img{
-    width: 30%;
+    /*width: 30%;*/
 }
 .product-page .image-slider .active-slide h1{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 18px;
@@ -1442,6 +1450,7 @@ footer.diller .copyright{
     top: 30%;
     width: 100%;
     padding: 0 30px;
+    z-index: 1;
 }
 .product-page .image-slider .navigation button{
     background: rgba(0, 0, 0, 0.4);
@@ -1455,7 +1464,7 @@ footer.diller .copyright{
     margin-bottom: 80px;
 }
 .product-page .video h1, .product-page .video h2, .product-page .video h3{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 24px;
@@ -1465,7 +1474,7 @@ footer.diller .copyright{
     margin-bottom: 120px;
 }
 .product-page .btn-text h1, .product-page .btn-text h2, .product-page .btn-text h3{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 20px;
@@ -1475,7 +1484,7 @@ footer.diller .copyright{
     border: none;
     padding: 12px 30px;
     font-size: 15px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 100;
     color: #fff;
     border-radius: 2px;
@@ -1503,7 +1512,7 @@ footer.diller .copyright{
     margin-right: 40px;
 }
 .product-page .image-text .text-wrapper h1{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 22px;
@@ -1511,7 +1520,7 @@ footer.diller .copyright{
     margin-top: 30px;
 }
 .product-page .image-text .text-wrapper p{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 14px;
@@ -1529,7 +1538,7 @@ footer.diller .copyright{
     cursor: pointer; 
     padding: 9px 20px;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 100;
     color: #fff;
     border-radius: 2px;
@@ -1540,7 +1549,7 @@ footer.diller .copyright{
     margin: 150px 0;
 }
 .product-page .specifications h1{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 26px;
@@ -1550,7 +1559,7 @@ footer.diller .copyright{
     margin-bottom: 40px;
 }
 .product-page .specifications .specifications-list .specifications-title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 15px;
     letter-spacing: 1px;
     font-weight: 400;
@@ -1558,7 +1567,7 @@ footer.diller .copyright{
     margin-bottom: 10px;
 }
 .product-page .specifications .specifications-list .specifications-value{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     letter-spacing: 1px;
     font-weight: 500;
@@ -1574,7 +1583,7 @@ footer.diller .copyright{
     background: #009bf5;
     padding: 9px 20px;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 100;
     color: #fff;
     border-radius: 2px;
@@ -1601,19 +1610,19 @@ footer.diller .copyright{
 }
 .product-page .specifications .feature .title{
     color: #161616;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 500;
     font-size: 16px;
     margin: 5px 0 12px;
 }
 .product-page .specifications .feature .text{
     color: #a9a9a9;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 400;
     font-size: 13px;
 }
 .product-page .materials h1{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 25px;
@@ -1623,7 +1632,7 @@ footer.diller .copyright{
     border-bottom: 3px solid #CED5D7;
 }
 .product-page .materials table thead td{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 15px;
     letter-spacing: 1px;
     font-weight: 400;
@@ -1635,7 +1644,7 @@ footer.diller .copyright{
     padding-left: 25px;
 }
 .product-page .materials table tbody td{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     letter-spacing: 1px;
     font-weight: 500;
@@ -1654,7 +1663,7 @@ footer.diller .copyright{
     margin-top: 180px;
 }
 .product-page .related-products h1{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 25px;
@@ -1664,6 +1673,12 @@ footer.diller .copyright{
 .account-wish-list .products-table-catalog .product .image-wrapper img,
 .account-order-details .products-table-catalog .product .image-wrapper img{
     width: 200px;
+}
+@media(max-width: 767px) {
+    .account-order-details .products-table-catalog .product .image-wrapper img, .account-wish-list .products-table-catalog .product .image-wrapper img, .product-page .related-products .products-table-catalog .product .image-wrapper img {
+        width: 100%;
+        object-fit: contain;
+    }
 }
 .products-table-catalog .product .info{
     padding: 20px 15px 14px;
@@ -1707,13 +1722,13 @@ footer.diller .copyright{
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
 }
 .form-wrapper form h1{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 25px;    
 }
 .form-wrapper form p{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     font-weight: 200;
     color: #848789;
@@ -1736,7 +1751,7 @@ footer.diller .copyright{
     font-size: 12px;
     width: 100%;
     color: #4A41DB;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
 }
 .form-wrapper form .form-group input:hover,
 .form-wrapper form .form-group input:focus,
@@ -1761,7 +1776,7 @@ footer.diller .copyright{
     border-left: 1px solid #D8DFE1;    
 }
 .form-wrapper form .form-group .tooltip{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 11px;
     font-weight: 100;
     color: #848789;
@@ -1802,7 +1817,7 @@ footer.diller .copyright{
 }
 .form-wrapper form .form-group .checker .label{
     float: left;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 12px;
     font-weight: 100;
     color: #848789;
@@ -1820,7 +1835,7 @@ footer.diller .copyright{
     background-size: 200% auto;  */  
     padding: 12px 0px;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 100;
     color: #fff;
     width: 100%;
@@ -1828,7 +1843,7 @@ footer.diller .copyright{
     cursor: pointer;
 }
 .form-wrapper form .form-group.social-buttons p{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 13px;
     font-weight: 200;
     color: #848789;
@@ -1887,7 +1902,7 @@ footer.diller .copyright{
     padding: 30px 0;
 }
 .account-menu .tab .wrapper .title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #848789;
     font-size: 12px;
     letter-spacing: 0.5px;
@@ -1917,14 +1932,14 @@ footer.diller .copyright{
     text-align: right;
 }
 .account-orders-history .order .param{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     letter-spacing: 1px;
     font-weight: 400;
     color: #161616;
 }
 .account-orders-history .order .value{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     letter-spacing: 1px;
     font-weight: 500;
@@ -1940,7 +1955,7 @@ footer.diller .copyright{
     background-size: 200% auto;*/
     padding: 5px 16px;
     font-size: 13px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 100;
     color: #fff;
     border-radius: 1px;
@@ -1956,7 +1971,7 @@ footer.diller .copyright{
 }
 .account-orders-history .total-info .bought-sum,
 .account-order-details .total-info .bought-sum{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 15px;
     color: #161616;
 }
@@ -1967,7 +1982,7 @@ footer.diller .copyright{
 .account-order-details .total-info .bought-sum .currency{
     color: #00d697;
     font-weight: bold;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
 }
 .account-orders-history .total-info .bought-sum .sum ,
 .account-order-details .total-info .bought-sum .sum{
@@ -2029,7 +2044,7 @@ footer.diller .copyright{
 }
 .basket .wrapper h1,
 .woocommerce-page .wrapper h1 {
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 27px; 
@@ -2047,7 +2062,7 @@ footer.diller .copyright{
 }
 .basket .wrapper .title,
 .woocommerce-page .wrapper .title {
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 20px;
@@ -2055,7 +2070,7 @@ footer.diller .copyright{
 }
 .basket .wrapper .price,
 .woocommerce-page .wrapper .price {
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #4A41DB;
     font-weight: 400;
     font-size: 20px;    
@@ -2092,7 +2107,7 @@ footer.diller .copyright{
 .woocommerce-page .wrapper .order-summary .order-text {
     max-width: 55%;
     color: #a9a9a9;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 400;
     font-size: 13px;    
 }
@@ -2102,14 +2117,14 @@ footer.diller .copyright{
 }
 .basket .wrapper .order-summary .order-info .total-sum,
 .woocommerce-page .wrapper .order-summary .order-info .total-sum {
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 19px;
 }
 .basket .wrapper .order-summary .order-info .sum,
 .woocommerce-page .wrapper .order-summary .order-info .sum {
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #4A41DB;
     font-weight: 400;
     font-size: 20px;
@@ -2126,7 +2141,7 @@ footer.diller .copyright{
     border: none;
     padding: 12px 34px;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 100;
     color: #fff;
     border-radius: 3px;
@@ -2184,7 +2199,7 @@ footer.diller .copyright{
     -ms-overflow-style: -ms-autohiding-scrollbar;    
 }
 .compare .wrapper .compare-products .compare-params .products-count{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 46px;
     color: #4A41DB;
     font-weight: 400;
@@ -2196,7 +2211,7 @@ footer.diller .copyright{
     min-width: 362px;
 }
 .compare .wrapper .compare-products .compare-params .count-text{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 18px;
@@ -2234,7 +2249,7 @@ footer.diller .copyright{
     font-size: 18px;
 }
 .compare .wrapper .compare-products .compare-params .param{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 15px;
     letter-spacing: 1px;
     font-weight: 400;
@@ -2262,21 +2277,21 @@ footer.diller .copyright{
     font-size: 18px;
 }
 .compare .wrapper .compare-products .compare-product .category-name{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     font-weight: 200;
     color: #848789;
     white-space: nowrap;    
 }
 .compare .wrapper .compare-products .compare-product .title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 500;
     font-size: 17px;
     margin: 20px 0px 15px;
 }
 .compare .wrapper .compare-products .compare-product .price{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #4A41DB;
     font-weight: 400;
     font-size: 20px;
@@ -2288,7 +2303,7 @@ footer.diller .copyright{
     height: 60px;
 }
 .compare .wrapper .compare-products .compare-product .param{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     letter-spacing: 1px;
     font-weight: 500;
@@ -2309,7 +2324,7 @@ footer.diller .copyright{
     padding: 14px 30px;
     font-weight: 100;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
 }
 .compare .wrapper .compare-products .compare-product .param .buy-btn:hover{
@@ -2329,7 +2344,7 @@ footer.diller .copyright{
     background: #FFF;
 }
 .contact .wrapper h1{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 24px;
@@ -2344,7 +2359,7 @@ footer.diller .copyright{
     color: #4A41DB;    
 }
 .contact .wrapper .title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 15px;
     letter-spacing: 1px;
     font-weight: 500;
@@ -2352,7 +2367,7 @@ footer.diller .copyright{
     margin: 20px 0 15px;
 }
 .contact .wrapper .text{
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     font-weight: 200;
     color: #848789;    
@@ -2381,13 +2396,13 @@ footer.diller .copyright{
     padding: 0px 30px;
 }
 .d-catalog .wrapper .block-title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 19px;    
 }
 .d-catalog .wrapper .block-small-title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 16px;
@@ -2439,7 +2454,7 @@ footer.diller .copyright{
 }
 .d-catalog .wrapper .catagories-tabs .tab .title{
     text-align: center;
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 17px;
     font-weight: 100;
     margin-top: 10px;
@@ -2517,7 +2532,7 @@ footer.diller .copyright{
     font-size: 18px;
 }
 .d-catalog .wrapper .products-table .products-count{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 15px;
     color: #161616;
     /*margin-left: 25px;*/
@@ -2533,7 +2548,7 @@ footer.diller .copyright{
     padding: 6px 18px;
     font-weight: 100;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
     margin-top: 50px;
 }
@@ -2548,7 +2563,7 @@ footer.diller .copyright{
 .d-catalog .wrapper .products-table .currency,
 .d-catalog .wrapper .invoice-table .currency,
 .catalog-filters-menu .filters-menu .currency{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
 }
 .d-catalog .wrapper .products-table .currency-checker,
 .d-catalog .wrapper .invoice-table .currency-checker,
@@ -2587,7 +2602,7 @@ footer.diller .copyright{
     color: #00d697;
 }
 .d-catalog .wrapper .products-table .bought-sum{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 15px;
     color: #161616;
     margin-left: 25px;    
@@ -2695,7 +2710,7 @@ footer.diller .copyright{
 }
 .d-catalog .wrapper .products-table .table table thead tr td,
 .d-catalog .wrapper .invoice-table table thead tr td{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 18px;
@@ -2731,7 +2746,7 @@ footer.diller .copyright{
     margin-top: 40px;
 }
 .d-catalog .wrapper .invoice-table .total-info .info .title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 18px;
     color: #161616;
 }
@@ -2758,7 +2773,7 @@ footer.diller .copyright{
     opacity: 0;
 }
 .d-catalog .wrapper .invoice-table table tbody tr .number{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     letter-spacing: 1px;
     font-weight: 400;
@@ -2766,7 +2781,7 @@ footer.diller .copyright{
 }
 .d-catalog .wrapper .products-table .table table tbody tr .title,
 .d-catalog .wrapper .invoice-table table tbody tr .title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 16px;
     letter-spacing: 1px;
     font-weight: 400;
@@ -2775,7 +2790,7 @@ footer.diller .copyright{
 }
 .d-catalog .wrapper .products-table .table table tbody tr .price,
 .d-catalog .wrapper .invoice-table table tbody tr .price{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #b5bdd1;
     font-weight: 400;
     font-size: 17px;
@@ -2796,13 +2811,13 @@ footer.diller .copyright{
 }
 .d-catalog .wrapper .products-table .table table tbody tr .amount .amount-checker .amount-value,
 .d-catalog .wrapper .invoice-table table tbody tr .amount .amount-checker .amount-value{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 16px;
 }
 .d-catalog .wrapper .products-table .table table tbody tr .status span{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 14px;
     font-weight: 400;
     padding: 2px 14px 5px;
@@ -2885,7 +2900,7 @@ footer.diller .copyright{
     height: 65px;
 }
 .diller-catalog .wrapper .catalog-item .title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 20px;
@@ -2909,7 +2924,7 @@ footer.diller .copyright{
     width: 100%;
 }
 .diller-products-table .table table thead td{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
     font-size: 19px;
@@ -2922,7 +2937,7 @@ footer.diller .copyright{
     height: 65px;
 }
 .diller-products-table .table table tbody td.title{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     font-size: 16px;
     letter-spacing: 1px;
     font-weight: 400;
@@ -2931,7 +2946,7 @@ footer.diller .copyright{
 }
 .diller-products-table .table table tbody td.price,
 .diller-products-table .table table tbody td.amount{
-    font-family: 'Oswald';
+    font-family: 'Montserrat', Oswald, OpenSans;
     color: #a9a9a9;
     font-weight: 400;
     font-size: 17px;
@@ -2949,7 +2964,7 @@ footer.diller .copyright{
     padding: 6px 14px;
     font-weight: 100;
     font-size: 14px;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     cursor: pointer;
 }
 .diller-products-table .table table tbody td button:hover{
@@ -3219,7 +3234,7 @@ footer.diller .copyright{
 
 .irs-min,
 .irs-max {
-  font-family: 'OpenSans';
+  font-family: 'Montserrat', Oswald, OpenSans;
   color: #161616;
   font-size: 12px;
   line-height: 1.333;
@@ -3240,7 +3255,7 @@ footer.diller .copyright{
 .irs-to,
 .irs-single {
   color: #161616;
-  font-family: 'OpenSans';
+  font-family: 'Montserrat', Oswald, OpenSans;
   font-size: 12px;
   line-height: 1.333;
   text-shadow: none;
@@ -3281,7 +3296,7 @@ footer.diller .copyright{
     font-size: 12px;
     padding: 10px 15px;
     text-align: center;
-    font-family: 'OpenSans';
+    font-family: 'Montserrat', Oswald, OpenSans;
     background: #fff;
     color: #161616;
     border: none;    
