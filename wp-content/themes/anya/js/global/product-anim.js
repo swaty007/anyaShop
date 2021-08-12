@@ -80,21 +80,20 @@ $(document).on("click", ".view-full-specifications", function () {
         $(this).removeClass('active');
         $(".product-page .specifications .full-features").slideUp();
         $(".product-page .specifications .full-specifications").slideUp();
-        $(this).text("Все характеристики");
         $(this).css("margin-top", 35 + "px");
-        $('html, body').animate({
-            scrollTop: $(".product-page .specifications").offset().top - 100
-        }, 1000);
+        // $('html, body').animate({
+        //     scrollTop: $(".product-page .specifications").offset().top - 100
+        // }, 1000);
     } else {
         $(this).addClass('active');
         $(".product-page .specifications .full-features").slideDown();
         $(".product-page .specifications .full-specifications").slideDown();
-        $(this).text("Свернуть");
         $(this).css("margin-top", 100 + "px");
-        $('html, body').animate({
-            scrollTop: $(".product-page .specifications").offset().top + 150
-        }, 1000);
+        // $('html, body').animate({
+        //     scrollTop: $(".product-page .specifications").offset().top + 150
+        // }, 1000);
     }
+    $(".product-page .specifications .view-full-specifications span").toggleClass('d-none')
 });
 
 

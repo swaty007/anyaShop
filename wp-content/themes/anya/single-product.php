@@ -310,7 +310,14 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                     <?php endif; ?>
                                 </ul>
                                 <?php if ($attributes_count > $attributes_column_size): ?>
-                                    <button class="view-full-specifications transition-3s">Все характеристики</button>
+                                    <button class="view-full-specifications transition-3s">
+                                        <span>
+                                            Все характеристики
+                                        </span>
+                                        <span class="d-none">
+                                            Свернуть
+                                        </span>
+                                    </button>
                                 <?php endif; ?>
                                 <!--                                <button class="transition-3s"><i class="fas fa-balance-scale"></i> Сравнить</button>-->
                             </div>
