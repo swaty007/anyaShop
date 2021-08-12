@@ -33,7 +33,6 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
 //the_content();
 ?>
 
-
 <section class="product-fixed-menu transition-3s">
     <div class="container content-container">
         <div class="row">
@@ -264,7 +263,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                 <div class="btn-text">
                                     <div class="container">
                                         <div class="row d-flex justify-content-center">
-                                            <div class="col-md-12 text-left" style="white-space: pre-line;">
+                                            <div class="col-md-12 text-left" style="white-space: pre-line;line-height: 24px;">
                                                 <?= get_post($post->ID)->post_content; ?>
                                             </div>
                                         </div>

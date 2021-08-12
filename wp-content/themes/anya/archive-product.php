@@ -4,7 +4,7 @@ get_header();
 <?php
 global $wp_query;
 $term = get_queried_object();
-$term_id = empty($term) ? NULL : $term->term_id;
+$term_id = empty($term->term_id) ? NULL : $term->term_id;
 $term_image_url = wp_get_attachment_url(get_term_meta($term_id, 'thumbnail_id', true));
 $parents = [];
 if (!empty($term->parent)) {

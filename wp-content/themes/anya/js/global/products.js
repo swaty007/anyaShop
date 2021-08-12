@@ -15,9 +15,9 @@
 	}
 	function setProductsSimilarHeight( selector ){
 		elemNumber = getBiggestHeightProductNumber(selector+" .info");
-		var titleHeight = $(selector+":nth-child("+elemNumber+")"+" .info").find(".title").outerHeight();
+		var titleHeight = $(selector+":nth-child("+elemNumber+")"+" .info").find(".title").innerHeight();
 		var advantagesHeight = $(selector+":nth-child("+elemNumber+")"+" .info").find(".advantages").outerHeight();
 		console.log(advantagesHeight)
-		$(selector+" .info").find(".title").css("height",titleHeight);
+		// $(selector+" .info").find(".title").css("height",titleHeight);
 		$(selector+" .info").find(".advantages").css("height",advantagesHeight);
 	}

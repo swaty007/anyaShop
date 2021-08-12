@@ -52,7 +52,10 @@ if (!function_exists('itea_setup')) :
             'menu-header' => esc_html__('Header', 'itea'),
         ));
         register_nav_menus(array(
-            'menu-footer' => esc_html__('Footer', 'itea'),
+            'menu-footer-navigation' => esc_html__('Footer Navigation', 'itea'),
+        ));
+        register_nav_menus(array(
+            'menu-footer-catalog' => esc_html__('Footer Catalog', 'itea'),
         ));
 //        register_nav_menus(array(
 //            'menu-support' => esc_html__('Client Support', 'itea'),

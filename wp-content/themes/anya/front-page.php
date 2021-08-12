@@ -87,7 +87,7 @@ get_header();
                         <div class="info">
                             <div class="title"><?php the_title(); ?></div>
                             <div class="advantages">
-                                <?php wc_display_product_attributes($product); ?>
+<!--                                --><?php //wc_display_product_attributes($product); ?>
                             </div>
                             <div class="price">
                                 <?= $product->get_price_html(); ?>
