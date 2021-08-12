@@ -551,6 +551,9 @@ header.diller ul li.icon-item .icon .counter{
 }
 .products-table-catalog .product .image-wrapper{
     background: #F8F8F8;
+    border-right: 1px solid #d8dfe1;
+    border-left: 1px solid #d8dfe1;
+    border-top: 1px solid #d8dfe1;
 }
 .products-table-catalog .product .image-wrapper img{
     max-width: 100%;
