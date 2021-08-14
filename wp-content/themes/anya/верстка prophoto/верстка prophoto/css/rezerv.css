@@ -556,8 +556,8 @@ header ul li.logo-item > a{
     margin-left: 5px;
     padding: 10px 16px;
 }
-.products-table-catalog .product .info .buttons button.compare-btn,
-.products-table-catalog .product .info .buttons button.like-btn{
+.products-table-catalog .product .info .buttons .compare-btn,
+.products-table-catalog .product .info .buttons .like-btn{
     margin-left: 2px;
 }
 

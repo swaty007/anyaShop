@@ -614,6 +614,7 @@ header.diller ul li.icon-item .icon .counter{
     background: #fff;
     width: auto;
     border: 1px solid #4a41db;
+    line-height: 18px;
 /*    background-image: -webkit-linear-gradient(to right, #fc00ff 0%, #00dbde 100%);
     background-image: -o-linear-gradient(to right, #fc00ff 0%, #00dbde 100%);
     background-image: -moz-linear-gradient(to right, #fc00ff 0%, #00dbde 100%);     
@@ -635,8 +636,8 @@ header.diller ul li.icon-item .icon .counter{
     margin-left: 20px;
     padding: 10px 16px;
 }
-.products-table-catalog .product .info .buttons button.compare-btn,
-.products-table-catalog .product .info .buttons button.like-btn{
+.products-table-catalog .product .info .buttons .compare-btn,
+.products-table-catalog .product .info .buttons .like-btn{
     margin-left: 2px;
 }
 

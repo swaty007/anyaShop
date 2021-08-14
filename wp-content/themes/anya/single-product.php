@@ -593,7 +593,17 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                                     </a>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="buttons">
-                                                            <!--                                                            <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>-->
+                                                            <a class="transition-3s like-btn tinvwl_add_to_wishlist_button"
+                                                                    role="button"
+                                                                    aria-label="Add to Wishlist"
+                                                                    data-tinv-wl-list="[]"
+                                                                    data-tinv-wl-product="<?= $related_product;?>"
+                                                                    data-tinv-wl-productvariation="0"
+                                                                    data-tinv-wl-productvariations="[0]"
+                                                                    data-tinv-wl-producttype="simple"
+                                                                    data-tinv-wl-action="add">
+                                                                <i class="far fa-heart"></i>
+                                                            </a>
                                                             <button data-id="<?= $related_product; ?>"
                                                                     class="transition-3s compare-btn br_compare_button br_product_<?= $related_product; ?> <?= set_class_compare($related_product); ?>">
                                                                 <i class="fas fa-balance-scale"></i>

@@ -91,14 +91,14 @@ $child_categories = get_terms('product_cat', [
                 <span class="products-count"><?= $wp_query->found_posts; ?> Товаров</span>
             </div>
             <div class="d-flex align-items-center">
-                <button class="transition-3s compare-btn">Сравнить</button>
+<!--                <button class="transition-3s compare-btn">Сравнить</button>-->
                 <?php woocommerce_catalog_ordering(); ?>
             </div>
         </div>
         <div class="container content-container filters-menu no-pad mobile">
             <div class="products-count"><?= $wp_query->found_posts; ?> Товаров</div>
             <div>
-                <button class="transition-3s compare-btn">Сравнить</button>
+<!--                <button class="transition-3s compare-btn">Сравнить</button>-->
             </div>
             <div>
                 <?php woocommerce_catalog_ordering(); ?>
@@ -206,7 +206,17 @@ $child_categories = get_terms('product_cat', [
                             </div>
                             <div class="buttons">
                                 <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                                <!--                                <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>-->
+                                <a class="transition-3s like-btn tinvwl_add_to_wishlist_button"
+                                        role="button"
+                                        aria-label="Add to Wishlist"
+                                        data-tinv-wl-list="[]"
+                                        data-tinv-wl-product="<?=$post->ID;?>"
+                                        data-tinv-wl-productvariation="0"
+                                        data-tinv-wl-productvariations="[0]"
+                                        data-tinv-wl-producttype="simple"
+                                        data-tinv-wl-action="add">
+                                    <i class="far fa-heart"></i>
+                                </a>
                                 <button data-id="<?= $post->ID; ?>"
                                         class="transition-3s compare-btn br_compare_button br_product_<?= $post->ID; ?> <?= set_class_compare($post->ID); ?>">
                                     <i class="fas fa-balance-scale"></i>

@@ -155,7 +155,7 @@
     	padding: 10px;
 	    font-size: 13px;
 	}
-	.products-table-catalog .product .info .buttons button.compare-btn, .products-table-catalog .product .info .buttons button.like-btn{
+	.products-table-catalog .product .info .buttons button.compare-btn, .products-table-catalog .product .info .buttons .like-btn{
 		margin-left: 0;
 	}
 }

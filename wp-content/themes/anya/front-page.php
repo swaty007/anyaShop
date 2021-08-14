@@ -80,24 +80,35 @@ get_header();
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
                         <a href="<?php the_permalink(); ?>" class="link">
                             <div class="image-wrapper text-center transition-3s">
-<!--                                <img src="--><?//= get_template_directory_uri(); ?><!--/images/item1.png">-->
-                                <?= woocommerce_get_product_thumbnail('full');?>
+                                <!--                                <img src="-->
+                                <? //= get_template_directory_uri(); ?><!--/images/item1.png">-->
+                                <?= woocommerce_get_product_thumbnail('full'); ?>
                             </div>
                         </a>
                         <div class="info">
                             <div class="title"><?php the_title(); ?></div>
                             <div class="advantages">
-<!--                                --><?php //wc_display_product_attributes($product); ?>
+                                <!--                                --><?php //wc_display_product_attributes($product); ?>
                             </div>
                             <div class="price">
                                 <?= $product->get_price_html(); ?>
                             </div>
                             <div class="buttons">
                                 <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-<!--                                <button class="transition-3s like-btn"><i class="far fa-heart"></i></button>-->
+                                <a class="transition-3s like-btn tinvwl_add_to_wishlist_button"
+                                   role="button"
+                                   aria-label="Add to Wishlist"
+                                   data-tinv-wl-list="[]"
+                                   data-tinv-wl-product="<?= $post->ID; ?>"
+                                   data-tinv-wl-productvariation="0"
+                                   data-tinv-wl-productvariations="[0]"
+                                   data-tinv-wl-producttype="simple"
+                                   data-tinv-wl-action="add">
+                                    <i class="far fa-heart"></i>
+                                </a>
 
-                                <button data-id="<?=$post->ID;?>"
-                                        class="transition-3s compare-btn br_compare_button br_product_<?=$post->ID;?> <?=set_class_compare($post->ID);?>">
+                                <button data-id="<?= $post->ID; ?>"
+                                        class="transition-3s compare-btn br_compare_button br_product_<?= $post->ID; ?> <?= set_class_compare($post->ID); ?>">
                                     <i class="fas fa-balance-scale"></i>
                                 </button>
 
@@ -116,80 +127,6 @@ get_header();
             <div class="row">
                 <div class="col-md-12 text-center">
                     <button class="view-more-btn transition-3s">Загрузить еще (9)</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="banners">
-        <div class="container banners-title">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Принуждаем к фотографии</h1>
-                </div>
-            </div>
-        </div>
-        <div class="container banners-wrapper">
-            <div class="banners-slider">
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner2.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner3.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner2.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner3.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
                 </div>
             </div>
         </div>
@@ -330,7 +267,6 @@ get_header();
             if ($("body").width() > 575) {
                 setProductsSimilarHeight(".products-table-catalog .product");
             }
-            iniBannersSlider(".news");
             iniBannersSlider(".banners");
         })
 

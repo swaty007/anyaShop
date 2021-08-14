@@ -65,7 +65,7 @@
 <script src="<?= get_template_directory_uri(); ?>/js/global/banners-slider.js" type="text/javascript"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/global/products.js" type="text/javascript"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/global/menu.js" type="text/javascript"></script>
-<!--<script src="--><?//= get_template_directory_uri(); ?><!--/js/global/price-range-slider.js" type="text/javascript"></script>-->
+<script src="<?= get_template_directory_uri(); ?>/js/global/price-range-slider.js" type="text/javascript"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/global/custom-select.js" type="text/javascript"></script>
 
 
