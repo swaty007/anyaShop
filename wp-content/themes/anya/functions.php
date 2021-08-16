@@ -369,6 +369,27 @@ function parsePlugin() {
 }
 //add_action('init', 'parsePlugin', 69);
 
+function removeDuplicates() {
+    $data = [];
+    $posts = get_posts([
+        'post_type' => 'product',
+        'post_status' => ['publish', 'draft'],
+        'posts_per_page' => -1,
+    ]);
+
+
+
+    foreach($posts as $post) {
+        $post_id = $post->ID;
+        $sku = get_post_meta($post_id, '_sku', true);
+        if (in_array($sku, $data)) {
+            wp_delete_post($post_id);
+        } else {
+            $data[] = $sku;
+        }
+    }
+}
+//add_action('init', 'removeDuplicates', 69);
 
 function is_set_cookie_compare( $id ) {
     if ( ! empty($_COOKIE['br_products_compare']) ) {

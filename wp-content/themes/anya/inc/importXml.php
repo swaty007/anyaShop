@@ -45,6 +45,7 @@ class ImportXML
         $this->set_categories_parents();
 //        $this->updateProductsPriceStock();
         $this->importProducts();
+        $this->removeDuplicates();
     }
 
     function loadData()
@@ -307,6 +308,7 @@ class ImportXML
 
     function productExists($sku)
     {
+        usleep(200000); //0.2 sek
         $posts = get_posts([
             'post_type' => 'product',
             'post_status' => ['publish', 'draft'],
@@ -314,7 +316,7 @@ class ImportXML
             'meta_query' => [
                 [
                     'key' => '_sku',
-                    'compare' => '=',
+                    'compare' => 'LIKE',
                     'value' => $sku,
                 ]
             ]
@@ -385,6 +387,28 @@ class ImportXML
                     update_post_meta($post_id, '_product_image_gallery', join(',', $galleryItems));
                 }
                 $n++;
+            }
+        }
+    }
+
+
+    function removeDuplicates() {
+        $data = [];
+        $posts = get_posts([
+            'post_type' => 'product',
+            'post_status' => ['publish', 'draft'],
+            'posts_per_page' => -1,
+        ]);
+
+
+
+        foreach($posts as $post) {
+            $post_id = $post->ID;
+            $sku = get_post_meta($post_id, '_sku', true);
+            if (in_array($sku, $data)) {
+                wp_delete_post($post_id);
+            } else {
+                $data[] = $sku;
             }
         }
     }
