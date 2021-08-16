@@ -1708,6 +1708,12 @@ footer.diller .copyright{
     padding: 6px 10px;
 }
 
+.product-page .related-products .products-table-catalog .product .info .buttons .like-btn,
+.account-wish-list .products-table-catalog .product .info .buttons .like-btn,
+.account-order-details .products-table-catalog .product .info .buttons .like-btn {
+    padding: 6px 10px;
+}
+
 .form-wrapper{
     padding: 60px 0;
     background: #fff;
