@@ -54,6 +54,8 @@
     "normalize.css": "^8.0.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14",
     "watchify": "^3.11.1",
     "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0",
@@ -61,6 +63,7 @@
     "yargs": "^16.2.0"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.14.5",
     "@babel/runtime": "^7.12.5",
     "@fancyapps/fancybox": "^3.5.7",
     "axios": "^0.21.0",
@@ -78,13 +81,16 @@
     "nouislider": "^14.6.3",
     "path": "^0.12.7",
     "popper.js": "^1.16.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "rellax": "^1.12.1",
     "sass-rem": "^2.0.1",
     "simple-lightbox": "^2.1.0",
     "slick-carousel": "^1.8.1",
     "smart-grid": "^2.1.2",
     "toastr": "^2.1.4",
-    "tocca": "^2.0.9"
+    "tocca": "^2.0.9",
+    "vue": "^2.6.14"
   },
   "browserify": {
     "transform": [

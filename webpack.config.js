@@ -1,7 +1,7 @@
 const path = require("path");
 import settings from "./settings";
 
-// const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader')
 
 
 module.exports = {
@@ -18,10 +18,10 @@ module.exports = {
     },
     module: {
         rules: [
-            // {
-            //     test: /\.vue$/,
-            //     loader: 'vue-loader'
-            // },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -31,6 +31,14 @@ module.exports = {
                         presets: ["@babel/preset-env"],
                     },
                 },
+            },
+            {
+                test: /\.jsx?$/, // определяем тип файлов
+                exclude: /(node_modules)/,  // исключаем из обработки папку node_modules
+                loader: "babel-loader",   // определяем загрузчик
+                options:{
+                    presets:["@babel/preset-env", "@babel/preset-react"]    // используемые плагины
+                }
             },
         ],
     },
@@ -43,7 +51,7 @@ module.exports = {
     },
     plugins: [
         // убедитесь что подключили плагин!
-        // new VueLoaderPlugin()
+        new VueLoaderPlugin()
     ],
     mode: "production",
     // mode: "development",

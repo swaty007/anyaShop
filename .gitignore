@@ -65,6 +65,7 @@ Thumbs.db
 !gulpfile.babel.js
 !settings.js
 !package.json
+!vue.config.js
 
 
 
