@@ -1,5 +1,5 @@
 var React = require('react');
-var SearchPlugin = require('./SearchPlugin.jsx');
+// var SearchPlugin = require('./SearchPlugin.jsx');
 
 class ItemsList extends React.Component {
     constructor(props){

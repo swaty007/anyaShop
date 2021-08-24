@@ -28,7 +28,7 @@ global.jQuery = global.$ = $;
 // import UtmCookie from "./modules/utm-cookie";
 import Product from "./modules/product";
 import Compare from "./modules/compare";
-// import Magazine_react from "./modules/magazine_react";
+import Magazine_react from "./modules/magazine_react";
 //
 // const global_script = new Global();
 // const allCourses = new AllCourses();
@@ -41,4 +41,4 @@ import Compare from "./modules/compare";
 // const privacyPolicy = new PrivacyPolicy();
 const product = new Product();
 const compare = new Compare();
-// const magazine_react = new Magazine_react();
+const magazine_react = new Magazine_react();

@@ -1,39 +1,18 @@
 <script>
     export default {
-        name: 'App',
-        el: '#calculator',
+        name: 'Main Page Magazine',
+        el: '#main-page-magazine',
         components: {
             // HelloWorld
         },
         data() {
             return {
                 busy: false,
-                tab: 1,
-                cityFrom: null,
-                cityTo: null,
-                type: "store-door",
-                parameters: null,
-                length: null,
-                width: null,
-                height: null,
-                weight: null,
-                monthShips: null,
-                declaredPrice: null,
-                errors: [],
-                maxSideSize: 180,
-                maxSize: 180,
-                declaredCoefficient: 0.005,
-                cityPrice: 400,
-                regionPrice: 650,
-                anotherCityPrice: 100,
-                anotherRegionPrice: 150,
-                emailData: {
-                    name: null,
-                    email: null,
-                    phone: null,
-                    site: null,
-                },
-                emailSend: false,
+                tab: 'popular',
+                products: [],
+                page: 1,
+                total_posts: 0,
+                total_pages: 0,
             }
         },
         computed: {
@@ -42,52 +21,48 @@
             },
         },
         watch: {
-            length: function () {
-                this.length = Number(this.length.replace(/[^0-9.]/g, ''))
+            tab: function (data) {
+                this.page = 1
+                this.products = []
+                this.loadPosts()
             },
         },
         mounted() {
-
+            this.loadPosts()
 
         },
         methods: {
-            setCityFrom(data) {
-                console.log(data)
-                this.cityFrom = data
-
-                if (this.cityFrom) {
-                    document.querySelector('#cityFrom input').value = this.cityFrom.value
-                }
+            loadMore() {
+                this.page++
+                this.loadPosts()
             },
-            sendEmail() {
 
-                fetch("/wp-admin/admin-ajax.php",
-                    {
-                        method: "POST",
-                        body: data,
-                    })
-                    .then(response => response.json())
-                    .then((data) => {
-                        this.busy = false
-                        console.log(data)
-                        this.emailData = {
-                            name: null,
-                            email: null,
-                            phone: null,
-                            site: null,
+            loadPosts() {
+                if (this.busy) return
+                this.busy = true
+                $.ajax({
+                    url: '/wp-json/v1/products/get',
+                    data: {
+                        security: iteaData.nonce,
+                        data: {
+                            filter: this.tab,
+                            page: this.page,
                         }
-                        this.emailSend = true
-                        setTimeout(() => {
-                            this.emailSend = false
-                        }, 5000)
-                        // if (data.code === 200) {
-                        // }
-                    })
-                    .catch((e) => {
+                    },
+                    type: 'GET',
+                    success: (data) => {
+                        console.log(data)
+                        if (data.data) {
+                            this.products = this.products.concat(data.data)
+                        }
+                        this.total_posts = data.found_posts
+                        this.total_pages = data.max_num_pages
+                    },
+                    complete: () => {
                         this.busy = false
-                        console.log('ошибка', e)
-                    })
-            },
+                    }
+                })
+            }
         }
     }
 </script>
