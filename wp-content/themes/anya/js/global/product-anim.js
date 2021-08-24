@@ -1,6 +1,6 @@
 // show product menu
 function showProductMenu() {
-    if ($(".product-page")[0]) {
+    if ($(".product-page")[0] && $(".product-page .image-slider")[0]) {
         var heightToSlider = $(".product-page .image-slider").offset().top;
         var currentScroll = $(window).scrollTop();
         if (currentScroll > (heightToSlider - 100)) {
@@ -117,7 +117,7 @@ $(".anchor-link").click(function (e) {
 
 // scroll body and activate anchor links
 $(window).scroll(function () {
-    if ($(".product-page")[0]) {
+    if ($(".product-page")[0] && $(".product-page #review").offset()) {
         if (($(window).scrollTop() > $(".product-page #review").offset().top - 90) && ($(window).scrollTop() < $(".product-page #specifications").offset().top - 127)) {
             $('.anchor-link').closest('div').removeClass("active");
             $('.anchor-link[href="#review"]').closest('div').addClass("active");

@@ -151,6 +151,10 @@ header ul li.icon-item.active{
     background: #4A41DB;
     color: #fff;
 }
+header ul li.icon-item:hover .icon,
+header ul li.icon-item.active .icon{
+    color: #fff;
+}
 header ul li.icon-item.left-border{
     /*border-left: 1px solid #CED5D7;*/
     border-left: 1px solid #fff;

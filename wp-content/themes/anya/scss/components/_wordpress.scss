@@ -190,3 +190,16 @@
 .pll_language {
   padding-left: 25px;
 }
+
+.woocommerce-MyAccount-navigation {
+  .woocommerce-MyAccount-navigation-link {
+    a {
+      color: #111;
+    }
+    &.is-active {
+      a {
+        color: #8E3DFF;
+      }
+    }
+  }
+}
