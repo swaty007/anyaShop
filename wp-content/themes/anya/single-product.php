@@ -631,23 +631,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
         </div>
     </div>
 </section>
-
-<section class="subscription">
-    <div class="container">
-        <div class="row justify-content-center no-marg">
-            <div class="col-md-6 text-center">
-                <p class="title">Подпишитесь на наши новости</p>
-                <p class="text">Будьте в курсе новостей, продуктов и событий Prophoto</p>
-                <div class="d-flex justify-content-center">
-                    <div class="relative">
-                        <input class="transition-3s" type="text" name="email" placeholder="Введите свой email">
-                        <i class="far fa-paper-plane icon"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<?= get_template_part('template-parts/components-subscription', 'form'); ?>
 
 <script type="text/javascript">
     window.addEventListener('load', function () {

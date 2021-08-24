@@ -42,148 +42,155 @@ get_header();
         </div>
     </section>
 
-<div id="main-page-magazine">
-    <section class="tabs">
-        <div class="container content-container">
-            <div class="row tabs-wrapper">
-                <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'popular'}" @click="tab = 'popular'">
-                    Популярные товары</div>
-                <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'new'}" @click="tab = 'new'">
-                    Новинки</div>
-                <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'discount'}" @click="tab = 'discount'">
-                    Продукты со скидками</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="products-table-catalog">
-        <div class="container content-container">
-            <div class="row">
-
-
-
-                <div v-for="product in products" :key="product.ID" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
-                    <a :href="product.guid" class="link">
-                        <div class="image-wrapper text-center transition-3s">
-                            <img :src="product.thumbnail_url" />
-                        </div>
-                    </a>
-                    <div class="info">
-                        <div class="title">
-                            {{product.post_title}}
-                        </div>
-                        <div class="advantages">
-                            <?php //wc_display_product_attributes($product); ?>
-                        </div>
-                        <div v-html="product.price_html" class="price">
-
-                        </div>
-                        <div class="buttons">
-                            <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-                            <a class="transition-3s like-btn tinvwl_add_to_wishlist_button"
-                               role="button"
-                               aria-label="Add to Wishlist"
-                               data-tinv-wl-list="[]"
-                               :data-tinv-wl-product="product.ID"
-                               data-tinv-wl-productvariation="0"
-                               data-tinv-wl-productvariations="[0]"
-                               data-tinv-wl-producttype="simple"
-                               data-tinv-wl-action="add">
-                                <i class="far fa-heart"></i>
-                            </a>
-
-                            <button :data-id="product.ID"
-                                    :class="`br_product_${product.ID} ${product.class_compare}`"
-                                    class="transition-3s compare-btn br_compare_button">
-                                <i class="fas fa-balance-scale"></i>
-                            </button>
-
-                            <button class="transition-3s buy-btn"
-                                    :data-sku="product.sku"
-                                    :data-id="product.ID">
-                                <i class="fas fa-cart-plus icon"></i> Купить
-                            </button>
-                        </div>
+    <div id="main-page-magazine">
+        <section class="tabs">
+            <div class="container content-container">
+                <div class="row tabs-wrapper">
+                    <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'popular'}"
+                         @click="tab = 'popular'">
+                        Популярные товары
+                    </div>
+                    <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'new'}" @click="tab = 'new'">
+                        Новинки
+                    </div>
+                    <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'discount'}"
+                         @click="tab = 'discount'">
+                        Продукты со скидками
                     </div>
                 </div>
-
-<!--                --><?php
-//                $loop = new WP_Query(array(
-//                        'post_type' => 'product',
-//                        'posts_per_page' => 20,
-//                        'orderby' => [],
-//                        'meta_query' => [
-//                            [
-//                                'key' => '_stock_status',
-//                                'value' => 'instock',
-//                                'compare' => '=',
-//                            ]
-//                        ]
-//                    )
-//                );
-//                while ($loop->have_posts()) : $loop->the_post(); ?>
-<!--                    --><?php
-//                    $product = wc_get_product($post->ID);
-//                    $sku = $product->get_sku();
-//                    ?>
-<!---->
-<!--                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">-->
-<!--                        <a href="--><?php //the_permalink(); ?><!--" class="link">-->
-<!--                            <div class="image-wrapper text-center transition-3s">-->
-<!--                                                             <img src="-->
-<!--                                --><?// //= get_template_directory_uri(); ?><!--/images/item1.png">-->
-<!--                                --><?//= woocommerce_get_product_thumbnail('full'); ?>
-<!--                            </div>-->
-<!--                        </a>-->
-<!--                        <div class="info">-->
-<!--                            <div class="title">--><?php //the_title(); ?><!--</div>-->
-<!--                            <div class="advantages">-->
-<!--                                                            --><?php ////wc_display_product_attributes($product); ?>
-<!--                            </div>-->
-<!--                            <div class="price">-->
-<!--                                --><?//= $product->get_price_html(); ?>
-<!--                            </div>-->
-<!--                            <div class="buttons">-->
-<!--                                 <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
-<!--                                <a class="transition-3s like-btn tinvwl_add_to_wishlist_button"-->
-<!--                                   role="button"-->
-<!--                                   aria-label="Add to Wishlist"-->
-<!--                                   data-tinv-wl-list="[]"-->
-<!--                                   data-tinv-wl-product="--><?//= $post->ID; ?><!--"-->
-<!--                                   data-tinv-wl-productvariation="0"-->
-<!--                                   data-tinv-wl-productvariations="[0]"-->
-<!--                                   data-tinv-wl-producttype="simple"-->
-<!--                                   data-tinv-wl-action="add">-->
-<!--                                    <i class="far fa-heart"></i>-->
-<!--                                </a>-->
-<!---->
-<!--                                <button data-id="--><?//= $post->ID; ?><!--"-->
-<!--                                        class="transition-3s compare-btn br_compare_button br_product_--><?//= $post->ID; ?><!-- --><?//= set_class_compare($post->ID); ?><!--">-->
-<!--                                    <i class="fas fa-balance-scale"></i>-->
-<!--                                </button>-->
-<!---->
-<!--                                <button class="transition-3s buy-btn"-->
-<!--                                        data-sku="--><?//= $sku; ?><!--"-->
-<!--                                        data-id="--><?//= $post->ID; ?><!--">-->
-<!--                                    <i class="fas fa-cart-plus icon"></i> Купить-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                --><?php //endwhile;
-//                wp_reset_query(); ?>
-
             </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <button v-if="total_pages > page" class="view-more-btn transition-3s" @click="loadMore">Загрузить еще (9)</button>
+        </section>
+
+        <section class="products-table-catalog">
+            <div class="container content-container">
+                <div class="row">
+
+
+                    <div v-for="product in products" :key="product.ID"
+                         class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
+                        <a :href="product.guid" class="link">
+                            <div class="image-wrapper text-center transition-3s">
+                                <img :src="product.thumbnail_url"/>
+                            </div>
+                        </a>
+                        <div class="info">
+                            <div class="title">
+                                {{product.post_title}}
+                            </div>
+                            <div class="advantages">
+                                <?php //wc_display_product_attributes($product); ?>
+                            </div>
+                            <div v-html="product.price_html" class="price">
+
+                            </div>
+                            <div class="buttons">
+                                <!-- <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
+                                <a class="transition-3s like-btn tinvwl_add_to_wishlist_button"
+                                   role="button"
+                                   aria-label="Add to Wishlist"
+                                   data-tinv-wl-list="[]"
+                                   :data-tinv-wl-product="product.ID"
+                                   data-tinv-wl-productvariation="0"
+                                   data-tinv-wl-productvariations="[0]"
+                                   data-tinv-wl-producttype="simple"
+                                   data-tinv-wl-action="add">
+                                    <i class="far fa-heart"></i>
+                                </a>
+
+                                <button :data-id="product.ID"
+                                        :class="`br_product_${product.ID} ${product.class_compare}`"
+                                        class="transition-3s compare-btn br_compare_button">
+                                    <i class="fas fa-balance-scale"></i>
+                                </button>
+
+                                <button class="transition-3s buy-btn"
+                                        :data-sku="product.sku"
+                                        :data-id="product.ID">
+                                    <i class="fas fa-cart-plus icon"></i> Купить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--                --><?php
+                    //                $loop = new WP_Query(array(
+                    //                        'post_type' => 'product',
+                    //                        'posts_per_page' => 20,
+                    //                        'orderby' => [],
+                    //                        'meta_query' => [
+                    //                            [
+                    //                                'key' => '_stock_status',
+                    //                                'value' => 'instock',
+                    //                                'compare' => '=',
+                    //                            ]
+                    //                        ]
+                    //                    )
+                    //                );
+                    //                while ($loop->have_posts()) : $loop->the_post(); ?>
+                    <!--                    --><?php
+                    //                    $product = wc_get_product($post->ID);
+                    //                    $sku = $product->get_sku();
+                    //                    ?>
+                    <!---->
+                    <!--                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">-->
+                    <!--                        <a href="--><?php //the_permalink(); ?><!--" class="link">-->
+                    <!--                            <div class="image-wrapper text-center transition-3s">-->
+                    <!--                                                             <img src="-->
+                    <!--                                -->
+                    <?// //= get_template_directory_uri(); ?><!--/images/item1.png">-->
+                    <!--                                --><?//= woocommerce_get_product_thumbnail('full'); ?>
+                    <!--                            </div>-->
+                    <!--                        </a>-->
+                    <!--                        <div class="info">-->
+                    <!--                            <div class="title">--><?php //the_title(); ?><!--</div>-->
+                    <!--                            <div class="advantages">-->
+                    <!--                                                            --><?php ////wc_display_product_attributes($product); ?>
+                    <!--                            </div>-->
+                    <!--                            <div class="price">-->
+                    <!--                                --><?//= $product->get_price_html(); ?>
+                    <!--                            </div>-->
+                    <!--                            <div class="buttons">-->
+                    <!--                                 <a href="#" class="transition-3s"><i class="far fa-eye"></i></a> -->
+                    <!--                                <a class="transition-3s like-btn tinvwl_add_to_wishlist_button"-->
+                    <!--                                   role="button"-->
+                    <!--                                   aria-label="Add to Wishlist"-->
+                    <!--                                   data-tinv-wl-list="[]"-->
+                    <!--                                   data-tinv-wl-product="--><?//= $post->ID; ?><!--"-->
+                    <!--                                   data-tinv-wl-productvariation="0"-->
+                    <!--                                   data-tinv-wl-productvariations="[0]"-->
+                    <!--                                   data-tinv-wl-producttype="simple"-->
+                    <!--                                   data-tinv-wl-action="add">-->
+                    <!--                                    <i class="far fa-heart"></i>-->
+                    <!--                                </a>-->
+                    <!---->
+                    <!--                                <button data-id="--><?//= $post->ID; ?><!--"-->
+                    <!--                                        class="transition-3s compare-btn br_compare_button br_product_-->
+                    <?//= $post->ID; ?><!-- --><?//= set_class_compare($post->ID); ?><!--">-->
+                    <!--                                    <i class="fas fa-balance-scale"></i>-->
+                    <!--                                </button>-->
+                    <!---->
+                    <!--                                <button class="transition-3s buy-btn"-->
+                    <!--                                        data-sku="--><?//= $sku; ?><!--"-->
+                    <!--                                        data-id="--><?//= $post->ID; ?><!--">-->
+                    <!--                                    <i class="fas fa-cart-plus icon"></i> Купить-->
+                    <!--                                </button>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                --><?php //endwhile;
+                    //                wp_reset_query(); ?>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button v-if="total_pages > page" class="view-more-btn transition-3s" @click="loadMore">
+                            Загрузить еще (9)
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
-
-
+        </section>
+    </div>
 
 
     <section class="timer-offer">
@@ -291,23 +298,7 @@ get_header();
             </div>
         </div>
     </section>
-
-    <section class="subscription">
-        <div class="container">
-            <div class="row justify-content-center no-marg">
-                <div class="col-md-6 text-center">
-                    <p class="title">Подпишитесь на наши новости</p>
-                    <p class="text">Будьте в курсе новостей, продуктов и событий Prophoto</p>
-                    <div class="d-flex justify-content-center">
-                        <div class="relative">
-                            <input class="transition-3s" type="text" name="email" placeholder="Введите свой email">
-                            <i class="far fa-paper-plane icon"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<?= get_template_part('template-parts/components-subscription', 'form'); ?>
 
     <div class="global-widgets">
         <div class="transition-3s action-btn"><i class="fas fa-phone icon"></i></div>
