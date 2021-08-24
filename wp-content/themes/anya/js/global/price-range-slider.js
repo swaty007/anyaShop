@@ -2691,8 +2691,10 @@ $(function() {
     $inputFrom = $(".js-input-from"),
     $inputTo = $(".js-input-to"),
     instance,
-    min = 0,
-    max = 5000,
+    min = $inputFrom.val(),
+    minCur = $inputFrom.attr('data-val'),
+    max = $inputTo.val(),
+    maxCur = $inputTo.attr('data-val'),
     from = 0,
     to = 0;
 
@@ -2700,8 +2702,8 @@ $(function() {
     type: "double",
     min: min,
     max: max,
-    from: 600,
-    to: 1900,
+    from: minCur ? minCur : min,
+    to: maxCur ? maxCur : max,
     prefix: "$ ",
     onStart: updateInputs,
     onChange: updateInputs,

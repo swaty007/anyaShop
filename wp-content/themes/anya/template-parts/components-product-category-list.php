@@ -17,6 +17,24 @@ $child_categories = get_terms('product_cat', [
     'hide_empty' => true,
     'parent' => $term_id,
 ]);
+
+//$wp_query->meta_query
+//echo "<pre>";
+//var_dump($wp_query->meta_query);
+//var_dump($wp_query->query_vars);
+//$meta_query = ['relation' => 'AND'];
+//$meta_query['_price'] = [
+//    'key' => '_price',
+//    'value' => 20000,
+//    'compare' => '>=',
+//    'type' => 'NUMERIC'
+//];
+////$wp_query->query_vars['meta_query'] = $meta_query;
+//$wp_query->set('meta_query', $meta_query);
+//$GLOBALS['wp_query']->query_vars['meta_query'] = $meta_query;
+//$GLOBALS['wp_query']->set('meta_query', $meta_query);
+//wp_reset_query();
+//query_posts($wp_query)
 ?>
     <section class="catalog-way">
         <div class="container no-pad">
@@ -153,26 +171,36 @@ $child_categories = get_terms('product_cat', [
                     </ul>
                 </div>
                 <div class="filter-wrapper">
+                    <form method="get">
                     <div class="title">Цена</div>
                     <div class="range-slider">
                         <input type="text" class="js-range-slider" value=""/>
                     </div>
                     <div class="price-slider extra-controls form-inline">
+                        <?php $prices = get_filtered_price();?>
                         <div class="form-group">
-                            <input type="text" class="js-input-from form-control" value="0"/>
-                            <input type="text" class="js-input-to form-control" value="0"/>
+                            <input type="text" class="js-input-from form-control" name="min_price"
+                                   value="<?=$prices['min'];?>" data-val="<?=$_GET['min_price'];?>"/>
+                            <input type="text" class="js-input-to form-control" name="max_price"
+                                   value="<?=$prices['max'];?>" data-val="<?=$_GET['max_price'];?>"/>
                         </div>
                     </div>
-                    <div class="price-block-wrapper">
-                        <div class="transition-2s block price-block">$100-$250</div>
-                        <div class="transition-2s block price-block">$250-$400</div>
-                        <div class="transition-2s block price-block">$400-$650</div>
-                    </div>
-                    <div class="price-block-wrapper">
-                        <div class="transition-2s block price-block">$650-$900</div>
-                        <div class="transition-2s block price-block">$900-$1200</div>
-                        <div class="transition-2s block price-block">$1200+</div>
-                    </div>
+
+<!--                    <div class="price-block-wrapper">-->
+<!--                        <div class="transition-2s block price-block">$100-$250</div>-->
+<!--                        <div class="transition-2s block price-block">$250-$400</div>-->
+<!--                        <div class="transition-2s block price-block">$400-$650</div>-->
+<!--                    </div>-->
+<!--                    <div class="price-block-wrapper">-->
+<!--                        <div class="transition-2s block price-block">$650-$900</div>-->
+<!--                        <div class="transition-2s block price-block">$900-$1200</div>-->
+<!--                        <div class="transition-2s block price-block">$1200+</div>-->
+<!--                    </div>-->
+                        <button type="submit">submit</button>
+                        <?php if(!empty($_GET['order_by'])):?>
+                            <input type="hidden" name="order_by" value="<?=$_GET['order_by'];?>">
+                        <?php endif;?>
+                    </form>
                 </div>
             </div>
         </div>
