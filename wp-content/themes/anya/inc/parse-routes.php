@@ -7,6 +7,7 @@ function parserRegisterRoute()
     register_rest_route('parse/v1', 'save', array(
         'methods' => WP_REST_SERVER::CREATABLE,
         'callback' => 'insertResult',
+        'permission_callback' => '__return_true'
     ));
 }
 

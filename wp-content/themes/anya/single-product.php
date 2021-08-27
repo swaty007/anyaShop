@@ -557,11 +557,24 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
     <?php endif; ?>
     <div id="related-products" class="related-products">
         <div class="container content-container">
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="container">
                         <div class="row">
+                            <div class="col-md-10">
+                                <?php
+                                // If comments are open or we have at least one comment, load up the comment template.
+                                if (comments_open() || get_comments_number()) :
+                                    comments_template();
+                                endif; ?>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12">
+                                <br>
+                                <br>
+                                <br>
                                 <h3>Похожие товары</h3>
                             </div>
                             <div class="col-md-12">
@@ -572,7 +585,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                             $productWC = wc_get_product($related_product);
                                             $skuWC = $product->get_sku();
                                             ?>
-                                            <div class="col-sm-12 col-md-6 col-lg-4 product">
+                                            <div class="col-sm-12 col-md-6 col-xl-4 product">
                                                 <a class="link" href="<?= get_the_permalink($related_product); ?>">
                                                     <div class="image-wrapper text-center transition-3s">
                                                         <?php

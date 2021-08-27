@@ -360,12 +360,12 @@ if (function_exists('wp_body_open')) {
         <div class="row">
             <div class="col-md-12">
                 <?php
-                wp_nav_menu(array(
+                wp_nav_menu([
                     'theme_location' => 'menu-header',
                     'menu_id' => 'header_menu',
                     'container' => 'ul',
                     'menu_class' => 'header_top__menu d-flex',
-                ));
+                ]);
                 ?>
             </div>
         </div>

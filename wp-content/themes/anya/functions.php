@@ -422,6 +422,7 @@ function registerProductsRoutes()
     register_rest_route('v1/products', 'get', array(
         'methods' => WP_REST_SERVER::READABLE,
         'callback' => 'getProducts',
+        'permission_callback' => '__return_true'
     ));
 }
 

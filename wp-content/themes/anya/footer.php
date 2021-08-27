@@ -11,6 +11,14 @@
             </div>
             <div class="col-sm-4 col-md-3 content-wrapper">
                 <div class="title">Навигация</div>
+                <?php
+                wp_nav_menu([
+                    'theme_location' => 'menu-footer-navigation',
+                    'menu_id' => 'menu-footer-navigation',
+                    'container' => 'ul',
+                    'menu_class' => 'links',
+                ]);
+                ?>
                 <ul class="links">
                     <li><a href="#">Главная</a></li>
                     <li><a href="#">О компании</a></li>
@@ -20,6 +28,14 @@
             </div>
             <div class="col-sm-4 col-md-3 content-wrapper">
                 <div class="title">Каталог</div>
+                <?php
+                wp_nav_menu([
+                    'theme_location' => 'menu-footer-catalog',
+                    'menu_id' => 'menu-footer-catalog',
+                    'container' => 'ul',
+                    'menu_class' => 'links',
+                ]);
+                ?>
                 <ul class="links">
                     <li><a href="#">Объективы</a></li>
                     <li><a href="#">Софтбоксы</a></li>
