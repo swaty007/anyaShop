@@ -104,9 +104,9 @@ $child_categories = get_terms('product_cat', [
                     <span class="line"></span>
                     <span class="currency uah">UAH</span>
                 </div>
-                <button class="transition-3s filters-btn">Фильтры <i class="material-icons">keyboard_arrow_down</i>
+                <button class="transition-3s filters-btn"><?php pll_e("Фильтры");?> <i class="material-icons">keyboard_arrow_down</i>
                 </button>
-                <span class="products-count"><?= $wp_query->found_posts; ?> Товаров</span>
+                <span class="products-count"><?= $wp_query->found_posts; ?> <?php pll_e("Товаров");?></span>
             </div>
             <div class="d-flex align-items-center">
 <!--                <button class="transition-3s compare-btn">Сравнить</button>-->
@@ -114,7 +114,7 @@ $child_categories = get_terms('product_cat', [
             </div>
         </div>
         <div class="container content-container filters-menu no-pad mobile">
-            <div class="products-count"><?= $wp_query->found_posts; ?> Товаров</div>
+            <div class="products-count"><?= $wp_query->found_posts; ?> <?php pll_e("Товаров");?></div>
             <div>
 <!--                <button class="transition-3s compare-btn">Сравнить</button>-->
             </div>
@@ -122,7 +122,7 @@ $child_categories = get_terms('product_cat', [
                 <?php woocommerce_catalog_ordering(); ?>
             </div>
             <div>
-                <button class="transition-3s filters-btn">Фильтры <i class="material-icons">keyboard_arrow_down</i>
+                <button class="transition-3s filters-btn"><?php pll_e("Фильтры");?> <i class="material-icons">keyboard_arrow_down</i>
                 </button>
             </div>
         </div>
@@ -172,7 +172,7 @@ $child_categories = get_terms('product_cat', [
                 </div>
                 <div class="filter-wrapper">
                     <form method="get">
-                    <div class="title">Цена</div>
+                    <div class="title"><?php pll_e("Цена");?></div>
                     <div class="range-slider">
                         <input type="text" class="js-range-slider" value=""/>
                     </div>
@@ -196,7 +196,7 @@ $child_categories = get_terms('product_cat', [
 <!--                        <div class="transition-2s block price-block">$900-$1200</div>-->
 <!--                        <div class="transition-2s block price-block">$1200+</div>-->
 <!--                    </div>-->
-                        <button type="submit">submit</button>
+                        <button type="submit" class="main__btn"><?php pll_e("Фильтровать");?></button>
                         <?php if(!empty($_GET['order_by'])):?>
                             <input type="hidden" name="order_by" value="<?=$_GET['order_by'];?>">
                         <?php endif;?>
@@ -252,7 +252,7 @@ $child_categories = get_terms('product_cat', [
                                 <button class="transition-3s buy-btn"
                                         data-sku="<?= $sku; ?>"
                                         data-id="<?= $post->ID; ?>">
-                                    <i class="fas fa-cart-plus icon"></i> Купить
+                                    <i class="fas fa-cart-plus icon"></i> <?php pll_e("Купить");?>
                                 </button>
                             </div>
                         </div>

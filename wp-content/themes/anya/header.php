@@ -47,7 +47,7 @@ if (function_exists('wp_body_open')) {
     display: flex;
 ">
     <!--    <img src="-->
-    <? //= get_template_directory_uri(); ?><!--/images/logo/logo_white.svg" style="max-width:300px;"/>-->
+    <? //= get_template_directory_uri(); ?><!--/images/logo/zoom-logo.png" style="max-width:300px;"/>-->
 </div>
 <!--preloader-->
 <script>
@@ -100,7 +100,7 @@ if (function_exists('wp_body_open')) {
                 <li class="logo-item d-flex align-items-center d-none">
                     <!-- <a href="#">Prophoto</a> -->
                     <a href="<?= pll_home_url(); ?>">
-                        <img width="170px" src="<?= get_template_directory_uri(); ?>/images/text-logo.png"/>
+                        <img width="170px" src="<?= get_template_directory_uri(); ?>/images/zoom-logo.png"/>
                     </a>
                 </li>
             </ul>

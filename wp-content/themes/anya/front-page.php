@@ -48,14 +48,14 @@ get_header();
                 <div class="row tabs-wrapper">
                     <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'popular'}"
                          @click="tab = 'popular'">
-                        Популярные товары
+                        <?php pll_e("Популярные товары");?>
                     </div>
                     <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'new'}" @click="tab = 'new'">
-                        Новинки
+                        <?php pll_e("Новинки");?>
                     </div>
                     <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'discount'}"
                          @click="tab = 'discount'">
-                        Продукты со скидками
+                        <?php pll_e("Продукты со скидками");?>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@ get_header();
                                 <button class="transition-3s buy-btn"
                                         :data-sku="product.sku"
                                         :data-id="product.ID">
-                                    <i class="fas fa-cart-plus icon"></i> Купить
+                                    <i class="fas fa-cart-plus icon"></i> <?php pll_e("Купить");?>
                                 </button>
                             </div>
                         </div>
@@ -184,7 +184,7 @@ get_header();
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <button v-if="total_pages > page" class="view-more-btn transition-3s" @click="loadMore">
-                            Загрузить еще (9)
+                            <?php pll_e("Загрузить еще");?> (9)
                         </button>
                     </div>
                 </div>
@@ -229,7 +229,7 @@ get_header();
         <div class="container banners-title">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Наши публикации</h1>
+                    <h2><?php pll_e("Наши публикации");?></h2>
                 </div>
             </div>
         </div>

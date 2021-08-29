@@ -298,6 +298,37 @@ function lb_menu_anchors($items, $args)
 if (function_exists('pll_register_string')) {
 
     pll_register_string("Pages", "КРУТИ ВНИЗ", "Globals");
+    pll_register_string("Pages", "Популярные товары", "Globals");
+    pll_register_string("Pages", "Новинки", "Globals");
+    pll_register_string("Pages", "Продукты со скидками", "Globals");
+    pll_register_string("Pages", "Купить", "Globals");
+    pll_register_string("Pages", "Загрузить еще", "Globals");
+    pll_register_string("Pages", "Наши публикации", "Globals");
+    pll_register_string("Pages", "Подпишитесь на наши новости", "Globals");
+    pll_register_string("Pages", "Будьте в курсе новостей, продуктов и событий Zoom", "Globals");
+    pll_register_string("Pages", "Фильтровать", "Globals");
+    pll_register_string("Pages", "Цена", "Globals");
+    pll_register_string("Pages", "Фильтры", "Globals");
+    pll_register_string("Pages", "Товаров", "Globals");
+    pll_register_string("Pages", "В корзину", "Globals");
+    pll_register_string("Pages", "Описание", "Globals");
+    pll_register_string("Pages", "Характеристики и особенности", "Globals");
+    pll_register_string("Pages", "Дополнительные материалы", "Globals");
+    pll_register_string("Pages", "Похожие товары", "Globals");
+    pll_register_string("Pages", "Сравнить", "Globals");
+    pll_register_string("Pages", "Количество:", "Globals");
+    pll_register_string("Pages", "Код товара:", "Globals");
+    pll_register_string("Pages", "Все характеристики", "Globals");
+    pll_register_string("Pages", "Свернуть", "Globals");
+    pll_register_string("Pages", "VC (компенсация вибраций)", "Globals");
+    pll_register_string("Pages", "Стабилизатор изображения VC обеспечивает резкое изображение без дрожания, а также обеспечивает резкое изображение в видоискателе.", "Globals");
+    pll_register_string("Pages", "USD (ультразвуковой мотор)", "Globals");
+    pll_register_string("Pages", "Мощный ультразвуковой двигатель для съемки быстрых и динамичных объектов. Чрезвычайно тихий и точный, позволяет осуществлять ручное управление фокусировкой во время съемки.", "Globals");
+    pll_register_string("Pages", "Покрытие eBAND", "Globals");
+    pll_register_string("Pages", "Нано - антибликовое покрытие для защиты от нежелательных отражений и ореола.", "Globals");
+    pll_register_string("Pages", "", "Globals");
+    pll_register_string("Pages", "", "Globals");
+    pll_register_string("Pages", "", "Globals");
 
 
     //pll_e("");

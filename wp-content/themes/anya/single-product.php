@@ -45,7 +45,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                 <div class="d-flex align-items-center">
                     <span class="price"><?= $product->get_price_html(); ?></span>
                     <?php if ($productStock): ?>
-                        <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> В корзину</button>
+                        <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину");?></button>
                     <?php endif; ?>
                 </div>
             </div>
@@ -59,7 +59,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                     <span class="price"><?= $product->get_price_html(); ?></span>
                     <?php if ($productStock): ?>
                         <button class="transition-3s buy-btn" data-sku="<?= $sku; ?>" data-id="<?= $post->ID; ?>">
-                            <i class="fas fa-cart-plus icon"></i> В корзину
+                            <i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину");?>
                         </button>
                     <?php endif; ?>
                 </div>
@@ -68,21 +68,25 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                 <div class="product-menu">
                     <div class="anchor-link-menu d-flex flex-nowrap">
                         <div class="transition-3s d-flex link active">
-                            <a class="anchor-link" href="#review">Описание</a>
+                            <a class="anchor-link" href="#review">
+                                <?php pll_e("Описание");?>
+                            </a>
                         </div>
                         <div class="transition-3s d-flex link">
-                            <a class="anchor-link" href="#specifications">Характеристики
-                                и особенности</a>
+                            <a class="anchor-link" href="#specifications">
+                                <?php pll_e("Характеристики и особенности");?>
+                            </a>
                         </div>
                         <?php if (have_rows('additional_materials')): ?>
                             <div class="transition-3s d-flex link">
                                 <a class="anchor-link" href="#materials">
-                                    Дополнительные материалы</a>
+                                    <?php pll_e("Дополнительные материалы");?>
+                                </a>
                             </div>
                         <?php endif; ?>
                         <div class="transition-3s d-flex link">
-                            <a class="anchor-link" href="#related-products">Похожие
-                                товары
+                            <a class="anchor-link" href="#related-products">
+                                <?php pll_e("Похожие товары");?>
                             </a>
                         </div>
                     </div>
@@ -114,7 +118,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                     <button data-id="<?= $post->ID; ?>"
                             class="transition-3s compare-btn add_to_cart_button br_compare_button br_product_<?= $post->ID; ?> <?= set_class_compare($post->ID); ?>">
                         <i class="fas fa-balance-scale"></i>
-                        Сравнить
+                        <?php pll_e("Сравнить");?>
                     </button>
                     <!--                    <button class="transition-3s like-btn"><i class="far fa-heart"></i> Добавить в избранное</button>-->
                     <div class="status">
@@ -124,7 +128,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                 </div>
                 <div class="additional-options">
                     <div class="option-wrapper">
-                        <h3>Количество:</h3>
+                        <h3><?php pll_e("Количество:");?></h3>
                         <span id="amount_checker" class="amount-checker"
                               data-min="<?= $product->get_min_purchase_quantity(); ?>"
                               data-max="<?= $product->get_max_purchase_quantity(); ?>">
@@ -144,7 +148,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                     <!--                        </ul>-->
                     <!--                    </div>-->
                     <div class="option-wrapper">
-                        <h3>Код товара:</h3>
+                        <h3><?php pll_e("Код товара:");?></h3>
                         <ul>
                             <li class="transition-3s"><?= $sku; ?></li>
                         </ul>
@@ -154,7 +158,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                             <?php if ($productStock): ?>
                                 <button class="transition-3s buy-btn" data-sku="<?= $sku; ?>"
                                         data-id="<?= $post->ID; ?>">
-                                    <i class="fas fa-cart-plus icon"></i> В корзину
+                                    <i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину");?>
                                 </button>
                             <?php endif; ?>
                             <div class="price align-items-center d-flex">
@@ -168,7 +172,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                 <div class="price-info">
                     <?php if ($productStock): ?>
                         <button class="transition-3s buy-btn" data-sku="<?= $sku; ?>" data-id="<?= $post->ID; ?>">
-                            <i class="fas fa-cart-plus icon"></i> В корзину
+                            <i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину");?>
                         </button>
                     <?php endif; ?>
                     <div class="price align-items-center d-flex">
@@ -183,14 +187,19 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
             <div class="row">
                 <div class="col-md-12">
                     <div class="anchor-link-menu d-flex flex-nowrap">
-                        <div class="transition-3s d-flex link active"><a class="anchor-link" href="#review">Описание</a>
+                        <div class="transition-3s d-flex link active"><a class="anchor-link" href="#review">
+                                <?php pll_e("Описание");?>
+                            </a>
                         </div>
-                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#specifications">Характеристики
-                                и особенности</a></div>
-                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#materials">Дополнительные
-                                материалы</a></div>
-                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#related-products">Похожие
-                                товары</a></div>
+                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#specifications">
+                                <?php pll_e("Характеристики и особенности");?>
+                            </a></div>
+                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#materials">
+                                <?php pll_e("Дополнительные материалы");?>
+                            </a></div>
+                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#related-products">
+                                <?php pll_e("Похожие товары");?>
+                            </a></div>
                     </div>
                 </div>
             </div>
@@ -271,7 +280,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h3 class="specifications__title">Характеристики и особенности</h3>
+                                <h3 class="specifications__title"><?php pll_e("Характеристики и особенности");?></h3>
                             </div>
                             <div class="col-md-4">
                                 <ul class="specifications-list">
@@ -311,10 +320,10 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                 <?php if ($attributes_count > $attributes_column_size): ?>
                                     <button class="view-full-specifications transition-3s">
                                         <span>
-                                            Все характеристики
+                                            <?php pll_e("Все характеристики");?>
                                         </span>
                                         <span class="d-none">
-                                            Свернуть
+                                            <?php pll_e("Свернуть");?>
                                         </span>
                                     </button>
                                 <?php endif; ?>
@@ -360,22 +369,18 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                 <?php if (!empty($vc_icon)): ?>
                                     <div class="feature">
                                         <img src="<?= get_template_directory_uri(); ?>/images/product/f1.png">
-                                        <div class="title">VC (компенсация вибраций)</div>
-                                        <div class="text">Стабилизатор изображения VC обеспечивает резкое изображение
-                                            без
-                                            дрожания, а также обеспечивает резкое изображение в видоискателе.
+                                        <div class="title"><?php pll_e("VC (компенсация вибраций)");?></div>
+                                        <div class="text">
+                                            <?php pll_e("Стабилизатор изображения VC обеспечивает резкое изображение без дрожания, а также обеспечивает резкое изображение в видоискателе.");?>
                                         </div>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (!empty($usd_icon)): ?>
                                     <div class="feature">
                                         <img src="<?= get_template_directory_uri(); ?>/images/product/f2.png">
-                                        <div class="title">USD (ультразвуковой мотор)</div>
-                                        <div class="text">Мощный ультразвуковой двигатель для съемки быстрых и
-                                            динамичных
-                                            объектов. Чрезвычайно тихий и точный, позволяет осуществлять ручное
-                                            управление
-                                            фокусировкой во время съемки.
+                                        <div class="title"><?php pll_e("USD (ультразвуковой мотор)");?></div>
+                                        <div class="text">
+                                            <?php pll_e("Мощный ультразвуковой двигатель для съемки быстрых и динамичных объектов. Чрезвычайно тихий и точный, позволяет осуществлять ручное управление фокусировкой во время съемки.");?>
                                         </div>
                                     </div>
                                 <?php endif; ?>
@@ -383,9 +388,9 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                     <?php if (!empty($eband_icon)): ?>
                                         <div class="feature">
                                             <img src="<?= get_template_directory_uri(); ?>/images/product/f3.png">
-                                            <div class="title">Покрытие eBAND</div>
-                                            <div class="text">Нано- антибликовое покрытие для защиты от нежелательных
-                                                отражений и ореола.
+                                            <div class="title"><?php pll_e("Покрытие eBAND");?></div>
+                                            <div class="text">
+                                                <?php pll_e("Нано - антибликовое покрытие для защиты от нежелательных отражений и ореола.");?>
                                             </div>
                                         </div>
                                     <?php endif; ?>
@@ -408,8 +413,10 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                             <div class="container">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-7 text-center">
-                                        <h3>Профото является эксклюзивным представителем в Украине известного мирового
-                                            производителя компании Tamron.</h3>
+                                        <h3>
+                                            Профото является эксклюзивным представителем в Украине известного мирового
+                                            производителя компании Tamron.
+                                        </h3>
                                     </div>
                                 </div>
                             </div>
@@ -575,7 +582,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                 <br>
                                 <br>
                                 <br>
-                                <h3>Похожие товары</h3>
+                                <h3><?php pll_e("Похожие товары");?></h3>
                             </div>
                             <div class="col-md-12">
                                 <div class="products-table-catalog">
@@ -624,7 +631,7 @@ $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2)
                                                             <button class="transition-3s buy-btn"
                                                                     data-sku="<?= $skuWC; ?>"
                                                                     data-id="<?= $related_product; ?>">
-                                                                <i class="fas fa-cart-plus icon"></i> Купить
+                                                                <i class="fas fa-cart-plus icon"></i> <?php pll_e("Купить");?>
                                                             </button>
                                                         </div>
                                                         <div class="price">

@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row justify-content-center no-marg">
             <div class="col-md-6 text-center">
-                <p class="title">Подпишитесь на наши новости</p>
-                <p class="text">Будьте в курсе новостей, продуктов и событий Prophoto</p>
+                <p class="title"><?php pll_e("Подпишитесь на наши новости");?></p>
+                <p class="text"><?php pll_e("Будьте в курсе новостей, продуктов и событий Zoom");?></p>
                 <div class="d-flex justify-content-center">
                     <div class="relative">
                         <?= do_shortcode('[contact-form-7 id="2627" title="Контактная форма 1"]');?>
