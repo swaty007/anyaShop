@@ -43,8 +43,6 @@ function insertResult($request)
                 'error' => '404',
                 'value' => $sku,
             ]);
-        } else {
-            $post_id = $posts[0]->ID;
         }
 
         $attachments = get_posts([
@@ -82,22 +80,25 @@ function insertResult($request)
 //            wp_send_json("Attach finded $attach_id");
         }
 
-        $post_thumbnail = get_post_meta($post_id, '_thumbnail_id', true);
-        if (empty($post_thumbnail)) {
+        foreach ($posts as $post) {
+            $post_id = $post->ID;
+            $post_thumbnail = get_post_meta($post_id, '_thumbnail_id', true);
+            if (empty($post_thumbnail)) {
 //            update_post_meta($post_id, '_thumbnail_id', $attach_id);
-            set_post_thumbnail($post_id, $attach_id);
-        } elseif ((int)$post_thumbnail !== $attach_id) {
-            $gallery = get_post_meta($post_id, '_product_image_gallery', true);
-            if (!empty($gallery)) {
-                $galleryItems = explode(",", $gallery);
-                if (in_array($attach_id, $galleryItems)) {
-                    wp_send_json($attach_id);
+                set_post_thumbnail($post_id, $attach_id);
+            } elseif ((int)$post_thumbnail !== $attach_id) {
+                $gallery = get_post_meta($post_id, '_product_image_gallery', true);
+                if (!empty($gallery)) {
+                    $galleryItems = explode(",", $gallery);
+                    if (in_array($attach_id, $galleryItems)) {
+                        wp_send_json($attach_id);
+                    }
+                    $galleryItems[] = $attach_id;
+                } else {
+                    $galleryItems = [$attach_id];
                 }
-                $galleryItems[] = $attach_id;
-            } else {
-                $galleryItems = [$attach_id];
+                update_post_meta($post_id, '_product_image_gallery', implode(',', array_unique($galleryItems)));
             }
-            update_post_meta($post_id, '_product_image_gallery', implode(',', array_unique($galleryItems)));
         }
 
 
