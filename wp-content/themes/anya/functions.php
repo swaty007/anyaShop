@@ -541,6 +541,28 @@ function getProducts(WP_REST_Request $request)
 
 }
 
+function updateProductsPriceSku () {
+    $posts = get_posts([
+        'post_type' => 'product',
+        'post_status' => ['publish', 'draft'],
+        'posts_per_page' => -1,
+        'lang' => ['ru'] //'uk'
+    ]);
+
+    foreach($posts as $post) {
+        $post_id = $post->ID;
+        $post_id_uk = pll_get_post($post->ID, 'uk');
+        $price = get_post_meta($post_id, '_price', true);
+        $sku = get_post_meta($post_id, '_sku', true);
+        if (empty($price)) {
+            $price = get_post_meta($post_id, '_regular_price', true);
+        }
+        update_post_meta($post_id_uk, '_regular_price', $price);
+        update_post_meta($post_id_uk, '_price', $price);
+        update_post_meta($post_id_uk, '_sku', $sku);
+    }
+}
+//add_action('init', 'updateProductsPriceSku', 69);
 
 add_action('pre_get_posts', function($query) {
     if (!is_admin() && $query->is_main_query()) {

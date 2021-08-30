@@ -227,7 +227,7 @@ $child_categories = get_terms('product_cat', [
                             </a>
 
                             <div class="advantages">
-                                <?php wc_display_product_attributes($product); ?>
+<!--                                --><?php //wc_display_product_attributes($product); ?>
                             </div>
                             <div class="price">
                                 <?= $product->get_price_html(); ?>
