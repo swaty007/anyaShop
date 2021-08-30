@@ -263,10 +263,10 @@ $child_categories = get_terms('product_cat', [
             <div class="row">
                 <div class="col-md-12 text-center">
                     <?php the_posts_pagination([
-//                        'prev_text' => '&lsaquo;',//&laquo;
-//                        'next_text' => '&rsaquo;'//&raquo;
+                        'prev_text' => '&lsaquo;',//&laquo;
+                        'next_text' => '&rsaquo;'//&raquo;
                     ]); ?>
-                    <button class="view-more-btn transition-3s">Загрузить еще (9)</button>
+<!--                    <button class="view-more-btn transition-3s">Загрузить еще (9)</button>-->
                 </div>
             </div>
         </div>

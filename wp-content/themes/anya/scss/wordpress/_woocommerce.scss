@@ -3,11 +3,11 @@
 }
 
 .woocommerce #review_form #respond .form-submit input,
-.main__btn{
+.main__btn {
   border-radius: 2px;
   padding: 10px 13px;
   font-size: 14px;
-  font-family: Montserrat,Oswald,OpenSans;
+  font-family: Montserrat, Oswald, OpenSans;
   cursor: pointer;
   border: 1px solid #4a41db;
   color: #4a41db;
@@ -27,7 +27,7 @@
 }
 
 .woocommerce #review_form #respond p input,
-.woocommerce #review_form #respond p textarea{
+.woocommerce #review_form #respond p textarea {
   box-sizing: border-box;
   margin: 0;
   outline: 0;
@@ -39,9 +39,27 @@
   width: 100%;
   color: #4a41db;
   font-weight: 400;
-  font-family: Montserrat,Oswald,OpenSans;
+  font-family: Montserrat, Oswald, OpenSans;
 }
 
 .woocommerce #review_form #respond p input[type="checkbox"] {
   width: auto;
+}
+
+.navigation {
+  .page-numbers {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 2px 0 0;
+    border: 1px solid #4a41db;
+    line-height: 1;
+    text-decoration: none;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .page-numbers.current,
+  a.page-numbers:hover {
+    background: #f9f9f9;
+  }
 }
