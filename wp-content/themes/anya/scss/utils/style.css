@@ -729,6 +729,7 @@ header.diller ul li.icon-item .icon .counter{
 }
 .banners .banners-wrapper .banner{
     height: 460px;
+    padding: 15px;
 }
 .banners .banners-wrapper .banner a{
     display: block;

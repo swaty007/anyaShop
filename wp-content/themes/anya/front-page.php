@@ -48,14 +48,14 @@ get_header();
                 <div class="row tabs-wrapper">
                     <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'popular'}"
                          @click="tab = 'popular'">
-                        <?php pll_e("Популярные товары");?>
+                        <?php pll_e("Популярные товары"); ?>
                     </div>
                     <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'new'}" @click="tab = 'new'">
-                        <?php pll_e("Новинки");?>
+                        <?php pll_e("Новинки"); ?>
                     </div>
                     <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'discount'}"
                          @click="tab = 'discount'">
-                        <?php pll_e("Продукты со скидками");?>
+                        <?php pll_e("Продукты со скидками"); ?>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@ get_header();
                                 <button class="transition-3s buy-btn"
                                         :data-sku="product.sku"
                                         :data-id="product.ID">
-                                    <i class="fas fa-cart-plus icon"></i> <?php pll_e("Купить");?>
+                                    <i class="fas fa-cart-plus icon"></i> <?php pll_e("Купить"); ?>
                                 </button>
                             </div>
                         </div>
@@ -184,7 +184,7 @@ get_header();
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <button v-if="total_pages > page" class="view-more-btn transition-3s" @click="loadMore">
-                            <?php pll_e("Загрузить еще");?> (9)
+                            <?php pll_e("Загрузить еще"); ?> (9)
                         </button>
                     </div>
                 </div>
@@ -229,73 +229,93 @@ get_header();
         <div class="container banners-title">
             <div class="row">
                 <div class="col-md-12">
-                    <h2><?php pll_e("Наши публикации");?></h2>
+                    <h2><?php pll_e("Наши публикации"); ?></h2>
                 </div>
             </div>
         </div>
-        <div class="container banners-wrapper">
-            <div class="banners-slider">
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
+        <div class="container">
+            <div class="banners-wrapper">
+                <div class="responsive">
+                    <?php
+                    $loop = new WP_Query(array(
+                            'post_type' => 'post',
+                            'posts_per_page' => 10,
+                            'orderby' => [],
+                        )
+                    );
+                    while ($loop->have_posts()) : $loop->the_post(); ?>
+
+                        <div class="banner">
+                            <a href="<?php the_permalink(); ?>">
+                                <img width="100%" height="100%" src="<?php the_post_thumbnail_url(); ?>">
+                                <div class="hover transition-3s"></div>
+                                <div class="description">
+                                    <h1><?php the_title(); ?></h1>
+                                    <div><?= mb_substr(get_the_excerpt(), 0, 90); ?>...</div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner2.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner3.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner2.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="banner">
-                    <a href="#">
-                        <img width="100%" height="100%" src="<?= get_template_directory_uri(); ?>/images/banner3.jpg">
-                        <div class="hover transition-3s"></div>
-                        <div class="description">
-                            <h1>Заголовок</h1>
-                            <p>Текст текст текст</p>
-                        </div>
-                    </a>
+
+                    <?php endwhile;
+                    wp_reset_query(); ?>
+                    <div class="banner">
+                        <a href="#">
+                            <img width="100%" height="100%"
+                                 src="<?= get_template_directory_uri(); ?>/images/banner3.jpg">
+                            <div class="hover transition-3s"></div>
+                            <div class="description">
+                                <h1>Заголовок</h1>
+                                <p>Текст текст текст</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="banner">
+                        <a href="#">
+                            <img width="100%" height="100%"
+                                 src="<?= get_template_directory_uri(); ?>/images/banner2.jpg">
+                            <div class="hover transition-3s"></div>
+                            <div class="description">
+                                <h1>Заголовок</h1>
+                                <p>Текст текст текст</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="banner">
+                        <a href="#">
+                            <img width="100%" height="100%"
+                                 src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
+                            <div class="hover transition-3s"></div>
+                            <div class="description">
+                                <h1>Заголовок</h1>
+                                <p>Текст текст текст</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="banner">
+                        <a href="#">
+                            <img width="100%" height="100%"
+                                 src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
+                            <div class="hover transition-3s"></div>
+                            <div class="description">
+                                <h1>Заголовок</h1>
+                                <p>Текст текст текст</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="banner">
+                        <a href="#">
+                            <img width="100%" height="100%"
+                                 src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
+                            <div class="hover transition-3s"></div>
+                            <div class="description">
+                                <h1>Заголовок</h1>
+                                <p>Текст текст текст</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
+
         </div>
     </section>
 <?= get_template_part('template-parts/components-subscription', 'form'); ?>
@@ -312,7 +332,45 @@ get_header();
             if ($("body").width() > 575) {
                 setProductsSimilarHeight(".products-table-catalog .product");
             }
-            iniBannersSlider(".banners");
+            // iniBannersSlider(".banners");
+
+
+            $('.responsive').slick({
+                dots: true,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                // centerPadding: '60px',
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ]
+            });
         })
 
     </script>

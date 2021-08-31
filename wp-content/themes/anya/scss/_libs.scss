@@ -28,6 +28,24 @@
 @import "../plugins/bootstrap-carousel/carousel.css";
 @import "../plugins/slick-slider/slick.css";
 @import "../plugins/slick-slider/slick-theme.css";
+.slick-loading .slick-list
+{
+  background: #fff url(./plugins/slick-slider/ajax-loader.gif) center center no-repeat;
+}
+
+/* Icons */
+@font-face
+{
+  font-family: 'slick';
+  font-weight: normal;
+  font-style: normal;
+
+  src: url(./plugins/slick-slider/fonts/slick.eot);
+  src: url(./plugins/slick-slider/fonts/slick.eot?#iefix) format('embedded-opentype'), url(./plugins/slick-slider/fonts/slick.woff) format('woff'), url(./plugins/slick-slider/fonts/slick.ttf) format('truetype'), url(./plugins/slick-slider/fonts/slick.svg#slick) format('svg');
+}
+.slick-slide img {
+  object-fit: cover;
+}
 //@import "//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/tiny-slider.css";
 //@import "../fonts/fontawesome/css/all.css";
 

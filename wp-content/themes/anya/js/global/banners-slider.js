@@ -43,3 +43,4 @@
 		setBannerSliderConfig( selector );
 		setNavigationButtonsMarginTop( selector );
 	}
+
