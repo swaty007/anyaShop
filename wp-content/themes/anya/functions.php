@@ -326,9 +326,11 @@ if (function_exists('pll_register_string')) {
     pll_register_string("Pages", "Мощный ультразвуковой двигатель для съемки быстрых и динамичных объектов. Чрезвычайно тихий и точный, позволяет осуществлять ручное управление фокусировкой во время съемки.", "Globals");
     pll_register_string("Pages", "Покрытие eBAND", "Globals");
     pll_register_string("Pages", "Нано - антибликовое покрытие для защиты от нежелательных отражений и ореола.", "Globals");
-    pll_register_string("Pages", "", "Globals");
-    pll_register_string("Pages", "", "Globals");
-    pll_register_string("Pages", "", "Globals");
+    pll_register_string("Pages", "Поиск", "Globals");
+    pll_register_string("Pages", "Результаты поиска по запросу", "Globals");
+    pll_register_string("Pages", "товаров", "Globals");
+    pll_register_string("Pages", "По вашему запросу ничего не найдено", "Globals");
+    pll_register_string("Pages", "К сожалению, по вашему запросу не найдено подходящих продуктов.", "Globals");
 
 
     //pll_e("");

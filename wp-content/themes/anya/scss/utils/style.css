@@ -124,7 +124,8 @@ body.open-modal {
 header{
     /*background: #EEEEEE;*/
     background: #fff;
-    width: 100%;    
+    width: 100%;
+    position:relative;
 }
 header .wrapper{
     max-width: 1600px;

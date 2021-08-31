@@ -63,10 +63,17 @@ if (function_exists('wp_body_open')) {
     <div class="container">
         <div class="row justify-content-between">
             <ul class="d-flex">
-                <li class="icon-item d-flex align-items-center left-border transition-3s">
+                <li id="navbar__search--btn" class="icon-item d-flex align-items-center left-border transition-3s">
 					<span class="icon">
 						<i class="fas fa-search"></i>
+						<i class="fas fa-close" style="display: none;"></i>
 					</span>
+                </li>
+                <li id="navbar__search" class="navbar__search">
+                    <form class="navbar__search--form form-inline" method="get" action="<?= site_url();?>" role="search">
+                        <!--<input type="hidden" name="post_type" value="products">-->
+                        <input id="navbar__search--input" class="navbar__search--input" type="text" name="s" placeholder="<?php pll_e('Поиск');?>">
+                    </form>
                 </li>
                 <li class="menu-item d-flex d-lg-none align-items-center transition-3s">
                     <div class="icon">
@@ -138,6 +145,8 @@ if (function_exists('wp_body_open')) {
         </div>
     </div>
 </header>
+
+
 
 
 <section class="mobile-menu transition-5s">

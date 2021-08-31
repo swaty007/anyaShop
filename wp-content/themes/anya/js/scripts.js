@@ -29,6 +29,7 @@ global.jQuery = global.$ = $;
 import Product from "./modules/product";
 import Compare from "./modules/compare";
 import Magazine_react from "./modules/magazine_react";
+import Search from "./modules/search";
 //
 // const global_script = new Global();
 // const allCourses = new AllCourses();
@@ -42,3 +43,4 @@ import Magazine_react from "./modules/magazine_react";
 const product = new Product();
 const compare = new Compare();
 const magazine_react = new Magazine_react();
+const search = new Search();
