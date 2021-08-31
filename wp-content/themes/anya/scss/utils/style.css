@@ -452,9 +452,11 @@ header.diller ul li.icon-item .icon .counter{
     border-bottom: none;
     width: 84.375%;
 }
-.mobile-menu .menu-list .link{
+.mobile-menu .menu-list .link,
+.mobile-menu .menu-list > li{
     border-bottom: 1px solid #CED5D7;
 }
+
 .mobile-menu .menu-list .link .title{
     background-color: #EEEEEE;
     padding: 20px 38px 15px;
@@ -464,6 +466,50 @@ header.diller ul li.icon-item .icon .counter{
     font-size: 18px;
     font-weight: 600;
     font-family: 'Montserrat', Oswald, OpenSans;
+}
+.mobile-menu .menu-list li {
+    position: relative;
+}
+.mobile-menu .menu-list li.menu-item-has-children:before {
+    content: "\f067";
+    color: #4a41db;
+    position: absolute;
+    top: 20px;
+    right: 38px;
+    font-size: 18px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+.mobile-menu .menu-list li.menu-item-has-children.open:before {
+    content: "\f068";
+}
+.mobile-menu .menu-list .sub-menu > li.menu-item-has-children:before {
+    top: 10px;
+    font-size: 13px;
+}
+.mobile-menu .menu-list > li > a{
+    background-color: #EEEEEE;
+    padding: 20px 38px 15px;
+    color: #4A41DB;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Montserrat', Oswald, OpenSans;
+    display: block;
+}
+.mobile-menu .menu-list .sub-menu {
+    height: 0;
+    overflow: hidden;
+    background-color: #eee;
+    transition: .5s ease-in-out;
+}
+.mobile-menu .menu-list .sub-menu > li {
+    padding: 10px 38px;
+}
+.mobile-menu .menu-list .sub-menu > li > a {
+    font-family: 'Montserrat', Oswald, OpenSans;
+    font-size: 14px;
+    color: #848789;
+    display: block;
 }
 .mobile-menu .menu-list .link .title .open-list-btn i{
     color: #4A41DB;
@@ -1331,7 +1377,7 @@ footer.diller .copyright{
     background-image: -moz-linear-gradient(to right, #00C9FF 0%, #92FE9D 51%, #00C9FF 100%);
     background-image: linear-gradient(to right, #00C9FF 0%, #92FE9D 51%, #00C9FF 100%);
     background-size: 200% auto;*/
-    background: #009bf5;
+    background: #4a41db;
     margin: 50px 0;
 }
 .product-page .price-info .buy-btn:hover{
@@ -1604,7 +1650,7 @@ footer.diller .copyright{
     background-image: -moz-linear-gradient(to right, #00C9FF 0%, #92FE9D 51%, #00C9FF 100%);
     background-image: linear-gradient(to right, #00C9FF 0%, #92FE9D 51%, #00C9FF 100%);
     background-size: 200% auto;*/
-    background: #009bf5;
+    background: #4a41db;
     padding: 9px 20px;
     font-size: 14px;
     font-family: 'Montserrat', Oswald, OpenSans;
