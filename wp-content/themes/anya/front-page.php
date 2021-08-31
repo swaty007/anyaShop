@@ -250,7 +250,7 @@ get_header();
                                 <img width="100%" height="100%" src="<?php the_post_thumbnail_url(); ?>">
                                 <div class="hover transition-3s"></div>
                                 <div class="description">
-                                    <h1><?php the_title(); ?></h1>
+                                    <h4 class="description__title"><?php the_title(); ?></h4>
                                     <div><?= mb_substr(get_the_excerpt(), 0, 90); ?>...</div>
                                 </div>
                             </a>

@@ -758,10 +758,11 @@ header.diller ul li.icon-item .icon .counter{
     padding: 30px;
     opacity: 0.9;
 }
-.banners .banners-wrapper .banner a .description h1{
+.banners .banners-wrapper .banner a .description .description__title{
     font-family: 'Montserrat', Oswald, OpenSans;
     font-weight: 400;
     font-size: 23px;
+    margin-bottom: 5px;
 }
 .banners .banners-wrapper .banner a .description p{
     font-family: 'Montserrat', Oswald, OpenSans;
