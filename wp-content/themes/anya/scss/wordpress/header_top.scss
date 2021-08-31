@@ -1,5 +1,8 @@
 .header_top {
   background: #111111;
+  @media(max-width:991px) {
+    display: none;
+  }
   &__menu {
 
     .menu-item {
