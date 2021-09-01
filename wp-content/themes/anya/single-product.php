@@ -30,6 +30,8 @@ foreach ($product->get_attributes() as $attribute) {
 $attributes_column_size = 8;
 $attributes_count = count($attributes);
 $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2);
+
+$type = $product->get_type(); //yith_bundle, simple
 //the_content();
 ?>
 
