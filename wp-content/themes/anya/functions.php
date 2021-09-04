@@ -396,11 +396,13 @@ function disable_emojis_tinymce($plugins)
 function parsePlugin()
 {
 //    return;
-    new ImportXML();
+    $xml = new ImportXML();
+    return;
+    $xml->parseLocalFileData();
     die();
 }
 
-//add_action('init', 'parsePlugin', 69);
+add_action('init', 'parsePlugin', 69);
 
 function removeDuplicates()
 {

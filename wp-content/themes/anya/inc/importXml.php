@@ -39,7 +39,44 @@ class ImportXML
 
     function __construct()
     {
-//        return;
+        add_action('admin_menu', array($this, 'addPluginAdminMenu'));
+    }
+
+    public function addPluginAdminMenu()
+    {
+        $page_hook = add_menu_page(
+            __('Обновление цен XML', 'sap-integration-woocommerce'), //page title
+            __('Обновление цен XML', 'sap-integration-woocommerce'), //menu title
+            'manage_options', //capability
+            'xml_settings', //menu_slug,
+            array($this, 'load_popup_settings_page'),
+            'dashicons-admin-site',
+            51
+        );
+
+        add_submenu_page(
+            'popup_settings',
+            __('Обновление цен XML', 'sap-integration-woocommerce'), //page title
+            __('Обновление цен XML', 'sap-integration-woocommerce'), //menu title
+            'manage_options', //capability
+            'xml_settings', //menu_slug,
+            array($this, 'load_popup_settings_page'),
+            15
+        );
+    }
+
+    public function load_popup_settings_page()
+    {
+        $updated = false;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit-xml-settings']) {
+            $updated = true;
+            update_option('xml_price_url', $_POST["xml_price_url"]);
+        }
+        include_once plugin_dir_path(__FILE__) . 'views/xml-display.php';
+    }
+
+    function parseLocalFileData() {
+        //        return;
         $this->loadData();
         $this->importCategories();
         $this->set_categories_parents();

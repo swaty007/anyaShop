@@ -70,9 +70,11 @@ if (function_exists('wp_body_open')) {
 					</span>
                 </li>
                 <li id="navbar__search" class="navbar__search">
-                    <form class="navbar__search--form form-inline" method="get" action="<?= site_url();?>" role="search">
+                    <form class="navbar__search--form form-inline" method="get" action="<?= site_url(); ?>"
+                          role="search">
                         <!--<input type="hidden" name="post_type" value="products">-->
-                        <input id="navbar__search--input" class="navbar__search--input" type="text" name="s" placeholder="<?php pll_e('Поиск');?>">
+                        <input id="navbar__search--input" class="navbar__search--input" type="text" name="s"
+                               placeholder="<?php pll_e('Поиск'); ?>">
                     </form>
                 </li>
                 <li id="menu__btn" class="menu-item d-flex d-lg-none align-items-center transition-3s">
@@ -120,12 +122,12 @@ if (function_exists('wp_body_open')) {
                         <i class="far fa-user"></i>
                     </a>
                 </li>
-                <!--                <li class="icon-item d-flex align-items-center transition-3s">-->
-                <!--					<span class="icon">-->
-                <!--						<i class="far fa-heart"></i>-->
-                <!--						<span class="counter">2</span>-->
-                <!--					</span>-->
-                <!--                </li>-->
+                <li class="icon-item d-flex align-items-center transition-3s">
+                					<a href="<?= get_permalink(pll_get_post(2540)); ?>" class="icon">
+                						<i class="far fa-heart"></i>
+<!--                						<span class="counter">2</span>-->
+                					</a>
+                </li>
                 <li class="icon-item d-flex align-items-center transition-3s">
                     <a href="<?= get_permalink(pll_get_post(1890)); ?>" class="icon">
                         <i class="fas fa-balance-scale"></i>
@@ -147,8 +149,6 @@ if (function_exists('wp_body_open')) {
 </header>
 
 
-
-
 <section class="mobile-menu transition-5s">
     <div class="header relative">
         <div class="logo-wrapper">
@@ -165,28 +165,28 @@ if (function_exists('wp_body_open')) {
             'menu_class' => 'menu-list d-block',
         ]);
         ?>
-<!--        <ul class="menu-list d-block">-->
-<!--            <li class="link relative d-block">-->
-<!--                <div class="title">-->
-<!--                    <a class="transition-2s" href="#">Объективы</a>-->
-<!--                    <span class="open-list-btn pull-right">-->
-<!--						<i class="fas fa-plus show transition-5s"></i>-->
-<!--						<i class="fas fa-minus hide transition-5s"></i>-->
-<!--					</span>-->
-<!--                </div>-->
-<!--                <ul class="under-list transition-5s">-->
-<!--                    <li><a class="transition-2s" href="#">Серия Di (полноразмерная матрица)</a></li>-->
-<!--                    <li><a class="transition-2s" href="#">Серия Di II (APS-C)</a></li>-->
-<!--                    <li><a class="transition-2s" href="#">Серия Di III (для цифровых системных камер</a></li>-->
-<!--                </ul>-->
-<!--            </li>-->
-<!--            <li class="link relative d-block">-->
-<!--                <div class="title">-->
-<!--                    <a class="transition-2s" href="#">Штативные головки</a>-->
-<!--                </div>-->
-<!--                <ul class="under-list transition-5s"></ul>-->
-<!--            </li>-->
-<!--        </ul>-->
+        <!--        <ul class="menu-list d-block">-->
+        <!--            <li class="link relative d-block">-->
+        <!--                <div class="title">-->
+        <!--                    <a class="transition-2s" href="#">Объективы</a>-->
+        <!--                    <span class="open-list-btn pull-right">-->
+        <!--						<i class="fas fa-plus show transition-5s"></i>-->
+        <!--						<i class="fas fa-minus hide transition-5s"></i>-->
+        <!--					</span>-->
+        <!--                </div>-->
+        <!--                <ul class="under-list transition-5s">-->
+        <!--                    <li><a class="transition-2s" href="#">Серия Di (полноразмерная матрица)</a></li>-->
+        <!--                    <li><a class="transition-2s" href="#">Серия Di II (APS-C)</a></li>-->
+        <!--                    <li><a class="transition-2s" href="#">Серия Di III (для цифровых системных камер</a></li>-->
+        <!--                </ul>-->
+        <!--            </li>-->
+        <!--            <li class="link relative d-block">-->
+        <!--                <div class="title">-->
+        <!--                    <a class="transition-2s" href="#">Штативные головки</a>-->
+        <!--                </div>-->
+        <!--                <ul class="under-list transition-5s"></ul>-->
+        <!--            </li>-->
+        <!--        </ul>-->
     </div>
 </section>
 

@@ -19,12 +19,6 @@
                     'menu_class' => 'links',
                 ]);
                 ?>
-                <ul class="links">
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#">О компании</a></li>
-                    <li><a href="#">Публикации</a></li>
-                    <li><a href="#">Контакты</a></li>
-                </ul>
             </div>
             <div class="col-sm-4 col-md-3 content-wrapper">
                 <div class="title">Каталог</div>
@@ -36,17 +30,6 @@
                     'menu_class' => 'links',
                 ]);
                 ?>
-                <ul class="links">
-                    <li><a href="#">Объективы</a></li>
-                    <li><a href="#">Софтбоксы</a></li>
-                    <li><a href="#">Комплекты</a></li>
-                    <li><a href="#">Аксессуары</a></li>
-                    <li><a href="#">Вспышки</a></li>
-                    <li><a href="#">Рефлекторы</a></li>
-                    <li><a href="#">Соты</a></li>
-                    <li><a href="#">Зонты</a></li>
-                    <li><a href="#">Фоны</a></li>
-                </ul>
             </div>
             <div class="col-sm-4 col-md-3 content-wrapper">
                 <div class="title">Социальные сети</div>

@@ -258,61 +258,6 @@ get_header();
 
                     <?php endwhile;
                     wp_reset_query(); ?>
-                    <div class="banner">
-                        <a href="#">
-                            <img width="100%" height="100%"
-                                 src="<?= get_template_directory_uri(); ?>/images/banner3.jpg">
-                            <div class="hover transition-3s"></div>
-                            <div class="description">
-                                <h1>Заголовок</h1>
-                                <p>Текст текст текст</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="banner">
-                        <a href="#">
-                            <img width="100%" height="100%"
-                                 src="<?= get_template_directory_uri(); ?>/images/banner2.jpg">
-                            <div class="hover transition-3s"></div>
-                            <div class="description">
-                                <h1>Заголовок</h1>
-                                <p>Текст текст текст</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="banner">
-                        <a href="#">
-                            <img width="100%" height="100%"
-                                 src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
-                            <div class="hover transition-3s"></div>
-                            <div class="description">
-                                <h1>Заголовок</h1>
-                                <p>Текст текст текст</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="banner">
-                        <a href="#">
-                            <img width="100%" height="100%"
-                                 src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
-                            <div class="hover transition-3s"></div>
-                            <div class="description">
-                                <h1>Заголовок</h1>
-                                <p>Текст текст текст</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="banner">
-                        <a href="#">
-                            <img width="100%" height="100%"
-                                 src="<?= get_template_directory_uri(); ?>/images/banner1.jpg">
-                            <div class="hover transition-3s"></div>
-                            <div class="description">
-                                <h1>Заголовок</h1>
-                                <p>Текст текст текст</p>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
 
