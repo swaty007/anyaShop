@@ -61,7 +61,7 @@ class ImportXML
             'manage_options', //capability
             'xml_settings', //menu_slug,
             array($this, 'load_popup_settings_page'),
-            15
+            50
         );
     }
 
@@ -73,6 +73,76 @@ class ImportXML
             update_option('xml_price_url', $_POST["xml_price_url"]);
         }
         include_once plugin_dir_path(__FILE__) . 'views/xml-display.php';
+    }
+
+    function parseGoogleDrive() {
+        $languages = pll_languages_list();
+        $csv = trim(get_option('xml_price_url', true));
+
+        if(!ini_set('default_socket_timeout', 15)) {
+            echo "Unable to change socket timeout";
+        }
+        $scv_data = [];
+        if (($file = fopen($csv, "r")) !== false) {
+            while (($data = fgetcsv($file, 1000, ",")) !== false) {
+                $scv_data[] = $data;
+            }
+            fclose($file);
+
+//            echo "<pre>";
+            $count = 0;
+            $valid = 0;
+            $items = 0;
+            foreach($scv_data as $item) {
+                $sku = $item[0];
+                $price = $item[2];
+                $availability = $item[3];
+//                var_dump($sku, $price, $availability);
+                $count++;
+                if (!empty($sku) && !empty($price) && !empty($availability)) {
+                    if (is_numeric($sku) && is_numeric($price) && in_array($availability, ['Y', 'N'])) {
+                        $valid++;
+                        $posts = get_posts([
+                            'post_type' => 'product',
+                            'post_status' => ['publish', 'draft'],
+                            'posts_per_page' => -1,
+                            'lang' => $languages,
+                            'meta_query' => [
+                                [
+                                    'key' => '_sku',
+                                    'compare' => 'LIKE',
+                                    'value' => $sku,
+                                ]
+                            ]
+                        ]);
+                        if (!empty($posts)) {
+                            $items++;
+                            foreach($posts as $post) {
+                                $productWp = wc_get_product($post->ID);
+                                update_post_meta($post->ID, '_regular_price', $price);
+                                update_post_meta($post->ID, '_price', $price);
+                                $stock = $availability === "Y";
+
+                                $productWp->set_manage_stock($stock);
+                                $productWp->save();
+                            }
+                        }
+
+                    }
+                }
+
+                unset($sku);
+                unset($price);
+                unset($availability);
+                unset($post_id);
+            }
+//            echo "Count: $count\n";
+//            echo "Valid Data: $valid\n";
+//            echo "Products finded: $items\n";
+//            die();
+        } else {
+            echo "ERROR PARSING CSV";
+        }
     }
 
     function parseLocalFileData() {
@@ -343,9 +413,11 @@ class ImportXML
     }
 
 
-    function productExists($sku)
+    function productExists($sku, $timeout = true)
     {
-        usleep(200000); //0.2 sek
+        if ($timeout) {
+            usleep(200000); //0.2 sek
+        }
         $posts = get_posts([
             'post_type' => 'product',
             'post_status' => ['publish', 'draft'],
@@ -430,24 +502,28 @@ class ImportXML
 
 
     function removeDuplicates() {
-        $data = [];
-        $posts = get_posts([
-            'post_type' => 'product',
-            'post_status' => ['publish', 'draft'],
-            'posts_per_page' => -1,
-        ]);
+        foreach (pll_languages_list() as $lang) {
+            $data = [];
+            $posts = get_posts([
+                'post_type' => 'product',
+                'post_status' => ['publish', 'draft'],
+                'posts_per_page' => -1,
+                'lang' => $lang,
+            ]);
 
 
 
-        foreach($posts as $post) {
-            $post_id = $post->ID;
-            $sku = get_post_meta($post_id, '_sku', true);
-            if (in_array($sku, $data)) {
-                wp_delete_post($post_id);
-            } else {
-                $data[] = $sku;
+            foreach($posts as $post) {
+                $post_id = $post->ID;
+                $sku = get_post_meta($post_id, '_sku', true);
+                if (in_array($sku, $data)) {
+                    wp_delete_post($post_id);
+                } else {
+                    $data[] = $sku;
+                }
             }
         }
+
     }
 
 }

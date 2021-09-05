@@ -15,19 +15,25 @@ get_header();
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <a href="#" class="d-block"><img widht="100%"
-                                                         src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
-                                                         alt="First slide"></a>
+                        <a href="#" class="d-block">
+                            <img widht="100%"
+                                 src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
+                                 alt="First slide">
+                        </a>
                     </div>
                     <div class="carousel-item">
-                        <a href="#" class="d-block"><img widht="100%"
-                                                         src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
-                                                         alt="First slide"></a>
+                        <a href="#" class="d-block">
+                            <img widht="100%"
+                                 src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
+                                 alt="First slide">
+                        </a>
                     </div>
                     <div class="carousel-item">
-                        <a href="#" class="d-block"><img widht="100%"
-                                                         src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
-                                                         alt="First slide"></a>
+                        <a href="#" class="d-block">
+                            <img widht="100%"
+                                 src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
+                                 alt="First slide">
+                        </a>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#homeSlider" role="button" data-slide="prev">

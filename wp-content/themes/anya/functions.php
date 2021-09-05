@@ -396,31 +396,39 @@ function disable_emojis_tinymce($plugins)
 function parsePlugin()
 {
 //    return;
-    $xml = new ImportXML();
-    return;
-    $xml->parseLocalFileData();
-    die();
+    $time = get_option('xml_price_cron');
+    $hour = 60*60*24; // 24 hours
+    if (empty($time) || $time + $hour < time()) {
+        $xml = new ImportXML();
+        $xml->parseGoogleDrive();
+        update_option('xml_price_cron', time());
+        return;
+        $xml->parseLocalFileData();
+        die();
+    }
 }
-
 add_action('init', 'parsePlugin', 69);
 
 function removeDuplicates()
 {
-    $data = [];
-    $posts = get_posts([
-        'post_type' => 'product',
-        'post_status' => ['publish', 'draft'],
-        'posts_per_page' => -1,
-    ]);
+    foreach (pll_languages_list() as $lang) {
+        $data = [];
+        $posts = get_posts([
+            'post_type' => 'product',
+            'post_status' => ['publish', 'draft'],
+            'posts_per_page' => -1,
+            'lang' => $lang,
+        ]);
 
 
-    foreach ($posts as $post) {
-        $post_id = $post->ID;
-        $sku = get_post_meta($post_id, '_sku', true);
-        if (in_array($sku, $data)) {
-            wp_delete_post($post_id);
-        } else {
-            $data[] = $sku;
+        foreach($posts as $post) {
+            $post_id = $post->ID;
+            $sku = get_post_meta($post_id, '_sku', true);
+            if (in_array($sku, $data)) {
+                wp_delete_post($post_id);
+            } else {
+                $data[] = $sku;
+            }
         }
     }
 }

@@ -1,10 +1,9 @@
 <?php
-
+global $wp;
 ?>
 
 <div class="wrap">
     <h2><?php echo esc_html(get_admin_page_title()); ?></h2>
-
     <?php //include_once plugin_dir_path( __FILE__ ). 'sap_integration_woocommerce-admin-sap-message.php'?>
 
     <?php if (!empty($updated)): ?>
@@ -16,8 +15,7 @@
     <?php endif ?>
 
 
-    <form action="<?php global $wp;
-    echo add_query_arg($wp->query_vars); ?>" method="POST">
+    <form action="<?php global $wp; $wp->query_vars; echo add_query_arg([]); ?>" method="POST">
         <table class="form-table">
             <tbody>
             <tr>
