@@ -17,24 +17,6 @@ $child_categories = get_terms('product_cat', [
     'hide_empty' => true,
     'parent' => $term_id,
 ]);
-
-//$wp_query->meta_query
-//echo "<pre>";
-//var_dump($wp_query->meta_query);
-//var_dump($wp_query->query_vars);
-//$meta_query = ['relation' => 'AND'];
-//$meta_query['_price'] = [
-//    'key' => '_price',
-//    'value' => 20000,
-//    'compare' => '>=',
-//    'type' => 'NUMERIC'
-//];
-////$wp_query->query_vars['meta_query'] = $meta_query;
-//$wp_query->set('meta_query', $meta_query);
-//$GLOBALS['wp_query']->query_vars['meta_query'] = $meta_query;
-//$GLOBALS['wp_query']->set('meta_query', $meta_query);
-//wp_reset_query();
-//query_posts($wp_query)
 ?>
     <section class="catalog-way">
         <div class="container no-pad">

@@ -75,11 +75,12 @@ class ImportXML
         include_once plugin_dir_path(__FILE__) . 'views/xml-display.php';
     }
 
-    function parseGoogleDrive() {
+    function parseGoogleDrive()
+    {
         $languages = pll_languages_list();
         $csv = trim(get_option('xml_price_url', true));
 
-        if(!ini_set('default_socket_timeout', 15)) {
+        if (!ini_set('default_socket_timeout', 15)) {
             echo "Unable to change socket timeout";
         }
         $scv_data = [];
@@ -93,7 +94,7 @@ class ImportXML
             $count = 0;
             $valid = 0;
             $items = 0;
-            foreach($scv_data as $item) {
+            foreach ($scv_data as $item) {
                 $sku = $item[0];
                 $price = $item[2];
                 $availability = $item[3];
@@ -117,13 +118,15 @@ class ImportXML
                         ]);
                         if (!empty($posts)) {
                             $items++;
-                            foreach($posts as $post) {
+                            foreach ($posts as $post) {
                                 $productWp = wc_get_product($post->ID);
                                 update_post_meta($post->ID, '_regular_price', $price);
                                 update_post_meta($post->ID, '_price', $price);
-                                $stock = $availability === "Y";
+                                $stock = $availability === "Y" ? "instock" : "outofstock";
 
-                                $productWp->set_manage_stock($stock);
+//                                $productWp->set_manage_stock($stock);
+                                $productWp->set_stock_status($stock);
+//                                wc_update_product_stock_status($stock); //instock outofstock onbackorder
                                 $productWp->save();
                             }
                         }
@@ -145,7 +148,8 @@ class ImportXML
         }
     }
 
-    function parseLocalFileData() {
+    function parseLocalFileData()
+    {
         //        return;
         $this->loadData();
         $this->importCategories();
@@ -191,8 +195,14 @@ class ImportXML
             if ($post_id) {
                 update_post_meta($post_id, '_regular_price', $product->price->__toString());
                 $productWp = wc_get_product($post_id);
-                $productWp->set_manage_stock(true);
-                wc_update_product_stock($post_id, $product->stock_quantity->__toString());
+
+                $stock = $product->stock_quantity->__toString() > 0 ? "instock" : "outofstock";
+
+//            $productWp->set_manage_stock(true);
+                $productWp->set_stock_status($stock);
+                //            wc_update_product_stock_status(); //instock outofstock onbackorder
+
+//                wc_update_product_stock($post_id, $product->stock_quantity->__toString());
                 $productWp->save();
             }
             unset($product);
@@ -329,11 +339,15 @@ class ImportXML
 
 //            var_dump($product->vendor->__toString());
 
+            $stock = $product->stock_quantity->__toString() > 0 ? "instock" : "outofstock";
 
-            $productWp->set_manage_stock(true);
+//            $productWp->set_manage_stock(true);
+            $productWp->set_stock_status($stock);
+            //            wc_update_product_stock_status(); //instock outofstock onbackorder
             $productWp->save();
+
 //            $productWp->set_price($product->price->__toString());
-            wc_update_product_stock($post_id, $product->stock_quantity->__toString());
+//            wc_update_product_stock($post_id, $product->stock_quantity->__toString());
 
 
             unset($product);
@@ -501,7 +515,8 @@ class ImportXML
     }
 
 
-    function removeDuplicates() {
+    function removeDuplicates()
+    {
         foreach (pll_languages_list() as $lang) {
             $data = [];
             $posts = get_posts([
@@ -512,8 +527,7 @@ class ImportXML
             ]);
 
 
-
-            foreach($posts as $post) {
+            foreach ($posts as $post) {
                 $post_id = $post->ID;
                 $sku = get_post_meta($post_id, '_sku', true);
                 if (in_array($sku, $data)) {

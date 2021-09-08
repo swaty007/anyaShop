@@ -398,8 +398,8 @@ function parsePlugin()
 //    return;
     $time = get_option('xml_price_cron');
     $hour = 60*60*24; // 24 hours
+    $xml = new ImportXML();
     if (empty($time) || $time + $hour < time()) {
-        $xml = new ImportXML();
         $xml->parseGoogleDrive();
         update_option('xml_price_cron', time());
         return;
@@ -558,20 +558,23 @@ function updateProductsPriceSku () {
         'post_type' => 'product',
         'post_status' => ['publish', 'draft'],
         'posts_per_page' => -1,
-        'lang' => ['ru'] //'uk'
+        'lang' => ['ru', 'uk'] //'uk'
     ]);
 
     foreach($posts as $post) {
-        $post_id = $post->ID;
-        $post_id_uk = pll_get_post($post->ID, 'uk');
-        $price = get_post_meta($post_id, '_price', true);
-        $sku = get_post_meta($post_id, '_sku', true);
-        if (empty($price)) {
-            $price = get_post_meta($post_id, '_regular_price', true);
-        }
-        update_post_meta($post_id_uk, '_regular_price', $price);
-        update_post_meta($post_id_uk, '_price', $price);
-        update_post_meta($post_id_uk, '_sku', $sku);
+        $productWp = wc_get_product($post->ID);
+        $productWp->set_manage_stock(false);
+        $productWp->save();
+//        $post_id = $post->ID;
+//        $post_id_uk = pll_get_post($post->ID, 'uk');
+//        $price = get_post_meta($post_id, '_price', true);
+//        $sku = get_post_meta($post_id, '_sku', true);
+//        if (empty($price)) {
+//            $price = get_post_meta($post_id, '_regular_price', true);
+//        }
+//        update_post_meta($post_id_uk, '_regular_price', $price);
+//        update_post_meta($post_id_uk, '_price', $price);
+//        update_post_meta($post_id_uk, '_sku', $sku);
     }
 }
 //add_action('init', 'updateProductsPriceSku', 69);

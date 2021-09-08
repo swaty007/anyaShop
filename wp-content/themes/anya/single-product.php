@@ -415,10 +415,10 @@ $type = $product->get_type(); //yith_bundle, simple
                             <div class="container">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-7 text-center">
-                                        <h3>
-                                            Профото является эксклюзивным представителем в Украине известного мирового
-                                            производителя компании Tamron.
-                                        </h3>
+<!--                                        <h3>-->
+<!--                                            Профото является эксклюзивным представителем в Украине известного мирового-->
+<!--                                            производителя компании Tamron.-->
+<!--                                        </h3>-->
                                     </div>
                                 </div>
                             </div>
