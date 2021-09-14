@@ -95,9 +95,16 @@ class ImportXML
             $valid = 0;
             $items = 0;
             foreach ($scv_data as $item) {
+
                 $sku = $item[0];
-                $price = $item[2];
-                $availability = $item[3];
+                $price = htmlentities($item[1],null, 'utf-8');
+                $price = str_replace(" ", "", $price);
+                $price = str_replace("\n", "", $price);
+                $price = str_replace("&nbsp;", "", $price);
+                $price = preg_replace("/\s|&nbsp;/",'',$price);
+                $price = preg_replace("/&nbsp;/",'',$price);
+//                $price = html_entity_decode($price);
+                $availability = $item[2];
 //                var_dump($sku, $price, $availability);
                 $count++;
                 if (!empty($sku) && !empty($price) && !empty($availability)) {
