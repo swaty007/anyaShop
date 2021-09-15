@@ -140,7 +140,7 @@ class ImportXML
 
                             }
                         }
-
+                        unset($posts);
                     }
                 }
 
