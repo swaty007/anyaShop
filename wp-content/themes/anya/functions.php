@@ -397,8 +397,9 @@ function parsePlugin()
 {
 //    return;
     $time = get_option('xml_price_cron');
-    $hour = 60*60*24; // 24 hours
+    $hour = 60*60*4; // 24 hours
     $xml = new ImportXML();
+//    $xml->parseGoogleDrive();
     if (empty($time) || $time + $hour < time()) {
         $xml->parseGoogleDrive();
         update_option('xml_price_cron', time());

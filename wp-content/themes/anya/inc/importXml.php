@@ -127,14 +127,17 @@ class ImportXML
                             $items++;
                             foreach ($posts as $post) {
                                 $productWp = wc_get_product($post->ID);
-                                update_post_meta($post->ID, '_regular_price', $price);
-                                update_post_meta($post->ID, '_price', $price);
                                 $stock = $availability === "Y" ? "instock" : "outofstock";
 
-//                                $productWp->set_manage_stock($stock);
-                                $productWp->set_stock_status($stock);
+                                if ($productWp->get_stock_status() !== $stock && $productWp->get_price() !== $price) {
+                                    update_post_meta($post->ID, '_regular_price', $price);
+                                    update_post_meta($post->ID, '_price', $price);
+                                    //                                $productWp->set_manage_stock($stock);
+                                    $productWp->set_stock_status($stock);
 //                                wc_update_product_stock_status($stock); //instock outofstock onbackorder
-                                $productWp->save();
+                                    $productWp->save();
+                                }
+
                             }
                         }
 
