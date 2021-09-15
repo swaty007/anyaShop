@@ -401,8 +401,8 @@ function parsePlugin()
     $xml = new ImportXML();
 //    $xml->parseGoogleDrive();
     if (empty($time) || $time + $hour < time()) {
-        $xml->parseGoogleDrive();
         update_option('xml_price_cron', time());
+        $xml->parseGoogleDrive();
         return;
         $xml->parseLocalFileData();
         die();
