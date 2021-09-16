@@ -2,8 +2,12 @@
 @media only screen and (max-width: 600px) {
 	header ul li.icon-item{
 		font-size: 16px;
-    	padding-left: 20px;
-    	padding-right: 20px;	
+		padding-left: 0;
+		padding-right: 0;
+	}
+	header ul li.icon-item .icon {
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 	header ul li.menu-item{
 		margin-right: 0px;
@@ -14,8 +18,11 @@
 /* Extra small devices (phones, 480px and down) */
 @media only screen and (max-width: 480px) {
 	header ul li.icon-item {
-    	padding: 20px 18px !important;
+    	padding: 0 !important;
     }
+	header ul li.icon-item .icon {
+		padding: 20px 18px !important;
+	}
 	.banners .banners-wrapper{
 	    padding-right: 15px;
 	    margin-right: auto;
@@ -95,7 +102,7 @@
 		font-size: 15px;
 	}
 	header ul li.logo-item{
-		display: block !important;
+		display: flex !important;
 	}			
 } 
 /* Custom 992px and down */
@@ -116,8 +123,11 @@
     	display: none !important;
     }
     header ul li.icon-item{
-    	padding: 25px;
+    	padding: 0;
     }
+	header ul li.icon-item .icon {
+		padding: 25px;
+	}
     .product-fixed-menu .desktop{
     	display: none !important;
     }    
@@ -130,7 +140,9 @@
 @media only screen and (min-width: 992px) {
 	header ul li.text-item,
 	header ul li.logo-item{
-		display: block !important;
+		display: flex !important;
+		justify-content: center;
+		align-items: center;
 	}		
 	header ul:last-of-type li.text-item{
 	    margin-right: 50px; 
@@ -288,8 +300,11 @@
 /** Custom */
 @media only screen and (max-width: 420px) {
 	header ul li.icon-item {
-    	padding: 18px 12px !important;
+    	padding: 0 !important;
     }
+	header ul li.icon-item .icon {
+		padding: 18px 12px !important;
+	}
 	header ul li.menu-item {
 	    padding: 0 15px;
 	}    

@@ -123,10 +123,10 @@ if (function_exists('wp_body_open')) {
                     </a>
                 </li>
                 <li class="icon-item d-flex align-items-center transition-3s">
-                					<a href="<?= get_permalink(pll_get_post(2540)); ?>" class="icon">
-                						<i class="far fa-heart"></i>
-<!--                						<span class="counter">2</span>-->
-                					</a>
+                    <a href="<?= get_permalink(pll_get_post(2540)); ?>" class="icon">
+                        <i class="far fa-heart"></i>
+                        <!--                						<span class="counter">2</span>-->
+                    </a>
                 </li>
                 <li class="icon-item d-flex align-items-center transition-3s">
                     <a href="<?= get_permalink(pll_get_post(1890)); ?>" class="icon">
@@ -134,15 +134,15 @@ if (function_exists('wp_body_open')) {
                         <span id="compare__counter" class="counter">1</span>
                     </a>
                 </li>
-                <li class="icon-item d-flex align-items-center transition-3s dropdown__li">
-					<span class="icon">
-						<i class="fas fa-shopping-basket"></i>
-						<span id="cart__counter" class="counter">1</span>
-					</span>
-                    <div class="dropdown__widget">
-                        <div class="widget_shopping_cart_content"></div>
-                    </div>
-                </li>
+<!--                <li class="icon-item d-flex align-items-center transition-3s dropdown__li">-->
+<!--					<span class="icon">-->
+<!--						<i class="fas fa-shopping-basket"></i>-->
+<!--						<span id="cart__counter" class="counter">1</span>-->
+<!--					</span>-->
+<!--                    <div class="dropdown__widget">-->
+<!--                        <div class="widget_shopping_cart_content"></div>-->
+<!--                    </div>-->
+<!--                </li>-->
             </ul>
         </div>
     </div>
@@ -165,35 +165,13 @@ if (function_exists('wp_body_open')) {
             'menu_class' => 'menu-list d-block',
         ]);
         ?>
-        <!--        <ul class="menu-list d-block">-->
-        <!--            <li class="link relative d-block">-->
-        <!--                <div class="title">-->
-        <!--                    <a class="transition-2s" href="#">Объективы</a>-->
-        <!--                    <span class="open-list-btn pull-right">-->
-        <!--						<i class="fas fa-plus show transition-5s"></i>-->
-        <!--						<i class="fas fa-minus hide transition-5s"></i>-->
-        <!--					</span>-->
-        <!--                </div>-->
-        <!--                <ul class="under-list transition-5s">-->
-        <!--                    <li><a class="transition-2s" href="#">Серия Di (полноразмерная матрица)</a></li>-->
-        <!--                    <li><a class="transition-2s" href="#">Серия Di II (APS-C)</a></li>-->
-        <!--                    <li><a class="transition-2s" href="#">Серия Di III (для цифровых системных камер</a></li>-->
-        <!--                </ul>-->
-        <!--            </li>-->
-        <!--            <li class="link relative d-block">-->
-        <!--                <div class="title">-->
-        <!--                    <a class="transition-2s" href="#">Штативные головки</a>-->
-        <!--                </div>-->
-        <!--                <ul class="under-list transition-5s"></ul>-->
-        <!--            </li>-->
-        <!--        </ul>-->
     </div>
 </section>
 
 <section class="header_top">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 d-flex justify-content-between">
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'menu-header',
@@ -202,6 +180,30 @@ if (function_exists('wp_body_open')) {
                     'menu_class' => 'header_top__menu d-flex',
                 ]);
                 ?>
+
+                <ul class="header_top__menu2 d-flex">
+                    <li class="icon-item d-flex align-items-center transition-3s">
+                        <a href="<?= get_permalink(pll_get_post(2540)); ?>" class="icon transition-3s">
+                            <i class="far fa-heart"></i>
+                            <!--                						<span class="counter">2</span>-->
+                        </a>
+                    </li>
+                    <li class="icon-item d-flex align-items-center transition-3s">
+                        <a href="<?= get_permalink(pll_get_post(1890)); ?>" class="icon transition-3s">
+                            <i class="fas fa-balance-scale"></i>
+                            <span id="compare__counter" class="counter">1</span>
+                        </a>
+                    </li>
+                    <li class="icon-item d-flex align-items-center transition-3s dropdown__li">
+					<span class="icon transition-3s">
+						<i class="fas fa-shopping-basket"></i>
+						<span id="cart__counter" class="counter">1</span>
+					</span>
+                        <div class="dropdown__widget">
+                            <div class="widget_shopping_cart_content"></div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

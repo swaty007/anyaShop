@@ -8,34 +8,40 @@ get_header();
     <section class="home-slider">
         <div class="container no-pad">
             <div id="homeSlider" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#homeSlider" data-slide-to="0" class="active"></li>
-                    <li data-target="#homeSlider" data-slide-to="1"></li>
-                    <li data-target="#homeSlider" data-slide-to="2"></li>
-                </ol>
                 <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                        <a href="#" class="d-block">
-                            <img widht="100%"
-                                 src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
-                                 alt="First slide">
-                        </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="#" class="d-block">
-                            <img widht="100%"
-                                 src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
-                                 alt="First slide">
-                        </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="#" class="d-block">
-                            <img widht="100%"
-                                 src="<?= get_template_directory_uri(); ?>/images/homepage_slider/slide1_desktop.png"
-                                 alt="First slide">
-                        </a>
-                    </div>
+                    <?php $loop = new WP_Query( array(
+                            'post_type' => 'slider',
+                            'posts_per_page' => -1,
+                        )
+                    ); ?>
+                    <?php $count = 0; while ( $loop->have_posts() ) : $loop->the_post();$count++; ?>
+                        <div class="carousel-item active">
+                            <div class="d-block">
+                                <img widht="100%"
+                                     src="<?php the_post_thumbnail_url();?>"
+                                     alt="First slide">
+<?//= get_template_directory_uri(); ?><!--/images/homepage_slider/slide1_desktop.png-->
+                                <div class="slider__text one">
+                                    <?php the_title();?>
+                                </div>
+                                <div class="slider__text two">
+                                    <?php the_excerpt();?>
+                                </div>
+                                <div class="slider__text three">
+                                    <?php the_content();?>
+                                </div>
+                                <a href="<?= get_post_meta($post->ID, 'button_link', true);?>" class="slider__text four">
+                                    <?= get_post_meta($post->ID, 'button_text', true);?>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endwhile; wp_reset_query(); ?>
                 </div>
+                <ol class="carousel-indicators">
+                    <?php for ($i = 0;$count > $i; $i++):?>
+                        <li data-target="#homeSlider" data-slide-to="<?=$i;?>" class="<?=$i === 0 ? 'active': '';?>"></li>
+                    <?php endfor;?>
+                </ol>
                 <a class="carousel-control-prev" href="#homeSlider" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"><i class="material-icons">keyboard_arrow_left</i></span>
                     <span class="sr-only">Назад</span>

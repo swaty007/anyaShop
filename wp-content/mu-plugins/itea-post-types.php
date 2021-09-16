@@ -3,7 +3,7 @@
 function itea_post_types() {
 
     register_post_type('slider', array(
-        'supports' => array('title', 'thumbnail', 'excerpt'),//, 'editor'
+        'supports' => array('title', 'thumbnail', 'excerpt', 'editor'),
         'public' => true,
         'publicly_queryable' => false,
         'labels' => array(
