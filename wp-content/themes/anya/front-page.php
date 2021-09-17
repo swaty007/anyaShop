@@ -18,6 +18,7 @@ get_header();
                         <div class="carousel-item <?=$count === 1 ? 'active': '';?>">
                             <div class="d-block">
                                 <img widht="100%"
+                                     style="object-fit: <?=get_post_meta($post->ID,'object_fit', true);?>"
                                      src="<?php the_post_thumbnail_url();?>"
                                      alt="First slide">
 <?//= get_template_directory_uri(); ?><!--/images/homepage_slider/slide1_desktop.png-->
