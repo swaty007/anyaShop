@@ -21,19 +21,19 @@
     width: auto;
     z-index: 4;
     &.one {
-      top: 21%;
+      top: 17%;
       font-weight: bold;
       font-size: 22px;
     }
     &.two {
-      top: 38%;
+      top: 34%;
       font-size: 25px;
       @media (max-width:768px) {
         font-size: 18px;
       }
     }
     &.three {
-      top: 47%;
+      top: 43%;
       font-size: 32px;
       font-weight: 600;
       line-height: 40px;
