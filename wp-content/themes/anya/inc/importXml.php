@@ -79,6 +79,8 @@ class ImportXML
     {
         $languages = pll_languages_list();
         $csv = trim(get_option('xml_price_url', true));
+        $items_by_tick = 300;
+        $items_from_last_tick = get_option('xml_price_items_tick', 0);
 
         if (!ini_set('default_socket_timeout', 15)) {
             echo "Unable to change socket timeout";
@@ -94,7 +96,14 @@ class ImportXML
             $count = 0;
             $valid = 0;
             $items = 0;
-            foreach ($scv_data as $item) {
+            $total_items = count($scv_data) - 1;
+            if ($total_items <= $items_from_last_tick) {
+                $items_from_last_tick = 0;
+            }
+            foreach ($scv_data as $count => $item) {
+                if ($count > ($items_from_last_tick + $items_by_tick) || $count < $items_from_last_tick) {
+                    continue;
+                }
 
                 $sku = $item[0];
                 $price = htmlentities($item[1],null, 'utf-8');
@@ -149,6 +158,7 @@ class ImportXML
                 unset($availability);
                 unset($post_id);
             }
+            update_option('xml_price_items_tick', $items_from_last_tick + $items_by_tick);
 //            echo "Count: $count\n";
 //            echo "Valid Data: $valid\n";
 //            echo "Products finded: $items\n";
