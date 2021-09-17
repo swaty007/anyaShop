@@ -15,7 +15,7 @@ get_header();
                         )
                     ); ?>
                     <?php $count = 0; while ( $loop->have_posts() ) : $loop->the_post();$count++; ?>
-                        <div class="carousel-item active">
+                        <div class="carousel-item <?=$i === 0 ? 'active': '';?>">
                             <div class="d-block">
                                 <img widht="100%"
                                      src="<?php the_post_thumbnail_url();?>"
