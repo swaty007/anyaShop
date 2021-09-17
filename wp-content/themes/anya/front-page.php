@@ -7,7 +7,7 @@ get_header();
 
     <section class="home-slider">
         <div class="container no-pad">
-            <div id="homeSlider" class="carousel slide" data-ride="carousel">
+            <div id="homeSlider" class="carousel slide" data-ride="carousel" data-interval="8000" >
                 <div class="carousel-inner" role="listbox">
                     <?php $loop = new WP_Query( array(
                             'post_type' => 'slider',
