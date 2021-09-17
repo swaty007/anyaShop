@@ -277,9 +277,9 @@ get_header();
     </section>
 <?= get_template_part('template-parts/components-subscription', 'form'); ?>
 
-    <div class="global-widgets">
-        <div class="transition-3s action-btn"><i class="fas fa-phone icon"></i></div>
-    </div>
+<!--    <div class="global-widgets">-->
+<!--        <div class="transition-3s action-btn"><i class="fas fa-phone icon"></i></div>-->
+<!--    </div>-->
 
     <script type="text/javascript">
         window.addEventListener('load', function () {
