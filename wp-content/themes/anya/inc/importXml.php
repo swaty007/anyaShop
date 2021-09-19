@@ -397,7 +397,7 @@ class ImportXML
             }
 
             $sku = $product['id']->__toString();
-            $posts = $this->productExists($sku);
+            $posts = $this->productExists($sku, false, 'ru');
             if (!empty($posts)) {
                 foreach($posts as $post) {
                     $post_id = $post->ID;
@@ -568,12 +568,12 @@ class ImportXML
     }
 
 
-    function productExists($sku, $timeout = true)
+    function productExists($sku, $timeout = true, $lang = false)
     {
         if ($timeout) {
             usleep(100000); //0.1 sek
         }
-        $posts = get_posts([
+        $query = [
             'post_type' => 'product',
             'post_status' => ['publish', 'draft'],
             'posts_per_page' => -1,
@@ -584,7 +584,11 @@ class ImportXML
                     'value' => $sku,
                 ]
             ]
-        ]); // Get products by sku
+        ];
+        if ($lang) {
+            $query['lang'] = $lang;
+        }
+        $posts = get_posts($query); // Get products by sku
         if (empty($posts)) {
             return false;
         }
