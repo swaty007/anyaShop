@@ -234,85 +234,89 @@ get_header();
     <section class="timer-offer">
         <div class="container">
             <div class="row">
-                <?php
-                $loop = new WP_Query(array(
-                        'post_type' => 'product',
-                        'posts_per_page' => -1,
-                        'orderby' => [],
-                        'meta_query' => [
-                            [
-                                'key' => '_yith_wcpb_bundle_data',
-//                                'value' => 'instock',
-                                'compare' => 'EXIST',
-                            ]
-                        ]
-                    )
-                );
-                while ($loop->have_posts()) : $loop->the_post();
-                    $gallery = get_post_meta($post->ID, '_product_image_gallery', true);
-                    $product_bundle = wc_get_product($post->ID);
-                    if (!empty($gallery)) {
-                        $gallery = explode(",", $gallery);
-                    }
-                    ?>
-                    <div class="col-md-12">
-                        <div class="row offer-wrapper">
-                            <div class="col-md-3 d-flex justify-content-center flex-column">
-                                <div class="image-wrapper">
-                                    <?php if (!empty($gallery[0])): ?>
-                                        <?php $bundle_image_url = get_url_from_img_id($gallery[0]);
-                                        if (!empty($bundle_image_url)):?>
-                                            <img src="<?= $bundle_image_url; ?>" width="100%">
-                                        <?php else: ?>
-                                            <img src="<?= wc_placeholder_img_src(); ?>" width="100%">
-                                        <?php endif; ?>
-                                    <?php endif; ?>
 
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-center">
-                                    <h4>
-                                        <?php pll_e("Горячее предложение"); ?>
-                                    </h4>
-                                    <h2 class="offer-title">
-                                        <?php the_title(); ?>
-                                    </h2>
-                                    <div class="offer-text">
-                                        <?php the_excerpt(); ?>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <div class="price">
-                                        <?= $product_bundle->get_price_html(); ?>
-                                    </div>
-                                    <div id="timer" class="timer"></div>
-<!--                                    <script type="text/javascript">-->
-<!--                                        window.addEventListener('load', function () {-->
-<!--                                            setTimer('timer', 'July 25, 2021 15:37:25');-->
-<!--                                        });-->
-<!--                                    </script>-->
-                                    <a href="<?php the_permalink(); ?>" class="btn transition-3s offer-button">
-                                        <?php pll_e("Узнать подробнее"); ?>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-3 d-flex justify-content-center flex-column">
-                                <div class="image-wrapper">
-                                    <?php if (!empty($gallery[1])): ?>
-                                        <?php $bundle_image_url = get_url_from_img_id($gallery[1]);
-                                        if (!empty($bundle_image_url)):?>
-                                            <img src="<?= $bundle_image_url; ?>" width="100%">
-                                        <?php else: ?>
-                                            <img src="<?= wc_placeholder_img_src(); ?>" width="100%">
+                <div class="bundle__slider">
+                    <?php
+                    $loop = new WP_Query(array(
+                            'post_type' => 'product',
+                            'posts_per_page' => -1,
+                            'orderby' => [],
+                            'meta_query' => [
+                                [
+                                    'key' => '_yith_wcpb_bundle_data',
+//                                'value' => 'instock',
+                                    'compare' => 'EXIST',
+                                ]
+                            ]
+                        )
+                    );
+                    while ($loop->have_posts()) : $loop->the_post();
+                        $gallery = get_post_meta($post->ID, '_product_image_gallery', true);
+                        $product_bundle = wc_get_product($post->ID);
+                        if (!empty($gallery)) {
+                            $gallery = explode(",", $gallery);
+                        }
+                        ?>
+                        <div class="col-md-12">
+                            <div class="row offer-wrapper">
+                                <div class="col-md-3 d-flex justify-content-center flex-column">
+                                    <div class="image-wrapper">
+                                        <?php if (!empty($gallery[0])): ?>
+                                            <?php $bundle_image_url = get_url_from_img_id($gallery[0]);
+                                            if (!empty($bundle_image_url)):?>
+                                                <img src="<?= $bundle_image_url; ?>" width="100%">
+                                            <?php else: ?>
+                                                <img src="<?= wc_placeholder_img_src(); ?>" width="100%">
+                                            <?php endif; ?>
                                         <?php endif; ?>
-                                    <?php endif; ?>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-center">
+                                        <h4>
+                                            <?php pll_e("Горячее предложение"); ?>
+                                        </h4>
+                                        <h2 class="offer-title">
+                                            <?php the_title(); ?>
+                                        </h2>
+                                        <div class="offer-text">
+                                            <?php the_excerpt(); ?>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <div class="price">
+                                            <?= $product_bundle->get_price_html(); ?>
+                                        </div>
+                                        <div id="timer" class="timer"></div>
+                                        <!--                                    <script type="text/javascript">-->
+                                        <!--                                        window.addEventListener('load', function () {-->
+                                        <!--                                            setTimer('timer', 'July 25, 2021 15:37:25');-->
+                                        <!--                                        });-->
+                                        <!--                                    </script>-->
+                                        <a href="<?php the_permalink(); ?>" class="btn transition-3s offer-button">
+                                            <?php pll_e("Узнать подробнее"); ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 d-flex justify-content-center flex-column">
+                                    <div class="image-wrapper">
+                                        <?php if (!empty($gallery[1])): ?>
+                                            <?php $bundle_image_url = get_url_from_img_id($gallery[1]);
+                                            if (!empty($bundle_image_url)):?>
+                                                <img src="<?= $bundle_image_url; ?>" width="100%">
+                                            <?php else: ?>
+                                                <img src="<?= wc_placeholder_img_src(); ?>" width="100%">
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
-                    </div>
-                <?php endwhile;
-                wp_reset_query(); ?>
+                    <?php endwhile;
+                    wp_reset_query(); ?>
+                </div>
             </div>
         </div>
     </section>
@@ -375,6 +379,13 @@ get_header();
             // iniBannersSlider(".banners");
 
 
+            $('.bundle__slider').slick({
+                dots: true,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            })
             $('.responsive').slick({
                 dots: true,
                 infinite: false,
