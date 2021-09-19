@@ -188,7 +188,7 @@ class ImportXML
 
     function loadData()
     {
-        $xml = simplexml_load_file(get_template_directory_uri() . '/datafile1.xml', 'SimpleXMLElement');
+        $xml = simplexml_load_file(get_template_directory_uri() . '/datafile2.xml', 'SimpleXMLElement');
 
 //        $this->categories = $xml->shop->categories->category;
         $xmlCategories = $xml->shop->categories->category;
