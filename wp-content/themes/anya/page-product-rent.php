@@ -83,7 +83,7 @@ the_post();
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <button v-if="total_pages > page" class="view-more-btn transition-3s" @click="loadMore">
+                <button v-if="total_pages > page && products.length" class="view-more-btn transition-3s" @click="loadMore">
                     <?php pll_e("Загрузить еще"); ?> (9)
                 </button>
             </div>
