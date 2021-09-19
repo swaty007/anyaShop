@@ -93,11 +93,13 @@ foreach ($bundle_data as $data) {
                                 <?php pll_e("Описание"); ?>
                             </a>
                         </div>
-                        <div class="transition-3s d-flex link">
-                            <a class="anchor-link" href="#specifications">
-                                <?php pll_e("Характеристики и особенности"); ?>
-                            </a>
-                        </div>
+                        <?php if (!empty($attributes)): ?>
+                            <div class="transition-3s d-flex link">
+                                <a class="anchor-link" href="#specifications">
+                                    <?php pll_e("Характеристики и особенности"); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                         <?php if (have_rows('additional_materials')): ?>
                             <div class="transition-3s d-flex link">
                                 <a class="anchor-link" href="#materials">
@@ -210,7 +212,7 @@ foreach ($bundle_data as $data) {
                             <img src="<?= wc_placeholder_img_src(); ?>" class="bundle__product--img">
                         <?php endif; ?>
 
-                        <a href="<?= get_the_permalink($bundle_product);?>" class="bundle__product--text">
+                        <a href="<?= get_the_permalink($bundle_product); ?>" class="bundle__product--text">
                             <?= get_the_title($bundle_product); ?>
                         </a>
                     </div>
@@ -224,19 +226,30 @@ foreach ($bundle_data as $data) {
             <div class="row">
                 <div class="col-md-12">
                     <div class="anchor-link-menu d-flex flex-nowrap">
-                        <div class="transition-3s d-flex link active"><a class="anchor-link" href="#review">
+                        <div class="transition-3s d-flex link active">
+                            <a class="anchor-link" href="#review">
                                 <?php pll_e("Описание"); ?>
                             </a>
                         </div>
-                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#specifications">
-                                <?php pll_e("Характеристики и особенности"); ?>
-                            </a></div>
-                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#materials">
-                                <?php pll_e("Дополнительные материалы"); ?>
-                            </a></div>
-                        <div class="transition-3s d-flex link"><a class="anchor-link" href="#related-products">
+                        <?php if (!empty($attributes)): ?>
+                            <div class="transition-3s d-flex link">
+                                <a class="anchor-link" href="#specifications">
+                                    <?php pll_e("Характеристики и особенности"); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (have_rows('additional_materials')): ?>
+                            <div class="transition-3s d-flex link">
+                                <a class="anchor-link" href="#materials">
+                                    <?php pll_e("Дополнительные материалы"); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                        <div class="transition-3s d-flex link">
+                            <a class="anchor-link" href="#related-products">
                                 <?php pll_e("Похожие товары"); ?>
-                            </a></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -317,92 +330,97 @@ foreach ($bundle_data as $data) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <h3 class="specifications__title"><?php pll_e("Характеристики и особенности"); ?></h3>
-                            </div>
-                            <div class="col-md-4">
-                                <ul class="specifications-list">
-                                    <?php
-                                    $count = 0;
-                                    foreach ($attributes as $label => $attributeArr):
-                                        if ($count >= ceil($attributes_column_size / 2)) continue;
-                                        ?>
-                                        <li>
-                                            <h3 class="specifications-title"><?= $label; ?>:</h3>
-                                            <?php foreach ($attributeArr as $attribute): ?>
-                                                <p class="specifications-value"><?= $attribute; ?></p>
-                                            <?php endforeach; ?>
-                                        </li>
-                                        <?php unset($attributes[$label]);
-                                        $count++; endforeach; ?>
+                            <?php if (!empty($attributes)): ?>
+
+                                <div class="col-md-12">
+                                    <h3 class="specifications__title">
+                                        <?php pll_e("Характеристики и особенности"); ?>
+                                    </h3>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="specifications-list">
+                                        <?php
+                                        $count = 0;
+                                        foreach ($attributes as $label => $attributeArr):
+                                            if ($count >= ceil($attributes_column_size / 2)) continue;
+                                            ?>
+                                            <li>
+                                                <h3 class="specifications-title"><?= $label; ?>:</h3>
+                                                <?php foreach ($attributeArr as $attribute): ?>
+                                                    <p class="specifications-value"><?= $attribute; ?></p>
+                                                <?php endforeach; ?>
+                                            </li>
+                                            <?php unset($attributes[$label]);
+                                            $count++; endforeach; ?>
+                                        <?php if ($attributes_count > $attributes_column_size): ?>
+                                            <div class="full-specifications">
+                                                <ul>
+                                                    <?php
+                                                    $count = 0;
+                                                    foreach ($attributes as $label => $attributeArr):
+                                                        if ($count >= $attributes_count_more) continue;
+                                                        ?>
+                                                        <li>
+                                                            <h3 class="specifications-title"><?= $label; ?>:</h3>
+                                                            <?php foreach ($attributeArr as $attribute): ?>
+                                                                <p class="specifications-value"><?= $attribute; ?></p>
+                                                            <?php endforeach; ?>
+                                                        </li>
+                                                        <?php unset($attributes[$label]);
+                                                        $count++; endforeach; ?>
+                                                </ul>
+                                            </div>
+                                        <?php endif; ?>
+                                    </ul>
                                     <?php if ($attributes_count > $attributes_column_size): ?>
-                                        <div class="full-specifications">
-                                            <ul>
-                                                <?php
-                                                $count = 0;
-                                                foreach ($attributes as $label => $attributeArr):
-                                                    if ($count >= $attributes_count_more) continue;
-                                                    ?>
-                                                    <li>
-                                                        <h3 class="specifications-title"><?= $label; ?>:</h3>
-                                                        <?php foreach ($attributeArr as $attribute): ?>
-                                                            <p class="specifications-value"><?= $attribute; ?></p>
-                                                        <?php endforeach; ?>
-                                                    </li>
-                                                    <?php unset($attributes[$label]);
-                                                    $count++; endforeach; ?>
-                                            </ul>
-                                        </div>
-                                    <?php endif; ?>
-                                </ul>
-                                <?php if ($attributes_count > $attributes_column_size): ?>
-                                    <button class="view-full-specifications transition-3s">
+                                        <button class="view-full-specifications transition-3s">
                                         <span>
                                             <?php pll_e("Все характеристики"); ?>
                                         </span>
-                                        <span class="d-none">
+                                            <span class="d-none">
                                             <?php pll_e("Свернуть"); ?>
                                         </span>
-                                    </button>
-                                <?php endif; ?>
-                                <!--                                <button class="transition-3s"><i class="fas fa-balance-scale"></i> Сравнить</button>-->
-                            </div>
-                            <div class="col-md-4">
-                                <ul class="specifications-list">
-                                    <?php
-                                    $count = 0;
-                                    foreach ($attributes as $label => $attributeArr):
-                                        if ($count >= ceil($attributes_column_size / 2)) continue;
-                                        ?>
-                                        <li>
-                                            <h3 class="specifications-title"><?= $label; ?>:</h3>
-                                            <?php foreach ($attributeArr as $attribute): ?>
-                                                <p class="specifications-value"><?= $attribute; ?></p>
-                                            <?php endforeach; ?>
-                                        </li>
-                                        <?php unset($attributes[$label]);
-                                        $count++; endforeach; ?>
-                                    <?php if ($attributes_count > $attributes_column_size): ?>
-                                        <div class="full-specifications">
-                                            <ul>
-                                                <?php
-                                                $count = 0;
-                                                foreach ($attributes as $label => $attributeArr):
-                                                    if ($count >= $attributes_count_more) continue;
-                                                    ?>
-                                                    <li>
-                                                        <h3 class="specifications-title"><?= $label; ?>:</h3>
-                                                        <?php foreach ($attributeArr as $attribute): ?>
-                                                            <p class="specifications-value"><?= $attribute; ?></p>
-                                                        <?php endforeach; ?>
-                                                    </li>
-                                                    <?php unset($attributes[$label]);
-                                                    $count++; endforeach; ?>
-                                            </ul>
-                                        </div>
+                                        </button>
                                     <?php endif; ?>
-                                </ul>
-                            </div>
+                                    <!--                                <button class="transition-3s"><i class="fas fa-balance-scale"></i> Сравнить</button>-->
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="specifications-list">
+                                        <?php
+                                        $count = 0;
+                                        foreach ($attributes as $label => $attributeArr):
+                                            if ($count >= ceil($attributes_column_size / 2)) continue;
+                                            ?>
+                                            <li>
+                                                <h3 class="specifications-title"><?= $label; ?>:</h3>
+                                                <?php foreach ($attributeArr as $attribute): ?>
+                                                    <p class="specifications-value"><?= $attribute; ?></p>
+                                                <?php endforeach; ?>
+                                            </li>
+                                            <?php unset($attributes[$label]);
+                                            $count++; endforeach; ?>
+                                        <?php if ($attributes_count > $attributes_column_size): ?>
+                                            <div class="full-specifications">
+                                                <ul>
+                                                    <?php
+                                                    $count = 0;
+                                                    foreach ($attributes as $label => $attributeArr):
+                                                        if ($count >= $attributes_count_more) continue;
+                                                        ?>
+                                                        <li>
+                                                            <h3 class="specifications-title"><?= $label; ?>:</h3>
+                                                            <?php foreach ($attributeArr as $attribute): ?>
+                                                                <p class="specifications-value"><?= $attribute; ?></p>
+                                                            <?php endforeach; ?>
+                                                        </li>
+                                                        <?php unset($attributes[$label]);
+                                                        $count++; endforeach; ?>
+                                                </ul>
+                                            </div>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                             <div class="col-md-4">
                                 <?php if (!empty($vc_icon)): ?>
                                     <div class="feature">
