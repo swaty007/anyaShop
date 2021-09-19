@@ -340,6 +340,9 @@ if (function_exists('pll_register_string')) {
     pll_register_string("Pages", "Цена проката:", "globals");
     pll_register_string("Pages", "Аренда", "globals");
 
+    pll_register_string("Pages", "Узнать подробнее", "globals");
+    pll_register_string("Pages", "Горячее предложение", "globals");
+
 
     //pll_e("");
 }

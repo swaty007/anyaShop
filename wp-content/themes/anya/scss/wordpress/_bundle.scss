@@ -1,0 +1,10 @@
+.bundle {
+  &__product {
+    &--img {
+      max-width: 30% !important;
+    }
+    &--text {
+      color: inherit;
+    }
+  }
+}

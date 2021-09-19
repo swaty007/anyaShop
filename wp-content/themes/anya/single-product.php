@@ -12,6 +12,8 @@ $youtube = get_post_meta($post->ID, 'youtube', true);
 $gallery = get_post_meta($post->ID, '_product_image_gallery', true);
 if (!empty($gallery)) {
     $gallery = explode(",", $gallery);
+} else {
+    $gallery = [];
 }
 $additional_information = get_post_meta($post->ID, 'additional_information', true); //repeater
 $additional_materials = get_post_meta($post->ID, 'additional_materials', true); //repeater
@@ -32,7 +34,20 @@ $attributes_count = count($attributes);
 $attributes_count_more = ceil(($attributes_count - $attributes_column_size) / 2);
 
 $type = $product->get_type(); //yith_bundle, simple
+$bundle_data = get_post_meta($post->ID, '_yith_wcpb_bundle_data', true);
+if (empty($bundle_data)) {
+    $bundle_data = [];
+}
+$bundle_products = [];
 //the_content();
+foreach ($bundle_data as $data) {
+    $bundle_products[] = $data['product_id'];
+    $data_gallery = get_post_meta($data['product_id'], '_product_image_gallery', true);
+    if (!empty($data_gallery)) {
+        $gallery = array_merge($gallery, explode(",", $data_gallery));
+    }
+
+}
 ?>
 
 <section class="product-fixed-menu transition-3s">
@@ -49,7 +64,7 @@ $type = $product->get_type(); //yith_bundle, simple
                     <?php if ($productStock): ?>
                         <button class="transition-3s buy-btn" data-sku="<?= $sku; ?>" data-id="<?= $post->ID; ?>">
                             <i class="fas fa-cart-plus icon"></i>
-                            <?php pll_e("В корзину");?>
+                            <?php pll_e("В корзину"); ?>
                         </button>
                     <?php endif; ?>
                 </div>
@@ -65,7 +80,7 @@ $type = $product->get_type(); //yith_bundle, simple
                     <?php if ($productStock): ?>
                         <button class="transition-3s buy-btn" data-sku="<?= $sku; ?>" data-id="<?= $post->ID; ?>">
                             <i class="fas fa-cart-plus icon"></i>
-                            <?php pll_e("В корзину");?>
+                            <?php pll_e("В корзину"); ?>
                         </button>
                     <?php endif; ?>
                 </div>
@@ -75,24 +90,24 @@ $type = $product->get_type(); //yith_bundle, simple
                     <div class="anchor-link-menu d-flex flex-nowrap">
                         <div class="transition-3s d-flex link active">
                             <a class="anchor-link" href="#review">
-                                <?php pll_e("Описание");?>
+                                <?php pll_e("Описание"); ?>
                             </a>
                         </div>
                         <div class="transition-3s d-flex link">
                             <a class="anchor-link" href="#specifications">
-                                <?php pll_e("Характеристики и особенности");?>
+                                <?php pll_e("Характеристики и особенности"); ?>
                             </a>
                         </div>
                         <?php if (have_rows('additional_materials')): ?>
                             <div class="transition-3s d-flex link">
                                 <a class="anchor-link" href="#materials">
-                                    <?php pll_e("Дополнительные материалы");?>
+                                    <?php pll_e("Дополнительные материалы"); ?>
                                 </a>
                             </div>
                         <?php endif; ?>
                         <div class="transition-3s d-flex link">
                             <a class="anchor-link" href="#related-products">
-                                <?php pll_e("Похожие товары");?>
+                                <?php pll_e("Похожие товары"); ?>
                             </a>
                         </div>
                     </div>
@@ -124,7 +139,7 @@ $type = $product->get_type(); //yith_bundle, simple
                     <button data-id="<?= $post->ID; ?>"
                             class="transition-3s compare-btn add_to_cart_button br_compare_button br_product_<?= $post->ID; ?> <?= set_class_compare($post->ID); ?>">
                         <i class="fas fa-balance-scale"></i>
-                        <?php pll_e("Сравнить");?>
+                        <?php pll_e("Сравнить"); ?>
                     </button>
                     <!--                    <button class="transition-3s like-btn"><i class="far fa-heart"></i> Добавить в избранное</button>-->
                     <div class="status">
@@ -134,7 +149,7 @@ $type = $product->get_type(); //yith_bundle, simple
                 </div>
                 <div class="additional-options">
                     <div class="option-wrapper">
-                        <h3><?php pll_e("Количество:");?></h3>
+                        <h3><?php pll_e("Количество:"); ?></h3>
                         <span id="amount_checker" class="amount-checker"
                               data-min="<?= $product->get_min_purchase_quantity(); ?>"
                               data-max="<?= $product->get_max_purchase_quantity(); ?>">
@@ -154,7 +169,7 @@ $type = $product->get_type(); //yith_bundle, simple
                     <!--                        </ul>-->
                     <!--                    </div>-->
                     <div class="option-wrapper">
-                        <h3><?php pll_e("Код товара:");?></h3>
+                        <h3><?php pll_e("Код товара:"); ?></h3>
                         <ul>
                             <li class="transition-3s"><?= $sku; ?></li>
                         </ul>
@@ -164,7 +179,7 @@ $type = $product->get_type(); //yith_bundle, simple
                             <?php if ($productStock): ?>
                                 <button class="transition-3s buy-btn" data-sku="<?= $sku; ?>"
                                         data-id="<?= $post->ID; ?>">
-                                    <i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину");?>
+                                    <i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину"); ?>
                                 </button>
                             <?php endif; ?>
                             <div class="price align-items-center d-flex">
@@ -178,13 +193,29 @@ $type = $product->get_type(); //yith_bundle, simple
                 <div class="price-info">
                     <?php if ($productStock): ?>
                         <button class="transition-3s buy-btn" data-sku="<?= $sku; ?>" data-id="<?= $post->ID; ?>">
-                            <i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину");?>
+                            <i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину"); ?>
                         </button>
                     <?php endif; ?>
                     <div class="price align-items-center d-flex">
                         <?= $product->get_price_html(); ?>
                     </div>
                 </div>
+
+                <?php foreach ($bundle_products as $bundle_product): ?>
+                    <div class="bundle__product align-items-center bundle__product d-flex justify-content-between">
+                        <?php $related_image_url = get_the_post_thumbnail_url($bundle_product);
+                        if (!empty($related_image_url)):?>
+                            <img src="<?= $related_image_url; ?>" class="bundle__product--img">
+                        <?php else: ?>
+                            <img src="<?= wc_placeholder_img_src(); ?>" class="bundle__product--img">
+                        <?php endif; ?>
+
+                        <a href="<?= get_the_permalink($bundle_product);?>" class="bundle__product--text">
+                            <?= get_the_title($bundle_product); ?>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+
             </div>
         </div>
     </div>
@@ -194,17 +225,17 @@ $type = $product->get_type(); //yith_bundle, simple
                 <div class="col-md-12">
                     <div class="anchor-link-menu d-flex flex-nowrap">
                         <div class="transition-3s d-flex link active"><a class="anchor-link" href="#review">
-                                <?php pll_e("Описание");?>
+                                <?php pll_e("Описание"); ?>
                             </a>
                         </div>
                         <div class="transition-3s d-flex link"><a class="anchor-link" href="#specifications">
-                                <?php pll_e("Характеристики и особенности");?>
+                                <?php pll_e("Характеристики и особенности"); ?>
                             </a></div>
                         <div class="transition-3s d-flex link"><a class="anchor-link" href="#materials">
-                                <?php pll_e("Дополнительные материалы");?>
+                                <?php pll_e("Дополнительные материалы"); ?>
                             </a></div>
                         <div class="transition-3s d-flex link"><a class="anchor-link" href="#related-products">
-                                <?php pll_e("Похожие товары");?>
+                                <?php pll_e("Похожие товары"); ?>
                             </a></div>
                     </div>
                 </div>
@@ -278,7 +309,8 @@ $type = $product->get_type(); //yith_bundle, simple
                                 <div class="btn-text">
                                     <div class="container">
                                         <div class="row d-flex justify-content-center">
-                                            <div class="col-md-12 text-left" style="white-space: pre-line;line-height: 24px;">
+                                            <div class="col-md-12 text-left"
+                                                 style="white-space: pre-line;line-height: 24px;">
                                                 <?= get_post($post->ID)->post_content; ?>
                                             </div>
                                         </div>
@@ -286,7 +318,7 @@ $type = $product->get_type(); //yith_bundle, simple
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h3 class="specifications__title"><?php pll_e("Характеристики и особенности");?></h3>
+                                <h3 class="specifications__title"><?php pll_e("Характеристики и особенности"); ?></h3>
                             </div>
                             <div class="col-md-4">
                                 <ul class="specifications-list">
@@ -326,10 +358,10 @@ $type = $product->get_type(); //yith_bundle, simple
                                 <?php if ($attributes_count > $attributes_column_size): ?>
                                     <button class="view-full-specifications transition-3s">
                                         <span>
-                                            <?php pll_e("Все характеристики");?>
+                                            <?php pll_e("Все характеристики"); ?>
                                         </span>
                                         <span class="d-none">
-                                            <?php pll_e("Свернуть");?>
+                                            <?php pll_e("Свернуть"); ?>
                                         </span>
                                     </button>
                                 <?php endif; ?>
@@ -375,18 +407,18 @@ $type = $product->get_type(); //yith_bundle, simple
                                 <?php if (!empty($vc_icon)): ?>
                                     <div class="feature">
                                         <img src="<?= get_template_directory_uri(); ?>/images/product/f1.png">
-                                        <div class="title"><?php pll_e("VC (компенсация вибраций)");?></div>
+                                        <div class="title"><?php pll_e("VC (компенсация вибраций)"); ?></div>
                                         <div class="text">
-                                            <?php pll_e("Стабилизатор изображения VC обеспечивает резкое изображение без дрожания, а также обеспечивает резкое изображение в видоискателе.");?>
+                                            <?php pll_e("Стабилизатор изображения VC обеспечивает резкое изображение без дрожания, а также обеспечивает резкое изображение в видоискателе."); ?>
                                         </div>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (!empty($usd_icon)): ?>
                                     <div class="feature">
                                         <img src="<?= get_template_directory_uri(); ?>/images/product/f2.png">
-                                        <div class="title"><?php pll_e("USD (ультразвуковой мотор)");?></div>
+                                        <div class="title"><?php pll_e("USD (ультразвуковой мотор)"); ?></div>
                                         <div class="text">
-                                            <?php pll_e("Мощный ультразвуковой двигатель для съемки быстрых и динамичных объектов. Чрезвычайно тихий и точный, позволяет осуществлять ручное управление фокусировкой во время съемки.");?>
+                                            <?php pll_e("Мощный ультразвуковой двигатель для съемки быстрых и динамичных объектов. Чрезвычайно тихий и точный, позволяет осуществлять ручное управление фокусировкой во время съемки."); ?>
                                         </div>
                                     </div>
                                 <?php endif; ?>
@@ -394,9 +426,9 @@ $type = $product->get_type(); //yith_bundle, simple
                                     <?php if (!empty($eband_icon)): ?>
                                         <div class="feature">
                                             <img src="<?= get_template_directory_uri(); ?>/images/product/f3.png">
-                                            <div class="title"><?php pll_e("Покрытие eBAND");?></div>
+                                            <div class="title"><?php pll_e("Покрытие eBAND"); ?></div>
                                             <div class="text">
-                                                <?php pll_e("Нано - антибликовое покрытие для защиты от нежелательных отражений и ореола.");?>
+                                                <?php pll_e("Нано - антибликовое покрытие для защиты от нежелательных отражений и ореола."); ?>
                                             </div>
                                         </div>
                                     <?php endif; ?>
@@ -419,10 +451,10 @@ $type = $product->get_type(); //yith_bundle, simple
                             <div class="container">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-7 text-center">
-<!--                                        <h3>-->
-<!--                                            Профото является эксклюзивным представителем в Украине известного мирового-->
-<!--                                            производителя компании Tamron.-->
-<!--                                        </h3>-->
+                                        <!--                                        <h3>-->
+                                        <!--                                            Профото является эксклюзивным представителем в Украине известного мирового-->
+                                        <!--                                            производителя компании Tamron.-->
+                                        <!--                                        </h3>-->
                                     </div>
                                 </div>
                             </div>
@@ -588,7 +620,7 @@ $type = $product->get_type(); //yith_bundle, simple
                                 <br>
                                 <br>
                                 <br>
-                                <h3><?php pll_e("Похожие товары");?></h3>
+                                <h3><?php pll_e("Похожие товары"); ?></h3>
                             </div>
                             <div class="col-md-12">
                                 <div class="products-table-catalog">
@@ -620,14 +652,14 @@ $type = $product->get_type(); //yith_bundle, simple
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="buttons">
                                                             <a class="transition-3s like-btn tinvwl_add_to_wishlist_button"
-                                                                    role="button"
-                                                                    aria-label="Add to Wishlist"
-                                                                    data-tinv-wl-list="[]"
-                                                                    data-tinv-wl-product="<?= $related_product;?>"
-                                                                    data-tinv-wl-productvariation="0"
-                                                                    data-tinv-wl-productvariations="[0]"
-                                                                    data-tinv-wl-producttype="simple"
-                                                                    data-tinv-wl-action="add">
+                                                               role="button"
+                                                               aria-label="Add to Wishlist"
+                                                               data-tinv-wl-list="[]"
+                                                               data-tinv-wl-product="<?= $related_product; ?>"
+                                                               data-tinv-wl-productvariation="0"
+                                                               data-tinv-wl-productvariations="[0]"
+                                                               data-tinv-wl-producttype="simple"
+                                                               data-tinv-wl-action="add">
                                                                 <i class="far fa-heart"></i>
                                                             </a>
                                                             <button data-id="<?= $related_product; ?>"
@@ -637,7 +669,7 @@ $type = $product->get_type(); //yith_bundle, simple
                                                             <button class="transition-3s buy-btn"
                                                                     data-sku="<?= $skuWC; ?>"
                                                                     data-id="<?= $related_product; ?>">
-                                                                <i class="fas fa-cart-plus icon"></i> <?php pll_e("Купить");?>
+                                                                <i class="fas fa-cart-plus icon"></i> <?php pll_e("Купить"); ?>
                                                             </button>
                                                         </div>
                                                         <div class="price">

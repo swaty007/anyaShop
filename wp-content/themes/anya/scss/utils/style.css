@@ -841,7 +841,7 @@ header.diller ul li.icon-item .icon .counter{
 .timer-offer .offer-wrapper h4{
     text-transform: uppercase;
 }
-.timer-offer .offer-wrapper h1{
+.timer-offer .offer-wrapper .offer-title{
     font-family: 'Montserrat', Oswald, OpenSans;
     color: #161616;
     font-weight: 400;
@@ -849,6 +849,7 @@ header.diller ul li.icon-item .icon .counter{
     margin: 40px 0px 50px;
 }
 .timer-offer .offer-wrapper h4,
+.timer-offer .offer-wrapper .offer-text,
 .timer-offer .offer-wrapper p{
     color: #848789;
     font-family: 'Montserrat', Oswald, OpenSans;
@@ -879,7 +880,7 @@ header.diller ul li.icon-item .icon .counter{
     text-transform: uppercase;
     margin-top: 8px;
 }
-.timer-offer .offer-wrapper button{
+.timer-offer .offer-wrapper .offer-button{
     padding: 10px 16px;
     border-radius: 2px;
     font-size: 14px;
@@ -894,7 +895,7 @@ header.diller ul li.icon-item .icon .counter{
     background-image: linear-gradient(to right, #fc00ff 0%, #00dbde 100%);
     background-size: 200% auto;*/
 }
-.timer-offer .offer-wrapper button:hover{
+.timer-offer .offer-wrapper .offer-button:hover{
     background-position: center;
     background-size: 3% auto;
 }

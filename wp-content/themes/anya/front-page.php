@@ -36,12 +36,12 @@ get_header();
                                 <div class="slider__text three">
                                     <?php the_content(); ?>
                                 </div>
-                                <?php if ($button_text):?>
-                                <a href="<?= $button_link; ?>"
-                                   class="slider__text four">
-                                    <?= $button_text; ?>
-                                </a>
-                                <?php endif;?>
+                                <?php if ($button_text): ?>
+                                    <a href="<?= $button_link; ?>"
+                                       class="slider__text four">
+                                        <?= $button_text; ?>
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endwhile;
@@ -220,7 +220,8 @@ get_header();
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <button v-if="total_pages > page && products.length" class="view-more-btn transition-3s" @click="loadMore">
+                        <button v-if="total_pages > page && products.length" class="view-more-btn transition-3s"
+                                @click="loadMore">
                             <?php pll_e("Загрузить еще"); ?> (9)
                         </button>
                     </div>
@@ -233,31 +234,85 @@ get_header();
     <section class="timer-offer">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="row offer-wrapper">
-                        <div class="col-md-3 d-flex justify-content-center flex-column">
-                            <div class="image-wrapper">
-                                <img width="100%" src="<?= get_template_directory_uri(); ?>/images/timer-offer1.png">
+                <?php
+                $loop = new WP_Query(array(
+                        'post_type' => 'product',
+                        'posts_per_page' => -1,
+                        'orderby' => [],
+                        'meta_query' => [
+                            [
+                                'key' => '_yith_wcpb_bundle_data',
+//                                'value' => 'instock',
+                                'compare' => 'EXIST',
+                            ]
+                        ]
+                    )
+                );
+                while ($loop->have_posts()) : $loop->the_post();
+                    $gallery = get_post_meta($post->ID, '_product_image_gallery', true);
+                    $product_bundle = wc_get_product($post->ID);
+                    if (!empty($gallery)) {
+                        $gallery = explode(",", $gallery);
+                    }
+                    ?>
+                    <div class="col-md-12">
+                        <div class="row offer-wrapper">
+                            <div class="col-md-3 d-flex justify-content-center flex-column">
+                                <div class="image-wrapper">
+                                    <?php if (!empty($gallery[0])): ?>
+                                        <?php $bundle_image_url = get_url_from_img_id($gallery[0]);
+                                        if (!empty($bundle_image_url)):?>
+                                            <img src="<?= $bundle_image_url; ?>" width="100%">
+                                        <?php else: ?>
+                                            <img src="<?= wc_placeholder_img_src(); ?>" width="100%">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-center">
-                                <h4>Горячее предложение</h4>
-                                <h1>Объектив + Светофильтр</h1>
-                                <p>При покупке объектива Tamron SP 24-70мм F/2.8 Di VC USD G2, светофильтр Marumi
-                                    CREATION VARI. ND2.5-ND500 в подарок!</p>
-                                <div class="price"></div>
-                                <div id="timer" class="timer"></div>
-                                <button class="btn transition-3s">Узнать подробнее</button>
+                            <div class="col-md-6">
+                                <div class="text-center">
+                                    <h4>
+                                        <?php pll_e("Горячее предложение"); ?>
+                                    </h4>
+                                    <h2 class="offer-title">
+                                        <?php the_title(); ?>
+                                    </h2>
+                                    <div class="offer-text">
+                                        <?php the_excerpt(); ?>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="price">
+                                        <?= $product_bundle->get_price_html(); ?>
+                                    </div>
+                                    <div id="timer" class="timer"></div>
+<!--                                    <script type="text/javascript">-->
+<!--                                        window.addEventListener('load', function () {-->
+<!--                                            setTimer('timer', 'July 25, 2021 15:37:25');-->
+<!--                                        });-->
+<!--                                    </script>-->
+                                    <a href="<?php the_permalink(); ?>" class="btn transition-3s offer-button">
+                                        <?php pll_e("Узнать подробнее"); ?>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 d-flex justify-content-center flex-column">
-                            <div class="image-wrapper">
-                                <img width="100%" src="<?= get_template_directory_uri(); ?>/images/timer-offer2.png">
+                            <div class="col-md-3 d-flex justify-content-center flex-column">
+                                <div class="image-wrapper">
+                                    <?php if (!empty($gallery[1])): ?>
+                                        <?php $bundle_image_url = get_url_from_img_id($gallery[1]);
+                                        if (!empty($bundle_image_url)):?>
+                                            <img src="<?= $bundle_image_url; ?>" width="100%">
+                                        <?php else: ?>
+                                            <img src="<?= wc_placeholder_img_src(); ?>" width="100%">
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php endwhile;
+                wp_reset_query(); ?>
             </div>
         </div>
     </section>
@@ -266,7 +321,9 @@ get_header();
         <div class="container banners-title">
             <div class="row">
                 <div class="col-md-12">
-                    <h2><?php pll_e("Наши публикации"); ?></h2>
+                    <h2>
+                        <?php pll_e("Наши публикации"); ?>
+                    </h2>
                 </div>
             </div>
         </div>
@@ -309,7 +366,7 @@ get_header();
 
     <script type="text/javascript">
         window.addEventListener('load', function () {
-            setTimer('timer', 'July 25, 2021 15:37:25');
+            // setTimer('timer', 'July 25, 2021 15:37:25');
 
 
             if ($("body").width() > 575) {
