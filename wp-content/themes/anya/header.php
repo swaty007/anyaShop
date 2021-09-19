@@ -104,7 +104,7 @@ if (function_exists('wp_body_open')) {
                 <!--                    <a href="#">Публикации</a>-->
                 <!--                </li>-->
             </ul>
-            <ul class="d-flex">
+            <ul class="d-flex" style="width: 33%;">
                 <li class="logo-item d-flex align-items-center d-none">
                     <!-- <a href="#">Zoom</a> -->
                     <a href="<?= pll_home_url(); ?>">
