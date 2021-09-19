@@ -5,12 +5,16 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4 col-md-3 content-wrapper">
-                <div class="title">Контакты</div>
+                <div class="title">
+                    <?php pll_e("Контакты");?>
+                </div>
                 <p class="address">Голосеевский проспект, <br>Киев, <br>03038, <br>Украина, <br>+38(044) 502 51 51, <br>info@prophoto.ua
                 </p>
             </div>
             <div class="col-sm-4 col-md-3 content-wrapper">
-                <div class="title">Навигация</div>
+                <div class="title">
+                    <?php pll_e("Навигация");?>
+                </div>
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'menu-footer-navigation',
@@ -21,7 +25,9 @@
                 ?>
             </div>
             <div class="col-sm-4 col-md-3 content-wrapper">
-                <div class="title">Каталог</div>
+                <div class="title">
+                    <?php pll_e("Каталог");?>
+                </div>
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'menu-footer-catalog',
@@ -32,14 +38,14 @@
                 ?>
             </div>
             <div class="col-sm-4 col-md-3 content-wrapper">
-                <div class="title">Социальные сети</div>
+                <div class="title"><?php pll_e("Социальные сети");?></div>
                 <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
     <div class="copyright">
-        <span>© 2018 Prophoto</span>
+        <span><?php pll_e("© 2021 Zoom Store");?></span>
     </div>
 </footer>
 

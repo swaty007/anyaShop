@@ -264,7 +264,7 @@ get_header();
                                 <div class="hover transition-3s"></div>
                                 <div class="description">
                                     <h4 class="description__title"><?php the_title(); ?></h4>
-                                    <div><?= mb_substr(get_the_excerpt(), 0, 90); ?>...</div>
+<!--                                    <div>--><?//= mb_substr(get_the_excerpt(), 0, 90); ?><!--...</div>-->
                                 </div>
                             </a>
                         </div>

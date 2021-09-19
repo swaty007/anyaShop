@@ -107,7 +107,7 @@ if (function_exists('wp_body_open')) {
             </ul>
             <ul class="d-flex">
                 <li class="logo-item d-flex align-items-center d-none">
-                    <!-- <a href="#">Prophoto</a> -->
+                    <!-- <a href="#">Zoom</a> -->
                     <a href="<?= pll_home_url(); ?>">
                         <img width="170px" src="<?= get_template_directory_uri(); ?>/images/zoom-logo.png"/>
                     </a>
@@ -152,7 +152,7 @@ if (function_exists('wp_body_open')) {
 <section class="mobile-menu transition-5s">
     <div class="header relative">
         <div class="logo-wrapper">
-            <div class="logo">Prophoto</div>
+            <div class="logo">Zoom</div>
         </div>
         <div class="close-btn">
             <i class="fas fa-times"></i>

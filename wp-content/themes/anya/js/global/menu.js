@@ -49,10 +49,10 @@ $(".open-list-btn").click(function (e) {
     }
 });
 
-$(".mobile-menu .menu-item-has-children").on('click', function (e) {
+$(".mobile-menu .menu-item-has-children>a").on('click', function (e) {
     e.preventDefault();
     e.stopPropagation();
-    let _this = $(this)
+    let _this = $(this).parent('li')
     if (_this.hasClass("open")) {
         _this.find(".sub-menu").first().height(0);
         _this.removeClass("open");

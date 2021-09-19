@@ -475,7 +475,7 @@ header.diller ul li.icon-item .icon .counter{
 .mobile-menu .menu-list li {
     position: relative;
 }
-.mobile-menu .menu-list li.menu-item-has-children:before {
+.mobile-menu .menu-list li.menu-item-has-children>a:after {
     content: "\f067";
     color: #4a41db;
     position: absolute;
@@ -485,10 +485,10 @@ header.diller ul li.icon-item .icon .counter{
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
 }
-.mobile-menu .menu-list li.menu-item-has-children.open:before {
+.mobile-menu .menu-list li.menu-item-has-children.open>a:after {
     content: "\f068";
 }
-.mobile-menu .menu-list .sub-menu > li.menu-item-has-children:before {
+.mobile-menu .menu-list .sub-menu > li.menu-item-has-children>a:after {
     top: 10px;
     font-size: 13px;
 }
@@ -1041,7 +1041,7 @@ footer.diller .copyright{
 }
 .catalog-way .way-name h1{
     font-size: 36px;
-    font-weight: 100;
+    /*font-weight: 100;*/
     font-family: 'Montserrat', Oswald, OpenSans;
     color: #fff;
 }

@@ -331,6 +331,12 @@ if (function_exists('pll_register_string')) {
     pll_register_string("Pages", "товаров", "globals");
     pll_register_string("Pages", "По вашему запросу ничего не найдено", "globals");
     pll_register_string("Pages", "К сожалению, по вашему запросу не найдено подходящих продуктов.", "globals");
+    pll_register_string("Pages", "product", "globals");
+    pll_register_string("Pages", "© 2021 Zoom Store", "globals");
+    pll_register_string("Pages", "Социальные сети", "globals");
+    pll_register_string("Pages", "Каталог", "globals");
+    pll_register_string("Pages", "Навигация", "globals");
+    pll_register_string("Pages", "Контакты", "globals");
 
 
     //pll_e("");

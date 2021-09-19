@@ -24,7 +24,7 @@ $child_categories = get_terms('product_cat', [
                 <div class="way-name d-flex flex-column justify-content-center">
                     <?php if (empty($parents)): ?>
                         <h1>
-                            <?= $term->name; ?>
+                            <?= pll__($term->name); ?>
                         </h1>
                     <?php else: ?>
                         <?php foreach ($parents as $ip => $parent): ?>
@@ -81,11 +81,11 @@ $child_categories = get_terms('product_cat', [
     <section class="catalog-filters-menu">
         <div class="container content-container filters-menu no-pad d-flex align-items-center justify-content-between desktop">
             <div class="d-flex align-items-center">
-                <div class="currency-checker">
-                    <span class="currency usd active">USD</span>
-                    <span class="line"></span>
-                    <span class="currency uah">UAH</span>
-                </div>
+<!--                <div class="currency-checker">-->
+<!--                    <span class="currency usd active">USD</span>-->
+<!--                    <span class="line"></span>-->
+<!--                    <span class="currency uah">UAH</span>-->
+<!--                </div>-->
                 <button class="transition-3s filters-btn"><?php pll_e("Фильтры");?> <i class="material-icons">keyboard_arrow_down</i>
                 </button>
                 <span class="products-count"><?= $wp_query->found_posts; ?> <?php pll_e("Товаров");?></span>
@@ -112,45 +112,25 @@ $child_categories = get_terms('product_cat', [
     <section class="catalog-filters-content">
         <div class="container content-container filters-content no-pad">
             <div class="filters">
+<!--                <div class="filter-wrapper">-->
+<!--                    <div class="title">Крепление</div>-->
+<!--                    <div class="transition-2s block">Nikon</div>-->
+<!--                    <div class="transition-2s block">Canon</div>-->
+<!--                    <div class="transition-2s block">Sony</div>-->
+<!--                    <div class="transition-2s block">Pentax</div>-->
+<!--                </div>-->
                 <div class="filter-wrapper">
-                    <div class="title">Крепление</div>
-                    <div class="transition-2s block">Nikon</div>
-                    <div class="transition-2s block">Canon</div>
-                    <div class="transition-2s block">Sony</div>
-                    <div class="transition-2s block">Pentax</div>
-                </div>
-                <div class="filter-wrapper">
-                    <div class="title">Производитель</div>
-                    <ul>
-                        <li>
-                            <div class="checker">
-                                <div class="checkbox transition-2s"><i class="material-icons transition-2s">done</i>
-                                </div>
-                                <div class="label">Tamron</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="checker">
-                                <div class="checkbox transition-2s"><i class="material-icons transition-2s">done</i>
-                                </div>
-                                <div class="label">Lastolite</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="checker">
-                                <div class="checkbox transition-2s"><i class="material-icons transition-2s">done</i>
-                                </div>
-                                <div class="label">Marumi</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="checker">
-                                <div class="checkbox transition-2s"><i class="material-icons transition-2s">done</i>
-                                </div>
-                                <div class="label">Rimelite</div>
-                            </div>
-                        </li>
-                    </ul>
+                    <?= do_shortcode('[woof]');?>
+<!--                    <div class="title">Производитель</div>-->
+<!--                    <ul>-->
+<!--                        <li>-->
+<!--                            <div class="checker">-->
+<!--                                <div class="checkbox transition-2s"><i class="material-icons transition-2s">done</i>-->
+<!--                                </div>-->
+<!--                                <div class="label">Tamron</div>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                    </ul>-->
                 </div>
                 <div class="filter-wrapper">
                     <form method="get">
@@ -162,9 +142,9 @@ $child_categories = get_terms('product_cat', [
                         <?php $prices = get_filtered_price();?>
                         <div class="form-group">
                             <input type="text" class="js-input-from form-control" name="min_price"
-                                   value="<?=$prices['min'];?>" data-val="<?=$_GET['min_price'];?>"/>
+                                   value="<?=$prices['min'];?>" data-val="<?= !empty($_GET['min_price']) ? $_GET['min_price'] : "";?>"/>
                             <input type="text" class="js-input-to form-control" name="max_price"
-                                   value="<?=$prices['max'];?>" data-val="<?=$_GET['max_price'];?>"/>
+                                   value="<?=$prices['max'];?>" data-val="<?= !empty($_GET['max_price']) ? $_GET['max_price'] : "";?>"/>
                         </div>
                     </div>
 
@@ -179,15 +159,15 @@ $child_categories = get_terms('product_cat', [
 <!--                        <div class="transition-2s block price-block">$1200+</div>-->
 <!--                    </div>-->
                         <button type="submit" class="main__btn"><?php pll_e("Фильтровать");?></button>
-                        <?php if(!empty($_GET['order_by'])):?>
-                            <input type="hidden" name="order_by" value="<?=$_GET['order_by'];?>">
-                        <?php endif;?>
+                        <?php foreach($_GET as $get_key => $get):
+                            if (in_array($get_key, ['min_price', 'max_price'])) continue;?>
+                            <input type="hidden" name="<?=$get_key;?>" value="<?=$get;?>">
+                        <?php endforeach;?>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-
     <section class="products-table-catalog">
         <div class="container content-container">
             <div class="row">
