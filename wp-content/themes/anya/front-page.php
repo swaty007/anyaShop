@@ -16,7 +16,10 @@ get_header();
                     ); ?>
                     <?php $count = 0;
                     while ($loop->have_posts()) : $loop->the_post();
-                        $count++; ?>
+                        $count++;
+                        $button_link = get_post_meta($post->ID, 'button_link', true);
+                        $button_text = get_post_meta($post->ID, 'button_text', true);
+                        ?>
                         <div class="carousel-item <?= $count === 1 ? 'active' : ''; ?>">
                             <div class="d-block">
                                 <img widht="100%"
@@ -33,10 +36,12 @@ get_header();
                                 <div class="slider__text three">
                                     <?php the_content(); ?>
                                 </div>
-                                <a href="<?= get_post_meta($post->ID, 'button_link', true); ?>"
+                                <?php if ($button_text):?>
+                                <a href="<?= $button_link; ?>"
                                    class="slider__text four">
-                                    <?= get_post_meta($post->ID, 'button_text', true); ?>
+                                    <?= $button_text; ?>
                                 </a>
+                                <?php endif;?>
                             </div>
                         </div>
                     <?php endwhile;

@@ -409,6 +409,7 @@ function parsePlugin()
     $xml = new ImportXML();
 //    $xml->parseGoogleDrive();
 //    $xml->parseLocalFileAttributes();
+//    $xml->copyAttributesRuToUk();
     if (empty($time) || $time + $hour < time()) {
         update_option('xml_price_cron', time());
         $xml->parseGoogleDrive();

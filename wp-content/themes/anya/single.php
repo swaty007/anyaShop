@@ -19,14 +19,14 @@ the_post(); ?>
                         comments_template();
                     endif; ?>
                 </div>
-                <h3 class="title__sm mb-2">
+                <h3 class="title__sm mb-2" style="margin-bottom: 20px;">
                     <?php pll_e("Other articles"); ?>
                 </h3>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     <?php $count = 0;
                     $loop = new WP_Query(array('post_type' => 'post', 'posts_per_page' => 4, 'post__not_in' => [$post->ID])); ?>
                     <?php while ($loop->have_posts()) : $loop->the_post(); ?>
-                        <div class="col blog__item">
+                        <div class="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 blog__item">
                             <?php //the_modified_time('F jS, Y'); ?>
                             <a class="block__item--link" href="<?php the_permalink(); ?>">
                                 <img src="<?php the_post_thumbnail_url(); ?>" class="blog__item--img">
@@ -38,7 +38,7 @@ the_post(); ?>
                         <?php $count++;endwhile;
                     wp_reset_query(); ?>
                 </div>
-                <div class="text-right">
+                <div class="text-right" style="margin-bottom: 30px;">
                     <div class="blog__more title__xm">
                         <!--                <a href="<? //= get_permalink( get_option( 'page_for_posts' )) ;?>" class="blog__more--btn">-->
                         <a href="<?= get_post_type_archive_link('post'); ?>" class="blog__more--btn">

@@ -182,13 +182,13 @@ class ImportXML
     public function parseLocalFileAttributes () {
         $this->loadData();
         $this->importProductOnlyAttributes();
-        $this->removeDuplicates();
+//        $this->removeDuplicates();
     }
 
 
     function loadData()
     {
-        $xml = simplexml_load_file(get_template_directory_uri() . '/datafile3.xml', 'SimpleXMLElement');
+        $xml = simplexml_load_file(get_template_directory_uri() . '/datafile1.xml', 'SimpleXMLElement');
 
 //        $this->categories = $xml->shop->categories->category;
         $xmlCategories = $xml->shop->categories->category;
@@ -390,12 +390,6 @@ class ImportXML
 
     function importProductOnlyAttributes () {
         foreach ($this->products as $product) {
-            $post = [
-                'post_title' => $product->name->__toString(),
-                'post_content' => trim($product->description->__toString()),
-                'post_status' => 'publish',
-                'post_type' => 'product'
-            ];
 
             if ($product['available']->__toString() != true) {
                 var_dump('available fail');
@@ -422,21 +416,8 @@ class ImportXML
 
 
                         if (!taxonomy_exists($taxonomy_name)) {
-                            $taxonomy_id = wc_create_attribute( // создать атрибут
-                                [
-                                    'name' => $attribute,
-                                    'type' => "select", // text
-                                    'slug' => $taxonomy_slug, // text
-                                ]
-                            );
-                            if (is_wp_error($taxonomy_id)) {
-                                var_dump($taxonomy_id);
-                                die();
-                            }
-                            register_taxonomy($taxonomy_name, ['product'], []);
-//                    WC_Post_Types::register_taxonomies();
+                            continue;
                         } else {
-//                    WC_Post_Types::register_taxonomies();
                             $taxonomy_id = wc_attribute_taxonomy_id_by_name($taxonomy_name);
                         }
 
@@ -447,21 +428,7 @@ class ImportXML
 
                             $term_id = term_exists($term_name, $taxonomy_name);
                             if (!$term_id) {
-                                $term_id = wp_insert_term($term_name, $taxonomy_name);
-                                if (is_wp_error($term_id)) {
-                                    if ($term_id->error_data['term_exists']) {
-                                        $term_id = $term_id->error_data['term_exists'];
-                                    } else {
-                                        var_dump($term_id);
-                                        var_dump($term_name);
-                                        var_dump($taxonomy_name);
-                                        var_dump(term_exists($term_name, $taxonomy_name));
-                                        die();
-                                        continue;
-                                    }
-                                } else {
-                                    $term_id = (int)$term_id['term_id'];
-                                }
+                                continue;
                             } else {
                                 $term_id = (int)$term_id['term_id'];
                             }
@@ -483,6 +450,50 @@ class ImportXML
             unset($product);
         }
         unset($this->products);
+    }
+
+    function copyAttributesRuToUk () {
+        $posts = get_posts([
+            'post_type' => 'product',
+            'post_status' => ['publish', 'draft'],
+            'posts_per_page' => -1,
+            'lang' => 'ru'
+        ]);
+
+        foreach($posts as $post) {
+            $post_id = $post->ID;
+            $post_id_uk = pll_get_post($post_id, 'uk');
+            $productWp = wc_get_product($post_id);
+            $productWp_uk = wc_get_product($post_id_uk);
+            if (!$productWp || !$productWp_uk) {
+                continue;
+            }
+            $attributes = $productWp->get_attributes();
+            $attributes_uk = $productWp_uk->get_attributes();
+            foreach($attributes as $attribute) {
+                $taxonomy_id = $attribute->get_id();
+                $taxonomy_name = $attribute->get_name();
+                $termsArr = [];
+                foreach($attribute->get_options() as $option) {
+                    $term_id = pll_get_term($option, 'uk');
+                    if (empty($term_id)) {
+                        continue;
+                    }
+                    if (!has_term($term_id, $taxonomy_name, $post_id_uk)) {
+                        wp_set_object_terms($post_id_uk, $term_id, $taxonomy_name, true);
+                    }
+                    $termsArr[] = $term_id;
+                }
+                $attributes_uk[] = $this->pricode_create_attributes($taxonomy_name, $termsArr, $taxonomy_id);
+            }
+            $productWp_uk->set_attributes($attributes_uk);
+            $productWp_uk->save();
+            unset($productWp_uk);
+            unset($productWp);
+            unset($attributes);
+            unset($attributes_uk);
+        }
+        die();
     }
 
     function pricode_create_attributes($name, $options, $taxonomy_id)
