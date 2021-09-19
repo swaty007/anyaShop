@@ -47,7 +47,10 @@ $type = $product->get_type(); //yith_bundle, simple
                 <div class="d-flex align-items-center">
                     <span class="price"><?= $product->get_price_html(); ?></span>
                     <?php if ($productStock): ?>
-                        <button class="transition-3s buy-btn"><i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину");?></button>
+                        <button class="transition-3s buy-btn" data-sku="<?= $sku; ?>" data-id="<?= $post->ID; ?>">
+                            <i class="fas fa-cart-plus icon"></i>
+                            <?php pll_e("В корзину");?>
+                        </button>
                     <?php endif; ?>
                 </div>
             </div>
@@ -61,7 +64,8 @@ $type = $product->get_type(); //yith_bundle, simple
                     <span class="price"><?= $product->get_price_html(); ?></span>
                     <?php if ($productStock): ?>
                         <button class="transition-3s buy-btn" data-sku="<?= $sku; ?>" data-id="<?= $post->ID; ?>">
-                            <i class="fas fa-cart-plus icon"></i> <?php pll_e("В корзину");?>
+                            <i class="fas fa-cart-plus icon"></i>
+                            <?php pll_e("В корзину");?>
                         </button>
                     <?php endif; ?>
                 </div>

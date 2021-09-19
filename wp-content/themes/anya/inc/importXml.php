@@ -75,7 +75,7 @@ class ImportXML
         include_once plugin_dir_path(__FILE__) . 'views/xml-display.php';
     }
 
-    function parseGoogleDrive()
+    public function parseGoogleDrive()
     {
         $languages = pll_languages_list();
         $csv = trim(get_option('xml_price_url', true));
@@ -168,7 +168,7 @@ class ImportXML
         }
     }
 
-    function parseLocalFileData()
+    public function parseLocalFileData()
     {
         //        return;
         $this->loadData();
@@ -178,6 +178,13 @@ class ImportXML
         $this->importProducts();
         $this->removeDuplicates();
     }
+
+    public function parseLocalFileAttributes () {
+        $this->loadData();
+        $this->importProductOnlyAttributes();
+        $this->removeDuplicates();
+    }
+
 
     function loadData()
     {
@@ -211,19 +218,24 @@ class ImportXML
     {
         foreach ($this->products as $product) {
             $sku = $product['id']->__toString();
-            $post_id = $this->productExists($sku);
-            if ($post_id) {
-                update_post_meta($post_id, '_regular_price', $product->price->__toString());
-                $productWp = wc_get_product($post_id);
+            $posts = $this->productExists($sku);
+            if (!empty($posts)) {
+                foreach ($posts as $post) {
+                    {
+                        $post_id = $post->ID;
+                        update_post_meta($post_id, '_regular_price', $product->price->__toString());
+                        $productWp = wc_get_product($post_id);
 
-                $stock = $product->stock_quantity->__toString() > 0 ? "instock" : "outofstock";
+                        $stock = $product->stock_quantity->__toString() > 0 ? "instock" : "outofstock";
 
 //            $productWp->set_manage_stock(true);
-                $productWp->set_stock_status($stock);
-                //            wc_update_product_stock_status(); //instock outofstock onbackorder
+                        $productWp->set_stock_status($stock);
+                        //            wc_update_product_stock_status(); //instock outofstock onbackorder
 
 //                wc_update_product_stock($post_id, $product->stock_quantity->__toString());
-                $productWp->save();
+                        $productWp->save();
+                    }
+                }
             }
             unset($product);
         }
@@ -246,7 +258,8 @@ class ImportXML
             }
 
             $sku = $product['id']->__toString();
-            $post_id = $this->productExists($sku);
+            $posts = $this->productExists($sku);
+            $post_id = $posts[0]->ID;
             if (!$post_id) {
                 $post_id = wp_insert_post($post);
                 update_post_meta($post_id, '_sku', $sku);
@@ -375,6 +388,103 @@ class ImportXML
         unset($this->products);
     }
 
+    function importProductOnlyAttributes () {
+        foreach ($this->products as $product) {
+            $post = [
+                'post_title' => $product->name->__toString(),
+                'post_content' => trim($product->description->__toString()),
+                'post_status' => 'publish',
+                'post_type' => 'product'
+            ];
+
+            if ($product['available']->__toString() != true) {
+                var_dump('available fail');
+//                $post['post_status'] = "draft";
+            }
+
+            $sku = $product['id']->__toString();
+            $posts = $this->productExists($sku);
+            if (!empty($posts)) {
+                foreach($posts as $post) {
+                    $post_id = $post->ID;
+
+                    $productWp = wc_get_product($post_id);
+                    $attributes = $productWp->get_attributes();
+                    foreach ($product->param as $parameter) {
+                        $paramName = $parameter['name']->__toString();
+                        $paramValue = $parameter->__toString();
+
+
+                        $attribute = $paramName;
+                        $taxonomy_name = "pa_" . apply_filters('sanitize_title', $attribute);
+                        $taxonomy_name = mb_substr(wc_attribute_taxonomy_name($attribute), 0, 29, 'utf-8');
+                        $taxonomy_slug = mb_substr(apply_filters('sanitize_title', $attribute), 0, 26, 'utf-8');
+
+
+                        if (!taxonomy_exists($taxonomy_name)) {
+                            $taxonomy_id = wc_create_attribute( // создать атрибут
+                                [
+                                    'name' => $attribute,
+                                    'type' => "select", // text
+                                    'slug' => $taxonomy_slug, // text
+                                ]
+                            );
+                            if (is_wp_error($taxonomy_id)) {
+                                var_dump($taxonomy_id);
+                                die();
+                            }
+                            register_taxonomy($taxonomy_name, ['product'], []);
+//                    WC_Post_Types::register_taxonomies();
+                        } else {
+//                    WC_Post_Types::register_taxonomies();
+                            $taxonomy_id = wc_attribute_taxonomy_id_by_name($taxonomy_name);
+                        }
+
+
+                        $termsArr = [];
+                        foreach (explode(", ", $paramValue) as $term_name) {
+                            if (empty($term_name)) continue;
+
+                            $term_id = term_exists($term_name, $taxonomy_name);
+                            if (!$term_id) {
+                                $term_id = wp_insert_term($term_name, $taxonomy_name);
+                                if (is_wp_error($term_id)) {
+                                    if ($term_id->error_data['term_exists']) {
+                                        $term_id = $term_id->error_data['term_exists'];
+                                    } else {
+                                        var_dump($term_id);
+                                        var_dump($term_name);
+                                        var_dump($taxonomy_name);
+                                        var_dump(term_exists($term_name, $taxonomy_name));
+                                        die();
+                                        continue;
+                                    }
+                                } else {
+                                    $term_id = (int)$term_id['term_id'];
+                                }
+                            } else {
+                                $term_id = (int)$term_id['term_id'];
+                            }
+                            $termsArr[] = $term_id;
+
+                            if (!has_term($term_id, $taxonomy_name, $post_id)) {
+                                wp_set_object_terms($post_id, $term_id, $taxonomy_name, true);
+                            }
+                        }
+
+                        $attributes[] = $this->pricode_create_attributes($taxonomy_name, $termsArr, $taxonomy_id);
+                        unset($parameter);
+                    }
+                    $productWp->set_attributes($attributes);
+                    unset($attributes);
+                    $productWp->save();
+                }
+            }
+            unset($product);
+        }
+        unset($this->products);
+    }
+
     function pricode_create_attributes($name, $options, $taxonomy_id)
     {
         $attribute = new WC_Product_Attribute();
@@ -450,7 +560,7 @@ class ImportXML
     function productExists($sku, $timeout = true)
     {
         if ($timeout) {
-            usleep(200000); //0.2 sek
+            usleep(100000); //0.1 sek
         }
         $posts = get_posts([
             'post_type' => 'product',
@@ -467,7 +577,7 @@ class ImportXML
         if (empty($posts)) {
             return false;
         }
-        return $posts[0]->ID;
+        return $posts;
 //        $translation = icl_object_id($posts[0]->ID, 'product', false, $this->languages[$lang]['code']); // get post id for language
     }
 

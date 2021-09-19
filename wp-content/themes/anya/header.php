@@ -46,8 +46,7 @@ if (function_exists('wp_body_open')) {
     justify-content: center;
     display: flex;
 ">
-    <!--    <img src="-->
-    <? //= get_template_directory_uri(); ?><!--/images/logo/zoom-logo.png" style="max-width:300px;"/>-->
+        <img src="<?= get_url_from_img_id(get_theme_mod('custom_logo')); ?>" style="max-width:300px;"/>
 </div>
 <!--preloader-->
 <script>
@@ -109,7 +108,7 @@ if (function_exists('wp_body_open')) {
                 <li class="logo-item d-flex align-items-center d-none">
                     <!-- <a href="#">Zoom</a> -->
                     <a href="<?= pll_home_url(); ?>">
-                        <img width="170px" src="<?= get_template_directory_uri(); ?>/images/zoom-logo.png"/>
+                        <img width="170px" src="<?= get_url_from_img_id(get_theme_mod('custom_logo')); ?>"/>
                     </a>
                 </li>
             </ul>
@@ -122,18 +121,18 @@ if (function_exists('wp_body_open')) {
                         <i class="far fa-user"></i>
                     </a>
                 </li>
-                <li class="icon-item d-flex align-items-center transition-3s">
-                    <a href="<?= get_permalink(pll_get_post(2540)); ?>" class="icon">
-                        <i class="far fa-heart"></i>
+<!--                <li class="icon-item d-flex align-items-center transition-3s">-->
+<!--                    <a href="--><?//= get_permalink(pll_get_post(2540)); ?><!--" class="icon">-->
+<!--                        <i class="far fa-heart"></i>-->
                         <!--                						<span class="counter">2</span>-->
-                    </a>
-                </li>
-                <li class="icon-item d-flex align-items-center transition-3s">
-                    <a href="<?= get_permalink(pll_get_post(1890)); ?>" class="icon">
-                        <i class="fas fa-balance-scale"></i>
-                        <span id="compare__counter" class="counter">1</span>
-                    </a>
-                </li>
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="icon-item d-flex align-items-center transition-3s">-->
+<!--                    <a href="--><?//= get_permalink(pll_get_post(1890)); ?><!--" class="icon">-->
+<!--                        <i class="fas fa-balance-scale"></i>-->
+<!--                        <span id="compare__counter" class="counter"></span>-->
+<!--                    </a>-->
+<!--                </li>-->
 <!--                <li class="icon-item d-flex align-items-center transition-3s dropdown__li">-->
 <!--					<span class="icon">-->
 <!--						<i class="fas fa-shopping-basket"></i>-->

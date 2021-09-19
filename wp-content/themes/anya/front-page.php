@@ -7,41 +7,46 @@ get_header();
 
     <section class="home-slider">
         <div class="container no-pad">
-            <div id="homeSlider" class="carousel slide" data-ride="carousel" data-interval="8000" >
+            <div id="homeSlider" class="carousel slide" data-ride="carousel" data-interval="8000">
                 <div class="carousel-inner" role="listbox">
-                    <?php $loop = new WP_Query( array(
+                    <?php $loop = new WP_Query(array(
                             'post_type' => 'slider',
                             'posts_per_page' => -1,
                         )
                     ); ?>
-                    <?php $count = 0; while ( $loop->have_posts() ) : $loop->the_post();$count++; ?>
-                        <div class="carousel-item <?=$count === 1 ? 'active': '';?>">
+                    <?php $count = 0;
+                    while ($loop->have_posts()) : $loop->the_post();
+                        $count++; ?>
+                        <div class="carousel-item <?= $count === 1 ? 'active' : ''; ?>">
                             <div class="d-block">
                                 <img widht="100%"
-                                     style="object-fit: <?=get_post_meta($post->ID,'object_fit', true);?>"
-                                     src="<?php the_post_thumbnail_url();?>"
+                                     style="object-fit: <?= get_post_meta($post->ID, 'object_fit', true); ?>"
+                                     src="<?php the_post_thumbnail_url(); ?>"
                                      alt="First slide">
-<?//= get_template_directory_uri(); ?><!--/images/homepage_slider/slide1_desktop.png-->
+                                <? //= get_template_directory_uri(); ?><!--/images/homepage_slider/slide1_desktop.png-->
                                 <div class="slider__text one">
-                                    <?php the_title();?>
+                                    <?php the_title(); ?>
                                 </div>
                                 <div class="slider__text two">
-                                    <?php the_excerpt();?>
+                                    <?php the_excerpt(); ?>
                                 </div>
                                 <div class="slider__text three">
-                                    <?php the_content();?>
+                                    <?php the_content(); ?>
                                 </div>
-                                <a href="<?= get_post_meta($post->ID, 'button_link', true);?>" class="slider__text four">
-                                    <?= get_post_meta($post->ID, 'button_text', true);?>
+                                <a href="<?= get_post_meta($post->ID, 'button_link', true); ?>"
+                                   class="slider__text four">
+                                    <?= get_post_meta($post->ID, 'button_text', true); ?>
                                 </a>
                             </div>
                         </div>
-                    <?php endwhile; wp_reset_query(); ?>
+                    <?php endwhile;
+                    wp_reset_query(); ?>
                 </div>
                 <ol class="carousel-indicators">
-                    <?php for ($i = 0;$count > $i; $i++):?>
-                        <li data-target="#homeSlider" data-slide-to="<?=$i;?>" class="<?=$i === 0 ? 'active': '';?>"></li>
-                    <?php endfor;?>
+                    <?php for ($i = 0; $count > $i; $i++): ?>
+                        <li data-target="#homeSlider" data-slide-to="<?= $i; ?>"
+                            class="<?= $i === 0 ? 'active' : ''; ?>"></li>
+                    <?php endfor; ?>
                 </ol>
                 <a class="carousel-control-prev" href="#homeSlider" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"><i class="material-icons">keyboard_arrow_left</i></span>
@@ -59,16 +64,20 @@ get_header();
         <section class="tabs">
             <div class="container content-container">
                 <div class="row tabs-wrapper">
-                    <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'popular'}"
+                    <div class="col-md-3 transition-3s tab" :class="{ 'active' : tab === 'popular'}"
                          @click="tab = 'popular'">
                         <?php pll_e("Популярные товары"); ?>
                     </div>
-                    <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'new'}" @click="tab = 'new'">
+                    <div class="col-md-3 transition-3s tab" :class="{ 'active' : tab === 'new'}" @click="tab = 'new'">
                         <?php pll_e("Новинки"); ?>
                     </div>
-                    <div class="col-md-4 transition-3s tab" :class="{ 'active' : tab === 'discount'}"
+                    <div class="col-md-3 transition-3s tab" :class="{ 'active' : tab === 'discount'}"
                          @click="tab = 'discount'">
                         <?php pll_e("Продукты со скидками"); ?>
+                    </div>
+                    <div class="col-md-3 transition-3s tab" :class="{ 'active' : tab === 'rent'}"
+                         @click="tab = 'rent'">
+                        <?php pll_e("Аренда"); ?>
                     </div>
                 </div>
             </div>
@@ -92,6 +101,16 @@ get_header();
                             </div>
                             <div class="advantages">
                                 <?php //wc_display_product_attributes($product); ?>
+                            </div>
+                            <div v-if="product.rent_price && tab === 'rent'" class="price price__rent">
+                                <span class="pull-left">
+                                    <?php pll_e("Цена проката:"); ?>
+                                </span>
+                                <span class="woocommerce-Price-amount amount">
+                                    <bdi>
+                                        <span class="woocommerce-Price-currencySymbol">₴</span>{{ product.rent_price }}
+                                    </bdi>
+                                </span>
                             </div>
                             <div v-html="product.price_html" class="price">
 
@@ -264,7 +283,8 @@ get_header();
                                 <div class="hover transition-3s"></div>
                                 <div class="description">
                                     <h4 class="description__title"><?php the_title(); ?></h4>
-<!--                                    <div>--><?//= mb_substr(get_the_excerpt(), 0, 90); ?><!--...</div>-->
+                                    <!--                                    <div>-->
+                                    <? //= mb_substr(get_the_excerpt(), 0, 90); ?><!--...</div>-->
                                 </div>
                             </a>
                         </div>
@@ -278,9 +298,9 @@ get_header();
     </section>
 <?= get_template_part('template-parts/components-subscription', 'form'); ?>
 
-<!--    <div class="global-widgets">-->
-<!--        <div class="transition-3s action-btn"><i class="fas fa-phone icon"></i></div>-->
-<!--    </div>-->
+    <!--    <div class="global-widgets">-->
+    <!--        <div class="transition-3s action-btn"><i class="fas fa-phone icon"></i></div>-->
+    <!--    </div>-->
 
     <script type="text/javascript">
         window.addEventListener('load', function () {

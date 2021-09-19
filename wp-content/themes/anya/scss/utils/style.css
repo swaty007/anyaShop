@@ -556,7 +556,7 @@ header.diller ul li.icon-item .icon .counter{
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 .tabs .tabs-wrapper .tab{
-    padding: 20px 0px;
+    padding: 20px 10px;
     color: #5D6065;
     text-transform: uppercase;
     text-align: center;
@@ -568,7 +568,7 @@ header.diller ul li.icon-item .icon .counter{
     border-right: 1px solid #D8DFE1;    
     border-bottom: 1px solid #D8DFE1;
     border-top: 1px solid transparent;
-    min-width: 220px;
+    min-width: 175px;
 }
 .tabs.image-tabs .tabs-wrapper .tab{
     padding: 12px 30px;
@@ -636,6 +636,9 @@ header.diller ul li.icon-item .icon .counter{
     font-weight: 400;
     font-size: 20px;    
     text-align: right;
+}
+.products-table-catalog .product .info .price__rent {
+    margin-bottom: 20px;
 }
 .products-table-catalog .product .info .advantages{
     margin: 35px 0px;

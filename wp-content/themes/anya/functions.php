@@ -241,8 +241,8 @@ function footer_enqueue_scripts()
 
 function cc_mime_types($mime_types)
 {
-//    $mime_types['svg'] = 'image/svg+xml';
-    $mime_types['svg'] = 'image/svg';
+    $mime_types['svg'] = 'image/svg+xml';
+//    $mime_types['svg'] = 'image/svg';
     return $mime_types;
 }
 
@@ -337,6 +337,8 @@ if (function_exists('pll_register_string')) {
     pll_register_string("Pages", "Каталог", "globals");
     pll_register_string("Pages", "Навигация", "globals");
     pll_register_string("Pages", "Контакты", "globals");
+    pll_register_string("Pages", "Цена проката:", "globals");
+    pll_register_string("Pages", "Аренда", "globals");
 
 
     //pll_e("");
@@ -406,7 +408,7 @@ function parsePlugin()
     $hour = 60*60*1; // 1 hours
     $xml = new ImportXML();
 //    $xml->parseGoogleDrive();
-//    $xml->parseGoogleDrive();
+//    $xml->parseLocalFileAttributes();
     if (empty($time) || $time + $hour < time()) {
         update_option('xml_price_cron', time());
         $xml->parseGoogleDrive();
@@ -519,6 +521,13 @@ function getProducts(WP_REST_Request $request)
                 'type' => 'numeric',
             ];
             break;
+        case "rent":
+            $meta_query['rent'] = [
+                'key' => 'rent',
+                'value' => '1',
+                'compare' => '=',
+            ];
+            break;
     }
 
 
@@ -536,7 +545,7 @@ function getProducts(WP_REST_Request $request)
         $product = wc_get_product($post->ID);
         $sku = $product->get_sku();
 
-//        $post->guid = get_permalink($post->ID);
+        $post->guid = get_permalink($post->ID);
         $related_image_url = get_the_post_thumbnail_url($post->ID);
         if (!empty($related_image_url)) {
             $post->thumbnail_url = $related_image_url;
@@ -548,6 +557,7 @@ function getProducts(WP_REST_Request $request)
         $post->class_compare = set_class_compare($post->ID);
         $post->sku = $sku;
         $post->popular = get_post_meta($post->ID, 'popular', true);
+        $post->rent_price = get_post_meta($post->ID, 'rent_price', true);
         $result['data'][] = $post;
     }
     $result['found_posts'] = $loop->found_posts;

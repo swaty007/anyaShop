@@ -4,7 +4,7 @@ function showProductMenu() {
         var heightToSlider = $(".product-page .image-slider").offset().top;
         var currentScroll = $(window).scrollTop();
         if (currentScroll > (heightToSlider - 100)) {
-            $(".product-fixed-menu").css("top", "0");
+            $(".product-fixed-menu").css("top", "40px");
         } else {
             $(".product-fixed-menu").css("top", "-100%");
         }
@@ -121,10 +121,10 @@ $(window).scroll(function () {
         if (($(window).scrollTop() > $(".product-page #review").offset().top - 90) && ($(window).scrollTop() < $(".product-page #specifications").offset().top - 127)) {
             $('.anchor-link').closest('div').removeClass("active");
             $('.anchor-link[href="#review"]').closest('div').addClass("active");
-        } else if (($(window).scrollTop() > $(".product-page #specifications").offset().top - 127) && ($(window).scrollTop() < $(".product-page #materials").offset().top - 200)) {
+        } else if ($(".product-page #materials")[0] && ($(window).scrollTop() > $(".product-page #specifications").offset().top - 127) && ($(window).scrollTop() < $(".product-page #materials").offset().top - 200)) {
             $('.anchor-link').closest('div').removeClass("active");
             $('.anchor-link[href="#specifications"]').closest('div').addClass("active");
-        } else if (($(window).scrollTop() > $(".product-page #materials").offset().top - 200) && ($(window).scrollTop() < $(".product-page #related-products").offset().top - 180)) {
+        } else if ($(".product-page #related-products")[0] && $(".product-page #materials")[0] && ($(window).scrollTop() > $(".product-page #materials").offset().top - 200) && ($(window).scrollTop() < $(".product-page #related-products").offset().top - 180)) {
             $('.anchor-link').closest('div').removeClass("active");
             $('.anchor-link[href="#materials"]').closest('div').addClass("active");
         } else if (($(window).scrollTop() > $(".product-page #related-products").offset().top - 180)) {
