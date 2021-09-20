@@ -972,6 +972,9 @@ footer .address{
     color: #fff;
     font-family: 'Montserrat', Oswald, OpenSans;
 }
+footer .address a {
+    color: #fff;
+}
 footer .links li{
     margin-bottom: 5px;    
 }

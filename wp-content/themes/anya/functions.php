@@ -4,7 +4,7 @@
 //define('MAIN_SITE_URL', 'https://jungo-master.demo.gns-it.com');
 //define('API_URL', 'https://api.jungo-dev.demo.gns-it.com/api/v1');
 
-//require_once get_theme_file_path('/inc/widgets.php');
+require_once get_theme_file_path('/inc/widgets.php');
 require_once get_theme_file_path('/inc/polylang-slug.php');
 require_once get_theme_file_path('/inc/importXml.php');
 require_once get_theme_file_path('/inc/parse-routes.php');
@@ -135,6 +135,9 @@ add_filter('wpcf7_autop_or_not', '__return_false');
 add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
 function my_jquery_enqueue()
 {
+    if (is_admin()) {
+        return;
+    }
     wp_deregister_script('jquery');
     wp_register_script('jquery', false);
 //    wp_register_script('jquery', "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js", false, null);
@@ -342,6 +345,7 @@ if (function_exists('pll_register_string')) {
 
     pll_register_string("Pages", "Узнать подробнее", "globals");
     pll_register_string("Pages", "Горячее предложение", "globals");
+    pll_register_string("Pages", 'Украина, Киев<br><a href="tel:+380956357677">+380956357677</a><br><a href="mailto:admin@zoomstore.com.ua">admin@zoomstore.com.ua</a><br><a href="mailto:sales@zoomstore.com.ua">sales@zoomstore.com.ua</a>', "globals");
 
 
     //pll_e("");

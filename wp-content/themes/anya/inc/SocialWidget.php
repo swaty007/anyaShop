@@ -25,41 +25,32 @@ class SocialWidget extends WP_Widget
     {
         // outputs the content of the widget
         echo $args['before_widget'];
+        echo '<div class="title">'.pll_e("Социальные сети").'</div>';
         ?>
         <?php if (!empty($instance['youtube'])): ?>
-        <li class="menu__item">
-            <a href="<?= $instance['youtube']; ?>">
-                <img src="<?= get_template_directory_uri(); ?>/images/social/you.svg"/>
-            </a>
-        </li>
+        <a href="<?= $instance['youtube']; ?>" class="social-btn instagram" target="_blank">
+            <i class="fab fa-youtube-f"></i>
+        </a>
     <?php endif; ?>
         <?php if (!empty($instance['facebook'])): ?>
-        <li class="menu__item">
-            <a href="<?= $instance['facebook']; ?>">
-                <img src="<?= get_template_directory_uri(); ?>/images/social/fb.svg"/>
-            </a>
-        </li>
+        <a href="<?= $instance['facebook']; ?>" class="social-btn facebook" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+        </a>
     <?php endif; ?>
         <?php if (!empty($instance['instagram'])): ?>
-        <li class="menu__item">
-            <a href="<?= $instance['instagram']; ?>">
-                <img src="<?= get_template_directory_uri(); ?>/images/social/in.svg"/>
-            </a>
-        </li>
+        <a href="<?= $instance['instagram']; ?>" class="social-btn instagram" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
     <?php endif; ?>
         <?php if (!empty($instance['vk'])): ?>
-        <li class="menu__item">
-            <a href="<?= $instance['vk']; ?>">
-                <img src="<?= get_template_directory_uri(); ?>/images/social/vk.svg"/>
-            </a>
-        </li>
+        <a href="<?= $instance['vk']; ?>" class="social-btn facebook" target="_blank">
+            <i class="fab fa-vk"></i>
+        </a>
     <?php endif; ?>
         <?php if (!empty($instance['telegram'])): ?>
-        <li class="menu__item">
-            <a href="<?= $instance['telegram']; ?>">
-                <img src="<?= get_template_directory_uri(); ?>/images/social/tg.svg"/>
-            </a>
-        </li>
+        <a href="<?= $instance['telegram']; ?>" class="social-btn facebook" target="_blank">
+            <i class="fab fa-telegram"></i>
+        </a>
     <?php endif; ?>
         <?php
         echo $args['after_widget'];

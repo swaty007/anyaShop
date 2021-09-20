@@ -8,7 +8,8 @@
                 <div class="title">
                     <?php pll_e("Контакты");?>
                 </div>
-                <p class="address">Голосеевский проспект, <br>Киев, <br>03038, <br>Украина, <br>+38(044) 502 51 51, <br>info@prophoto.ua
+                <p class="address">
+                    <?php pll_e('Украина, Киев<br><a href="tel:+380956357677">+380956357677</a><br><a href="mailto:admin@zoomstore.com.ua">admin@zoomstore.com.ua</a><br><a href="mailto:sales@zoomstore.com.ua">sales@zoomstore.com.ua</a>');?>
                 </p>
             </div>
             <div class="col-sm-4 col-md-3 content-wrapper">
@@ -37,11 +38,7 @@
                 ]);
                 ?>
             </div>
-            <div class="col-sm-4 col-md-3 content-wrapper">
-                <div class="title"><?php pll_e("Социальные сети");?></div>
-                <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
-            </div>
+            <?php dynamic_sidebar( 'social_widget' ); ?>
         </div>
     </div>
     <div class="copyright">

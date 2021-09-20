@@ -5,8 +5,8 @@ function sidebar_widgets_init() {
     register_sidebar( array(
         'name'          => 'Social widget',
         'id'            => 'social_widget',
-        'before_widget' => '<ul class="footer__menu footer__menu--social">',
-        'after_widget'  => '</ul>',
+        'before_widget' => '<div class="col-sm-4 col-md-3 content-wrapper">',
+        'after_widget'  => '</div>',
         'before_title'  => '<h2 class="rounded">',
         'after_title'   => '</h2>',
     ) );
