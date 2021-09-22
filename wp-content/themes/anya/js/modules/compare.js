@@ -9,9 +9,8 @@ class Compare {
     }
 
     events() {
-        let items_length = this.compare_items.split(",").length
-        if (items_length) {
-            $('#compare__counter').text(items_length).show()
+        if (this.compare_items && typeof this.compare_items === "string" && this.compare_items.split(",").length) {
+            $('#compare__counter').text(this.compare_items.split(",").length).show()
         } else {
             $('#compare__counter').hide()
         }
