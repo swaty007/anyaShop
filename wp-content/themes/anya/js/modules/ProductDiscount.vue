@@ -44,6 +44,7 @@
                     url: '/wp-json/v1/products/get',
                     data: {
                         security: iteaData.nonce,
+                        language: iteaData.language,
                         data: {
                             filter: this.tab,
                             page: this.page,

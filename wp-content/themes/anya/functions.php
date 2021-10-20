@@ -113,7 +113,7 @@ function itea_files()
         'root_url' => get_site_url(),
         'nonce' => wp_create_nonce('protection'),
         'ajaxurl' => admin_url('admin-ajax.php'),
-//        'language' => pll_current_language(),
+        'language' => pll_current_language(),
         'translates' => [
 //            'favorite' => pll__('Favorite equipment'),
         ],
@@ -491,6 +491,7 @@ function getProducts(WP_REST_Request $request)
 {
 //    if (wp_verify_nonce($_GET['security'], 'protection')) {
     $data = $_GET['data'];
+    $lang = $_GET['language'];
 
     $result = [];
 
@@ -545,6 +546,7 @@ function getProducts(WP_REST_Request $request)
             'paged' => !empty($data['page']) ? $data['page'] : 1,
             'orderby' => $order_by,
             'meta_query' => $meta_query,
+            'lang' => [$lang],
         )
     );
     while ($loop->have_posts()) {
