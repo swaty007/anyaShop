@@ -79,7 +79,7 @@ class ImportXML
     {
         $languages = pll_languages_list();
         $csv = trim(get_option('xml_price_url', true));
-        $items_by_tick = 300;
+        $items_by_tick = 200;
         $items_from_last_tick = get_option('xml_price_items_tick', 0);
 
         if (!ini_set('default_socket_timeout', 15)) {
@@ -112,6 +112,7 @@ class ImportXML
                 $price = str_replace("&nbsp;", "", $price);
                 $price = preg_replace("/\s|&nbsp;/",'',$price);
                 $price = preg_replace("/&nbsp;/",'',$price);
+                $price = str_replace(",", ".", $price);
 //                $price = html_entity_decode($price);
                 $availability = $item[2];
 //                var_dump($sku, $price, $availability);
@@ -121,7 +122,7 @@ class ImportXML
                         $valid++;
                         $posts = get_posts([
                             'post_type' => 'product',
-                            'post_status' => ['publish', 'draft'],
+                            'post_status' => ['publish'],//, 'draft'
                             'posts_per_page' => -1,
                             'lang' => $languages,
                             'meta_query' => [
@@ -138,7 +139,7 @@ class ImportXML
                                 $productWp = wc_get_product($post->ID);
                                 $stock = $availability === "Y" ? "instock" : "outofstock";
 
-                                if ($productWp->get_stock_status() !== $stock && $productWp->get_price() !== $price) {
+                                if ($productWp->get_stock_status() !== $stock || $productWp->get_price() !== $price) {
                                     update_post_meta($post->ID, '_regular_price', $price);
                                     update_post_meta($post->ID, '_price', $price);
                                     //                                $productWp->set_manage_stock($stock);

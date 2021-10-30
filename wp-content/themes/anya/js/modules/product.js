@@ -85,12 +85,16 @@ class Product {
     }
 
     wc_fragment_refresh() {
-        let itemsL = $('div.widget_shopping_cart_content li.woocommerce-mini-cart-item.mini_cart_item').length
+        let itemsL = $('.header_top div.widget_shopping_cart_content li.woocommerce-mini-cart-item.mini_cart_item').length
         console.log(itemsL)
         if (itemsL) {
-            $('#cart__counter').text(itemsL).show()
+            $('.cart__counter').each(function () {
+                $(this).text(itemsL).show()
+            })
         } else {
-            $('#cart__counter').hide()
+            $('.cart__counter').each(function () {
+                $(this).hide()
+            })
         }
 
     }

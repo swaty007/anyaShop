@@ -189,6 +189,9 @@
 
 .pll_language {
   padding-left: 25px;
+  span {
+    text-transform: uppercase;
+  }
 }
 
 .woocommerce-MyAccount-navigation {
@@ -201,5 +204,11 @@
         color: #8E3DFF;
       }
     }
+  }
+}
+
+@media(min-width: 992px) {
+  .width33-lg {
+    width: 33%;
   }
 }

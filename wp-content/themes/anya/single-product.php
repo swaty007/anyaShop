@@ -278,6 +278,7 @@ foreach ($bundle_data as $data) {
                             <?php foreach ($gallery as $i => $image): ?>
                                 <div class="slide transition-3s <?php if ($i === 0) echo "active"; ?>">
                                     <img data-title="Объектив Tamron SP 24-70mm Nicon <?php if ($i !== 0) echo $i; ?>"
+                                         data-fancybox="gallery"
                                          src="<?= get_url_from_img_id($image) ?>">
                                 </div>
                             <?php endforeach; ?>
@@ -320,12 +321,10 @@ foreach ($bundle_data as $data) {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="btn-text">
-                                    <div class="container">
-                                        <div class="row d-flex justify-content-center">
-                                            <div class="col-md-12 text-left"
-                                                 style="white-space: pre-line;line-height: 24px;">
-                                                <?= get_post($post->ID)->post_content; ?>
-                                            </div>
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-12 text-left"
+                                             style="white-space: pre-line;line-height: 24px;">
+                                            <?= get_post($post->ID)->post_content; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -533,14 +532,18 @@ foreach ($bundle_data as $data) {
                         <!--                            </div>-->
                         <!--                        </div>-->
                         <?php if (!empty($youtube)): ?>
-
+                            <?php
+                            parse_str(parse_url($youtube, PHP_URL_QUERY), $youtubeArray);
+                            $videoId = $youtubeArray['v'];
+                            ?>
                             <div class="video">
                                 <div class="container">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-md-12">
                                             <h2><?php the_title(); ?></h2>
                                             <iframe width="100%" height="600px"
-                                                    src="https://www.youtube.com/embed/XC7ZUTmvZ1A?rel=0&amp;controls=0&amp;showinfo=0"
+                                                    style="max-height: 60vh;"
+                                                    src="https://www.youtube.com/embed/<?= $videoId; ?>?rel=0&amp;controls=1&amp;showinfo=0"
                                                     frameborder="0" allow="autoplay; encrypted-media"
                                                     allowfullscreen></iframe>
                                         </div>

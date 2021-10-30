@@ -104,7 +104,7 @@ if (function_exists('wp_body_open')) {
                 <!--                    <a href="#">Публикации</a>-->
                 <!--                </li>-->
             </ul>
-            <ul class="d-flex" style="width: 33%;">
+            <ul class="d-flex width33-lg" >
                 <li class="logo-item d-flex align-items-center d-none">
                     <!-- <a href="#">Zoom</a> -->
                     <a href="<?= pll_home_url(); ?>">
@@ -121,27 +121,27 @@ if (function_exists('wp_body_open')) {
                         <i class="far fa-user"></i>
                     </a>
                 </li>
-<!--                <li class="icon-item d-flex align-items-center transition-3s">-->
-<!--                    <a href="--><?//= get_permalink(pll_get_post(2540)); ?><!--" class="icon">-->
-<!--                        <i class="far fa-heart"></i>-->
-                        <!--                						<span class="counter">2</span>-->
-<!--                    </a>-->
-<!--                </li>-->
+                <li class="icon-item d-lg-none d-flex align-items-center transition-3s">
+                    <a href="<?= get_permalink(pll_get_post(2540)); ?>" class="icon">
+                        <i class="far fa-heart"></i>
+<!--                                        						<span class="counter">2</span>-->
+                    </a>
+                </li>
 <!--                <li class="icon-item d-flex align-items-center transition-3s">-->
 <!--                    <a href="--><?//= get_permalink(pll_get_post(1890)); ?><!--" class="icon">-->
 <!--                        <i class="fas fa-balance-scale"></i>-->
 <!--                        <span id="compare__counter" class="counter"></span>-->
 <!--                    </a>-->
 <!--                </li>-->
-<!--                <li class="icon-item d-flex align-items-center transition-3s dropdown__li">-->
-<!--					<span class="icon">-->
-<!--						<i class="fas fa-shopping-basket"></i>-->
-<!--						<span id="cart__counter" class="counter">1</span>-->
-<!--					</span>-->
-<!--                    <div class="dropdown__widget">-->
-<!--                        <div class="widget_shopping_cart_content"></div>-->
-<!--                    </div>-->
-<!--                </li>-->
+                <li class="icon-item d-lg-none d-flex align-items-center transition-3s dropdown__li">
+					<span class="icon">
+						<i class="fas fa-shopping-basket"></i>
+						<span id="cart__counter" class="counter cart__counter">1</span>
+					</span>
+                    <div class="dropdown__widget">
+                        <div class="widget_shopping_cart_content"></div>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -196,7 +196,7 @@ if (function_exists('wp_body_open')) {
                     <li class="icon-item d-flex align-items-center transition-3s dropdown__li">
 					<span class="icon transition-3s">
 						<i class="fas fa-shopping-basket"></i>
-						<span id="cart__counter" class="counter">1</span>
+						<span id="cart__counter" class="counter cart__counter">1</span>
 					</span>
                         <div class="dropdown__widget">
                             <div class="widget_shopping_cart_content"></div>

@@ -44,3 +44,7 @@ const product = new Product();
 const compare = new Compare();
 const magazine_react = new Magazine_react();
 const search = new Search();
+
+$(document).on('click', '.woocommerce-ordering ul.options li', function() {
+    $(this).closest('form').find('select').trigger('change')
+})

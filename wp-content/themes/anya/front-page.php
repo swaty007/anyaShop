@@ -264,9 +264,9 @@ get_header();
                                         <?php if (!empty($gallery[0])): ?>
                                             <?php $bundle_image_url = get_url_from_img_id($gallery[0]);
                                             if (!empty($bundle_image_url)):?>
-                                                <img src="<?= $bundle_image_url; ?>" width="100%">
+                                                <img src="<?= $bundle_image_url; ?>" />
                                             <?php else: ?>
-                                                <img src="<?= wc_placeholder_img_src(); ?>" width="100%">
+                                                <img src="<?= wc_placeholder_img_src(); ?>" />
                                             <?php endif; ?>
                                         <?php endif; ?>
 
@@ -304,9 +304,9 @@ get_header();
                                         <?php if (!empty($gallery[1])): ?>
                                             <?php $bundle_image_url = get_url_from_img_id($gallery[1]);
                                             if (!empty($bundle_image_url)):?>
-                                                <img src="<?= $bundle_image_url; ?>" width="100%">
+                                                <img src="<?= $bundle_image_url; ?>" />
                                             <?php else: ?>
-                                                <img src="<?= wc_placeholder_img_src(); ?>" width="100%">
+                                                <img src="<?= wc_placeholder_img_src(); ?>" />
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
