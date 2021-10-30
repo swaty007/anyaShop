@@ -94,6 +94,9 @@
 	.tabs{
 		padding: 0;
 	}
+	.product-page .image-text .text-wrapper{
+		margin-left: 0;
+	}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
