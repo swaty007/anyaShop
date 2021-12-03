@@ -141,7 +141,9 @@ class ImportXML
 
                                 if ($productWp->get_stock_status() !== $stock || $productWp->get_price() !== $price) {
                                     update_post_meta($post->ID, '_regular_price', $price);
-                                    update_post_meta($post->ID, '_price', $price);
+                                    if (empty(get_post_meta($post->ID, '_sale_price', true))) {
+                                        update_post_meta($post->ID, '_price', $price);
+                                    }
                                     //                                $productWp->set_manage_stock($stock);
                                     $productWp->set_stock_status($stock);
 //                                wc_update_product_stock_status($stock); //instock outofstock onbackorder
