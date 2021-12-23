@@ -264,9 +264,9 @@ get_header();
                                         <?php if (!empty($gallery[0])): ?>
                                             <?php $bundle_image_url = get_url_from_img_id($gallery[0]);
                                             if (!empty($bundle_image_url)):?>
-                                                <img src="<?= $bundle_image_url; ?>" />
+                                                <img src="<?= $bundle_image_url; ?>" alt="<?=$gallery[0];?>"/>
                                             <?php else: ?>
-                                                <img src="<?= wc_placeholder_img_src(); ?>" />
+                                                <img src="<?= wc_placeholder_img_src(); ?>" alt="placeholder"/>
                                             <?php endif; ?>
                                         <?php endif; ?>
 
@@ -304,9 +304,9 @@ get_header();
                                         <?php if (!empty($gallery[1])): ?>
                                             <?php $bundle_image_url = get_url_from_img_id($gallery[1]);
                                             if (!empty($bundle_image_url)):?>
-                                                <img src="<?= $bundle_image_url; ?>" />
+                                                <img src="<?= $bundle_image_url; ?>" alt="<?=$gallery[1];?>"/>
                                             <?php else: ?>
-                                                <img src="<?= wc_placeholder_img_src(); ?>" />
+                                                <img src="<?= wc_placeholder_img_src(); ?>" alt="placeholder"/>
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
@@ -345,7 +345,7 @@ get_header();
 
                         <div class="banner">
                             <a href="<?php the_permalink(); ?>">
-                                <img width="100%" height="100%" src="<?php the_post_thumbnail_url(); ?>">
+                                <img width="100%" height="100%" src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
                                 <div class="hover transition-3s"></div>
                                 <div class="description">
                                     <h4 class="description__title"><?php the_title(); ?></h4>

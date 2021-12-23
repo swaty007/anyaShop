@@ -207,9 +207,9 @@ foreach ($bundle_data as $data) {
                     <div class="bundle__product align-items-center bundle__product d-flex justify-content-between">
                         <?php $related_image_url = get_the_post_thumbnail_url($bundle_product);
                         if (!empty($related_image_url)):?>
-                            <img src="<?= $related_image_url; ?>" class="bundle__product--img">
+                            <img src="<?= $related_image_url; ?>" class="bundle__product--img" alt="<?=$bundle_product;?>">
                         <?php else: ?>
-                            <img src="<?= wc_placeholder_img_src(); ?>" class="bundle__product--img">
+                            <img src="<?= wc_placeholder_img_src(); ?>" class="bundle__product--img" alt="placeholder">
                         <?php endif; ?>
 
                         <a href="<?= get_the_permalink($bundle_product); ?>" class="bundle__product--text">
