@@ -98,7 +98,7 @@ function itea_files()
 //        wp_enqueue_script('slick', get_template_directory_uri() . '/js/slick.js', '', '', true);
 //        wp_enqueue_script('main-js', get_template_directory_uri() . '/js/main.js', '', '', true);
 //        wp_enqueue_script('modal-js', get_template_directory_uri() . '/js/modalDiscount.js', '', '', true);
-    wp_enqueue_script('fancybox', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', '', '', true);
+    wp_enqueue_script('fancybox', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', ['main-itea-bundled-js', 'jquery'], '', true);
     wp_enqueue_style('fancybox_css', '//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css');
     wp_enqueue_style('material_icons', '//fonts.googleapis.com/icon?family=Material+Icons');
     wp_enqueue_style('tiny_slider', '//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/tiny-slider.css');
@@ -143,6 +143,17 @@ function my_jquery_enqueue()
 //    wp_register_script('jquery', "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js", false, null);
 //    wp_enqueue_script('jquery');
 }
+
+//add_action('wp_head', 'fix_header_jquery', 1);
+//function fix_header_jquery () {
+//    if(is_admin()) {return;}
+//    echo '<script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>';
+//}
+//add_action('wp_footer', 'fix_footer_jquery', 8);
+//function fix_footer_jquery () {
+//    if(is_admin()) {return;}
+//    echo '<script>(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>';
+//}
 
 //add_filter('script_loader_tag', 'add_async_attribute', 49, 3);
 function add_async_attribute($tag, $handle, $src)
@@ -229,13 +240,13 @@ function footer_enqueue_scripts()
 
     remove_action('wp_head', 'wp_print_scripts');
     remove_action('wp_head', 'wp_enqueue_scripts', 2);
-//  remove_action('wp_head', 'wp_print_styles',8);
+    remove_action('wp_head', 'wp_print_styles', 8);
     remove_action('wp_head', 'wp_print_head_scripts', 9);
 //    wp_enqueue_style
 //    style_loader_tag
     add_action('wp_footer', 'wp_print_scripts', 4);
     add_action('wp_footer', 'wp_enqueue_scripts', 5);
-//  add_action('wp_footer','wp_print_styles',6);
+    add_action('wp_footer', 'wp_print_styles', 6);
     add_action('wp_footer', 'wp_print_head_scripts', 7);
 
 }
@@ -412,7 +423,7 @@ function parsePlugin()
 {
 //    return;
     $time = get_option('xml_price_cron');
-    $hour = 60*60*1; // 1 hours
+    $hour = 60 * 60 * 1; // 1 hours
     $xml = new ImportXML();
 //    $xml->parseGoogleDrive();
 //    $xml->parseLocalFileAttributes();
@@ -425,6 +436,7 @@ function parsePlugin()
         die();
     }
 }
+
 add_action('init', 'parsePlugin', 69);
 
 function removeDuplicates()
@@ -439,7 +451,7 @@ function removeDuplicates()
         ]);
 
 
-        foreach($posts as $post) {
+        foreach ($posts as $post) {
             $post_id = $post->ID;
             $sku = get_post_meta($post_id, '_sku', true);
             if (in_array($sku, $data)) {
@@ -581,7 +593,8 @@ function getProducts(WP_REST_Request $request)
 
 }
 
-function updateProductsPriceSku () {
+function updateProductsPriceSku()
+{
     $posts = get_posts([
         'post_type' => 'product',
         'post_status' => ['publish', 'draft'],
@@ -589,7 +602,7 @@ function updateProductsPriceSku () {
         'lang' => ['ru', 'uk'] //'uk'
     ]);
 
-    foreach($posts as $post) {
+    foreach ($posts as $post) {
         $productWp = wc_get_product($post->ID);
         $productWp->set_manage_stock(false);
         $productWp->save();
@@ -605,9 +618,10 @@ function updateProductsPriceSku () {
 //        update_post_meta($post_id_uk, '_sku', $sku);
     }
 }
+
 //add_action('init', 'updateProductsPriceSku', 69);
 
-add_action('pre_get_posts', function($query) {
+add_action('pre_get_posts', function ($query) {
     if (!is_admin() && $query->is_main_query()) {
 //        $meta_query = ['relation' => 'AND'];
 //        $meta_query['_price'] = [
@@ -621,28 +635,28 @@ add_action('pre_get_posts', function($query) {
 });
 
 
-
-function get_filtered_price() {
+function get_filtered_price()
+{
     global $wpdb;
 
-    $args       = wc()->query->get_main_query();
+    $args = wc()->query->get_main_query();
 
-    $tax_query  = isset( $args->tax_query->queries ) ? $args->tax_query->queries : array();
-    $meta_query = isset( $args->query_vars['meta_query'] ) ? $args->query_vars['meta_query'] : array();
+    $tax_query = isset($args->tax_query->queries) ? $args->tax_query->queries : array();
+    $meta_query = isset($args->query_vars['meta_query']) ? $args->query_vars['meta_query'] : array();
 
-    foreach ( $meta_query + $tax_query as $key => $query ) {
-        if ( ! empty( $query['price_filter'] ) || ! empty( $query['rating_filter'] ) ) {
-            unset( $meta_query[ $key ] );
+    foreach ($meta_query + $tax_query as $key => $query) {
+        if (!empty($query['price_filter']) || !empty($query['rating_filter'])) {
+            unset($meta_query[$key]);
         }
     }
 
-    $meta_query = new \WP_Meta_Query( $meta_query );
-    $tax_query  = new \WP_Tax_Query( $tax_query );
+    $meta_query = new \WP_Meta_Query($meta_query);
+    $tax_query = new \WP_Tax_Query($tax_query);
 
-    $meta_query_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
-    $tax_query_sql  = $tax_query->get_sql( $wpdb->posts, 'ID' );
+    $meta_query_sql = $meta_query->get_sql('post', $wpdb->posts, 'ID');
+    $tax_query_sql = $tax_query->get_sql($wpdb->posts, 'ID');
 
-    $sql  = "SELECT min( FLOOR( price_meta.meta_value ) ) as min_price, max( CEILING( price_meta.meta_value ) ) as max_price FROM {$wpdb->posts} ";
+    $sql = "SELECT min( FLOOR( price_meta.meta_value ) ) as min_price, max( CEILING( price_meta.meta_value ) ) as max_price FROM {$wpdb->posts} ";
     $sql .= " LEFT JOIN {$wpdb->postmeta} as price_meta ON {$wpdb->posts}.ID = price_meta.post_id " . $tax_query_sql['join'] . $meta_query_sql['join'];
     $sql .= " 	WHERE {$wpdb->posts}.post_type IN ('product')
 			AND {$wpdb->posts}.post_status = 'publish'
@@ -651,14 +665,14 @@ function get_filtered_price() {
     $sql .= $tax_query_sql['where'] . $meta_query_sql['where'];
 
     $search = \WC_Query::get_main_search_query_sql();
-    if ( $search ) {
+    if ($search) {
         $sql .= ' AND ' . $search;
     }
 
-    $prices = $wpdb->get_row( $sql ); // WPCS: unprepared SQL ok.
+    $prices = $wpdb->get_row($sql); // WPCS: unprepared SQL ok.
 
     return [
-        'min' => floor( $prices->min_price ),
-        'max' => ceil( $prices->max_price )
+        'min' => floor($prices->min_price),
+        'max' => ceil($prices->max_price)
     ];
 }
