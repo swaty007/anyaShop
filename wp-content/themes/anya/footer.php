@@ -72,6 +72,6 @@
 
 
 <?php get_template_part('template-parts/components', 'modals'); ?>
-
+<!--<script defer type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" id="fancybox-js"></script>-->
 </body>
 </html>

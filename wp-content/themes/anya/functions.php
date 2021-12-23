@@ -102,7 +102,8 @@ function itea_files()
     wp_enqueue_style('tiny_slider', '//cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.3/tiny-slider.css');
     wp_enqueue_style('itea_main_styles', get_stylesheet_uri());
     wp_enqueue_style('fancybox_css', '//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css');
-    wp_enqueue_script('fancybox', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', ['main-itea-bundled-js'], '', true);
+//    wp_enqueue_script('fancybox', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', ['main-itea-bundled-js', 'jquery'], '', true);
+    wp_enqueue_script('fancybox', get_template_directory_uri() . '/js/jquery.fancybox.min.js', ['main-itea-bundled-js', 'jquery'], '', true);
     // }
 
 
@@ -144,16 +145,16 @@ function my_jquery_enqueue()
 //    wp_enqueue_script('jquery');
 }
 
-//add_action('wp_head', 'fix_header_jquery', 1);
-//function fix_header_jquery () {
-//    if(is_admin()) {return;}
-//    echo '<script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>';
-//}
-//add_action('wp_footer', 'fix_footer_jquery', 8);
-//function fix_footer_jquery () {
-//    if(is_admin()) {return;}
-//    echo '<script>(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>';
-//}
+add_action('wp_head', 'fix_header_jquery', 1);
+function fix_header_jquery () {
+    if(is_admin()) {return;}
+    echo '<script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>';
+}
+add_action('wp_footer', 'fix_footer_jquery', 8);
+function fix_footer_jquery () {
+    if(is_admin()) {return;}
+    echo '<script>(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>';
+}
 
 //add_filter('script_loader_tag', 'add_async_attribute', 49, 3);
 function add_async_attribute($tag, $handle, $src)
