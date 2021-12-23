@@ -15,7 +15,7 @@ the_post();
             </div>
             <div class="image d-flex flex-column justify-content-center">
                 <?php if (!empty(get_the_post_thumbnail_url())): ?>
-                    <img src="<?= get_the_post_thumbnail_url(); ?>" width="100%" height="100%">
+                    <img src="<?= get_the_post_thumbnail_url(); ?>" width="100%" height="100%" alt="<?php the_title(); ?>">
                 <?php endif; ?>
             </div>
         </div>
@@ -29,7 +29,7 @@ the_post();
                  class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
                 <a :href="product.guid" class="link">
                     <div class="image-wrapper text-center transition-3s">
-                        <img :src="product.thumbnail_url"/>
+                        <img :src="product.thumbnail_url" :alt="product.post_title"/>
                     </div>
                 </a>
                 <div class="info">

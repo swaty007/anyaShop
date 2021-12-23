@@ -7,10 +7,10 @@ get_header();
     <div class="blog__block blog__block--wide">
         <div class="container blog__container">
             <div class="blog__main">
-                <img class="blog__main-photo" src="<?= get_template_directory_uri(); ?>/img/theme.png" />
+                <img class="blog__main-photo" src="<?= get_template_directory_uri(); ?>/img/theme.png" alt="theme"/>
                 <div class="blog__main-dark"></div>
                 <div class="blog__main-content">
-                    <img class="blog__main-icon-photo" src="<?= get_template_directory_uri(); ?>/img/icons/category.svg" />
+                    <img class="blog__main-icon-photo" src="<?= get_template_directory_uri(); ?>/img/icons/category.svg" alt="category"/>
                     <div class="desc desc--sm text--white text-medium">
                         <?php pll_e("Что нового в");?>
                     </div>
@@ -34,7 +34,7 @@ get_header();
                     <div class="paper paper--sm">
                         <div class="paper__image">
                             <?php //the_post_thumbnail(); ?>
-                            <img class="paper__image-photo" src="<?php the_post_thumbnail_url();?>" />
+                            <img class="paper__image-photo" src="<?php the_post_thumbnail_url();?>" alt="<?php the_title(); ?>"/>
                             <?php $terms = wp_get_post_terms($post->ID); ?>
                             <?php if (!empty($terms)):?>
                                 <div class="icon-title icon-title--white icon-title--hashtag paper__image-icon-title">
@@ -47,11 +47,11 @@ get_header();
                             <div class="desc desc--sm paper__desc hidemobile"><?php the_excerpt(); ?></div>
                             <div class="desc desc--xs paper__time">
                                 <div class="paper__time--date">
-                                    <img src="<?= get_template_directory_uri(); ?>/img/icons/date.svg"/>
+                                    <img src="<?= get_template_directory_uri(); ?>/img/icons/date.svg" alt="date"/>
                                     <?php the_modified_time('F jS, Y'); ?>
                                 </div>
                                 <div class="paper__time--views">
-                                    <img src="<?= get_template_directory_uri(); ?>/img/icons/eye.svg"/>
+                                    <img src="<?= get_template_directory_uri(); ?>/img/icons/eye.svg" alt="eye"/>
                                     <?= get_post_meta($post->ID, '_pageviews', true) ;?>
                                     <?php pll_e("просмотров");?>
                                 </div>

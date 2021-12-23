@@ -48,7 +48,7 @@ $child_categories = get_terms('product_cat', [
                 </div>
                 <div class="image d-flex flex-column justify-content-center">
                     <?php if (!empty($term_image_url)): ?>
-                        <img src="<?= $term_image_url; ?>" width="100%" height="100%">
+                        <img src="<?= $term_image_url; ?>" width="100%" height="100%" alt="<?= $term->name; ?>">
                     <?php endif; ?>
                 </div>
             </div>
@@ -66,7 +66,7 @@ $child_categories = get_terms('product_cat', [
                        href="<?= get_term_link($child_category->term_id); ?>">
                         <div>
                             <?php if (!empty($child_term_image_url)): ?>
-                                <img src="<?= $child_term_image_url; ?>" class="category__img"/>
+                                <img src="<?= $child_term_image_url; ?>" class="category__img" alt="<?= $child_category->name; ?>"/>
                             <?php endif; ?>
                         </div>
                         <div>

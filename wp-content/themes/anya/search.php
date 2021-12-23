@@ -30,7 +30,7 @@ global $wp_query;
                 while(have_posts()): the_post();?>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
                         <a href="<?php the_permalink();?>" class="search__item">
-                            <img src="<?php the_post_thumbnail_url() ?>" />
+                            <img src="<?php the_post_thumbnail_url() ?>" alt="<?php the_title(); ?>""/>
                             <div>
                                 <h4 class="search__item--title">
                                     <?php the_title(); ?>

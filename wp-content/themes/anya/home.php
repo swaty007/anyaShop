@@ -31,7 +31,7 @@ get_header('dark');
 
                         <div class="banner col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4">
                             <a href="<?php the_permalink(); ?>" class="d-block">
-                                <img width="100%" height="100%" src="<?php the_post_thumbnail_url(); ?>">
+                                <img width="100%" height="100%" src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
                                 <div class="hover transition-3s"></div>
                                 <div class="description">
                                     <h4 class="description__title"><?php the_title(); ?></h4>

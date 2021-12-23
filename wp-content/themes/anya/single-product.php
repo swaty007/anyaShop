@@ -55,7 +55,7 @@ foreach ($bundle_data as $data) {
         <div class="row">
             <div class="col-md-12 d-flex align-items-center justify-content-between desktop">
                 <div class="d-flex align-items-center">
-                    <img width="50px" src="<?= get_the_post_thumbnail_url(); ?>">
+                    <img width="50px" src="<?= get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
                     <!--                    --><? //= woocommerce_get_product_thumbnail();?>
                     <span class="product-title"><?php the_title(); ?></span>
                 </div>
@@ -71,7 +71,7 @@ foreach ($bundle_data as $data) {
             </div>
             <div class="col-md-12 tablet-mobile">
                 <div class="image-title d-flex align-items-center">
-                    <img width="50px" src="<?= get_the_post_thumbnail_url(); ?>">
+                    <img width="50px" src="<?= get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
                     <!--                    --><? //= woocommerce_get_product_thumbnail();?>
                     <span class="product-title"><?php the_title(); ?></span>
                 </div>
@@ -124,7 +124,7 @@ foreach ($bundle_data as $data) {
             <div class="col-12 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                 <a href="<?= get_the_post_thumbnail_url(); ?>" data-fancybox="gallery">
                     <img class="product-avatar"
-                         src="<?= get_the_post_thumbnail_url(); ?>">
+                         src="<?= get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
                 </a>
 
                 <!--                <div class="product-avatar">-->
@@ -266,7 +266,7 @@ foreach ($bundle_data as $data) {
                                 <div class="text-center relative" style="z-index: 4;">
                                     <div class="active-slide">
                                         <a href="<?= get_url_from_img_id($gallery[0]) ?>" data-fancybox="gallery">
-                                            <img src="<?= get_url_from_img_id($gallery[0]) ?>">
+                                            <img src="<?= get_url_from_img_id($gallery[0]) ?>" alt="<?php the_title(); ?>">
                                         </a>
 
                                         <h2><?php the_title(); ?></h2>
@@ -423,7 +423,7 @@ foreach ($bundle_data as $data) {
                             <div class="col-md-4">
                                 <?php if (!empty($vc_icon)): ?>
                                     <div class="feature">
-                                        <img src="<?= get_template_directory_uri(); ?>/images/product/f1.png">
+                                        <img src="<?= get_template_directory_uri(); ?>/images/product/f1.png" alt="f1">
                                         <div class="title"><?php pll_e("VC (компенсация вибраций)"); ?></div>
                                         <div class="text">
                                             <?php pll_e("Стабилизатор изображения VC обеспечивает резкое изображение без дрожания, а также обеспечивает резкое изображение в видоискателе."); ?>
@@ -432,7 +432,7 @@ foreach ($bundle_data as $data) {
                                 <?php endif; ?>
                                 <?php if (!empty($usd_icon)): ?>
                                     <div class="feature">
-                                        <img src="<?= get_template_directory_uri(); ?>/images/product/f2.png">
+                                        <img src="<?= get_template_directory_uri(); ?>/images/product/f2.png" alt="f2">
                                         <div class="title"><?php pll_e("USD (ультразвуковой мотор)"); ?></div>
                                         <div class="text">
                                             <?php pll_e("Мощный ультразвуковой двигатель для съемки быстрых и динамичных объектов. Чрезвычайно тихий и точный, позволяет осуществлять ручное управление фокусировкой во время съемки."); ?>
@@ -442,7 +442,7 @@ foreach ($bundle_data as $data) {
                                 <div class="full-features">
                                     <?php if (!empty($eband_icon)): ?>
                                         <div class="feature">
-                                            <img src="<?= get_template_directory_uri(); ?>/images/product/f3.png">
+                                            <img src="<?= get_template_directory_uri(); ?>/images/product/f3.png" alt="f3">
                                             <div class="title"><?php pll_e("Покрытие eBAND"); ?></div>
                                             <div class="text">
                                                 <?php pll_e("Нано - антибликовое покрытие для защиты от нежелательных отражений и ореола."); ?>
@@ -487,6 +487,7 @@ foreach ($bundle_data as $data) {
                                         <div class="col-md-5 <?php if ($count % 2) echo 'order-md-2'; ?>">
                                             <div class="image-wrapper">
                                                 <img width="100%"
+                                                     alt="<?= get_sub_field('text') ?>"
                                                      src="<?= get_sub_field('img') ?>">
                                             </div>
                                         </div>
@@ -587,6 +588,7 @@ foreach ($bundle_data as $data) {
                                             <td>Lorem ipsum dolor sit amet</td>
                                             <td class="text-center">Ru</td>
                                             <td class="text-center"><img
+                                                        alt="icon_pdf"
                                                         src="<?= get_template_directory_uri(); ?>/images/icon_pdf.png">
                                             </td>
                                         </tr>
@@ -594,6 +596,7 @@ foreach ($bundle_data as $data) {
                                             <td>Ut enim ad minim veniam</td>
                                             <td class="text-center">En</td>
                                             <td class="text-center"><img
+                                                        alt="icon_windows"
                                                         src="<?= get_template_directory_uri(); ?>/images/icon_windows.png">
                                             </td>
                                         </tr>
@@ -601,6 +604,7 @@ foreach ($bundle_data as $data) {
                                             <td>Sed quia consequuntur</td>
                                             <td class="text-center">Ru</td>
                                             <td class="text-center"><img
+                                                        alt="icon_apple"
                                                         src="<?= get_template_directory_uri(); ?>/images/icon_apple.png">
                                             </td>
                                         </tr>
@@ -608,6 +612,7 @@ foreach ($bundle_data as $data) {
                                             <td>Neque porro quisquam est</td>
                                             <td class="text-center">En</td>
                                             <td class="text-center"><img
+                                                        alt="icon_linux"
                                                         src="<?= get_template_directory_uri(); ?>/images/icon_linux.png">
                                             </td>
                                         </tr>
@@ -657,9 +662,9 @@ foreach ($bundle_data as $data) {
                                                         <?php
                                                         $related_image_url = get_the_post_thumbnail_url($related_product);
                                                         if (!empty($related_image_url)):?>
-                                                            <img src="<?= $related_image_url; ?>">
+                                                            <img src="<?= $related_image_url; ?>" alt="<?= get_the_title($related_product); ?>">
                                                         <?php else: ?>
-                                                            <img src="<?= wc_placeholder_img_src(); ?>">
+                                                            <img src="<?= wc_placeholder_img_src(); ?>" alt="<?= get_the_title($related_product); ?>">
                                                         <?php endif; ?>
 
                                                     </div>

@@ -46,7 +46,7 @@ if (function_exists('wp_body_open')) {
     justify-content: center;
     display: flex;
 ">
-        <img src="<?= get_url_from_img_id(get_theme_mod('custom_logo')); ?>" style="max-width:300px;"/>
+        <img src="<?= get_url_from_img_id(get_theme_mod('custom_logo')); ?>" style="max-width:300px;" alt="logo"/>
 </div>
 <!--preloader-->
 <script>
@@ -108,7 +108,7 @@ if (function_exists('wp_body_open')) {
                 <li class="logo-item d-flex align-items-center d-none">
                     <!-- <a href="#">Zoom</a> -->
                     <a href="<?= pll_home_url(); ?>">
-                        <img width="170px" src="<?= get_url_from_img_id(get_theme_mod('custom_logo')); ?>"/>
+                        <img width="170px" src="<?= get_url_from_img_id(get_theme_mod('custom_logo')); ?>" alt="logo"/>
                     </a>
                 </li>
             </ul>

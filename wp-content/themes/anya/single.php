@@ -5,7 +5,7 @@ the_post(); ?>
     <div class="container">
         <div class="row">
             <div class="col-md-10 offset-md-1">
-                <img class="article__photo mb-4" src="<?php the_post_thumbnail_url(); ?>"/>
+                <img class="article__photo mb-4" src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title() ?>"/>
                 <h1 class="title__xl mb-5">
                     <?php the_title() ?>
                 </h1>
@@ -29,7 +29,7 @@ the_post(); ?>
                         <div class="col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 blog__item">
                             <?php //the_modified_time('F jS, Y'); ?>
                             <a class="block__item--link" href="<?php the_permalink(); ?>">
-                                <img src="<?php the_post_thumbnail_url(); ?>" class="blog__item--img">
+                                <img src="<?php the_post_thumbnail_url(); ?>" class="blog__item--img" alt="<?php the_title(); ?>">
                                 <h4 class="title__xm">
                                     <?php the_title(); ?>
                                 </h4>

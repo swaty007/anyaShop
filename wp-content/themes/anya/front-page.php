@@ -97,7 +97,7 @@ get_header();
                          class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 product">
                         <a :href="product.guid" class="link">
                             <div class="image-wrapper text-center transition-3s">
-                                <img :src="product.thumbnail_url"/>
+                                <img :src="product.thumbnail_url" :alt="product.post_title"/>
                             </div>
                         </a>
                         <div class="info">
