@@ -79,7 +79,7 @@ class ImportXML
     {
         $languages = pll_languages_list();
         $csv = trim(get_option('xml_price_url', true));
-        $items_by_tick = 200;
+        $items_by_tick = 100;
         $items_from_last_tick = get_option('xml_price_items_tick', 0);
 
         if (!ini_set('default_socket_timeout', 15)) {
