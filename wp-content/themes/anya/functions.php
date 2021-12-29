@@ -357,6 +357,7 @@ if (function_exists('pll_register_string')) {
 
     pll_register_string("Pages", "Узнать подробнее", "globals");
     pll_register_string("Pages", "Горячее предложение", "globals");
+    pll_register_string("Pages", "Есть в наличии", "globals");
     pll_register_string("Pages", 'Украина, Киев<br><a href="tel:+380956357677">+380956357677</a><br><a href="mailto:admin@zoomstore.com.ua">admin@zoomstore.com.ua</a><br><a href="mailto:sales@zoomstore.com.ua">sales@zoomstore.com.ua</a>', "globals");
 
 

@@ -145,7 +145,12 @@ foreach ($bundle_data as $data) {
                     </button>
                     <!--                    <button class="transition-3s like-btn"><i class="far fa-heart"></i> Добавить в избранное</button>-->
                     <div class="status">
-                        <?= wc_get_stock_html($product); ?>
+                        <?php if (empty(wc_get_stock_html($product))):?>
+                            <?php pll_e("Есть в наличии"); ?>
+                        <?php else:?>
+                            <?= wc_get_stock_html($product); ?>
+                        <?php endif;?>
+
                     </div>
                     <div class="line"></div>
                 </div>

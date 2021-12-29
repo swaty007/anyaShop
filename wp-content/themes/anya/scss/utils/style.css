@@ -1337,6 +1337,9 @@ footer.diller .copyright{
     margin: 20px 0px 0px 6px;
     font-weight: 400;
 }
+.product-page .price-info .status .out-of-stock {
+    color: #d52d25;
+}
 .product-page .price-info .last-price{
     color: #848789;
     font-family: 'Montserrat', Oswald, OpenSans;
