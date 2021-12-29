@@ -371,16 +371,6 @@ foreach ($bundle_data as $data) {
                                             </div>
                                         <?php endif; ?>
                                     </ul>
-                                    <?php if ($attributes_count > $attributes_column_size): ?>
-                                        <button class="view-full-specifications transition-3s">
-                                        <span>
-                                            <?php pll_e("Все характеристики"); ?>
-                                        </span>
-                                            <span class="d-none">
-                                            <?php pll_e("Свернуть"); ?>
-                                        </span>
-                                        </button>
-                                    <?php endif; ?>
                                     <!--                                <button class="transition-3s"><i class="fas fa-balance-scale"></i> Сравнить</button>-->
                                 </div>
                                 <div class="col-md-4">
@@ -418,6 +408,16 @@ foreach ($bundle_data as $data) {
                                             </div>
                                         <?php endif; ?>
                                     </ul>
+                                    <?php if ($attributes_count > $attributes_column_size): ?>
+                                        <button class="view-full-specifications transition-3s">
+                                        <span>
+                                            <?php pll_e("Все характеристики"); ?>
+                                        </span>
+                                            <span class="d-none">
+                                            <?php pll_e("Свернуть"); ?>
+                                        </span>
+                                        </button>
+                                    <?php endif; ?>
                                 </div>
                             <?php endif; ?>
                             <div class="col-md-4">
@@ -487,7 +487,7 @@ foreach ($bundle_data as $data) {
                                         <div class="col-md-5 <?php if ($count % 2) echo 'order-md-2'; ?>">
                                             <div class="image-wrapper">
                                                 <img width="100%"
-                                                     alt="<?= get_sub_field('text') ?>"
+                                                     alt=""
                                                      src="<?= get_sub_field('img') ?>">
                                             </div>
                                         </div>

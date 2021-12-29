@@ -1491,6 +1491,7 @@ footer.diller .copyright{
     padding: 80px 0px;
     margin-bottom: 100px;
     margin-bottom: 0;
+    overflow: hidden;
 }
 .product-page .image-slider .active-slide img{
     /*width: 30%;*/
